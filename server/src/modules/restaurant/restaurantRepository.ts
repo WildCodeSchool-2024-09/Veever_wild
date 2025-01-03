@@ -71,11 +71,15 @@ class RestaurantRepository {
 
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing restaurant
-  async update(
-    restaurantId: number,
-    chrId: number,
-    chrData: { address: string; minPrice: number; maxPrice: number },
-  ): Promise<{
+  async update({
+    restaurantId,
+    chrId,
+    chrData,
+  }: {
+    restaurantId: number;
+    chrId: number;
+    chrData: { address: string; minPrice: number; maxPrice: number };
+  }): Promise<{
     chrId: number;
     chrData: { address: string; minPrice: number; maxPrice: number };
   }> {

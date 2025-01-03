@@ -1,7 +1,4 @@
 import type { RequestHandler } from "express";
-
-import { Connection } from "mysql2/typings/mysql/lib/Connection";
-// Import access to data
 import restaurantRepository from "./restaurantRepository";
 
 // The B of BREAD - Browse (Read All) operation
@@ -41,22 +38,20 @@ const read: RequestHandler = async (req, res, next) => {
 const edit: RequestHandler = async (req, res, next) => {
   try {
     const restaurantId = Number(req.params.id);
-    const editRestaurant = {
-      chr_id: Number(req.body.chr_id),
-    };
-    const chrData = {
-      address: req.body.address,
-      minPrice: Number(req.body.minPrice),
-      maxPrice: Number(req.body.maxPrice),
-    };
-    const updateRestaurant = await restaurantRepository.update(
+
+    const updateData = {
       restaurantId,
-      editRestaurant.chr_id,
-      chrData,
-    );
+      chrId: Number(req.body.chr_id),
+      chrData: {
+        address: req.body.address,
+        minPrice: Number(req.body.minPrice),
+        maxPrice: Number(req.body.maxPrice),
+      },
+    };
+    const updateRestaurant = await restaurantRepository.update(updateData);
 
     if (updateRestaurant) {
-      res.json(updateRestaurant);
+      res.sendStatus(204);
     } else {
       res.sendStatus(404);
     }
@@ -72,9 +67,9 @@ const destroy: RequestHandler = async (req, res, next) => {
     const restaurantDeleted = await restaurantRepository.delete(restaurantId);
 
     if (restaurantDeleted) {
-      res.sendStatus(404);
-    } else {
       res.sendStatus(204);
+    } else {
+      res.sendStatus(404);
     }
   } catch (err) {
     next(err);
@@ -83,11 +78,6 @@ const destroy: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   try {
-    if (!req.body.address || !req.body.minPrice || !req.body.maxPrice) {
-      res.status(400).json({ error: "Données manquantes ou invalide" });
-      return;
-    }
-
     const chrData = {
       address: req.body.address,
       minPrice: Number(req.body.minPrice),
