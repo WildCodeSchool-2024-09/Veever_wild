@@ -1,19 +1,13 @@
+import type { ResultSetHeader } from "mysql2";
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
-
-type Restaurant = {
-  id: number;
-  chr_id: number;
-};
+import type { Restaurant, chrData } from "../../types/chr/chrData";
 
 class RestaurantRepository {
   // The C of CRUD - Create operation
 
-  async create(
-    restaurant: Omit<Restaurant, "id">,
-    chrData: { address: string; minPrice: number; maxPrice: number },
-  ) {
+  async create(chrData: chrData) {
     const connection = await databaseClient.getConnection();
     // Execute the SQL INSERT query to add a new restaurant to the "restaurant" table
     try {
@@ -21,9 +15,12 @@ class RestaurantRepository {
       const [chrResult] = await connection.query<Result>(
         ` INSERT INTO chr
           (address, min_price, max_price) values (?, ?, ?)`,
-        [chrData.address, chrData.maxPrice, chrData.minPrice],
+        [chrData.address, chrData.minPrice, chrData.maxPrice],
       );
 
+      if (!chrResult || !chrResult.insertId) {
+        throw new Error("Insertion échouée");
+      }
       const chrId = chrResult.insertId;
 
       const [restaurantResult] = await connection.query<Result>(
@@ -32,11 +29,14 @@ class RestaurantRepository {
         [chrId],
       );
 
+      if (!restaurantResult || restaurantResult.affectedRows === 0) {
+        throw new Error("Insertion échouée");
+      }
+
       await connection.commit();
       return restaurantResult.insertId;
     } catch (error) {
       await connection.rollback();
-      console.error("Erreur lors de la transaction", error);
       throw error;
     } finally {
       connection.release();
@@ -48,9 +48,11 @@ class RestaurantRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific restaurant by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT *
+      `SELECT chr.address, chr.min_Price AS minPrice, chr.max_Price AS maxPrice
        FROM restaurant 
-       WHERE id = ?`,
+       JOIN chr
+       ON restaurant.chr_id = chr_id
+       WHERE restaurant.id = ?`,
       [id],
     );
 
@@ -61,8 +63,10 @@ class RestaurantRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all restaurants from the "restaurant" table
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT *
-       FROM restaurant`,
+      `SELECT chr.address, chr.min_price AS minPrice , chr.max_price AS maxPrice
+       FROM restaurant
+       JOIN chr
+       ON restaurant.chr_id = chr.id`,
     );
 
     // Return the array of restaurants
@@ -89,8 +93,9 @@ class RestaurantRepository {
       await connection.beginTransaction();
       await connection.query<Result>(
         `UPDATE chr
-         SET address = ? , minPrice = ? , maxPrice = ?
-         WHERE id = ?`,
+         JOIN restaurant ON restaurant.chr_id = chr.id
+         SET chr.address = ?, chr.minPrice = ?, chr.maxPrice = ?
+         WHERE restaurant.id = ?`,
         [chrData.address, chrData.minPrice, chrData.maxPrice, chrId],
       );
 
@@ -117,13 +122,46 @@ class RestaurantRepository {
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an restaurant by its ID
   async delete(id: number) {
-    const [rows] = await databaseClient.query<Rows>(
-      `DELETE 
-       FROM restaurant
-       WHERE id = ?`,
-      [id],
-    );
-    return rows as Restaurant[];
+    const connection = await databaseClient.getConnection();
+    try {
+      await connection.beginTransaction();
+      const [chrRows] = await databaseClient.query<Rows>(
+        `SELECT chr_id 
+         FROM restaurant
+         WHERE id = ?`,
+        [id],
+      );
+      if (chrRows.length === 0) {
+        throw new Error("Le restaurant n'existe pas ou est déjà supprimé");
+      }
+
+      const chrId = chrRows[0].chr_id;
+
+      await connection.query<Result>(
+        `DELETE FROM chr
+         WHERE id = ?`,
+        [chrId],
+      );
+
+      const [restaurantResult] = await connection.query<Result>(
+        `DELETE FROM restaurant
+         WHERE id = ?`,
+        [id],
+      );
+
+      if (!restaurantResult || restaurantResult.affectedRows === 0) {
+        throw new Error(
+          "Aucun restaurant n'a été supprimé, l'ID est peut-être invalide.",
+        );
+      }
+
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
   }
 }
 

@@ -64,30 +64,24 @@ const destroy: RequestHandler = async (req, res, next) => {
   try {
     const restaurantId = Number(req.params.id);
 
-    const restaurantDeleted = await restaurantRepository.delete(restaurantId);
+    await restaurantRepository.delete(restaurantId);
 
-    if (restaurantDeleted) {
-      res.sendStatus(204);
-    } else {
-      res.sendStatus(404);
-    }
+    res.sendStatus(204);
   } catch (err) {
+    res.sendStatus(404);
     next(err);
   }
 };
 
 const add: RequestHandler = async (req, res, next) => {
+  const chrData = {
+    chr_id: req.body.chr_id,
+    address: req.body.address,
+    minPrice: Number(req.body.minPrice),
+    maxPrice: Number(req.body.maxPrice),
+  };
   try {
-    const chrData = {
-      address: req.body.address,
-      minPrice: Number(req.body.minPrice),
-      maxPrice: Number(req.body.maxPrice),
-    };
-
-    const insertId = await restaurantRepository.create(
-      { chr_id: req.body.chr_id },
-      chrData,
-    );
+    const insertId = await restaurantRepository.create(chrData);
 
     res.status(201).json({ insertId });
   } catch (err) {
