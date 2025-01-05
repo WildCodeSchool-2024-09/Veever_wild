@@ -10,11 +10,13 @@
   --light: white;
   --dark: black;
 
-  --border-ref: 10px;
+  --border-ref: 8px;
   --border-XL: calc(var(--border-ref) * 2);
 
   --spacing-ref: 1rem;
   --spacing-S: calc(var(--spacing-ref) * 0.5);
+
+  --spacing-letter-ref: 1px;
 
   --box-shadow-soft: 0px 0px 2px 2px #00000033;
 }

@@ -1,0 +1,79 @@
+@import url("@src/variables.css");
+
+fieldset {
+  border: 0;
+}
+
+placeholder {
+  letter-spacing: var(--spacing-letter-ref);
+}
+
+.logoForm {
+  height: 8rem;
+  width: 8rem;
+}
+
+.headerForm {
+  text-align: center;
+  padding: var(--spacing-ref);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--spacing-ref) * 0.4);
+}
+
+.checkLabel {
+  text-align: center;
+}
+.createForm {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: var(--spacing-ref);
+}
+
+.createForm input {
+  margin-bottom: calc(var(--spacing-ref) * 0.4);
+}
+
+.createForm label {
+  justify-self: center;
+  letter-spacing: var(--spacing-letter-ref);
+}
+
+#gender {
+  width: 320px;
+  padding: 8px 12px;
+  border-radius: var(--border-ref);
+}
+
+#gender:focus {
+  border-color: #3399ff;
+  box-shadow: 0 0 0 3px #80bfff;
+}
+
+.checkBox {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-ref);
+}
+
+.errorPassword {
+  color: red;
+  font-size: 0.8rem;
+}
+
+.react-datepicker__input-container input {
+  border-radius: var(--border-ref);
+}
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  border-radius: var(--border-ref);
+  padding: calc(var(--spacing-ref) * 0.2);
+  margin: calc(var(--spacing-ref) * 0.3);
+}
