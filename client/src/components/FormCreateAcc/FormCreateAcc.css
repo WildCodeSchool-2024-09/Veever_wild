@@ -45,17 +45,6 @@ placeholder {
   letter-spacing: var(--spacing-letter-ref);
 }
 
-#gender {
-  width: 320px;
-  padding: 8px 12px;
-  border-radius: var(--border-ref);
-}
-
-#gender:focus {
-  border-color: #3399ff;
-  box-shadow: 0 0 0 3px #80bfff;
-}
-
 .checkBox {
   display: flex;
   justify-content: center;
@@ -69,6 +58,18 @@ placeholder {
 
 .react-datepicker__input-container input {
   border-radius: var(--border-ref);
+  width: 20rem;
+  border: 1px solid #dae2ed;
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: var(--spacing-letter-ref);
+  line-height: 1.5;
+  padding: var(--padding-input);
+}
+
+.react-datepicker__input-container input:focus {
+  border-color: #3399ff;
+  box-shadow: 0 0 0 3px #80bfff;
 }
 
 .react-datepicker__month-select,

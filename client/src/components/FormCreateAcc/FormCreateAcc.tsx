@@ -2,6 +2,7 @@ import "./FormCreateAcc.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "@mui/material";
 import InputCheckCGU from "./inputForm/InputCheckCGU";
+import InputDate from "./inputForm/InputDate";
 import InputEmail from "./inputForm/InputEmail";
 import InputFirstName from "./inputForm/InputFirstName";
 import InputGender from "./inputForm/InputGender";
@@ -28,6 +29,7 @@ export default function FormCreateAcc() {
         <InputEmail />
         <InputPassword />
         <InputGender />
+        <InputDate />
         <InputPhone />
         <InputCheckContact />
         <InputCheckCGU />
