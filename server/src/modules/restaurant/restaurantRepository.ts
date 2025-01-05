@@ -50,7 +50,7 @@ class RestaurantRepository {
     const [rows] = await databaseClient.query<Rows>(
       `SELECT chr.address, chr.min_Price AS minPrice, chr.max_Price AS maxPrice
        FROM restaurant 
-       JOIN chr
+       INNER JOIN chr
        ON restaurant.chr_id = chr_id
        WHERE restaurant.id = ?`,
       [id],
@@ -65,7 +65,7 @@ class RestaurantRepository {
     const [rows] = await databaseClient.query<Rows>(
       `SELECT chr.address, chr.min_price AS minPrice , chr.max_price AS maxPrice
        FROM restaurant
-       JOIN chr
+       INNER JOIN chr
        ON restaurant.chr_id = chr.id`,
     );
 
@@ -93,7 +93,8 @@ class RestaurantRepository {
       await connection.beginTransaction();
       await connection.query<Result>(
         `UPDATE chr
-         JOIN restaurant ON restaurant.chr_id = chr.id
+         INNER JOIN restaurant 
+         ON restaurant.chr_id = chr.id
          SET chr.address = ?, chr.minPrice = ?, chr.maxPrice = ?
          WHERE restaurant.id = ?`,
         [chrData.address, chrData.minPrice, chrData.maxPrice, chrId],
