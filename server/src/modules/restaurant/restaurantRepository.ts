@@ -18,6 +18,7 @@ class RestaurantRepository {
       );
 
       if (!chrResult || !chrResult.insertId) {
+        await connection.rollback();
         throw new Error("Insertion échouée");
       }
       const chrId = chrResult.insertId;
@@ -28,7 +29,8 @@ class RestaurantRepository {
         [chrId],
       );
 
-      if (!restaurantResult || restaurantResult.affectedRows === 0) {
+      if (!restaurantResult || restaurantResult.insertId) {
+        await connection.rollback();
         throw new Error("Insertion échouée");
       }
 
@@ -81,38 +83,49 @@ class RestaurantRepository {
   }: {
     restaurantId: number;
     chrId: number;
-    chrData: { address: string; minPrice: number; maxPrice: number };
+    chrData: chrData;
   }): Promise<{
     chrId: number;
-    chrData: { address: string; minPrice: number; maxPrice: number };
+    chrData: chrData;
   }> {
     const connection = await databaseClient.getConnection();
 
     try {
       await connection.beginTransaction();
-      await connection.query<Result>(
+
+      const [chrResult] = await connection.query<Result>(
         `UPDATE chr
-         INNER JOIN restaurant 
-         ON restaurant.chr_id = chr.id
-         SET chr.address = ?, chr.minPrice = ?, chr.maxPrice = ?
-         WHERE restaurant.id = ?`,
+         SET address = ?, minPrice = ?, maxPrice = ?
+         WHERE id = ?`,
         [chrData.address, chrData.minPrice, chrData.maxPrice, chrId],
       );
 
-      await connection.query<Result>(
+      if (chrResult.affectedRows === 0) {
+        await connection.rollback();
+        throw new Error(
+          "Modification invalide dans la table 'chr'. L'id n'est peut être pas valide.",
+        );
+      }
+
+      const [restaurantResult] = await connection.query<Result>(
         `UPDATE restaurant
          SET chr_id = ?
          WHERE id = ?`,
         [chrId, restaurantId],
       );
 
+      if (restaurantResult.affectedRows === 0) {
+        await connection.rollback();
+        throw new Error(
+          "Modification invalide dans la table 'restaurant'. L'id n'est peut être pas valide.",
+        );
+      }
+
       await connection.commit();
-      console.info("Transaction réussie !");
 
       return { chrId, chrData };
     } catch (error) {
       await connection.rollback();
-      console.error("Erreur lors de la transaction: ", error);
       throw error;
     } finally {
       connection.release();
@@ -121,27 +134,38 @@ class RestaurantRepository {
 
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an restaurant by its ID
+
   async delete(id: number) {
     const connection = await databaseClient.getConnection();
     try {
       await connection.beginTransaction();
-      const [chrRows] = await databaseClient.query<Rows>(
+
+      const [chrRows] = await connection.query<Rows>(
         `SELECT chr_id 
          FROM restaurant
          WHERE id = ?`,
         [id],
       );
+
       if (chrRows.length === 0) {
+        await connection.rollback();
         throw new Error("Le restaurant n'existe pas ou est déjà supprimé");
       }
 
       const chrId = chrRows[0].chr_id;
 
-      await connection.query<Result>(
+      const [chrResult] = await connection.query<Result>(
         `DELETE FROM chr
          WHERE id = ?`,
         [chrId],
       );
+
+      if (chrResult.affectedRows !== 1) {
+        await connection.rollback();
+        throw new Error(
+          `Erreur lors de la suppression dans 'chr'. affectedRows: ${chrResult.affectedRows}`,
+        );
+      }
 
       const [restaurantResult] = await connection.query<Result>(
         `DELETE FROM restaurant
@@ -149,9 +173,10 @@ class RestaurantRepository {
         [id],
       );
 
-      if (!restaurantResult || restaurantResult.affectedRows === 0) {
+      if (restaurantResult.affectedRows !== 1) {
+        await connection.rollback();
         throw new Error(
-          "Aucun restaurant n'a été supprimé, l'ID est peut-être invalide.",
+          `Erreur lors de la suppression du restaurant. affectedRows: ${restaurantResult.affectedRows}`,
         );
       }
 

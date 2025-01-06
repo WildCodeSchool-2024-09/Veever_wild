@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 
-const validateChar = (req: Request, res: Response, next: NextFunction) => {
+const validateChr = (req: Request, res: Response, next: NextFunction) => {
   const { address, minPrice, maxPrice } = req.body;
   if (!address || minPrice == null || !maxPrice == null) {
     res.status(400).json({ error: "Données manquantes ou invalide" });
@@ -8,4 +8,4 @@ const validateChar = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export default validateChar;
+export default validateChr;

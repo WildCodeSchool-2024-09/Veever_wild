@@ -43,6 +43,7 @@ const edit: RequestHandler = async (req, res, next) => {
       restaurantId,
       chrId: Number(req.body.chr_id),
       chrData: {
+        id: Number(req.body.id),
         address: req.body.address,
         minPrice: Number(req.body.minPrice),
         maxPrice: Number(req.body.maxPrice),
@@ -75,7 +76,7 @@ const destroy: RequestHandler = async (req, res, next) => {
 
 const add: RequestHandler = async (req, res, next) => {
   const chrData = {
-    chr_id: req.body.chr_id,
+    id: Number(req.body.id),
     address: req.body.address,
     minPrice: Number(req.body.minPrice),
     maxPrice: Number(req.body.maxPrice),

@@ -1,8 +1,8 @@
 export type chrData = {
+  id: number;
   address: string;
   minPrice: number;
   maxPrice: number;
-  chr_id: number;
 };
 
 export type Restaurant = {
