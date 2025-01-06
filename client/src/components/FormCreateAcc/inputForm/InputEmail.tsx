@@ -6,7 +6,12 @@ import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
 const schema = Yup.object({
   email: Yup.string()
     .email("Veuillez entrer un e-mail valide")
-    .required("L'e-mail est requis"),
+    .required("L'e-mail est requis")
+    .matches(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      "Veuillez entrer un e-mail valide avec un domaine correct",
+    )
+    .max(50, "L'e-mail ne peut pas dépasser 50 caractères"),
 });
 
 export default function InputEmail() {
