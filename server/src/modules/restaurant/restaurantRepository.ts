@@ -100,10 +100,10 @@ class RestaurantRepository {
         [chrData.address, chrData.minPrice, chrData.maxPrice, chrId],
       );
 
-      if (chrResult.affectedRows === 0) {
+      if (chrResult.affectedRows !== 1) {
         await connection.rollback();
         throw new Error(
-          "Modification invalide dans la table 'chr'. L'id n'est peut être pas valide.",
+          `Erreur lors de la suppression dans 'chr'. affectedRows: ${chrResult.affectedRows}`,
         );
       }
 
@@ -114,10 +114,10 @@ class RestaurantRepository {
         [chrId, restaurantId],
       );
 
-      if (restaurantResult.affectedRows === 0) {
+      if (restaurantResult.affectedRows !== 1) {
         await connection.rollback();
         throw new Error(
-          "Modification invalide dans la table 'restaurant'. L'id n'est peut être pas valide.",
+          `Erreur lors de la suppression dans 'restaurant'. affectedRows: ${restaurantResult.affectedRows}`,
         );
       }
 
