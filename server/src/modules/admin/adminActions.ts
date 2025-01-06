@@ -1,7 +1,7 @@
 import type { RequestHandler } from "express";
 
 // Import access to data
-import adminRepository, { type User } from "./adminRepository";
+import adminRepository, { type UserCreate, type User } from "./adminRepository";
 
 // The B of BREAD - Browse (Read All) operation
 const browse: RequestHandler = async (req, res, next) => {
@@ -39,6 +39,7 @@ const read: RequestHandler = async (req, res, next) => {
 
 // The E of BREAD - Edit operation
 const edit: RequestHandler = async (req, res, next) => {
+  const userId = Number(req.params.id);
   try {
     // Update a specific admin based on the provided ID
     const userData: User = {
@@ -46,17 +47,17 @@ const edit: RequestHandler = async (req, res, next) => {
       password: req.body.password,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      id: req.body.user_id,
+      id: userId,
     };
 
-    const { message, profile } = await adminRepository.update(userData);
+    const { profile } = await adminRepository.update(userData);
 
     // If the admin is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the admin in JSON format
     if (!profile) {
       res.sendStatus(404);
     } else {
-      res.status(200).json({ message, profile });
+      res.status(204);
     }
   } catch (error) {
     // Pass any errors to the error-handling middleware
@@ -68,19 +69,18 @@ const edit: RequestHandler = async (req, res, next) => {
 const add: RequestHandler = async (req, res, next) => {
   try {
     // Extract the admin data from the request body
-    const userData: User = {
+    const userData: UserCreate = {
       email: req.body.email,
       password: req.body.password,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      id: req.body.user_id,
     };
 
     // Create the admin
-    const { message, profile } = await adminRepository.create(userData);
+    const { profile } = await adminRepository.create(userData);
 
     // Respond with HTTP 201 (Created) and the ID of the newly inserted admin
-    res.status(201).json({ message, profile });
+    res.status(201).json({ profile });
   } catch (error) {
     // Pass any errors to the error-handling middleware
     next(error);
@@ -93,10 +93,10 @@ const destroy: RequestHandler = async (req, res, next) => {
     // Delete a specific admin based on the provided ID
     const adminId = Number(req.params.id);
 
-    const { message } = await adminRepository.destroy(adminId);
+    await adminRepository.destroy(adminId);
 
-    // Respond with HTTP 200 (OK) and message
-    res.status(204).json({ message });
+    // Respond with HTTP 204 (OK)
+    res.status(204);
   } catch (error) {
     next(error);
   }

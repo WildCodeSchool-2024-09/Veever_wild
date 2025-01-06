@@ -15,10 +15,12 @@ export type User = {
   lastname: string;
 };
 
+export type UserCreate = Omit<User, "id">;
+
 class adminRepository {
   // The C of CRUD - Create operation
   async create(
-    userData: User,
+    userData: UserCreate,
   ): Promise<{ profile: User & { adminId: number } }> {
     const connection = await databaseClient.getConnection();
 
