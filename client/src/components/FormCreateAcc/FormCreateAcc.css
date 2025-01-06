@@ -55,7 +55,7 @@ placeholder {
   gap: var(--spacing-ref);
 }
 
-.errorPassword {
+.error {
   color: var(--errorColor);
   font-size: calc(var(--font-size-ref) * 0.8);
 }

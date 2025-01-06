@@ -49,7 +49,7 @@ export default function InputPassword() {
           id="password"
           placeholder="Votre mot de passe"
         />
-        {error && <p className="errorPassword">{error}</p>}
+        {error && <p className="error">{error}</p>}
       </FormControl>
 
       <FormControl className="formGroup" required>
@@ -65,7 +65,7 @@ export default function InputPassword() {
         />
 
         {passwords !== isSamePasswords && (
-          <p className="errorPassword">Mots de passe différents</p>
+          <p className="error">Mots de passe différents</p>
         )}
       </FormControl>
     </>
