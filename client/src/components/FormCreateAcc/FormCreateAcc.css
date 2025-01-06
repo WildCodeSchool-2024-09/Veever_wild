@@ -31,6 +31,7 @@ placeholder {
 
 .checkLabel {
   text-align: center;
+  width: var(--width-label-text);
 }
 .createForm {
   display: flex;
@@ -45,7 +46,6 @@ placeholder {
 }
 
 .createForm label {
-  justify-self: center;
   letter-spacing: var(--spacing-letter-ref);
 }
 
@@ -53,6 +53,7 @@ placeholder {
   display: flex;
   justify-content: center;
   gap: var(--spacing-ref);
+  padding: var(--spacing-ref);
 }
 
 .errors {

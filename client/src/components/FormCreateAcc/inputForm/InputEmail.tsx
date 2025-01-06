@@ -41,7 +41,7 @@ export default function InputEmail() {
         placeholder="Votre e-mail"
         value={email}
       />
-      {errors && <p className="error">{errors}</p>}
+      {errors && <p className="errors">{errors}</p>}
     </FormControl>
   );
 }
