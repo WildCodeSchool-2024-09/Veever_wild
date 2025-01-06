@@ -1,3 +1,4 @@
+import { FormControl, FormLabel } from "@mui/material";
 import { useState } from "react";
 import {
   StyledInput,
@@ -11,8 +12,8 @@ export default function InputGender() {
   };
 
   return (
-    <fieldset className="formGroup">
-      <label htmlFor="gender">Votre genre</label>
+    <FormControl className="formGroup">
+      <FormLabel htmlFor="gender">Votre genre</FormLabel>
       <StyledSelect
         required
         name="gender"
@@ -28,7 +29,7 @@ export default function InputGender() {
 
       {gender === "others" && (
         <>
-          <label htmlFor="othersGenre">Veuillez spécifiez</label>
+          <FormLabel htmlFor="othersGenre">Veuillez spécifiez</FormLabel>
           <StyledInput
             type="text"
             name="othersGenre"
@@ -37,6 +38,6 @@ export default function InputGender() {
           />
         </>
       )}
-    </fieldset>
+    </FormControl>
   );
 }

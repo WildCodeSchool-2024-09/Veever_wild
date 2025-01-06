@@ -1,3 +1,4 @@
+import { FormControl, FormLabel } from "@mui/material";
 import { useState } from "react";
 import { StyledTelInput } from "../../../services/FormCreateAcc/inputStyle";
 
@@ -7,14 +8,14 @@ export default function InputPhone() {
     setValue(newValue);
   };
   return (
-    <fieldset className="formGroup">
-      <label htmlFor="tel">Votre numéro de téléphone</label>
+    <FormControl className="formGroup phone">
+      <FormLabel htmlFor="tel">Votre numéro de téléphone</FormLabel>
       <StyledTelInput
-        className="phone"
+        id="tel"
         value={value}
         onChange={handleChangePhone}
         defaultCountry="FR"
       />
-    </fieldset>
+    </FormControl>
   );
 }

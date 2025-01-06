@@ -1,10 +1,11 @@
+import { FormControl, FormLabel } from "@mui/material";
 import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
 
 export default function InputFirstName() {
   return (
     <>
-      <fieldset className="formGroup">
-        <label htmlFor="firstname">Votre Prénom</label>
+      <FormControl className="formGroup">
+        <FormLabel htmlFor="firstname">Votre Prénom</FormLabel>
         <StyledInput
           required
           type="text"
@@ -12,7 +13,7 @@ export default function InputFirstName() {
           id="firstname"
           placeholder="Votre prénom"
         />
-      </fieldset>
+      </FormControl>
     </>
   );
 }

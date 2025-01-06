@@ -1,3 +1,4 @@
+import { FormControl, FormLabel } from "@mui/material";
 import { fr } from "date-fns/locale/fr";
 import { useState } from "react";
 import { StyledDatePicker } from "../../../services/FormCreateAcc/inputStyle";
@@ -5,8 +6,8 @@ import { StyledDatePicker } from "../../../services/FormCreateAcc/inputStyle";
 export default function InputDate() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   return (
-    <fieldset className="formGroup">
-      <label htmlFor="birthday">Votre date de naissance</label>
+    <FormControl className="formGroup">
+      <FormLabel htmlFor="birthday">Votre date de naissance</FormLabel>
       <StyledDatePicker
         className="birthdayCalendar"
         required
@@ -20,6 +21,6 @@ export default function InputDate() {
         selected={startDate}
         onChange={(date) => setStartDate(date)}
       />
-    </fieldset>
+    </FormControl>
   );
 }

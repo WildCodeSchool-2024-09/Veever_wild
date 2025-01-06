@@ -1,15 +1,21 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
+import {
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+} from "@mui/material";
+import { Link } from "react-router-dom";
 
 export default function InputCheckCGU() {
   return (
-    <fieldset className="formGroup">
-      <label htmlFor="checkCGU" className="checkLabel">
+    <FormControl className="formGroup checkCGU">
+      <FormLabel className="checkLabel">
         Merci de bien vouloir lire les{" "}
-        <a href="/cgu-veever">conditions général d'utilisation</a>
-      </label>
+        <Link to="/cgu-veever">conditions général d'utilisation</Link>
+      </FormLabel>
       <div className="checkBox">
         <FormControlLabel required control={<Checkbox />} label="Accepter" />
       </div>
-    </fieldset>
+    </FormControl>
   );
 }

@@ -1,15 +1,27 @@
-import { Checkbox, FormControlLabel } from "@mui/material";
+import {
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 
 export default function InputCheckContact() {
   return (
-    <fieldset className="formGroup">
-      <label htmlFor="contact" className="checkLabel">
-        Recevoir les réservations par E-mail ou par Téléphone ?
-      </label>
-      <div className="checkBox">
-        <FormControlLabel control={<Checkbox />} label="E-mail" />
-        <FormControlLabel control={<Checkbox />} label="Téléphone" />
-      </div>
-    </fieldset>
+    <FormControl className="formGroup checkContact">
+      <FormLabel id="demo-radio-buttons-group-label">
+        Pour les réservations préférez vous être contacter par:
+      </FormLabel>
+      <RadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue=""
+        name="radio-buttons-group"
+      >
+        <div className="checkBox">
+          <FormControlLabel value="email" control={<Radio />} label="E-mail" />
+          <FormControlLabel value="tel" control={<Radio />} label="Téléphone" />
+        </div>
+      </RadioGroup>
+    </FormControl>
   );
 }

@@ -1,3 +1,4 @@
+import { FormControl, FormLabel } from "@mui/material";
 import { useState } from "react";
 import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
 
@@ -37,8 +38,10 @@ export default function InputPassword() {
 
   return (
     <>
-      <fieldset className="formGroup">
-        <label htmlFor="password">Veuillez entrer un mot de passe</label>
+      <FormControl className="formGroup">
+        <FormLabel htmlFor="password">
+          Veuillez entrer un mot de passe
+        </FormLabel>
         <StyledInput
           onChange={handlePasswordChange}
           required
@@ -48,12 +51,12 @@ export default function InputPassword() {
           placeholder="Votre mot de passe"
         />
         {error && <p className="errorPassword">{error}</p>}
-      </fieldset>
+      </FormControl>
 
-      <fieldset className="formGroup">
-        <label htmlFor="confirmedPassword">
+      <FormControl className="formGroup">
+        <FormLabel htmlFor="confirmedPassword">
           Veuillez confirmer votre mot de passe
-        </label>
+        </FormLabel>
         <StyledInput
           onChange={handleConfirmPasswordChange}
           required
@@ -66,7 +69,7 @@ export default function InputPassword() {
         {passwords !== isSamePasswords && (
           <p className="errorPassword">Mots de passe différents</p>
         )}
-      </fieldset>
+      </FormControl>
     </>
   );
 }

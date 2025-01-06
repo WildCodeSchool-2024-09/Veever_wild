@@ -15,11 +15,7 @@ export default function FormCreateAcc() {
   return (
     <>
       <section className="headerForm">
-        <img
-          className="logoForm"
-          src="./src/assets/images/logo.svg"
-          alt="Logo"
-        />
+        <img className="logoForm" src="./src/assets/images/logo.svg" alt="" />
         <h1>Crée votre Compte pour devenir un Veever</h1>
       </section>
       <form action="submit" className="createForm">

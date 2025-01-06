@@ -1,9 +1,10 @@
+import { FormControl, FormLabel } from "@mui/material";
 import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
 
 export default function inputUsername() {
   return (
-    <fieldset className="formGroup">
-      <label htmlFor="username">Choisissez un nom d'utilisateur</label>
+    <FormControl className="formGroup">
+      <FormLabel htmlFor="username">Choisissez un nom d'utilisateur</FormLabel>
       <StyledInput
         required
         type="text"
@@ -11,6 +12,6 @@ export default function inputUsername() {
         id="username"
         placeholder="Votre nom d'utilisateur"
       />
-    </fieldset>
+    </FormControl>
   );
 }

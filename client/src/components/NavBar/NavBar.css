@@ -4,7 +4,7 @@ header {
   width: 100vw;
 
   margin-bottom: var(--spacing-ref);
-
+  z-index: 100;
   position: fixed;
   bottom: 0;
   left: 0;
