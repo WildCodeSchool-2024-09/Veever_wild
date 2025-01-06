@@ -6,7 +6,15 @@ type Hotels = {
   id: number;
   chr_id: number;
 };
-
+type ChrData = {
+  address: string;
+  minPrice: number;
+  maxPrice: number;
+};
+type UpdateResponse = {
+  chrId: number;
+  chrData: ChrData;
+};
 class HotelsRepository {
   // The C of CRUD - Create operation
   async create(hotel: Omit<Hotels, "id">) {
@@ -51,15 +59,11 @@ class HotelsRepository {
   async update(
     hotelId: number,
     chrId: number,
-    chrData: { address: string; minPrice: number; maxPrice: number },
-  ): Promise<{
-    chrId: number;
-    chrData: { address: string; minPrice: number; maxPrice: number };
-  }> {
+    chrData: ChrData,
+  ): Promise<UpdateResponse> {
     const connection = await databaseClient.getConnection();
 
     try {
-      await connection.beginTransaction();
       await connection.query(
         `UPDATE chr
          SET address = ?, minPrice = ?, maxPrice = ?
@@ -75,7 +79,6 @@ class HotelsRepository {
       );
 
       await connection.commit();
-      console.info("Transaction réussie !");
 
       return { chrId, chrData };
     } catch (error) {

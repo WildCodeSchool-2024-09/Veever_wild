@@ -22,6 +22,7 @@ const read: RequestHandler = async (req, res, next) => {
   try {
     // Fetch a specific hotel based on the provided ID
     const hotelId = Number(req.params.id);
+
     const hotel = await hotelRepository.read(hotelId);
 
     // If the hotel is not found, respond with HTTP 404 (Not Found)
@@ -50,7 +51,7 @@ const edit: RequestHandler = async (req, res, next) => {
     const updateHotel = await hotelRepository.update(hotelId, chrId, chrData);
 
     if (updateHotel == null) {
-      res.sendStatus(404);
+      res.sendStatus(204);
     } else {
       res.json(updateHotel);
     }

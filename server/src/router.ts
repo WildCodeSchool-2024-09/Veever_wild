@@ -16,9 +16,9 @@ router.post("/api/items", itemActions.add);
 import hotelsActions from "./modules/hotels/hotelsActions";
 router.get("/api/hotels", hotelsActions.browse);
 router.get("/api/hotels/:id", hotelsActions.read);
-router.put("/api/hotels", hotelsActions.edit);
+router.put("/api/hotels/:id", hotelsActions.edit);
 router.post("api/hotels", hotelsActions.add);
-router.delete("/api/hotels", hotelsActions.destroy);
+router.delete("/api/hotels/:id", hotelsActions.destroy);
 
 /* ************************************************************************* */
 
