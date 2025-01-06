@@ -55,9 +55,14 @@ placeholder {
   gap: var(--spacing-ref);
 }
 
-.error {
+.errors {
+  list-style: none;
   color: var(--errorColor);
   font-size: calc(var(--font-size-ref) * 0.8);
+}
+
+.error::before {
+  content: "❌";
 }
 
 .react-datepicker__view-calendar-icon input {

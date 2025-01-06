@@ -1,41 +1,14 @@
 import { FormControl, FormLabel } from "@mui/material";
-import { useState } from "react";
 import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
+import { usePasswordValidation } from "../../../services/FormCreateAcc/passwords";
 
 export default function InputPassword() {
-  const [passwords, setPasswords] = useState("");
-  const [isSamePasswords, setIsSamePasswords] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  const checkPassword = (password: string) => {
-    if (password.length < 8) {
-      setError("Le mot de passe doit comporter au moins 8 caractères.");
-      return false;
-    }
-
-    if (password === password.toLowerCase()) {
-      setError("Le mot de passe doit contenir au moins une majuscule.");
-      return false;
-    }
-
-    setError(null);
-    return true;
-  };
-
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const password = e.target.value;
-    setPasswords(password);
-
-    checkPassword(password);
-  };
-
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const confirmedPassword = e.target.value;
-    setIsSamePasswords(confirmedPassword);
-  };
-
+  const {
+    errors,
+    handlePasswordChange,
+    handleConfirmPasswordChange,
+    isSamePassword,
+  } = usePasswordValidation();
   return (
     <>
       <FormControl className="formGroup" required>
@@ -43,13 +16,22 @@ export default function InputPassword() {
           Veuillez entrer un mot de passe
         </FormLabel>
         <StyledInput
-          onChange={handlePasswordChange}
+          onChange={(e) => handlePasswordChange(e.target.value)}
           type="password"
           name="password"
           id="password"
           placeholder="Votre mot de passe"
         />
-        {error && <p className="error">{error}</p>}
+        {errors && (
+          <ul className="errors">
+            {errors.length && <li className="error">{errors.length}</li>}
+            {errors.maj && <li className="error">{errors.maj}</li>}
+            {errors.number && <li className="error">{errors.number}</li>}
+            {errors.specialChar && (
+              <li className="error">{errors.specialChar}</li>
+            )}
+          </ul>
+        )}
       </FormControl>
 
       <FormControl className="formGroup" required>
@@ -57,16 +39,14 @@ export default function InputPassword() {
           Veuillez confirmer votre mot de passe
         </FormLabel>
         <StyledInput
-          onChange={handleConfirmPasswordChange}
+          onChange={(e) => handleConfirmPasswordChange(e.target.value)}
           placeholder="Confirmez votre mot de passe"
           type="password"
           name="confirmedPassword"
           id="confirmedPassword"
         />
 
-        {passwords !== isSamePasswords && (
-          <p className="error">Mots de passe différents</p>
-        )}
+        {!isSamePassword && <p className="errors">Mots de passe différents</p>}
       </FormControl>
     </>
   );

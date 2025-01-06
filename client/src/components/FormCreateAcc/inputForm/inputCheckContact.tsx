@@ -10,7 +10,7 @@ export default function InputCheckContact() {
   return (
     <FormControl className="formGroup checkContact" required>
       <FormLabel id="demo-radio-buttons-group-label">
-        Pour les réservations préférez vous être contacter par:
+        Pour les réservations préférez vous être contacté par:
       </FormLabel>
       <RadioGroup
         aria-labelledby="demo-radio-buttons-group-label"
