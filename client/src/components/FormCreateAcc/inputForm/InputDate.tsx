@@ -6,11 +6,10 @@ import { StyledDatePicker } from "../../../services/FormCreateAcc/inputStyle";
 export default function InputDate() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   return (
-    <FormControl className="formGroup">
+    <FormControl className="formGroup" required>
       <FormLabel htmlFor="birthday">Votre date de naissance</FormLabel>
       <StyledDatePicker
         className="birthdayCalendar"
-        required
         locale={fr}
         peekNextMonth
         showMonthDropdown

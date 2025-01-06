@@ -8,7 +8,7 @@ import {
 
 export default function InputCheckContact() {
   return (
-    <FormControl className="formGroup checkContact">
+    <FormControl className="formGroup checkContact" required>
       <FormLabel id="demo-radio-buttons-group-label">
         Pour les réservations préférez vous être contacter par:
       </FormLabel>

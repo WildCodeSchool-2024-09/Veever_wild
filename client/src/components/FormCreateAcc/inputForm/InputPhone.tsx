@@ -8,7 +8,7 @@ export default function InputPhone() {
     setValue(newValue);
   };
   return (
-    <FormControl className="formGroup phone">
+    <FormControl className="formGroup phone" required>
       <FormLabel htmlFor="tel">Votre numéro de téléphone</FormLabel>
       <StyledTelInput
         id="tel"

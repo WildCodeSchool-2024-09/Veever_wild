@@ -38,13 +38,12 @@ export default function InputPassword() {
 
   return (
     <>
-      <FormControl className="formGroup">
+      <FormControl className="formGroup" required>
         <FormLabel htmlFor="password">
           Veuillez entrer un mot de passe
         </FormLabel>
         <StyledInput
           onChange={handlePasswordChange}
-          required
           type="password"
           name="password"
           id="password"
@@ -53,13 +52,12 @@ export default function InputPassword() {
         {error && <p className="errorPassword">{error}</p>}
       </FormControl>
 
-      <FormControl className="formGroup">
+      <FormControl className="formGroup" required>
         <FormLabel htmlFor="confirmedPassword">
           Veuillez confirmer votre mot de passe
         </FormLabel>
         <StyledInput
           onChange={handleConfirmPasswordChange}
-          required
           placeholder="Confirmez votre mot de passe"
           type="password"
           name="confirmedPassword"

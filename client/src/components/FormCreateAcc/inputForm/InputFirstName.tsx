@@ -4,10 +4,9 @@ import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
 export default function InputFirstName() {
   return (
     <>
-      <FormControl className="formGroup">
+      <FormControl className="formGroup" required>
         <FormLabel htmlFor="firstname">Votre Prénom</FormLabel>
         <StyledInput
-          required
           type="text"
           name="firstname"
           id="firstname"
