@@ -19,7 +19,7 @@ class adminRepository {
   // The C of CRUD - Create operation
   async create(
     userData: User,
-  ): Promise<{ message: string; profile: User & { adminId: number } }> {
+  ): Promise<{ profile: User & { adminId: number } }> {
     const connection = await databaseClient.getConnection();
 
     try {
@@ -37,7 +37,12 @@ class adminRepository {
           userData.lastname,
         ],
       );
+
       const userId = userResult.insertId;
+
+      if (!userId) {
+        throw new Error("Echec de création de l'utilisateur.");
+      }
 
       const [adminResult] = await connection.query<Result>(
         `
@@ -51,7 +56,6 @@ class adminRepository {
       await connection.commit();
 
       return {
-        message: "Administrateur créé.",
         profile: {
           email: userData.email,
           password: userData.password,
@@ -70,11 +74,11 @@ class adminRepository {
   }
 
   // The Rs of CRUD - Read operations
-  async read(id: number) {
+  async read(id: number): Promise<Omit<User & Admin, "password"> | null> {
     // Execute the SQL SELECT query to retrieve a specific admin by its ID
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT admin.id, user.id as user_id, email, password, firstname, lastname
+      SELECT admin.id, user.id as user_id, email, firstname, lastname
       FROM admin
       INNER JOIN user
       ON user.id = admin.user_id
@@ -83,28 +87,40 @@ class adminRepository {
       [id],
     );
 
+    if (rows.length === 0) {
+      return null;
+    }
+
     // Return the first row of the result, which represents the admin
-    const { password, ...rest } = rows[0];
-    return rest as Omit<User & Admin, "password">;
+    const admin = rows[0] as Omit<User & Admin, "password">;
+    return admin;
   }
 
-  async readAll() {
+  async readAll(): Promise<Array<Omit<User & Admin, "password">> | null> {
     // Execute the SQL SELECT query to retrieve all admins from the "admin" table
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT admin.id, user.id as user_id, email, password, firstname, lastname
+      SELECT admin.id, user.id as user_id, email, firstname, lastname
       FROM admin
       INNER JOIN user
       ON user.id = admin.user_id
       `,
     );
 
+    if (rows.length === 0) {
+      return null;
+    }
+
     // Return the array of admins
-    return rows.map(({ password, ...rest }) => rest);
+    const admins = rows.map((admin) => {
+      return admin as Omit<User & Admin, "password">;
+    });
+
+    return admins;
   }
 
   // The U of CRUD - Update operation
-  async update(userData: User): Promise<{ message: string; profile: User }> {
+  async update(userData: User): Promise<{ profile: User }> {
     const connection = await databaseClient.getConnection();
 
     try {
@@ -129,10 +145,7 @@ class adminRepository {
         );
       }
 
-      await connection.commit();
-
       return {
-        message: "Administrateur modifié.",
         profile: {
           email: userData.email,
           password: userData.password,
@@ -150,41 +163,29 @@ class adminRepository {
   }
 
   // The D of CRUD - Delete operation
-  async destroy(adminId: number): Promise<{ message: string }> {
+  async destroy(adminId: number) {
     const connection = await databaseClient.getConnection();
 
     try {
       await connection.beginTransaction();
-      const [adminResult] = await connection.query<Result>(
+      const [result] = await connection.query<Result>(
         `
-        DELETE FROM admin
-        WHERE id = ?
+        DELETE user, admin
+        FROM user
+        INNER JOIN admin
+        ON admin.user_id = user.id
+        WHERE admin.id = ?;
         `,
         [adminId],
       );
 
-      if (adminResult.affectedRows === 0) {
-        throw new Error("Administrateur non trouvé");
-      }
-
-      const [userResult] = await connection.query<Result>(
-        `
-        DELETE user FROM user
-        INNER JOIN admin ON admin.user_id = user.id
-        WHERE admin.id = ?
-        `,
-        [adminId],
-      );
-
-      if (userResult.affectedRows === 0) {
-        throw new Error("Utilisateur non trouvé");
+      if (result.affectedRows === 0) {
+        throw new Error("Administrateur ou utilisateur non trouvé");
       }
 
       await connection.commit();
 
-      return {
-        message: "Administrateur supprimé.",
-      };
+      return result.affectedRows;
     } catch (error) {
       await connection.rollback();
       throw error;
