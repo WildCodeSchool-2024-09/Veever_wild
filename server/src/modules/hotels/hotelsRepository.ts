@@ -92,13 +92,24 @@ class HotelsRepository {
 
   // The D of CRUD - Delete operation
   async delete(id: number) {
-    const [rows] = await databaseClient.query<Rows>(
-      `DELETE FROM hotel
-      WHERE id = ?`,
-      [id],
-    );
-    return rows as Hotels[];
+    const connection = await databaseClient.getConnection();
+    try {
+      await connection.query("SET FOREIGN_KEY_CHECKS=0");
+      await connection.query(
+        `DELETE hotel, chr 
+         FROM hotel 
+         LEFT JOIN chr ON hotel.chr_id = chr.id 
+         WHERE hotel.id = ?`,
+        [id],
+      );
+      await connection.query("SET FOREIGN_KEY_CHECKS=1");
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
   }
 }
-
 export default new HotelsRepository();
