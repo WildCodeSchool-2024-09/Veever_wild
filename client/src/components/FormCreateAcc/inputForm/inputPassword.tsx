@@ -1,50 +1,23 @@
 import { FormControl, FormLabel } from "@mui/material";
-import { useState } from "react";
 import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
-import type { passwordCheck } from "../../../types/Password/PasswordCheck";
 
-export default function InputPassword() {
-  const [passwords, setPasswords] = useState("");
-  const [isSamePasswords, setIsSamePasswords] = useState("");
-  const [errors, setErrors] = useState<passwordCheck>({});
+interface InputPasswordProps {
+  password: string;
+  confirmPassword: string;
+  errors: Record<string, string>;
+  isSamePassword: boolean;
+  handlePasswordChange: (value: string) => void;
+  handleConfirmPasswordChange: (value: string) => void;
+}
 
-  const handleChangeCheckPassword = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const password = e.target.value;
-    setPasswords(password);
-
-    const newErrors: passwordCheck = {};
-
-    // Vérifie la longueur
-    if (password.length < 8) {
-      newErrors.length =
-        "Votre mot de passe doit contenir au moins 8 caractères";
-    }
-
-    if (!/\d/.test(password)) {
-      newErrors.number = "Votre mot de passe doit contenir au moins un chiffre";
-    }
-
-    if (password === password.toLowerCase()) {
-      newErrors.maj = "Votre mot de passe doit contenir au moins une majuscule";
-    }
-
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      newErrors.specialChar =
-        "Votre mot de passe doit contenir au moins un caractère spécial";
-    }
-
-    setErrors(newErrors);
-  };
-
-  const handleConfirmPasswordChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const confirmedPassword = e.target.value;
-    setIsSamePasswords(confirmedPassword);
-  };
-
+export default function InputPassword({
+  password,
+  confirmPassword,
+  errors,
+  isSamePassword,
+  handlePasswordChange,
+  handleConfirmPasswordChange,
+}: InputPasswordProps) {
   return (
     <>
       <FormControl className="formGroup" required>
@@ -52,13 +25,14 @@ export default function InputPassword() {
           Veuillez entrer un mot de passe
         </FormLabel>
         <StyledInput
-          onChange={handleChangeCheckPassword}
+          value={password}
+          onChange={(e) => handlePasswordChange(e.target.value)}
           type="password"
           name="password"
           id="password"
           placeholder="Votre mot de passe"
         />
-        {errors && (
+        {Object.keys(errors).length > 0 && (
           <ul className="errors">
             {errors.length && <li className="error">{errors.length}</li>}
             {errors.maj && <li className="error">{errors.maj}</li>}
@@ -75,16 +49,14 @@ export default function InputPassword() {
           Veuillez confirmer votre mot de passe
         </FormLabel>
         <StyledInput
-          onChange={handleConfirmPasswordChange}
+          value={confirmPassword}
+          onChange={(e) => handleConfirmPasswordChange(e.target.value)}
           placeholder="Confirmez votre mot de passe"
           type="password"
           name="confirmedPassword"
           id="confirmedPassword"
         />
-
-        {passwords !== isSamePasswords && (
-          <p className="errors">Mots de passe différents</p>
-        )}
+        {!isSamePassword && <p className="errors">Mots de passe différents</p>}
       </FormControl>
     </>
   );
