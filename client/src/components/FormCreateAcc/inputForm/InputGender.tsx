@@ -12,9 +12,10 @@ export default function InputGender() {
   };
 
   return (
-    <FormControl className="formGroup" required>
+    <FormControl className="formGroup">
       <FormLabel htmlFor="gender">Votre genre</FormLabel>
       <StyledSelect
+        required
         name="gender"
         id="gender"
         value={gender}

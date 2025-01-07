@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { passwordCheck } from "../../types/Password/PasswordCheck";
 
 export function usePasswordValidation() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState<passwordCheck>({});
+  const [isSamePassword, setIsSamePassword] = useState(true);
 
-  const validatePassword = (password: string) => {
+  const validatePassword = useCallback((password: string) => {
     const newErrors: passwordCheck = {};
 
     if (password.length < 8) {
@@ -24,24 +25,22 @@ export function usePasswordValidation() {
         "Votre mot de passe doit contenir au moins un caractère spécial";
     }
 
-    setErrors(newErrors);
-  };
+    return newErrors;
+  }, []);
 
-  const handlePasswordChange = (value: string) => {
-    setPassword(value);
-    validatePassword(value);
-  };
+  useEffect(() => {
+    setErrors(validatePassword(password));
+    setIsSamePassword(password === confirmPassword);
+  }, [password, confirmPassword, validatePassword]);
 
-  const handleConfirmPasswordChange = (value: string) => {
+  const handlePasswordChange = (value: string) => setPassword(value);
+  const handleConfirmPasswordChange = (value: string) =>
     setConfirmPassword(value);
-  };
 
   return {
-    password,
-    confirmPassword,
     errors,
+    isSamePassword,
     handlePasswordChange,
     handleConfirmPasswordChange,
-    isSamePassword: password === confirmPassword,
   };
 }

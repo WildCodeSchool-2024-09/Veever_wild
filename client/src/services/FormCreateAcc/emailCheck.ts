@@ -9,7 +9,7 @@ const schema = Yup.object({
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
       "Veuillez entrer un e-mail valide avec un domaine correct",
     )
-    .max(50, "L'e-mail ne peut pas dépasser 50 caractères"),
+    .max(50),
 });
 
 export default function useEmailCheck() {

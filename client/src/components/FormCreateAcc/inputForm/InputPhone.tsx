@@ -8,9 +8,10 @@ export default function InputPhone() {
     setValue(newValue);
   };
   return (
-    <FormControl className="formGroup phone" required>
+    <FormControl className="formGroup phone">
       <FormLabel htmlFor="tel">Votre numéro de téléphone</FormLabel>
       <StyledTelInput
+        required
         id="tel"
         value={value}
         onChange={handleChangePhone}

@@ -6,9 +6,10 @@ export default function InputEmail() {
   const { email, errors, handleChangeEmail } = useEmailCheck();
 
   return (
-    <FormControl className="formGroup" required>
+    <FormControl className="formGroup">
       <FormLabel htmlFor="email">Votre adresse e-mail</FormLabel>
       <StyledInput
+        required
         onChange={handleChangeEmail}
         type="email"
         name="email"
