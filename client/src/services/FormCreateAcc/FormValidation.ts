@@ -1,5 +1,4 @@
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function useFormValidation() {
   const [email, setEmail] = useState("");
@@ -7,8 +6,6 @@ export default function useFormValidation() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [isSamePassword, setIsSamePassword] = useState(true);
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const navigate = useNavigate();
 
   const validatePassword = useCallback((password: string) => {
     const newErrors: Record<string, string> = {};
@@ -41,19 +38,6 @@ export default function useFormValidation() {
     setIsSamePassword(newPassword === password);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    if (Object.keys(errors).length > 0 || !isSamePassword) {
-      e.preventDefault();
-      setShowSnackbar(true);
-      return;
-    }
-    navigate("/");
-  };
-
-  const handleClose = () => {
-    setShowSnackbar(false);
-  };
-
   const validateEmail = useCallback((email: string) => {
     const newErrors: Record<string, string> = {};
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
@@ -77,12 +61,9 @@ export default function useFormValidation() {
     password,
     errors,
     confirmPassword,
-    showSnackbar,
     isSamePassword,
-    handleClose,
     handlePasswordChange,
     handleConfirmPasswordChange,
-    handleSubmit,
     handleEmailCheckChange,
   };
 }

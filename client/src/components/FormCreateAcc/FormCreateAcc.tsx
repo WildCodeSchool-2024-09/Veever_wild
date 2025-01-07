@@ -2,6 +2,8 @@ import "./FormCreateAcc.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useFormValidation from "../../services/FormCreateAcc/FormValidation";
 import InputCheckCGU from "./inputForm/InputCheckCGU";
 import InputDate from "./inputForm/InputDate";
@@ -15,19 +17,31 @@ import InputPassword from "./inputForm/inputPassword";
 import InputUsername from "./inputForm/inputUsername";
 
 export default function FormCreateAcc() {
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const navigate = useNavigate();
   const {
     email,
     password,
     errors,
     confirmPassword,
-    showSnackbar,
     isSamePassword,
-    handleClose,
     handlePasswordChange,
     handleConfirmPasswordChange,
     handleEmailCheckChange,
-    handleSubmit,
   } = useFormValidation();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    if (Object.keys(errors).length > 0 || !isSamePassword) {
+      e.preventDefault();
+      setShowSnackbar(true);
+      return;
+    }
+    navigate("/");
+  };
+
+  const handleClose = () => {
+    setShowSnackbar(false);
+  };
   return (
     <>
       <section className="headerForm">
