@@ -1,19 +1,6 @@
 import databaseClient from "../../../database/client";
-
 import type { Result, Rows } from "../../../database/client";
-
-type Admin = {
-  id: number;
-  user_id: number;
-};
-
-export type User = {
-  id: number;
-  email: string;
-  password: string;
-  firstname: string;
-  lastname: string;
-};
+import type { Admin, User } from "../../types/admin/adminTypes";
 
 class adminRepository {
   // The C of CRUD - Create operation
