@@ -1,4 +1,14 @@
 @import url("@src/variables.css");
+.catalog-boxes-section {
+  margin: 0 auto;
+  display: grid;
+  gap: var(--border-ref);
+  text-align: center;
+  margin-top: var(--border-ref);
+  max-width: 25rem;
+  border: solid 2px blue;
+  padding: 2rem;
+}
 
 .catalog-title {
   font-family: var(--titleFont);
@@ -8,15 +18,6 @@
   font-size: 2.5rem;
   margin-bottom: var(--border-ref);
   grid-column: span 2;
-}
-
-.catalog-section {
-  margin: 0 auto;
-  display: grid;
-  gap: var(--border-ref);
-  text-align: center;
-  margin-top: var(--border-ref);
-  max-width: 25rem;
 }
 
 .catalog-boxes {

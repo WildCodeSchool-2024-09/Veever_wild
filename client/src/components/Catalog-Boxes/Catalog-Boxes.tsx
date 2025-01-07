@@ -1,11 +1,10 @@
-import CatalogFilter from "../../services/Catalog/CatalogFilters";
 import "./Catalog-Boxes.css";
-
+import CatalogFilter from "../../services/Catalog/CatalogBoxesLogic";
 export default function CatalogBoxes() {
   const { filters, handleFilterChange } = CatalogFilter();
 
   return (
-    <section className="catalog-section">
+    <section className="catalog-boxes-section">
       <h1 className="catalog-title">Mon catalogue personnalisé</h1>
 
       <label className="catalog-boxes">

@@ -1,0 +1,22 @@
+@import url("@src/variables.css");
+.catalog-filter-section {
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: var(--border-ref);
+  text-align: center;
+  margin-top: var(--border-ref);
+  max-width: 25rem;
+  border: solid 2px blue;
+  padding: 2rem;
+}
+.emoji {
+  font-size: 4rem;
+}
+.catalog-filter-section h1,
+p {
+  font-size: 1.5rem;
+  font-family: var(--titleFont);
+  margin: var(--spacing-ref);
+}

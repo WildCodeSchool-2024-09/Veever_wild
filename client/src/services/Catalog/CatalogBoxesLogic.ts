@@ -1,12 +1,5 @@
 import { useState } from "react";
-
-interface Filters {
-  restaurants: boolean;
-  activities: boolean;
-  hotels: boolean;
-  all: boolean;
-}
-
+import type { Filters } from "../../types/Catalog/CatalogTypes";
 export default function CatalogFilter() {
   const [filters, setFilters] = useState<Filters>({
     restaurants: false,
