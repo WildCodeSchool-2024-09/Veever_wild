@@ -55,6 +55,7 @@ CREATE TABLE reservation_date (
 
 CREATE TABLE chr (
   id int unsigned primary key auto_increment not null,
+  name varchar(255) not null,
   address varchar(255) not null,
   min_price int unsigned not null,
   max_price int unsigned not null
