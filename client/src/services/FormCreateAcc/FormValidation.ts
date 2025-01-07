@@ -1,7 +1,8 @@
 import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function usePasswordValidation() {
+export default function useFormValidation() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
@@ -30,21 +31,20 @@ export default function usePasswordValidation() {
     return newErrors;
   }, []);
 
-  const handlePasswordChange = (value: string) => {
-    setPassword(value);
-    setErrors(validatePassword(value));
+  const handlePasswordChange = (newPassword: string) => {
+    setPassword(newPassword);
+    setErrors(validatePassword(newPassword));
   };
 
-  const handleConfirmPasswordChange = (value: string) => {
-    setConfirmPassword(value);
-    setIsSamePassword(value === password);
+  const handleConfirmPasswordChange = (newPassword: string) => {
+    setConfirmPassword(newPassword);
+    setIsSamePassword(newPassword === password);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     if (Object.keys(errors).length > 0 || !isSamePassword) {
       e.preventDefault();
       setShowSnackbar(true);
-      console.error(errors);
       return;
     }
     navigate("/");
@@ -54,7 +54,26 @@ export default function usePasswordValidation() {
     setShowSnackbar(false);
   };
 
+  const validateEmail = useCallback((email: string) => {
+    const newErrors: Record<string, string> = {};
+    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+      newErrors.emailCheck = "Votre adresse e-mail est invalide";
+    }
+
+    return newErrors;
+  }, []);
+
+  const handleEmailChange = (newEmail: string) => {
+    setEmail(newEmail);
+    setErrors(validateEmail(newEmail));
+  };
+
+  const handleEmailCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleEmailChange(e.target.value);
+  };
+
   return {
+    email,
     password,
     errors,
     confirmPassword,
@@ -64,5 +83,6 @@ export default function usePasswordValidation() {
     handlePasswordChange,
     handleConfirmPasswordChange,
     handleSubmit,
+    handleEmailCheckChange,
   };
 }

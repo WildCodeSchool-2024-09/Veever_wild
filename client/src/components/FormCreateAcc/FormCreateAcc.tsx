@@ -2,7 +2,7 @@ import "./FormCreateAcc.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
-import usePasswordValidation from "../../services/FormCreateAcc/passwordCheck";
+import useFormValidation from "../../services/FormCreateAcc/FormValidation";
 import InputCheckCGU from "./inputForm/InputCheckCGU";
 import InputDate from "./inputForm/InputDate";
 import InputEmail from "./inputForm/InputEmail";
@@ -16,6 +16,7 @@ import InputUsername from "./inputForm/inputUsername";
 
 export default function FormCreateAcc() {
   const {
+    email,
     password,
     errors,
     confirmPassword,
@@ -24,8 +25,9 @@ export default function FormCreateAcc() {
     handleClose,
     handlePasswordChange,
     handleConfirmPasswordChange,
+    handleEmailCheckChange,
     handleSubmit,
-  } = usePasswordValidation();
+  } = useFormValidation();
   return (
     <>
       <section className="headerForm">
@@ -36,7 +38,11 @@ export default function FormCreateAcc() {
         <InputUsername />
         <InputLastName />
         <InputFirstName />
-        <InputEmail />
+        <InputEmail
+          errors={errors}
+          email={email}
+          handleEmailCheckChange={handleEmailCheckChange}
+        />
         <InputPassword
           password={password}
           confirmPassword={confirmPassword}

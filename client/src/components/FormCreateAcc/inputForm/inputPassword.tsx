@@ -1,14 +1,6 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
-
-interface InputPasswordProps {
-  password: string;
-  confirmPassword: string;
-  errors: Record<string, string>;
-  isSamePassword: boolean;
-  handlePasswordChange: (value: string) => void;
-  handleConfirmPasswordChange: (value: string) => void;
-}
+import type { PasswordValidation } from "../../../types/FormValidation/FormValidationCheck";
 
 export default function InputPassword({
   password,
@@ -17,7 +9,7 @@ export default function InputPassword({
   isSamePassword,
   handlePasswordChange,
   handleConfirmPasswordChange,
-}: InputPasswordProps) {
+}: PasswordValidation) {
   return (
     <>
       <FormControl className="formGroup" required>
