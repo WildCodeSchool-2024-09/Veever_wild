@@ -13,8 +13,8 @@ class RestaurantRepository {
       await connection.beginTransaction();
       const [chrResult] = await connection.query<Result>(
         ` INSERT INTO chr
-          (address, min_price, max_price) values (?, ?, ?)`,
-        [chrData.address, chrData.minPrice, chrData.maxPrice],
+          (name, address, min_price, max_price) values (?, ?, ?)`,
+        [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
       );
 
       if (!chrResult || !chrResult.insertId) {
@@ -49,7 +49,7 @@ class RestaurantRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific restaurant by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.address, chr.min_Price AS minPrice, chr.max_Price AS maxPrice
+      `SELECT chr.address, chr.min_Price AS minPrice, chr.max_Price AS maxPrice, chr.name AS name
        FROM restaurant 
        INNER JOIN chr
        ON restaurant.chr_id = chr_id
@@ -64,7 +64,7 @@ class RestaurantRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all restaurants from the "restaurant" table
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.address, chr.min_price AS minPrice , chr.max_price AS maxPrice
+      `SELECT chr.address, chr.min_price AS minPrice , chr.max_price AS maxPrice, chr.name AS name
        FROM restaurant
        INNER JOIN chr
        ON restaurant.chr_id = chr.id`,
@@ -77,7 +77,6 @@ class RestaurantRepository {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing restaurant
   async update({
-    restaurantId,
     chrId,
     chrData,
   }: {
@@ -93,27 +92,21 @@ class RestaurantRepository {
     try {
       const [chrResult] = await connection.query<Result>(
         `UPDATE chr
-         SET address = ?, minPrice = ?, maxPrice = ?
-         WHERE id = ?`,
-        [chrData.address, chrData.minPrice, chrData.maxPrice, chrId],
+         SET name = ?, address = ?, minPrice = ?, maxPrice = ?
+         WHERE id = (SELECT chr_id FROM restaurant WHERE id = ?)`,
+        [
+          chrData.name,
+          chrData.address,
+          chrData.minPrice,
+          chrData.maxPrice,
+          chrData.id,
+          chrId,
+        ],
       );
 
       if (chrResult.affectedRows !== 1) {
         throw new Error(
           `Erreur lors de la mise à jour de 'chr'. affectedRows: ${chrResult.affectedRows}`,
-        );
-      }
-
-      const [restaurantResult] = await connection.query<Result>(
-        `UPDATE restaurant
-         SET chr_id = ?
-         WHERE id = ?`,
-        [chrId, restaurantId],
-      );
-
-      if (restaurantResult.affectedRows !== 1) {
-        throw new Error(
-          `Erreur lors de la suppression dans 'restaurant'. affectedRows: ${restaurantResult.affectedRows}`,
         );
       }
 

@@ -1,4 +1,6 @@
 export type chrData = {
+  id: number;
+  name: string;
   address: string;
   minPrice: number;
   maxPrice: number;
