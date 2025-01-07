@@ -103,7 +103,7 @@ placeholder {
   margin: calc(var(--spacing-ref) * 0.3);
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 900px) {
   .createForm {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
