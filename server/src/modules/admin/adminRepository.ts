@@ -15,13 +15,11 @@ export type User = {
   lastname: string;
 };
 
-export type UserCreate = Omit<User, "id">;
-
 class adminRepository {
   // The C of CRUD - Create operation
   async create(
-    userData: UserCreate,
-  ): Promise<{ profile: User & { adminId: number } }> {
+    userData: Omit<User, "id">,
+  ): Promise<{ profile: Omit<User & { adminId: number }, "password"> }> {
     const connection = await databaseClient.getConnection();
 
     try {
@@ -42,7 +40,7 @@ class adminRepository {
 
       const userId = userResult.insertId;
 
-      if (!userId) {
+      if (!userId || userResult.affectedRows === 0) {
         throw new Error("Echec de création de l'utilisateur.");
       }
 
@@ -60,7 +58,6 @@ class adminRepository {
       return {
         profile: {
           email: userData.email,
-          password: userData.password,
           firstname: userData.firstname,
           lastname: userData.lastname,
           id: userId,
@@ -122,7 +119,7 @@ class adminRepository {
   }
 
   // The U of CRUD - Update operation
-  async update(userData: User): Promise<{ profile: User }> {
+  async update(userData: User): Promise<{ profile: Omit<User, "password"> }> {
     const connection = await databaseClient.getConnection();
 
     try {
@@ -130,7 +127,7 @@ class adminRepository {
         `
         UPDATE user
         SET email = ?, password = ?, firstname = ?, lastname = ?
-        WHERE id = ?
+        WHERE id = (SELECT user_id FROM admin WHERE id = ?)
         `,
         [
           userData.email,
@@ -143,33 +140,32 @@ class adminRepository {
 
       if (userResult.affectedRows === 0) {
         throw new Error(
-          "Utilisateur non trouvé ou aucune modification effectuée",
+          "Utilisateur non trouvé ou aucune modification effectuée.",
         );
       }
 
       return {
         profile: {
           email: userData.email,
-          password: userData.password,
           firstname: userData.firstname,
           lastname: userData.lastname,
           id: userData.id,
         },
       };
     } catch (error) {
-      await connection.rollback();
-      throw error;
+      throw new Error(
+        "Nous avons rencontré une erreur lors de la mise à jour de l'utilisateur.",
+      );
     } finally {
       connection.release();
     }
   }
 
   // The D of CRUD - Delete operation
-  async destroy(adminId: number) {
+  async destroy(adminId: number): Promise<number> {
     const connection = await databaseClient.getConnection();
 
     try {
-      await connection.beginTransaction();
       const [result] = await connection.query<Result>(
         `
         DELETE user, admin
@@ -182,15 +178,14 @@ class adminRepository {
       );
 
       if (result.affectedRows === 0) {
-        throw new Error("Administrateur ou utilisateur non trouvé");
+        throw new Error("Administrateur ou utilisateur non trouvé.");
       }
-
-      await connection.commit();
 
       return result.affectedRows;
     } catch (error) {
-      await connection.rollback();
-      throw error;
+      throw new Error(
+        "Nous avons rencontré une erreur lors de la suppression de l'utilisateur.",
+      );
     } finally {
       connection.release();
     }

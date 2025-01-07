@@ -1,7 +1,7 @@
 import type { RequestHandler } from "express";
 
 // Import access to data
-import adminRepository, { type UserCreate, type User } from "./adminRepository";
+import adminRepository, { type User } from "./adminRepository";
 
 // The B of BREAD - Browse (Read All) operation
 const browse: RequestHandler = async (req, res, next) => {
@@ -53,11 +53,11 @@ const edit: RequestHandler = async (req, res, next) => {
     const { profile } = await adminRepository.update(userData);
 
     // If the admin is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the admin in JSON format
     if (!profile) {
       res.sendStatus(404);
     } else {
-      res.status(204);
+      // Otherwise, respond with the admin in JSON format
+      res.status(200).json({ profile });
     }
   } catch (error) {
     // Pass any errors to the error-handling middleware
@@ -69,7 +69,7 @@ const edit: RequestHandler = async (req, res, next) => {
 const add: RequestHandler = async (req, res, next) => {
   try {
     // Extract the admin data from the request body
-    const userData: UserCreate = {
+    const userData: Omit<User, "id"> = {
       email: req.body.email,
       password: req.body.password,
       firstname: req.body.firstname,
@@ -90,13 +90,15 @@ const add: RequestHandler = async (req, res, next) => {
 // The D of BREAD - Delete operation
 const destroy: RequestHandler = async (req, res, next) => {
   try {
-    // Delete a specific admin based on the provided ID
     const adminId = Number(req.params.id);
 
-    await adminRepository.destroy(adminId);
+    const affectedRows = await adminRepository.destroy(adminId);
 
-    // Respond with HTTP 204 (OK)
-    res.status(204);
+    if (affectedRows === 0) {
+      res.status(404).json({ message: "Administrateur non trouvé." });
+    }
+
+    res.status(204).send();
   } catch (error) {
     next(error);
   }
