@@ -116,6 +116,21 @@ CREATE TABLE client_keyword (
   ON DELETE CASCADE
 );
 
+CREATE TABLE illustration (
+  id int unsigned primary key auto_increment not null,
+  link varchar(255) not null
+)
+
+CREATE TABLE illustration_keyword (
+  id int unsigned primary key auto_increment not null,
+  illustration_id int unsigned not null,
+  keyword_id int unsigned not null,
+  foreign key(illustration_id) references illustration(id)
+  ON DELETE CASCADE,
+  foreign key(keyword_id) references keyword(id)
+  ON DELETE CASCADE
+)
+
 CREATE TABLE form_item (
   id int unsigned primary key auto_increment not null,
   name varchar(255) not null
