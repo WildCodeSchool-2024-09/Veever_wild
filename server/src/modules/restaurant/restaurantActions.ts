@@ -43,7 +43,6 @@ const edit: RequestHandler = async (req, res, next) => {
       restaurantId,
       chrId: Number(req.body.chr_id),
       chrData: {
-        id: Number(req.body.id),
         address: req.body.address,
         minPrice: Number(req.body.minPrice),
         maxPrice: Number(req.body.maxPrice),
@@ -61,22 +60,25 @@ const edit: RequestHandler = async (req, res, next) => {
   }
 };
 
-const destroy: RequestHandler = async (req, res, next) => {
+const destroy: RequestHandler = async (req, res, next): Promise<void> => {
   try {
     const restaurantId = Number(req.params.id);
 
-    await restaurantRepository.delete(restaurantId);
+    const result = await restaurantRepository.delete(restaurantId);
+
+    if (result.affectedRows === 0) {
+      res.status(404).json({ message: "Restaurant introuvable" });
+      return;
+    }
 
     res.sendStatus(204);
   } catch (err) {
-    res.sendStatus(404);
     next(err);
   }
 };
 
 const add: RequestHandler = async (req, res, next) => {
   const chrData = {
-    id: Number(req.body.id),
     address: req.body.address,
     minPrice: Number(req.body.minPrice),
     maxPrice: Number(req.body.maxPrice),

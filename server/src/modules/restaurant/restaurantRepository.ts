@@ -91,8 +91,6 @@ class RestaurantRepository {
     const connection = await databaseClient.getConnection();
 
     try {
-      await connection.beginTransaction();
-
       const [chrResult] = await connection.query<Result>(
         `UPDATE chr
          SET address = ?, minPrice = ?, maxPrice = ?
@@ -101,9 +99,8 @@ class RestaurantRepository {
       );
 
       if (chrResult.affectedRows !== 1) {
-        await connection.rollback();
         throw new Error(
-          `Erreur lors de la suppression dans 'chr'. affectedRows: ${chrResult.affectedRows}`,
+          `Erreur lors de la mise à jour de 'chr'. affectedRows: ${chrResult.affectedRows}`,
         );
       }
 
@@ -115,7 +112,6 @@ class RestaurantRepository {
       );
 
       if (restaurantResult.affectedRows !== 1) {
-        await connection.rollback();
         throw new Error(
           `Erreur lors de la suppression dans 'restaurant'. affectedRows: ${restaurantResult.affectedRows}`,
         );
@@ -125,8 +121,7 @@ class RestaurantRepository {
 
       return { chrId, chrData };
     } catch (error) {
-      await connection.rollback();
-      throw error;
+      throw new Error("Echec de la mise à jour");
     } finally {
       connection.release();
     }
@@ -135,7 +130,7 @@ class RestaurantRepository {
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an restaurant by its ID
 
-  async delete(id: number) {
+  async delete(id: number): Promise<Result> {
     const connection = await databaseClient.getConnection();
     try {
       await connection.beginTransaction();
@@ -181,6 +176,7 @@ class RestaurantRepository {
       }
 
       await connection.commit();
+      return restaurantResult;
     } catch (error) {
       await connection.rollback();
       throw error;
