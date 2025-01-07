@@ -40,7 +40,7 @@ const read: RequestHandler = async (req, res, next) => {
 // The E of BREAD - Edit operation
 const edit: RequestHandler = async (req, res, next) => {
   try {
-    const activityId = Number(res.params.id);
+    const activityId = Number(req.params.id);
     const editActivity = {
       chr_id: Number(req.body.chr_id),
     };
@@ -65,7 +65,7 @@ const add: RequestHandler = async (req, res, next) => {
     // Extract the activity data from the request body
     const newActivity = {
       title: req.body.title,
-      user_id: req.body.user_id,
+      chr_id: req.body.chr_id,
     };
 
     // Create the activity
