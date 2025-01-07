@@ -43,6 +43,7 @@ const edit: RequestHandler = async (req, res, next) => {
     const hotelId = Number(req.params.id);
     const chrId = Number(req.body.chr_id);
     const chrData = {
+      name: req.body.name,
       address: req.body.address,
       minPrice: req.body.minPrice,
       maxPrice: req.body.maxPrice,
@@ -72,13 +73,13 @@ const destroy: RequestHandler = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const add: RequestHandler = async (req, res, next) => {
+  const newHotel = {
+    name: req.body.name,
+    address: req.body.address,
+    minPrice: Number(req.body.minPrice),
+    maxPrice: Number(req.body.maxPrice),
+  };
   try {
-    const newHotel = {
-      chr_id: req.body.chr_id,
-      address: req.body.address,
-      minPrice: req.body.minPrice,
-      maxPrice: req.body.maxPrice,
-    };
     const insertId = await hotelRepository.create(newHotel);
     res.status(201).json({ insertId });
   } catch (err) {
