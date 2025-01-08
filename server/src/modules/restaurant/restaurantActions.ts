@@ -60,7 +60,7 @@ const edit: RequestHandler = async (req, res, next) => {
   }
 };
 
-const destroy: RequestHandler = async (req, res, next): Promise<void> => {
+const destroy: RequestHandler = async (req, res, next) => {
   try {
     const restaurantId = Number(req.params.id);
 
