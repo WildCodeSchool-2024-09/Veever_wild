@@ -45,8 +45,8 @@ const edit: RequestHandler = async (req, res, next) => {
     const chrData = {
       name: req.body.name,
       address: req.body.address,
-      minPrice: req.body.minPrice,
-      maxPrice: req.body.maxPrice,
+      minPrice: Number(req.body.minPrice),
+      maxPrice: Number(req.body.maxPrice),
     };
 
     const updateHotel = await hotelRepository.update(hotelId, chrId, chrData);
@@ -64,7 +64,13 @@ const edit: RequestHandler = async (req, res, next) => {
 const destroy: RequestHandler = async (req, res, next) => {
   try {
     const hotelId = Number(req.params.id);
-    await hotelRepository.delete(hotelId);
+
+    const wasDeleted = await hotelRepository.delete(hotelId);
+    if (wasDeleted.affectedRows === 0) {
+      res.status(404).json({ message: "Hotel not found" });
+      return;
+    }
+
     res.sendStatus(204);
   } catch (err) {
     next(err);

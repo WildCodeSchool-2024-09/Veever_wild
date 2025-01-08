@@ -25,7 +25,7 @@ class HotelsRepository {
       await connection.beginTransaction();
       const [chrResult] = await connection.query<Result>(
         ` INSERT INTO chr
-          (name, address, min_price, max_price) values (?, ?, ?)`,
+          (name, address, min_price, max_price) values (?, ?, ?, ?)`,
         [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
       );
 
@@ -108,11 +108,8 @@ class HotelsRepository {
         ],
       );
 
-      await connection.commit();
-
       return { chrId, chrData };
     } catch (error) {
-      await connection.rollback();
       console.error("Erreur lors de la transaction: ", error);
       throw error;
     } finally {
@@ -133,13 +130,10 @@ class HotelsRepository {
       );
 
       if (hotelResult.affectedRows !== 1) {
-        await connection.rollback();
       }
-      await connection.commit();
       return hotelResult;
     } catch (error) {
-      await connection.rollback();
-      throw error;
+      throw new Error("Erreur lors de la suppression");
     } finally {
       connection.release();
     }
