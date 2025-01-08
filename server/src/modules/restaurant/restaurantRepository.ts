@@ -1,7 +1,12 @@
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
-import type { Restaurant, chrData } from "../../types/chr/chrData";
+import type {
+  Restaurant,
+  UpdateChrData,
+  UpdateResultChr,
+  chrData,
+} from "../../types/chr/chrData";
 
 class RestaurantRepository {
   // The C of CRUD - Create operation
@@ -13,7 +18,7 @@ class RestaurantRepository {
       await connection.beginTransaction();
       const [chrResult] = await connection.query<Result>(
         ` INSERT INTO chr
-          (name, address, min_price, max_price) values (?, ?, ?)`,
+          (name, address, min_price, max_price) values (?, ?, ?,?)`,
         [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
       );
 
@@ -76,17 +81,8 @@ class RestaurantRepository {
 
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing restaurant
-  async update({
-    chrId,
-    chrData,
-  }: {
-    restaurantId: number;
-    chrId: number;
-    chrData: chrData;
-  }): Promise<{
-    chrId: number;
-    chrData: chrData;
-  }> {
+
+  async update({ chrId, chrData }: UpdateChrData): Promise<UpdateResultChr> {
     const connection = await databaseClient.getConnection();
 
     try {
@@ -94,25 +90,14 @@ class RestaurantRepository {
         `UPDATE chr
          SET name = ?, address = ?, minPrice = ?, maxPrice = ?
          WHERE id = (SELECT chr_id FROM restaurant WHERE id = ?)`,
-        [
-          chrData.name,
-          chrData.address,
-          chrData.minPrice,
-          chrData.maxPrice,
-          chrData.id,
-          chrId,
-        ],
+        [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
       );
 
       if (chrResult.affectedRows !== 1) {
-        throw new Error(
-          `Erreur lors de la mise à jour de 'chr'. affectedRows: ${chrResult.affectedRows}`,
-        );
+        return { success: false };
       }
 
-      await connection.commit();
-
-      return { chrId, chrData };
+      return { success: true, chrId, chrData };
     } catch (error) {
       throw new Error("Echec de la mise à jour");
     } finally {
@@ -126,8 +111,6 @@ class RestaurantRepository {
   async delete(id: number): Promise<Result> {
     const connection = await databaseClient.getConnection();
     try {
-      await connection.beginTransaction();
-
       const [chrRows] = await connection.query<Rows>(
         `SELECT chr_id 
          FROM restaurant
@@ -136,7 +119,6 @@ class RestaurantRepository {
       );
 
       if (chrRows.length === 0) {
-        await connection.rollback();
         throw new Error("Le restaurant n'existe pas ou est déjà supprimé");
       }
 
@@ -149,7 +131,6 @@ class RestaurantRepository {
       );
 
       if (chrResult.affectedRows !== 1) {
-        await connection.rollback();
         throw new Error(
           `Erreur lors de la suppression dans 'chr'. affectedRows: ${chrResult.affectedRows}`,
         );
@@ -162,17 +143,14 @@ class RestaurantRepository {
       );
 
       if (restaurantResult.affectedRows !== 1) {
-        await connection.rollback();
         throw new Error(
           `Erreur lors de la suppression du restaurant. affectedRows: ${restaurantResult.affectedRows}`,
         );
       }
 
-      await connection.commit();
       return restaurantResult;
     } catch (error) {
-      await connection.rollback();
-      throw error;
+      throw new Error("Erreur lors de la supression");
     } finally {
       connection.release();
     }

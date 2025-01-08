@@ -37,10 +37,8 @@ const read: RequestHandler = async (req, res, next) => {
 
 const edit: RequestHandler = async (req, res, next) => {
   try {
-    const restaurantId = Number(req.params.id);
-
     const updateData = {
-      restaurantId,
+      restaurantId: Number(req.params.id),
       chrId: Number(req.body.chr_id),
       chrData: {
         id: Number(req.body.id),
@@ -81,7 +79,6 @@ const destroy: RequestHandler = async (req, res, next): Promise<void> => {
 
 const add: RequestHandler = async (req, res, next) => {
   const chrData = {
-    id: Number(req.body.id),
     name: req.body.name,
     address: req.body.address,
     minPrice: Number(req.body.minPrice),

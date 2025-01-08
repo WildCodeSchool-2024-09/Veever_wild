@@ -1,5 +1,4 @@
 export type chrData = {
-  id: number;
   name: string;
   address: string;
   minPrice: number;
@@ -10,3 +9,13 @@ export type Restaurant = {
   id: number;
   chr_id: number;
 };
+
+export type UpdateChrData = {
+  restaurantId: number;
+  chrId: number;
+  chrData: chrData;
+};
+
+export type UpdateResultChr =
+  | { success: true; chrId: number; chrData: chrData }
+  | { success: false };
