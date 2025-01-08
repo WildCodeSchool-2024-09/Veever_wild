@@ -83,10 +83,8 @@ class RestaurantRepository {
   // TODO: Implement the update operation to modify an existing restaurant
 
   async update({ chrId, chrData }: UpdateChrData): Promise<UpdateResultChr> {
-    const connection = await databaseClient.getConnection();
-
     try {
-      const [chrResult] = await connection.query<Result>(
+      const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
          SET name = ?, address = ?, minPrice = ?, maxPrice = ?
          WHERE id = (SELECT chr_id FROM restaurant WHERE id = ?)`,
@@ -100,22 +98,21 @@ class RestaurantRepository {
       return { success: true, chrId, chrData };
     } catch (error) {
       throw new Error("Echec de la mise à jour");
-    } finally {
-      connection.release();
     }
   }
 
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an restaurant by its ID
 
-  async delete(id: number): Promise<Result> {
-    const connection = await databaseClient.getConnection();
+  async delete(restaurantId: number): Promise<Result> {
     try {
-      const [chrRows] = await connection.query<Rows>(
-        `SELECT chr_id 
-         FROM restaurant
-         WHERE id = ?`,
-        [id],
+      const [chrRows] = await databaseClient.query<Rows>(
+        `DELETE chr, restaurant 
+         FROM chr
+         INNER JOIN restaurant
+         ON restaurant.chr_id = chr.id
+         WHERE restaurant.id = ?`,
+        [restaurantId],
       );
 
       if (chrRows.length === 0) {
@@ -124,35 +121,9 @@ class RestaurantRepository {
 
       const chrId = chrRows[0].chr_id;
 
-      const [chrResult] = await connection.query<Result>(
-        `DELETE FROM chr
-         WHERE id = ?`,
-        [chrId],
-      );
-
-      if (chrResult.affectedRows !== 1) {
-        throw new Error(
-          `Erreur lors de la suppression dans 'chr'. affectedRows: ${chrResult.affectedRows}`,
-        );
-      }
-
-      const [restaurantResult] = await connection.query<Result>(
-        `DELETE FROM restaurant
-         WHERE id = ?`,
-        [id],
-      );
-
-      if (restaurantResult.affectedRows !== 1) {
-        throw new Error(
-          `Erreur lors de la suppression du restaurant. affectedRows: ${restaurantResult.affectedRows}`,
-        );
-      }
-
-      return restaurantResult;
+      return chrId;
     } catch (error) {
       throw new Error("Erreur lors de la supression");
-    } finally {
-      connection.release();
     }
   }
 }
