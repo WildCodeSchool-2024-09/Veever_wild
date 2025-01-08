@@ -2,18 +2,21 @@
 
 section.blog {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 section.blog h3 {
   font-weight: bold;
   font-size: 2rem;
+  margin: 3%;
+  width: 100%;
 }
 
 section.blog article {
   border: solid 1px #000;
-  width: 90%;
+  width: 45%;
   justify-content: center;
   border-radius: 15px;
 }
