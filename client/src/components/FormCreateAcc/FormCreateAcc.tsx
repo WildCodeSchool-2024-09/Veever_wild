@@ -53,9 +53,9 @@ export default function FormCreateAcc() {
         <InputLastName />
         <InputFirstName />
         <InputEmail
-          errors={errors}
-          email={email}
           handleEmailCheckChange={handleEmailCheckChange}
+          email={email}
+          errors={errors}
         />
         <InputPassword
           password={password}

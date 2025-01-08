@@ -4,20 +4,20 @@ import type { EmailValidation } from "../../../types/FormValidation/FormValidati
 
 export default function InputEmail({
   email,
-  errors,
   handleEmailCheckChange,
+  errors,
 }: EmailValidation) {
   return (
     <FormControl className="formGroup">
       <FormLabel htmlFor="email">Votre adresse e-mail</FormLabel>
       <StyledInput
         required
+        value={email}
         onChange={handleEmailCheckChange}
         type="email"
         name="email"
         id="email"
         placeholder="Votre e-mail"
-        value={email}
       />
       {errors && <p className="errors">{errors.emailCheck}</p>}
     </FormControl>
