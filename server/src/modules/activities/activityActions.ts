@@ -86,7 +86,7 @@ const deleteActivity: RequestHandler = async (req, res, next) => {
 
     const activityDeleted = await activityRepository.delete(activityId);
 
-    if (activityDeleted) {
+    if (!activityDeleted) {
       res.sendStatus(404);
     } else {
       res.sendStatus(204);
