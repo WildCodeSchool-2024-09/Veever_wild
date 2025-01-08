@@ -3,6 +3,7 @@
   text-align: center;
   padding: var(--spacing-ref);
   margin: var(--spacing-ref);
+  width: 100%;
 }
 .date-card {
   padding: var(--spacing-ref);

@@ -1,10 +1,11 @@
 @import url("@src/variables.css");
 
 .chr-bottom-section {
-  max-width: 40rem;
+  width: 100%;
   margin: 0 auto;
   padding: var(--spacing-ref);
   border: solid 2px black;
+  border-radius: 8px;
 }
 
 .type-select {
@@ -44,4 +45,11 @@ footer {
   cursor: pointer;
   border-radius: 15px;
   margin: var(--spacing-ref);
+  border: rgb(211, 79, 101) 2px solid;
+  border-radius: 15px;
+  background-color: rgb(171, 168, 168);
+  transition: 0.6s;
+}
+.add-button:hover {
+  background-color: rgb(209, 206, 206);
 }
