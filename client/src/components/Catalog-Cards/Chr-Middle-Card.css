@@ -1,0 +1,8 @@
+@import url("@src/variables.css");
+.img-catalog-card {
+  height: auto;
+  max-width: 100%;
+}
+.article-chr-middle-card {
+  text-align: center;
+}

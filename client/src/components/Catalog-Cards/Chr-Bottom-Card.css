@@ -1,0 +1,47 @@
+@import url("@src/variables.css");
+
+.chr-bottom-section {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: var(--spacing-ref);
+  border: solid 2px black;
+}
+
+.type-select {
+  width: 100%;
+  font-size: var(--spacing-ref);
+  padding: var(--spacing-ref);
+  cursor: pointer;
+  border-radius: 15px;
+  margin: var(--spacing-ref) 0;
+}
+
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style-type: none;
+  font-size: 1.25rem;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+h1,
+h2 {
+  text-align: left;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-button {
+  font-size: 1.5rem;
+  padding: var(--spacing-ref);
+  cursor: pointer;
+  border-radius: 15px;
+  margin: var(--spacing-ref);
+}
