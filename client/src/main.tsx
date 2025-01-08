@@ -8,6 +8,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Favorites from "./pages/Favorites/Favorites";
 import HomePage from "./pages/HomePage/HomePage";
+import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import Search from "./pages/Search/Search";
 import Settings from "./pages/Settings/Settings";
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <Settings />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },
