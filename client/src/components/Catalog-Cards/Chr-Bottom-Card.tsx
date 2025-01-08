@@ -12,7 +12,7 @@ export default function ChrBottomCard() {
         <ul>
           <li>Bar à thème</li>
           <li>Wifi gratuit</li>
-          <li>Service de chambre (avec finition)</li>
+          <li>Service de chambre </li>
         </ul>
       </section>
       <footer className="button-container">

@@ -7,7 +7,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import Catalog from "./pages/Catalog/Catalog";
-import Favorites from "./pages/Favorites/Favorites";
 import HomePage from "./pages/HomePage/HomePage";
 import Profile from "./pages/Profile/Profile";
 import Search from "./pages/Search/Search";
@@ -32,17 +31,14 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
-        path: "/Catalog",
+        path: "/catalog",
         element: <Catalog />,
       },
       {
         path: "/search",
         element: <Search />,
       },
-      {
-        path: "/favorites",
-        element: <Favorites />,
-      },
+
       {
         path: "/profile",
         element: <Profile />,
