@@ -27,7 +27,8 @@ class adminRepository {
 
       const userId = userResult.insertId;
 
-      if (!userId || userResult.affectedRows === 0) {
+      if (!userId) {
+        await connection.rollback();
         throw new Error("Echec de création de l'utilisateur.");
       }
 
@@ -39,6 +40,11 @@ class adminRepository {
         [userId],
       );
       const adminId = adminResult.insertId;
+
+      if (!adminId) {
+        await connection.rollback();
+        throw new Error("Echec de création de l'administrateur.");
+      }
 
       await connection.commit();
 
@@ -107,10 +113,8 @@ class adminRepository {
 
   // The U of CRUD - Update operation
   async update(userData: User): Promise<{ profile: Omit<User, "password"> }> {
-    const connection = await databaseClient.getConnection();
-
     try {
-      const [userResult] = await connection.query<Result>(
+      const [userResult] = await databaseClient.query<Result>(
         `
         UPDATE user
         SET email = ?, password = ?, firstname = ?, lastname = ?
@@ -143,17 +147,13 @@ class adminRepository {
       throw new Error(
         "Nous avons rencontré une erreur lors de la mise à jour de l'utilisateur.",
       );
-    } finally {
-      connection.release();
     }
   }
 
   // The D of CRUD - Delete operation
   async destroy(adminId: number): Promise<number> {
-    const connection = await databaseClient.getConnection();
-
     try {
-      const [result] = await connection.query<Result>(
+      const [result] = await databaseClient.query<Result>(
         `
         DELETE user, admin
         FROM user
@@ -173,8 +173,6 @@ class adminRepository {
       throw new Error(
         "Nous avons rencontré une erreur lors de la suppression de l'utilisateur.",
       );
-    } finally {
-      connection.release();
     }
   }
 }
