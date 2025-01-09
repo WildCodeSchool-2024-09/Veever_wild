@@ -1,0 +1,14 @@
+@import url("@src/variables.css");
+
+.signUpBtn {
+  width: 10rem;
+  height: 1.5rem;
+
+  display: inline-block;
+  text-align: center;
+
+  background-color: var(--light);
+  border: none;
+  border-radius: 3px;
+  box-shadow: var(--box-shadow-soft);
+}
