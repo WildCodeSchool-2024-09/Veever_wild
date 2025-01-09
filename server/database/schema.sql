@@ -117,7 +117,7 @@ CREATE TABLE client_keyword (
 CREATE TABLE illustration (
   id int unsigned primary key auto_increment not null,
   link varchar(255) not null
-)
+);
 
 CREATE TABLE illustration_keyword (
   id int unsigned primary key auto_increment not null,
@@ -125,7 +125,7 @@ CREATE TABLE illustration_keyword (
   keyword_id int unsigned not null,
   foreign key(illustration_id) references illustration(id),
   foreign key(keyword_id) references keyword(id)
-)
+);
 
 CREATE TABLE form_item (
   id int unsigned primary key auto_increment not null,
@@ -134,7 +134,7 @@ CREATE TABLE form_item (
 
 CREATE TABLE question (
   id int unsigned primary key auto_increment not null,
-  order int not null,
+  position int not null,
   form_item_id int unsigned not null,
   foreign key(form_item_id) references form_item(id)
   ON DELETE CASCADE
