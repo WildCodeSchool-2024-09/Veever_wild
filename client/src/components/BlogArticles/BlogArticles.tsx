@@ -3,9 +3,10 @@ import "./BlogArticles.css";
 export default function BlogArticles() {
   return (
     <section className="blog">
-      <h3>Dernier articles du blog</h3>
+      <h3>Dernier article du blog</h3>
       <article>
         <img src="src/assets/images/Palace.jpg" alt="hotel" />
+
         <h4>Article du blog</h4>
         <p>
           Porro laudantium, tempore officia blanditiis labore delectus
@@ -15,6 +16,7 @@ export default function BlogArticles() {
       </article>
       <article>
         <img src="src/assets/images/Palace.jpg" alt="hotel" />
+
         <h4>Article du blog</h4>
         <p>
           Porro laudantium, tempore officia blanditiis labore delectus

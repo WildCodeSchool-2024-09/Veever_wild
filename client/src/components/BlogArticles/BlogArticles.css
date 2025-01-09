@@ -6,6 +6,7 @@ section.blog {
   flex-wrap: wrap;
   justify-content: space-around;
   font-family: var(--textFont);
+  margin-bottom: 1.5rem;
 }
 
 section.blog h3 {
@@ -31,6 +32,11 @@ section.blog article img {
 
 section.blog article h4 {
   font-family: var(--titleFont);
+}
+
+section.blog article a {
+  text-decoration: none;
+  color: var(--secondColor);
 }
 
 section.blog article h4,
