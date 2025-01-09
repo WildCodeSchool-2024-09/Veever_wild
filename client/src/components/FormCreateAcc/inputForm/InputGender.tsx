@@ -1,9 +1,6 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { useState } from "react";
-import {
-  StyledInput,
-  StyledSelect,
-} from "../../../services/FormCreateAcc/inputStyle";
+import { StyledSelect } from "../../../services/FormCreateAcc/StyledSelect";
 
 export default function InputGender() {
   const [gender, setGender] = useState("");
@@ -22,22 +19,16 @@ export default function InputGender() {
         onChange={handleChangeGender}
       >
         <option value="">Veuillez sélectionner</option>
-        <option value="male">Homme</option>
-        <option value="female">Femme</option>
-        <option value="others">Autres</option>
+        <option id="male" value="male">
+          Homme
+        </option>
+        <option id="female" value="female">
+          Femme
+        </option>
+        <option id="others" value="others">
+          Autres
+        </option>
       </StyledSelect>
-
-      {gender === "others" && (
-        <>
-          <FormLabel htmlFor="othersGenre">Veuillez spécifiez</FormLabel>
-          <StyledInput
-            type="text"
-            name="othersGenre"
-            id="othersGenre"
-            placeholder="Veuillez spécifiez.."
-          />
-        </>
-      )}
     </FormControl>
   );
 }

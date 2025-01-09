@@ -11,4 +11,5 @@ export type EmailValidation = {
   handleEmailCheckChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   email: string;
   errors: Record<string, string>;
+  id: string;
 };

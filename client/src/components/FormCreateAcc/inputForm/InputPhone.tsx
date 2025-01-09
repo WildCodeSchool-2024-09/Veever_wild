@@ -1,6 +1,6 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { useState } from "react";
-import { StyledTelInput } from "../../../services/FormCreateAcc/inputStyle";
+import { StyledTelInput } from "../../../services/FormCreateAcc/StyledTelInput";
 
 export default function InputPhone() {
   const [value, setValue] = useState("+33");

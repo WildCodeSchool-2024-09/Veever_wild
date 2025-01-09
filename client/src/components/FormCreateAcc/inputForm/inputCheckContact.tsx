@@ -17,10 +17,20 @@ export default function InputCheckContact() {
         defaultValue=""
         name="radio-buttons-group"
       >
-        <div className="checkBox">
-          <FormControlLabel value="email" control={<Radio />} label="E-mail" />
-          <FormControlLabel value="tel" control={<Radio />} label="Téléphone" />
-        </div>
+        <FormControlLabel
+          className="checkBox"
+          id="email"
+          value="email"
+          control={<Radio id="email" />}
+          label="E-mail"
+        />
+        <FormControlLabel
+          className="checkBox"
+          value="tel"
+          id="tel"
+          control={<Radio id="tel" />}
+          label="Téléphone"
+        />
       </RadioGroup>
     </FormControl>
   );

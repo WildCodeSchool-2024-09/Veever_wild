@@ -14,6 +14,7 @@ export default function NewsLetter() {
       <form>
         <label htmlFor="newsLetterEmail">Votre adresse email :</label>
         <InputEmail
+          id="newsLetterEmail"
           email={email}
           handleEmailCheckChange={handleEmailCheckChange}
           errors={errors}

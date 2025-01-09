@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import type { passwordCheck } from "../../types/FormValidation/PasswordCheck";
 
 export default function useFormValidation() {
   const [email, setEmail] = useState("");
@@ -8,7 +9,7 @@ export default function useFormValidation() {
   const [isSamePassword, setIsSamePassword] = useState(true);
 
   const validatePassword = useCallback((password: string) => {
-    const newErrors: Record<string, string> = {};
+    const newErrors: passwordCheck = {};
 
     if (password.length < 12) {
       newErrors.length =
