@@ -11,15 +11,36 @@
   font-family: var(--textFont);
 }
 .button-throw-likes-away {
-  font-size: 1.5rem;
-  padding: var(--spacing-ref);
+  box-shadow: 0px 10px 14px -7px rgba(173, 50, 80, 0.5);
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 140, 160, 1) 5%,
+    rgba(245, 105, 145, 1) 100%
+  );
+  background-color: rgba(247, 140, 160, 1);
+  border-radius: var(--border-ref);
+  display: inline-block;
   cursor: pointer;
-  border-radius: 15px;
+  color: var(--light);
+  font-size: calc(var(--font-size-ref) * 1.25);
+  font-weight: bold;
+  padding: calc(var(--spacing-ref) * 0.8) calc(var(--spacing-ref) * 2);
+  text-decoration: none;
+  text-shadow: 0 2px 0 rgba(128, 30, 50, 0.5);
+
+  &:hover {
+    background: linear-gradient(
+      to bottom,
+      rgba(245, 105, 145, 1) 5%,
+      rgba(247, 140, 160, 1) 100%
+    );
+    background-color: rgba(245, 105, 145, 1);
+  }
 }
 .card-category {
   padding: var(--spacing-ref);
-  font-size: 2rem;
-  border: solid 2px black;
+  font-size: calc(var(--font-size-ref) * 2);
+  border: var(--border-input);
   margin: var(--spacing-ref);
-  border-radius: 15px;
+  border-radius: calc(var(--border-ref) * 2);
 }

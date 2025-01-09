@@ -7,15 +7,15 @@
   gap: var(--border-ref);
   text-align: center;
   margin-top: var(--border-ref);
-  max-width: 25rem;
-  padding: 2rem;
+  max-width: calc(var(--spacing-ref) * 25);
+  padding: calc(var(--spacing-ref) * 2);
 }
 .emoji {
-  font-size: 4rem;
+  font-size: calc(var(--font-size-ref) * 4);
 }
 .catalog-filter-section h1,
 p {
-  font-size: 1.5rem;
+  font-size: calc(var(--font-size-ref) * 1.5);
   font-family: var(--titleFont);
   margin: var(--spacing-ref);
 }

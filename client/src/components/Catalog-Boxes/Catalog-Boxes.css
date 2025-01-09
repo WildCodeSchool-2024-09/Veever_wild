@@ -5,8 +5,8 @@
   gap: var(--border-ref);
   text-align: center;
   margin-top: var(--border-ref);
-  max-width: 25rem;
-  padding: 2rem;
+  max-width: calc(var(--spacing-ref) * 25);
+  padding: calc(var(--spacing-ref) * 2);
 }
 
 .catalog-title {
@@ -14,7 +14,7 @@
   text-align: center;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: calc(var(--font-size-ref) * 2.5);
   margin-bottom: var(--border-ref);
   grid-column: span 2;
 }
@@ -22,19 +22,16 @@
 .catalog-boxes {
   cursor: pointer;
   border: solid var(--dark) 2px;
-  border-radius: 15px;
+  border-radius: calc(var(--border-ref) * 2);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  font-size: 1.2rem;
-  background-color: rgb(240, 126, 147);
+  padding: var(--spacing-ref);
+  font-size: calc(var(--font-size-ref) * 1.25);
+  background-color: var(--bckgColor);
   color: var(--light);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--box-shadow-input);
   transition: 0.6s;
-}
-.catalog-boxes:hover {
-  background-color: #ff69b4;
 }
 
 input[type="checkbox"] {

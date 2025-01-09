@@ -4,8 +4,8 @@
   width: 100%;
   margin: 0 auto;
   padding: var(--spacing-ref);
-  border: solid 2px black;
-  border-radius: 8px;
+  border: var(--border-input);
+  border-radius: var(--border-ref);
 }
 
 .type-select {
@@ -13,7 +13,7 @@
   font-size: var(--spacing-ref);
   padding: var(--spacing-ref);
   cursor: pointer;
-  border-radius: 15px;
+  border-radius: calc(var(--border-ref) * 2);
   margin: var(--spacing-ref) 0;
 }
 
@@ -23,8 +23,8 @@ ul {
 
 ul li {
   list-style-type: none;
-  font-size: 1.25rem;
-  padding: 0.5rem;
+  font-size: calc(var(--spacing-ref) * 1.25);
+  padding: calc(var(--spacing-ref) * 0.5);
   text-align: left;
 }
 
@@ -47,22 +47,22 @@ footer {
     rgba(245, 105, 145, 1) 100%
   );
   background-color: rgba(247, 140, 160, 1);
-  border-radius: 0.5rem;
+  border-radius: calc(var(--border-ref) * 1.25);
   display: inline-block;
   cursor: pointer;
   color: var(--light);
-  font-size: 1.25rem;
+  font-size: calc(var(--font-size-ref) * 1.25);
   font-weight: bold;
-  padding: 0.8rem 2rem;
+  padding: calc(var(--spacing-ref) * 0.8) calc(var(--spacing-ref) * 2);
   text-decoration: none;
   text-shadow: 0 2px 0 rgba(128, 30, 50, 0.5);
-}
 
-.add-button:hover {
-  background: linear-gradient(
-    to bottom,
-    rgba(245, 105, 145, 1) 5%,
-    rgba(247, 140, 160, 1) 100%
-  );
-  background-color: rgba(245, 105, 145, 1);
+  &:hover {
+    background: linear-gradient(
+      to bottom,
+      rgba(245, 105, 145, 1) 5%,
+      rgba(247, 140, 160, 1) 100%
+    );
+    background-color: rgba(245, 105, 145, 1);
+  }
 }

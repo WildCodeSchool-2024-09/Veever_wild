@@ -10,9 +10,9 @@ export default function CatalogCards() {
     <div className="chr-full-card">
       <ChrTopCard />
       <ChakraProvider value={system}>
-        <Box maxW="sm" borderWidth="1px" overflow="hidden">
+        <Box className="chrCard" maxW="sm" borderWidth="1px" overflow="hidden">
           <ChrMiddleCard />
-          <Box p="6">
+          <Box className="chrCard" p="6">
             <Box className="bottomCard" mt="4" display="flex" gap="4">
               <ChrBottomCard />
             </Box>
