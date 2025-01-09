@@ -1,7 +1,7 @@
 export type FormData = {
   username: string;
-  lastName: string;
-  firstName: string;
+  lastname: string;
+  firstname: string;
   gender: string;
   date: string;
   phone: string;

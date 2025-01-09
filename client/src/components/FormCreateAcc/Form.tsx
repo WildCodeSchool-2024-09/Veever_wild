@@ -51,12 +51,12 @@ export default function FormCreateAcc() {
           value={formData.username}
         />
         <InputLastName
-          handleChange={handleChange("lastName")}
-          value={formData.lastName}
+          handleChange={handleChange("lastname")}
+          value={formData.lastname}
         />
         <InputFirstName
-          handleChange={handleChange("firstName")}
-          value={formData.firstName}
+          handleChange={handleChange("firstname")}
+          value={formData.firstname}
         />
         <InputEmail
           handleEmailCheckChange={handleEmailCheckChange}

@@ -4,8 +4,8 @@ import type { FormData } from "../../types/FormData/FormData";
 export default function useFormData() {
   const [formData, setFormData] = useState<FormData>({
     username: "",
-    lastName: "",
-    firstName: "",
+    lastname: "",
+    firstname: "",
     gender: "",
     date: "",
     phone: "",
