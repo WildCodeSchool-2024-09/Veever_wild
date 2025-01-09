@@ -39,7 +39,7 @@ const edit: RequestHandler = async (req, res, next) => {
   try {
     const updateData = {
       restaurantId: Number(req.params.id),
-      chrId: Number(req.body.chr_id),
+      chrId: Number(req.params.id),
       chrData: {
         id: Number(req.body.id),
         name: req.body.name,
@@ -48,6 +48,7 @@ const edit: RequestHandler = async (req, res, next) => {
         maxPrice: Number(req.body.maxPrice),
       },
     };
+
     const updateRestaurant = await restaurantRepository.update(updateData);
 
     if (updateRestaurant) {

@@ -18,7 +18,7 @@ class RestaurantRepository {
       await connection.beginTransaction();
       const [chrResult] = await connection.query<Result>(
         ` INSERT INTO chr
-          (name, address, min_price, max_price) values (?, ?, ?,?)`,
+          (name, address, min_price, max_price) values (?, ?, ?, ?)`,
         [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
       );
 
@@ -34,7 +34,7 @@ class RestaurantRepository {
         [chrId],
       );
 
-      if (!restaurantResult || restaurantResult.insertId) {
+      if (!restaurantResult || !restaurantResult.insertId) {
         await connection.rollback();
         throw new Error("Insertion échouée");
       }
@@ -57,12 +57,11 @@ class RestaurantRepository {
       `SELECT chr.address, chr.min_Price AS minPrice, chr.max_Price AS maxPrice, chr.name AS name
        FROM restaurant 
        INNER JOIN chr
-       ON restaurant.chr_id = chr_id
+       ON restaurant.chr_id = chr.id
        WHERE restaurant.id = ?`,
       [id],
     );
 
-    // Return the first row of the result, which represents the restaurant
     return rows[0] as Restaurant;
   }
 
@@ -81,23 +80,28 @@ class RestaurantRepository {
 
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing restaurant
-
   async update({ chrId, chrData }: UpdateChrData): Promise<UpdateResultChr> {
     try {
       const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
-         SET name = ?, address = ?, minPrice = ?, maxPrice = ?
-         WHERE id = (SELECT chr_id FROM restaurant WHERE id = ?)`,
-        [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
+         SET name = ?, address = ?, min_price = ?, max_price = ?
+         WHERE id = (SELECT chr_id FROM restaurant WHERE id = ? LIMIT 1)`,
+        [
+          chrData.name,
+          chrData.address,
+          chrData.minPrice,
+          chrData.maxPrice,
+          chrId,
+        ],
       );
 
-      if (chrResult.affectedRows !== 1) {
-        return { success: false };
+      if (chrResult.affectedRows === 0) {
+        throw new Error(`Aucune mise à jour effectuée pour chrId ${chrId}`);
       }
 
       return { success: true, chrId, chrData };
     } catch (error) {
-      throw new Error("Echec de la mise à jour");
+      throw new Error("Échec de la mise à jour");
     }
   }
 
@@ -106,7 +110,7 @@ class RestaurantRepository {
 
   async delete(restaurantId: number): Promise<Result> {
     try {
-      const [chrRows] = await databaseClient.query<Rows>(
+      const [chrRows] = await databaseClient.query<Result>(
         `DELETE chr, restaurant 
          FROM chr
          INNER JOIN restaurant
@@ -115,13 +119,11 @@ class RestaurantRepository {
         [restaurantId],
       );
 
-      if (chrRows.length === 0) {
+      if (chrRows.affectedRows === 0) {
         throw new Error("Le restaurant n'existe pas ou est déjà supprimé");
       }
 
-      const chrId = chrRows[0].chr_id;
-
-      return chrId;
+      return chrRows;
     } catch (error) {
       throw new Error("Erreur lors de la supression");
     }
