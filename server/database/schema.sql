@@ -29,7 +29,6 @@ CREATE TABLE client (
   foreign key(user_id) references user(id)
   ON DELETE CASCADE,
   foreign key(gender_id) references gender(id)
-  ON DELETE CASCADE
 );
 
 CREATE TABLE phone (
@@ -64,10 +63,10 @@ CREATE TABLE chr (
 CREATE TABLE chr_reservation (
   id int unsigned primary key auto_increment not null,
   reservation_id int unsigned not null,
-  foreign key(reservation_id) references reservation(id),
   chr_id int unsigned not null,
+  foreign key(reservation_id) references reservation(id)
+  ON DELETE CASCADE,
   foreign key(chr_id) references chr(id)
-  ON DELETE CASCADE
 );
 
 CREATE TABLE restaurant (
@@ -100,8 +99,7 @@ CREATE TABLE chr_keyword (
     id int unsigned primary key auto_increment not null,
   chr_id int unsigned not null,
   keyword_id int unsigned not null,
-  foreign key(chr_id) references chr(id)
-  ON DELETE CASCADE,
+  foreign key(chr_id) references chr(id),
   foreign key(keyword_id) references keyword(id)
   ON DELETE CASCADE
 );
@@ -119,17 +117,15 @@ CREATE TABLE client_keyword (
 CREATE TABLE illustration (
   id int unsigned primary key auto_increment not null,
   link varchar(255) not null
-)
+);
 
 CREATE TABLE illustration_keyword (
   id int unsigned primary key auto_increment not null,
   illustration_id int unsigned not null,
   keyword_id int unsigned not null,
-  foreign key(illustration_id) references illustration(id)
-  ON DELETE CASCADE,
+  foreign key(illustration_id) references illustration(id),
   foreign key(keyword_id) references keyword(id)
-  ON DELETE CASCADE
-)
+);
 
 CREATE TABLE form_item (
   id int unsigned primary key auto_increment not null,
@@ -138,7 +134,7 @@ CREATE TABLE form_item (
 
 CREATE TABLE question (
   id int unsigned primary key auto_increment not null,
-  order int not null,
+  position int not null,
   form_item_id int unsigned not null,
   foreign key(form_item_id) references form_item(id)
   ON DELETE CASCADE
@@ -149,8 +145,6 @@ CREATE TABLE answer (
   is_checked BOOLEAN not null default 0,
   question_id int unsigned not null,
   keyword_id int unsigned not null,
-  foreign key(question_id) references question(id)
-  ON DELETE CASCADE,
+  foreign key(question_id) references question(id),
   foreign key(keyword_id) references keyword(id)
-  ON DELETE CASCADE
 );
