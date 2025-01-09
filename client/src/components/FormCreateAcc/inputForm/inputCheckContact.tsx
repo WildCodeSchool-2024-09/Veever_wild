@@ -5,8 +5,9 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+import type { FormInput } from "../../../types/FormInput/FormInput";
 
-export default function InputCheckContact() {
+export default function InputCheckContact({ handleChange, value }: FormInput) {
   return (
     <FormControl className="formGroup checkContact" required>
       <FormLabel id="demo-radio-buttons-group-label">
@@ -16,6 +17,8 @@ export default function InputCheckContact() {
         aria-labelledby="demo-radio-buttons-group-label"
         defaultValue=""
         name="radio-buttons-group"
+        value={value}
+        onChange={(e) => handleChange(e.target.value)}
       >
         <FormControlLabel
           className="checkBox"

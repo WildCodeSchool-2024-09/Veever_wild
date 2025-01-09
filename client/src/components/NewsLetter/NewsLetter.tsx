@@ -12,9 +12,7 @@ export default function NewsLetter() {
       <p className="offerNewsLetter">Accès anticipé au nouveauté !</p>
       <p className="offerNewsLetter">-10% sur votre première réservation !</p>
       <form>
-        <label htmlFor="newsLetterEmail">Votre adresse email :</label>
         <InputEmail
-          id="newsLetterEmail"
           email={email}
           handleEmailCheckChange={handleEmailCheckChange}
           errors={errors}

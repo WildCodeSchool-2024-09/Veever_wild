@@ -1,11 +1,10 @@
 import { FormControl, FormLabel } from "@mui/material";
-import { useState } from "react";
 import { StyledTelInput } from "../../../services/FormCreateAcc/StyledTelInput";
+import type { FormInput } from "../../../types/FormInput/FormInput";
 
-export default function InputPhone() {
-  const [value, setValue] = useState("+33");
+export default function InputPhone({ handleChange, value }: FormInput) {
   const handleChangePhone = (newValue: string) => {
-    setValue(newValue);
+    handleChange(newValue);
   };
   return (
     <FormControl className="formGroup phone">

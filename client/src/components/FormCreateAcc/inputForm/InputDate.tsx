@@ -1,10 +1,10 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { fr } from "date-fns/locale/fr";
-import { useState } from "react";
 import { StyledDatePicker } from "../../../services/FormCreateAcc/StyledDatePickers";
+import type { FormInput } from "../../../types/FormInput/FormInput";
 
-export default function InputDate() {
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+export default function InputDate({ handleChange, value }: FormInput) {
+  const today = new Date().toISOString();
   return (
     <FormControl className="formGroup">
       <FormLabel htmlFor="birthday">Votre date de naissance</FormLabel>
@@ -19,8 +19,10 @@ export default function InputDate() {
         dropdownMode="select"
         showIcon
         toggleCalendarOnIconClick
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
+        selected={value ? new Date(value) : new Date(today)}
+        onChange={(date: Date | null) =>
+          handleChange(date ? date.toDateString() : "")
+        }
       />
     </FormControl>
   );

@@ -1,7 +1,8 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
+import type { FormInput } from "../../../types/FormInput/FormInput";
 
-export default function InputFirstName() {
+export default function InputFirstName({ handleChange, value }: FormInput) {
   return (
     <>
       <FormControl className="formGroup">
@@ -9,6 +10,8 @@ export default function InputFirstName() {
         <StyledInput
           required
           type="text"
+          value={value}
+          onChange={(e) => handleChange(e.target.value)}
           name="firstname"
           id="firstname"
           placeholder="Votre prénom"

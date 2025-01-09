@@ -1,13 +1,8 @@
 import { FormControl, FormLabel } from "@mui/material";
-import { useState } from "react";
 import { StyledSelect } from "../../../services/FormCreateAcc/StyledSelect";
+import type { FormInput } from "../../../types/FormInput/FormInput";
 
-export default function InputGender() {
-  const [gender, setGender] = useState("");
-  const handleChangeGender = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setGender(e.target.value);
-  };
-
+export default function InputGender({ handleChange, value }: FormInput) {
   return (
     <FormControl className="formGroup">
       <FormLabel htmlFor="gender">Votre genre</FormLabel>
@@ -15,19 +10,13 @@ export default function InputGender() {
         required
         name="gender"
         id="gender"
-        value={gender}
-        onChange={handleChangeGender}
+        value={value}
+        onChange={(e) => handleChange(e.target.value)}
       >
         <option value="">Veuillez sélectionner</option>
-        <option id="male" value="male">
-          Homme
-        </option>
-        <option id="female" value="female">
-          Femme
-        </option>
-        <option id="others" value="others">
-          Autres
-        </option>
+        <option value="Men">Homme</option>
+        <option value="Women">Femme</option>
+        <option value="Others">Autres</option>
       </StyledSelect>
     </FormControl>
   );

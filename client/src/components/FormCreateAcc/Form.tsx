@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import useFormData from "../../services/FormCreateAcc/FormData";
 import useFormValidation from "../../services/FormCreateAcc/FormValidation";
 import HeaderForm from "./HeaderForm";
 import InputCheckCGU from "./inputForm/InputCheckCGU";
@@ -18,8 +18,6 @@ import InputPassword from "./inputForm/inputPassword";
 import InputUsername from "./inputForm/inputUsername";
 
 export default function FormCreateAcc() {
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const navigate = useNavigate();
   const {
     email,
     password,
@@ -30,28 +28,37 @@ export default function FormCreateAcc() {
     handleConfirmPasswordChange,
     handleEmailCheckChange,
   } = useFormValidation();
-
-  const handleSubmit = (e: React.FormEvent) => {
-    if (Object.keys(errors).length > 0 || !isSamePassword) {
-      e.preventDefault();
-      setShowSnackbar(true);
-      return;
-    }
-    navigate("/");
-  };
-
+  const { handleChange, formData } = useFormData();
+  const [showSnackbar, setShowSnackbar] = useState(false);
   const handleClose = () => {
     setShowSnackbar(false);
   };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (Object.keys(errors).length > 0 || !isSamePassword) {
+      setShowSnackbar(true);
+      return;
+    }
+  };
+
   return (
     <>
       <HeaderForm />
       <form onSubmit={handleSubmit} className="createForm">
-        <InputUsername />
-        <InputLastName />
-        <InputFirstName />
+        <InputUsername
+          handleChange={handleChange("username")}
+          value={formData.username}
+        />
+        <InputLastName
+          handleChange={handleChange("lastName")}
+          value={formData.lastName}
+        />
+        <InputFirstName
+          handleChange={handleChange("firstName")}
+          value={formData.firstName}
+        />
         <InputEmail
-          id=""
           handleEmailCheckChange={handleEmailCheckChange}
           email={email}
           errors={errors}
@@ -64,11 +71,23 @@ export default function FormCreateAcc() {
           handlePasswordChange={handlePasswordChange}
           handleConfirmPasswordChange={handleConfirmPasswordChange}
         />
-        <InputGender />
-        <InputDate />
-        <InputPhone />
-        <InputCheckContact />
-        <InputCheckCGU />
+        <InputGender
+          handleChange={handleChange("gender")}
+          value={formData.gender}
+        />
+        <InputDate handleChange={handleChange("date")} value={formData.date} />
+        <InputPhone
+          handleChange={handleChange("phone")}
+          value={formData.phone}
+        />
+        <InputCheckContact
+          handleChange={handleChange("checkContact")}
+          value={formData.checkContact}
+        />
+        <InputCheckCGU
+          handleChange={handleChange("checkCGU")}
+          value={formData.checkCGU}
+        />
         <Button className="btnAcceptForm" type="submit" variant="contained">
           Crée mon compte
         </Button>
