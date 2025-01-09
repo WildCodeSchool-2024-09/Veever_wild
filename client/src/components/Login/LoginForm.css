@@ -1,0 +1,30 @@
+@import url("@src/variables.css");
+
+.loginForm label {
+  display: none;
+}
+
+.loginForm input {
+  margin: .5rem 0;
+  padding-left: .25rem;
+
+  height: 1.5rem;
+  width: 100%;
+}
+
+.loginForm button {
+  grid-column: span 2;
+  margin: .5rem 0;
+
+  height: 1.5rem;
+  width: 100%;
+
+  background-color: var(--light);
+  border: none;
+  border-radius: 3px;
+  box-shadow: var(--box-shadow-soft);
+}
+
+.loginForm button:hover {
+  background-color: var(--bckgColor);
+}

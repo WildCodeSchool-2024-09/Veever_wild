@@ -1,4 +1,10 @@
+import "./PasswordForgotten.css";
+
 export default function PasswordForgotten() {
-  // biome-ignore lint/a11y/useValidAnchor: <explanation>
-  return <a href="#">Mot de passe oublié ?</a>;
+  return (
+    // biome-ignore lint/a11y/useValidAnchor: <explanation>
+    <a href="#" className="passwordForgotten">
+      Mot de passe oublié ?
+    </a>
+  );
 }

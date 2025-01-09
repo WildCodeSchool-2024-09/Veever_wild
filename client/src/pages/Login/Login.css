@@ -1,1 +1,23 @@
 @import url("@src/variables.css");
+
+a {
+  text-decoration: none;
+  color: var(--dark);
+}
+
+.loginMain {
+  display: flex;
+  flex-direction: column;
+
+  margin: 2rem;
+
+  text-align: center;
+}
+
+.loginMain h2 {
+  margin-bottom: 1.5rem;
+}
+
+.loginMain p {
+  margin: .5rem 0;
+}
