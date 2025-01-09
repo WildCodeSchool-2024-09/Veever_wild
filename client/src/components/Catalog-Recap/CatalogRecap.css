@@ -13,9 +13,10 @@
 .emoji {
   font-size: calc(var(--font-size-ref) * 4);
 }
-.catalog-filter-section h1,
+.catalog-filter-section h2,
 p {
   font-size: calc(var(--font-size-ref) * 1.5);
   font-family: var(--titleFont);
   margin: var(--spacing-ref);
+  text-align: center;
 }

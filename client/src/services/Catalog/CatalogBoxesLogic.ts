@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { Filters } from "../../types/Catalog/CatalogTypes";
-export default function CatalogFilter() {
+
+export default function useCatalogFilter() {
   const [filters, setFilters] = useState<Filters>({
     restaurants: false,
     activities: false,

@@ -12,5 +12,5 @@
 
 .chrCard {
   border-radius: var(--border-ref);
-  box-shadow: 3px 2px 7px 1px #0000005e;
+  box-shadow: 3px 2px 7px 1px var(--dark);
 }

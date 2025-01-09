@@ -1,13 +1,26 @@
 import CatalogBoxes from "../../components/Catalog-Boxes/Catalog-Boxes";
 import CatalogCards from "../../components/Catalog-Cards/Catalog-Cards";
-import CatalogFilter from "../../components/Catalog-Filter/CatalogFilter";
+import CatalogRecap from "../../components/Catalog-Recap/CatalogRecap";
+import useCatalogFilter from "../../services/Catalog/CatalogBoxesLogic";
+import type { RecapItem } from "../../types/Catalog/CatalogTypes";
 
 export default function Catalog() {
+  const { filters, handleFilterChange } = useCatalogFilter();
+
+  const recapData: RecapItem[] = [
+    { name: "Offres likées", emoji: "❤️", count: 23, type: "all" },
+    { name: "Hôtels", emoji: "🏨", count: 10, type: "hotels" },
+    { name: "Restaurants", emoji: "🍴", count: 8, type: "restaurants" },
+    { name: "Activités", emoji: "🏃‍♀️", count: 5, type: "activities" },
+  ];
+
+  const filteredData = recapData.filter((item) => filters[item.type]);
+
   return (
-    <>
-      <CatalogBoxes />
-      <CatalogFilter />
+    <main>
+      <CatalogBoxes filters={filters} onFilterChange={handleFilterChange} />
+      <CatalogRecap data={filteredData} />
       <CatalogCards />
-    </>
+    </main>
   );
 }
