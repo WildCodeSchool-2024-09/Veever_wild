@@ -1,21 +1,11 @@
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
-
-type Hotels = {
-  id: number;
-  chr_id: number;
-};
-type ChrData = {
-  name: string;
-  address: string;
-  minPrice: number;
-  maxPrice: number;
-};
-type UpdateResponse = {
-  chrId: number;
-  chrData: ChrData;
-};
+import type {
+  ChrData,
+  Hotels,
+  UpdateResponse,
+} from "../../types/HotelTypes/HotelTypes";
 class HotelsRepository {
   // The C of CRUD - Create operation
   async create(chrData: ChrData) {
@@ -41,7 +31,7 @@ class HotelsRepository {
         [chrId],
       );
 
-      if (!hotelResult || hotelResult.insertId) {
+      if (!hotelResult || !hotelResult.insertId) {
         await connection.rollback();
         throw new Error("Insertion échouée");
       }
@@ -60,10 +50,10 @@ class HotelsRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific hotel by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.adress, chr.min_price, chr.max_price, chr.name
+      `SELECT chr.name, chr.address, chr.min_price, chr.max_price
        FROM hotel 
        INNER JOIN chr
-       ON hotel.chr_id = chr_id
+       ON hotel.chr_id = chr.id
        WHERE hotel.id = ?`,
       [id],
     );
@@ -75,10 +65,10 @@ class HotelsRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all hotels from the "hotel" table
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.adress, chr.min_price, chr.max_price, chr.name
+      `SELECT chr.name, chr.address, chr.min_price, chr.max_price
        FROM hotel
        INNER JOIN chr
-       ON hotel.chr_id = chr_id`,
+       ON hotel.chr_id = chr.id`,
     );
 
     // Return the array of hotels
@@ -87,17 +77,11 @@ class HotelsRepository {
 
   // The U of CRUD - Update operation for hotels
 
-  async update(
-    hotelId: number,
-    chrId: number,
-    chrData: ChrData,
-  ): Promise<UpdateResponse> {
-    const connection = await databaseClient.getConnection();
-
+  async update({ chrId, chrData }: UpdateResponse): Promise<UpdateResponse> {
     try {
-      await connection.query(
+      const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
-         SET name = ?, address = ?, minPrice = ?, maxPrice = ?
+         SET name = ?, address = ?, min_price = ?, max_price = ?
          WHERE id = ?`,
         [
           chrData.name,
@@ -107,21 +91,19 @@ class HotelsRepository {
           chrId,
         ],
       );
-
+      if (chrResult.affectedRows === 0) {
+        throw new Error(`Aucune mise à jour effectué pour chrId ${chrId}`);
+      }
       return { chrId, chrData };
     } catch (error) {
-      console.error("Erreur lors de la transaction: ", error);
-      throw error;
-    } finally {
-      connection.release();
+      throw new Error("Echec de la mise à jour");
     }
   }
 
   // The D of CRUD - Delete operation
   async delete(id: number): Promise<Result> {
-    const connection = await databaseClient.getConnection();
     try {
-      const [hotelResult] = await connection.query<Result>(
+      const [hotelResult] = await databaseClient.query<Result>(
         `DELETE hotel, chr 
          FROM hotel 
          LEFT JOIN chr ON hotel.chr_id = chr.id 
@@ -129,13 +111,12 @@ class HotelsRepository {
         [id],
       );
 
-      if (hotelResult.affectedRows !== 1) {
+      if (hotelResult.affectedRows === 0) {
+        throw new Error("Cet hôtel n'existe pas");
       }
       return hotelResult;
     } catch (error) {
       throw new Error("Erreur lors de la suppression");
-    } finally {
-      connection.release();
     }
   }
 }

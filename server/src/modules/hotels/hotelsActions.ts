@@ -40,21 +40,24 @@ const read: RequestHandler = async (req, res, next) => {
 
 const edit: RequestHandler = async (req, res, next) => {
   try {
-    const hotelId = Number(req.params.id);
-    const chrId = Number(req.body.chr_id);
-    const chrData = {
-      name: req.body.name,
-      address: req.body.address,
-      minPrice: Number(req.body.minPrice),
-      maxPrice: Number(req.body.maxPrice),
+    const updateData = {
+      hotelId: Number(req.params.id),
+      chrId: Number(req.params.id),
+      chrData: {
+        id: Number(req.body.id),
+        name: req.body.name,
+        address: req.body.address,
+        minPrice: Number(req.body.minPrice),
+        maxPrice: Number(req.body.maxPrice),
+      },
     };
 
-    const updateHotel = await hotelRepository.update(hotelId, chrId, chrData);
+    const updateHotel = await hotelRepository.update(updateData);
 
-    if (updateHotel == null) {
-      res.sendStatus(204);
+    if (!updateHotel) {
+      res.sendStatus(404);
     } else {
-      res.json(updateHotel);
+      res.json(204);
     }
   } catch (err) {
     next(err);
