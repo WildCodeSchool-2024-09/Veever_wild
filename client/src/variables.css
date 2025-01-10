@@ -16,5 +16,7 @@
   --spacing-ref: 1rem;
   --spacing-S: calc(var(--spacing-ref) * 0.5);
 
+  --font-size-XS: calc(var(--spacing-ref) * 0.8);
+
   --box-shadow-soft: 0px 0px 2px 2px #00000033;
 }
