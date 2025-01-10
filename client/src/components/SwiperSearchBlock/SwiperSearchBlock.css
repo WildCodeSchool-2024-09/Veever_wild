@@ -1,0 +1,34 @@
+aside.swipeandsearch {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(2, 1fr);
+}
+article.swipe-search {
+  background-color: var(--aliceBlueColor);
+  padding: 2rem;
+  margin: 2rem;
+  border-radius: 5px;
+}
+
+article.swipe-search h4 {
+  font-family: var(--titleFont);
+}
+
+article.swipe-search p {
+  font-family: var(--textFont);
+  padding: 1rem 0;
+}
+
+article.swipe-search button {
+  background-color: var(--mainColor);
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid var(--mainColor);
+}
+
+@media (max-width: 768px) {
+  aside.swipeandsearch {
+    display: flex;
+    flex-direction: column;
+  }
+}
