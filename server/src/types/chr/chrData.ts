@@ -12,7 +12,6 @@ export type Restaurant = {
 
 export type UpdateChrData = {
   restaurantId: number;
-  chrId: number;
   chrData: chrData;
 };
 

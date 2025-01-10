@@ -22,7 +22,7 @@ class RestaurantRepository {
         [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
       );
 
-      if (!chrResult || !chrResult.insertId) {
+      if (!chrResult.insertId) {
         await connection.rollback();
         throw new Error("Insertion échouée");
       }
@@ -34,7 +34,7 @@ class RestaurantRepository {
         [chrId],
       );
 
-      if (!restaurantResult || !restaurantResult.insertId) {
+      if (!restaurantResult.insertId) {
         await connection.rollback();
         throw new Error("Insertion échouée");
       }
@@ -80,7 +80,7 @@ class RestaurantRepository {
 
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing restaurant
-  async update({ chrId, chrData }: UpdateChrData): Promise<UpdateResultChr> {
+  async update({ restaurantId, chrData }: UpdateChrData) {
     try {
       const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
@@ -91,15 +91,11 @@ class RestaurantRepository {
           chrData.address,
           chrData.minPrice,
           chrData.maxPrice,
-          chrId,
+          restaurantId,
         ],
       );
 
-      if (chrResult.affectedRows === 0) {
-        throw new Error(`Aucune mise à jour effectuée pour chrId ${chrId}`);
-      }
-
-      return { success: true, chrId, chrData };
+      return chrResult.insertId;
     } catch (error) {
       throw new Error("Échec de la mise à jour");
     }
@@ -108,7 +104,7 @@ class RestaurantRepository {
   // The D of CRUD - Delete operation
   // TODO: Implement the delete operation to remove an restaurant by its ID
 
-  async delete(restaurantId: number): Promise<Result> {
+  async delete(restaurantId: number) {
     try {
       const [chrRows] = await databaseClient.query<Result>(
         `DELETE chr, restaurant 
@@ -119,11 +115,7 @@ class RestaurantRepository {
         [restaurantId],
       );
 
-      if (chrRows.affectedRows === 0) {
-        throw new Error("Le restaurant n'existe pas ou est déjà supprimé");
-      }
-
-      return chrRows;
+      return chrRows.affectedRows;
     } catch (error) {
       throw new Error("Erreur lors de la supression");
     }

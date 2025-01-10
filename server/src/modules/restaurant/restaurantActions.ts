@@ -39,9 +39,7 @@ const edit: RequestHandler = async (req, res, next) => {
   try {
     const updateData = {
       restaurantId: Number(req.params.id),
-      chrId: Number(req.params.id),
       chrData: {
-        id: Number(req.body.id),
         name: req.body.name,
         address: req.body.address,
         minPrice: Number(req.body.minPrice),
@@ -65,14 +63,13 @@ const destroy: RequestHandler = async (req, res, next) => {
   try {
     const restaurantId = Number(req.params.id);
 
-    const result = await restaurantRepository.delete(restaurantId);
+    const wasDeleted = await restaurantRepository.delete(restaurantId);
 
-    if (result.affectedRows === 0) {
-      res.status(404).json({ message: "Restaurant introuvable" });
-      return;
+    if (!wasDeleted) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
     }
-
-    res.sendStatus(204);
   } catch (err) {
     next(err);
   }
