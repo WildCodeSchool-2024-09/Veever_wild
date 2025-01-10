@@ -9,13 +9,13 @@ export type RecapItem = {
   name: string;
   emoji: string;
   count: number;
-  type: keyof Filters;
+  type: "all" | "hotels" | "restaurants" | "activities"; // <--- Ici on pourrait mettre keyof de Filters
 };
 
 // Props pour CatalogBoxes
 export type CatalogBoxesProps = {
   filters: Filters;
-  onFilterChange: (filterName: keyof Filters) => void;
+  onFilterChange: (filterName: keyof Filters) => void; //<--- keyof permet de prendre UNE clé de Filters
 };
 
 // Props pour CatalogRecap

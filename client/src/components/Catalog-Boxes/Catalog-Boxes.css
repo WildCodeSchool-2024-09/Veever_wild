@@ -30,7 +30,7 @@
   padding: var(--spacing-ref);
   font-size: calc(var(--font-size-ref) * 1.25);
   background-color: var(--bckgColor);
-  color: var(--light);
+  color: var(--dark);
   box-shadow: var(--box-shadow-input);
   transition: 0.6s;
 }

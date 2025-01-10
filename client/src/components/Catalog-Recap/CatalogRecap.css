@@ -8,10 +8,9 @@
   text-align: center;
   margin-top: var(--border-ref);
   max-width: calc(var(--spacing-ref) * 25);
-  padding: calc(var(--spacing-ref) * 2);
 }
 .emoji {
-  font-size: calc(var(--font-size-ref) * 4);
+  font-size: calc(var(--font-size-ref) * 3);
 }
 .catalog-filter-section h2,
 p {

@@ -40,15 +40,14 @@ footer {
 }
 
 .add-button {
-  box-shadow: 0px 10px 14px -7px var(--dark);
-  background-color: var(--bckgColor);
+  box-shadow: var(--box-shadow-soft);
+
   border-radius: calc(var(--border-ref) * 1.25);
   display: inline-block;
   cursor: pointer;
-  color: var(--light);
+  color: var(--dark);
   font-size: calc(var(--font-size-ref) * 1.25);
   font-weight: bold;
   padding: calc(var(--spacing-ref) * 0.8) calc(var(--spacing-ref) * 2);
   text-decoration: none;
-  text-shadow: 0 2px 0 var(--dark);
 }
