@@ -54,7 +54,7 @@ class RestaurantRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific restaurant by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.address, chr.min_price AS minPrice, chr.max_price AS maxPrice, chr.name AS name
+      `SELECT chr.name AS name, chr.address, chr.min_price AS minPrice, chr.max_price AS maxPrice
        FROM restaurant 
        INNER JOIN chr
        ON restaurant.chr_id = chr.id
@@ -68,7 +68,7 @@ class RestaurantRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all restaurants from the "restaurant" table
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.address, chr.min_price AS minPrice , chr.max_price AS maxPrice, chr.name AS name
+      `SELECT chr.name AS name, chr.address, chr.min_price AS minPrice , chr.max_price AS maxPrice
        FROM restaurant
        INNER JOIN chr
        ON restaurant.chr_id = chr.id`,
