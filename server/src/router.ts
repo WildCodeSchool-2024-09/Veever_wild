@@ -19,7 +19,7 @@ import adminActions from "./modules/admin/adminActions";
 router.get("/api/admins", adminActions.browse);
 router.get("/api/admins/:id", adminActions.read);
 router.put("/api/admins/:id", adminActions.edit);
-router.post("/api/admins", adminActions.add);
+router.post("/api/admins", adminActions.add); //test
 router.delete("/api/admins/:id", adminActions.destroy);
 
 /* ************************************************************************* */
