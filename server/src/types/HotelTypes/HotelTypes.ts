@@ -9,6 +9,6 @@ export type ChrData = {
   maxPrice: number;
 };
 export type UpdateResponse = {
-  chrId: number;
+  hotelId: number;
   chrData: ChrData;
 };

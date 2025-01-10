@@ -19,7 +19,7 @@ class HotelsRepository {
         [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
       );
 
-      if (!chrResult || !chrResult.insertId) {
+      if (!chrResult.insertId) {
         await connection.rollback();
         throw new Error("Insertion échouée");
       }
@@ -31,7 +31,7 @@ class HotelsRepository {
         [chrId],
       );
 
-      if (!hotelResult || !hotelResult.insertId) {
+      if (!hotelResult.insertId) {
         await connection.rollback();
         throw new Error("Insertion échouée");
       }
@@ -77,44 +77,42 @@ class HotelsRepository {
 
   // The U of CRUD - Update operation for hotels
 
-  async update({ chrId, chrData }: UpdateResponse): Promise<UpdateResponse> {
+  async update({ hotelId, chrData }: UpdateResponse) {
     try {
       const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
          SET name = ?, address = ?, min_price = ?, max_price = ?
-         WHERE id = ?`,
+         WHERE id = (
+          SELECT chr_id
+          FROM hotel
+          WHERE id = ?
+        )`,
         [
           chrData.name,
           chrData.address,
           chrData.minPrice,
           chrData.maxPrice,
-          chrId,
+          hotelId,
         ],
       );
-      if (chrResult.affectedRows === 0) {
-        throw new Error(`Aucune mise à jour effectué pour chrId ${chrId}`);
-      }
-      return { chrId, chrData };
+      return chrResult.affectedRows;
     } catch (error) {
       throw new Error("Echec de la mise à jour");
     }
   }
 
   // The D of CRUD - Delete operation
-  async delete(id: number): Promise<Result> {
+  async delete(id: number) {
     try {
       const [hotelResult] = await databaseClient.query<Result>(
         `DELETE hotel, chr 
          FROM hotel 
-         LEFT JOIN chr ON hotel.chr_id = chr.id 
+         INNER JOIN chr ON hotel.chr_id = chr.id 
          WHERE hotel.id = ?`,
         [id],
       );
 
-      if (hotelResult.affectedRows === 0) {
-        throw new Error("Cet hôtel n'existe pas");
-      }
-      return hotelResult;
+      return hotelResult.affectedRows;
     } catch (error) {
       throw new Error("Erreur lors de la suppression");
     }
