@@ -6,10 +6,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
+import TestSwiper from "./components/TestSwiper/TestSwiper";
 import Favorites from "./pages/Favorites/Favorites";
 import HomePage from "./pages/HomePage/HomePage";
 import Profile from "./pages/Profile/Profile";
-import Search from "./pages/Search/Search";
 import Settings from "./pages/Settings/Settings";
 
 // Import additional components for new routes
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <Search />,
+        element: <TestSwiper />,
       },
       {
         path: "/favorites",
