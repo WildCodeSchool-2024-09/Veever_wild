@@ -4,7 +4,6 @@ import type { Result, Rows } from "../../../database/client";
 import type {
   Restaurant,
   UpdateChrData,
-  UpdateResultChr,
   chrData,
 } from "../../types/chr/chrData";
 
