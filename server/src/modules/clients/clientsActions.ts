@@ -46,6 +46,11 @@ const add: RequestHandler = async (req, res, next) => {
       nickName: req.body.nickName,
       gender_Id: req.body.gender,
       user_id: req.body.user_id,
+      email: req.body.email,
+      password: req.body.password,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      phoneNumber: req.body.phoneNumber,
     };
 
     // Create the client
@@ -67,6 +72,11 @@ const update: RequestHandler = async (req, res, next) => {
       nickName: req.body.nickName,
       gender_Id: req.body.gender,
       id: +req.params.id,
+      email: req.body.email,
+      password: req.body.password,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      phoneNumber: req.body.phoneNumber,
     };
 
     // Update the client
