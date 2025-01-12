@@ -32,14 +32,14 @@ const read: RequestHandler = async (req, res, next) => {
 
 // The E of BREAD - Edit operation
 const edit: RequestHandler = async (req, res, next) => {
-  const userId = Number(req.params.id);
+  const adminId = Number(req.params.id);
   try {
     const userData: User = {
       email: req.body.email,
       password: req.body.password,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      id: userId,
+      id: adminId,
     };
 
     const updateAdmin = await adminRepository.update(userData);
