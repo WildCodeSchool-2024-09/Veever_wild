@@ -1,19 +1,15 @@
 import type { RequestHandler } from "express";
 
-// Import access to data
 import type { User } from "../../types/admin/adminTypes";
 import adminRepository from "./adminRepository";
 
 // The B of BREAD - Browse (Read All) operation
 const browse: RequestHandler = async (req, res, next) => {
   try {
-    // Fetch all admins
     const admins = await adminRepository.readAll();
 
-    // Respond with the sanitized admins in JSON format
     res.json(admins);
   } catch (error) {
-    // Pass any errors to the error-handling middleware
     next(error);
   }
 };
@@ -21,19 +17,15 @@ const browse: RequestHandler = async (req, res, next) => {
 // The R of BREAD - Read operation
 const read: RequestHandler = async (req, res, next) => {
   try {
-    // Fetch a specific admin based on the provided ID
     const adminId = Number(req.params.id);
     const admin = await adminRepository.read(adminId);
 
-    // If the admin is not found, respond with HTTP 404 (Not Found)
-    // Otherwise, respond with the admin in JSON format
     if (!admin) {
       res.sendStatus(404);
     } else {
       res.json(admin);
     }
   } catch (error) {
-    // Pass any errors to the error-handling middleware
     next(error);
   }
 };
@@ -42,7 +34,6 @@ const read: RequestHandler = async (req, res, next) => {
 const edit: RequestHandler = async (req, res, next) => {
   const userId = Number(req.params.id);
   try {
-    // Update a specific admin based on the provided ID
     const userData: User = {
       email: req.body.email,
       password: req.body.password,
@@ -51,17 +42,14 @@ const edit: RequestHandler = async (req, res, next) => {
       id: userId,
     };
 
-    const { profile } = await adminRepository.update(userData);
+    const updateAdmin = await adminRepository.update(userData);
 
-    // If the admin is not found, respond with HTTP 404 (Not Found)
-    if (!profile) {
+    if (!updateAdmin) {
       res.sendStatus(404);
     } else {
-      // Otherwise, respond with the admin in JSON format
-      res.status(200).json({ profile });
+      res.status(204);
     }
   } catch (error) {
-    // Pass any errors to the error-handling middleware
     next(error);
   }
 };
@@ -69,7 +57,6 @@ const edit: RequestHandler = async (req, res, next) => {
 // The A of BREAD - Add (Create) operation
 const add: RequestHandler = async (req, res, next) => {
   try {
-    // Extract the admin data from the request body
     const userData: Omit<User, "id"> = {
       email: req.body.email,
       password: req.body.password,
@@ -77,13 +64,10 @@ const add: RequestHandler = async (req, res, next) => {
       lastname: req.body.lastname,
     };
 
-    // Create the admin
-    const { profile } = await adminRepository.create(userData);
+    const insertId = await adminRepository.create(userData);
 
-    // Respond with HTTP 201 (Created) and the ID of the newly inserted admin
-    res.status(201).json({ profile });
+    res.status(201).json({ insertId });
   } catch (error) {
-    // Pass any errors to the error-handling middleware
     next(error);
   }
 };
@@ -96,10 +80,10 @@ const destroy: RequestHandler = async (req, res, next) => {
     const affectedRows = await adminRepository.destroy(adminId);
 
     if (affectedRows === 0) {
-      res.status(404).json({ message: "Administrateur non trouvé." });
+      res.sendStatus(404);
     }
 
-    res.status(204).send();
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }

@@ -4,9 +4,7 @@ import type { Admin, User } from "../../types/admin/adminTypes";
 
 class adminRepository {
   // The C of CRUD - Create operation
-  async create(
-    userData: Omit<User, "id">,
-  ): Promise<{ profile: Omit<User & { adminId: number }, "password"> }> {
+  async create(userData: Omit<User, "id">) {
     const connection = await databaseClient.getConnection();
 
     try {
@@ -29,7 +27,7 @@ class adminRepository {
 
       if (!userId) {
         await connection.rollback();
-        throw new Error("Echec de création de l'utilisateur.");
+        throw new Error("Insertion échouée dans la table user");
       }
 
       const [adminResult] = await connection.query<Result>(
@@ -43,20 +41,12 @@ class adminRepository {
 
       if (!adminId) {
         await connection.rollback();
-        throw new Error("Echec de création de l'administrateur.");
+        throw new Error("Insertion échouée dans la table admin");
       }
 
       await connection.commit();
 
-      return {
-        profile: {
-          email: userData.email,
-          firstname: userData.firstname,
-          lastname: userData.lastname,
-          id: userId,
-          adminId: adminId,
-        },
-      };
+      return adminId;
     } catch (error) {
       await connection.rollback();
       throw error;
@@ -66,8 +56,7 @@ class adminRepository {
   }
 
   // The Rs of CRUD - Read operations
-  async read(id: number): Promise<Omit<User & Admin, "password"> | null> {
-    // Execute the SQL SELECT query to retrieve a specific admin by its ID
+  async read(id: number) {
     const [rows] = await databaseClient.query<Rows>(
       `
       SELECT admin.id, user.id as user_id, email, firstname, lastname
@@ -83,13 +72,11 @@ class adminRepository {
       return null;
     }
 
-    // Return the first row of the result, which represents the admin
     const admin = rows[0] as Omit<User & Admin, "password">;
     return admin;
   }
 
-  async readAll(): Promise<Array<Omit<User & Admin, "password">> | null> {
-    // Execute the SQL SELECT query to retrieve all admins from the "admin" table
+  async readAll() {
     const [rows] = await databaseClient.query<Rows>(
       `
       SELECT admin.id, user.id as user_id, email, firstname, lastname
@@ -103,7 +90,6 @@ class adminRepository {
       return null;
     }
 
-    // Return the array of admins
     const admins = rows.map((admin) => {
       return admin as Omit<User & Admin, "password">;
     });
@@ -112,7 +98,7 @@ class adminRepository {
   }
 
   // The U of CRUD - Update operation
-  async update(userData: User): Promise<{ profile: Omit<User, "password"> }> {
+  async update(userData: User) {
     try {
       const [userResult] = await databaseClient.query<Result>(
         `
@@ -129,20 +115,7 @@ class adminRepository {
         ],
       );
 
-      if (userResult.affectedRows === 0) {
-        throw new Error(
-          "Utilisateur non trouvé ou aucune modification effectuée.",
-        );
-      }
-
-      return {
-        profile: {
-          email: userData.email,
-          firstname: userData.firstname,
-          lastname: userData.lastname,
-          id: userData.id,
-        },
-      };
+      return userResult.affectedRows;
     } catch (error) {
       throw new Error(
         "Nous avons rencontré une erreur lors de la mise à jour de l'utilisateur.",
