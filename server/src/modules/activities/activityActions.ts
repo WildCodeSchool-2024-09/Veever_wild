@@ -40,16 +40,19 @@ const read: RequestHandler = async (req, res, next) => {
 // The E of BREAD - Edit operation
 const edit: RequestHandler = async (req, res, next) => {
   try {
-    const activityId = Number(req.params.id);
-    const editActivity = {
-      chr_id: Number(req.body.chr_id),
+    const updateData = {
+      ActivityId: Number(req.params.id),
+      chrData: {
+        name: req.body.name,
+        address: req.body.address,
+        minPrice: Number(req.body.minPrice),
+        maxPrice: Number(req.body.maxPrice),
+      },
     };
-    const updateActivity = await activityRepository.update(
-      activityId,
-      editActivity,
-    );
 
-    if (updateActivity == null) {
+    const updateActivity = await activityRepository.update(updateData);
+
+    if (!updateActivity) {
       res.sendStatus(404);
     } else {
       res.json(updateActivity);
@@ -61,16 +64,17 @@ const edit: RequestHandler = async (req, res, next) => {
 
 // The A of BREAD - Add (Create) operation
 const add: RequestHandler = async (req, res, next) => {
-  try {
-    // Extract the activity data from the request body
-    const newActivity = {
-      title: req.body.title,
-      chr_id: req.body.chr_id,
-    };
+  // Extract the activity data from the request body
+  const newActivity = {
+    name: req.body.name,
+    address: req.body.address,
+    minPrice: Number(req.body.minPrice),
+    maxPrice: Number(req.body.maxPrice),
+  };
 
+  try {
     // Create the activity
     const insertId = await activityRepository.create(newActivity);
-
     // Respond with HTTP 201 (Created) and the ID of the newly inserted activity
     res.status(201).json({ insertId });
   } catch (err) {
@@ -80,13 +84,13 @@ const add: RequestHandler = async (req, res, next) => {
 };
 
 // The D of BREAD - Delete operation
-const deleteActivity: RequestHandler = async (req, res, next) => {
+const destroy: RequestHandler = async (req, res, next) => {
   try {
     const activityId = Number(req.params.id);
 
-    const activityDeleted = await activityRepository.delete(activityId);
+    const wasDeleted = await activityRepository.delete(activityId);
 
-    if (!activityDeleted) {
+    if (!wasDeleted) {
       res.sendStatus(404);
     } else {
       res.sendStatus(204);
@@ -96,4 +100,4 @@ const deleteActivity: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add };
+export default { browse, read, add, edit, destroy };

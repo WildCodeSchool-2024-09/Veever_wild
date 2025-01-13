@@ -1,18 +1,14 @@
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
-
-type chrData = {
-  name: string;
-  address: string;
-  min_price: number;
-  max_price: number;
-};
-
+import type {
+  Activities,
+  ChrData,
+  UpdateResponse,
+} from "../../types/ActivityTypes.ts/ActivityTypes";
 class ActivityRepository {
   // The C of CRUD - Create operation
-
-  async create(chrData: chrData) {
+  async create(chrData: ChrData) {
     const connection = await databaseClient.getConnection();
     try {
       await connection.beginTransaction();
@@ -21,7 +17,7 @@ class ActivityRepository {
         `INSERT 
         INTO chr 
         (name, address, min_price, max_price) values (?, ?, ?, ?)`,
-        [chrData.name, chrData.address, chrData.min_price, chrData.max_price],
+        [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
       );
       if (!chrResult || !chrResult.insertId) {
         await connection.rollback();
@@ -30,12 +26,11 @@ class ActivityRepository {
       // Return the ID of the newly inserted activity
       const chrId = chrResult.insertId;
       const [activityResult] = await connection.query<Result>(
-        `INSERT
-        INTO activity
+        `INSERT INTO activity
         (chr_id) values (?)`,
         [chrId],
       );
-      if (!activityResult || !activityResult.insertId) {
+      if (!activityResult.insertId) {
         await connection.rollback();
         throw new Error("Insertion activité échoué");
       }
@@ -54,7 +49,7 @@ class ActivityRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific activity by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.name AS name, chr.address AS address, chr.min_price AS minPrice, chr.max_price AS maxPrice,
+      `SELECT chr.name, chr.address, chr.min_price, chr.max_price,
        FROM actitivy 
        INNER JOIN chr
        ON activity.chr_id = chr.id
@@ -69,8 +64,10 @@ class ActivityRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all activities from the "activity" table
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT *
-       FROM activity`,
+      `SELECT chr.name, chr.address, chr.min_price, chr.max_price
+       FROM activity
+       INNER JOIN chr
+       ON activity.chr_id = chrid`,
     );
 
     // Return the array of activities
@@ -80,27 +77,45 @@ class ActivityRepository {
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing activity
 
-  async update(id: number, editActivities: Partial<Omit<Activities, "id">>) {
-    const [rows] = await databaseClient.query<Rows>(
-      `UPDATE activity
-       SET chr_id = ?
-       WHERE id = ?`,
-      [editActivities.chr_id, id],
-    );
-    return rows as Activities[];
+  async update({ activityId, chrData }: UpdateResponse) {
+    try {
+      const [chrResult] = await databaseClient.query<Result>(
+        `UPDATE chr
+         SET name = ?, address = ?, min_price = ?, max_price = ?
+         WHERE id = (
+          SELECT chr_id
+          FROM activity
+          WHERE id = ?
+        )`,
+        [
+          chrData.name,
+          chrData.address,
+          chrData.minPrice,
+          chrData.maxPrice,
+          activityId,
+        ],
+      );
+      return chrResult.affectedRows;
+    } catch (error) {
+      throw new Error("Echec de la mise à jour");
+    }
   }
 
   // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove an activity by its ID
-
   async delete(id: number) {
-    const [rows] = await databaseClient.query<Rows>(
-      `DELETE 
-      FROM hotel
-      WHERE id = ?`,
-      [id],
-    );
-    return rows as Activities[];
+    try {
+      const [activityResult] = await databaseClient.query<Result>(
+        `DELETE activity, chr 
+           FROM activity 
+           INNER JOIN chr ON activity.chr_id = chr.id 
+           WHERE activity.id = ?`,
+        [id],
+      );
+
+      return activityResult.affectedRows;
+    } catch (error) {
+      throw new Error("Erreur lors de la suppression");
+    }
   }
 }
 
