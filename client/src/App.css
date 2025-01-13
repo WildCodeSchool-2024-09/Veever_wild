@@ -6,10 +6,6 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: tomato;
-}
-
 button {
   cursor: pointer;
 }
