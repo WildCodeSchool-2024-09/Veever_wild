@@ -28,6 +28,13 @@ router.put("/api/hotels/:id", hotelsActions.edit);
 router.post("/api/hotels", hotelsActions.add);
 router.delete("/api/hotels/:id", hotelsActions.destroy);
 
+import activityActions from "./modules/activities/activityActions";
+router.get("/api/activities", activityActions.browse);
+router.get("/api/activities/:id", activityActions.read);
+router.put("/api/activities/:id", activityActions.edit);
+router.post("/api/activities", activityActions.add);
+router.delete("/api/activities/:id", activityActions.destroy);
+
 /* ************************************************************************* */
 
 export default router;

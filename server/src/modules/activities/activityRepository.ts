@@ -49,11 +49,11 @@ class ActivityRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific activity by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.name, chr.address, chr.min_price, chr.max_price,
-       FROM actitivy 
+      `SELECT chr.name, chr.address, chr.min_price, chr.max_price
+       FROM activity
        INNER JOIN chr
        ON activity.chr_id = chr.id
-       where id = ?`,
+       WHERE activity.id = ?`,
       [id],
     );
 
@@ -67,7 +67,7 @@ class ActivityRepository {
       `SELECT chr.name, chr.address, chr.min_price, chr.max_price
        FROM activity
        INNER JOIN chr
-       ON activity.chr_id = chrid`,
+       ON activity.chr_id = chr.id`,
     );
 
     // Return the array of activities

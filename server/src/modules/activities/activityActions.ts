@@ -41,7 +41,7 @@ const read: RequestHandler = async (req, res, next) => {
 const edit: RequestHandler = async (req, res, next) => {
   try {
     const updateData = {
-      ActivityId: Number(req.params.id),
+      activityId: Number(req.params.id),
       chrData: {
         name: req.body.name,
         address: req.body.address,
@@ -55,7 +55,7 @@ const edit: RequestHandler = async (req, res, next) => {
     if (!updateActivity) {
       res.sendStatus(404);
     } else {
-      res.json(updateActivity);
+      res.sendStatus(204);
     }
   } catch (err) {
     next(err);
