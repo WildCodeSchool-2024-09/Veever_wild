@@ -127,24 +127,10 @@ CREATE TABLE illustration_keyword (
   foreign key(keyword_id) references keyword(id)
 );
 
-CREATE TABLE form_item (
+CREATE TABLE illustration_chr (
   id int unsigned primary key auto_increment not null,
-  name varchar(255) not null
-);
-
-CREATE TABLE question (
-  id int unsigned primary key auto_increment not null,
-  position int not null,
-  form_item_id int unsigned not null,
-  foreign key(form_item_id) references form_item(id)
-  ON DELETE CASCADE
-);
-
-CREATE TABLE answer (
-  id int unsigned primary key auto_increment not null,
-  is_checked BOOLEAN not null default 0,
-  question_id int unsigned not null,
-  keyword_id int unsigned not null,
-  foreign key(question_id) references question(id),
-  foreign key(keyword_id) references keyword(id)
+  illustration_id int unsigned not null,
+  chr_id int unsigned not null,
+  foreign key(illustration_id) references illustration(id),
+  foreign key(chr_id) references chr(id)
 );
