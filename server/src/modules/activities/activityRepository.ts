@@ -2,25 +2,51 @@ import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
 
-type Activities = {
-  id: number;
-  chr_id: number;
+type chrData = {
+  name: string;
+  address: string;
+  min_price: number;
+  max_price: number;
 };
 
 class ActivityRepository {
   // The C of CRUD - Create operation
 
-  async create(activity: Omit<Activities, "id">) {
-    // Execute the SQL INSERT query to add a new activity to the "activity" table
-    const [result] = await databaseClient.query<Result>(
-      `INSERT 
-       INTO activity 
-      (chr_id) values (?)`,
-      [activity.chr_id],
-    );
-
-    // Return the ID of the newly inserted activity
-    return result.insertId;
+  async create(chrData: chrData) {
+    const connection = await databaseClient.getConnection();
+    try {
+      await connection.beginTransaction();
+      // Execute the SQL INSERT query to add a new activity to the "activity" table
+      const [chrResult] = await connection.query<Result>(
+        `INSERT 
+        INTO chr 
+        (name, address, min_price, max_price) values (?, ?, ?, ?)`,
+        [chrData.name, chrData.address, chrData.min_price, chrData.max_price],
+      );
+      if (!chrResult || !chrResult.insertId) {
+        await connection.rollback();
+        throw new Error("Insertion chr échoué");
+      }
+      // Return the ID of the newly inserted activity
+      const chrId = chrResult.insertId;
+      const [activityResult] = await connection.query<Result>(
+        `INSERT
+        INTO activity
+        (chr_id) values (?)`,
+        [chrId],
+      );
+      if (!activityResult || !activityResult.insertId) {
+        await connection.rollback();
+        throw new Error("Insertion activité échoué");
+      }
+      await connection.commit();
+      return activityResult.insertId;
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
   }
 
   // The Rs of CRUD - Read operations
@@ -28,8 +54,10 @@ class ActivityRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific activity by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT *
+      `SELECT chr.name AS name, chr.address AS address, chr.min_price AS minPrice, chr.max_price AS maxPrice,
        FROM actitivy 
+       INNER JOIN chr
+       ON activity.chr_id = chr.id
        where id = ?`,
       [id],
     );
