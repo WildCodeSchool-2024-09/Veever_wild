@@ -52,9 +52,9 @@ class ClientsRepository {
 
       const userId = userResult.insertId;
 
-      if(!userId) {
+      if (!userId) {
         throw new Error("User creation failed");
-      };
+      }
 
       const [clientResult] = await connection.query<Result>(
         `
@@ -67,9 +67,9 @@ class ClientsRepository {
 
       const clientId = clientResult.insertId;
 
-      if(!clientId) {
+      if (!clientId) {
         throw new Error("Client creation failed");
-      };
+      }
 
       const [phoneResult] = await connection.query<Result>(
         `
@@ -79,9 +79,9 @@ class ClientsRepository {
         [clientId, client.phoneNumber],
       );
 
-      if(!phoneResult.insertId) {
+      if (!phoneResult.insertId) {
         throw new Error("Phone creation failed");
-      };
+      }
 
       await connection.commit();
       return clientId;
@@ -115,13 +115,14 @@ class ClientsRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "client" table
     const [rows] = await databaseClient.query<Rows>(
-            ` 
+      ` 
       SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phone.phone_number, gender.type
       FROM client
       INNER JOIN user ON client.user_id = user.id
       INNER JOIN phone ON client.id = phone.client_id
       INNER JOIN gender ON client.gender_id = gender.id
-      `)
+      `,
+    );
 
     // Return the array of items
     return rows as Client[];
