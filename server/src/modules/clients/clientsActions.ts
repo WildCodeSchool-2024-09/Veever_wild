@@ -1,5 +1,4 @@
 import type { RequestHandler } from "express";
-
 // Import access to data
 import clientsRepository from "./clientsRepository";
 
@@ -8,7 +7,6 @@ const browse: RequestHandler = async (req, res, next) => {
   try {
     // Fetch all client
     const clients = await clientsRepository.readAll();
-
     // Respond with the item in JSON format
     res.json(clients);
   } catch (err) {
@@ -45,7 +43,6 @@ const add: RequestHandler = async (req, res, next) => {
       birthdate: req.body.birthdate,
       nickName: req.body.nickName,
       gender_Id: req.body.gender,
-      user_id: req.body.user_id,
       email: req.body.email,
       password: req.body.password,
       firstname: req.body.firstname,
@@ -55,7 +52,6 @@ const add: RequestHandler = async (req, res, next) => {
 
     // Create the client
     const insertId = await clientsRepository.create(newClient);
-
     // Respond with HTTP 201 (Created) and the ID of the newly inserted client
     res.status(201).json({ insertId });
   } catch (err) {
@@ -99,10 +95,8 @@ const destroy: RequestHandler = async (req, res, next) => {
   try {
     // Extract the client ID from the request parameters
     const clientId = Number(req.params.id);
-
     // Delete the client
     const destroyed = await clientsRepository.destroy(clientId);
-
     // If the client was deleted, respond with HTTP 204 (No Content)
     // Otherwise, respond with HTTP 404 (Not Found)
     if (destroyed) {

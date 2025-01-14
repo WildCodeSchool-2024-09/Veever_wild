@@ -1,20 +1,9 @@
+import { el } from "@faker-js/faker/.";
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
 
-type Client = {
-  id: number;
-  email: string;
-  password: string;
-  firstname: string;
-  lastname: string;
-
-  birthdate: Date;
-  nickName: string;
-  phoneNumber: number;
-  gender_Id: number;
-  user_id: number;
-};
+import type { Client } from "../../types/clientsTypes/clientsTypes";
 
 class ClientsRepository {
   async update(updateClient: Omit<Client, "user_id">): Promise<boolean> {
@@ -32,7 +21,7 @@ class ClientsRepository {
 
     const [result] = await databaseClient.query<Result>(
       `
-    UPDATE clients
+    UPDATE client
     SET birthdate = ?, nickname = ?, gender_id = ?
     WHERE id = ?
     `,
@@ -53,20 +42,24 @@ class ClientsRepository {
     try {
       await connection.beginTransaction();
 
-      const [result] = await databaseClient.query<Result>(
+      const [userResult] = await connection.query<Result>(
         `
-        INSERT INTO users
+        INSERT INTO user
             (email, password, firstname, lastname)
         VALUES (?, ?, ?, ?)
         `,
         [client.email, client.password, client.firstname, client.lastname],
       );
 
-      const userId = result.insertId;
+      const userId = userResult.insertId;
+
+      if(!userId) {
+        throw new Error("User creation failed");
+      };
 
       const [clientResult] = await connection.query<Result>(
         `
-        INSERT INTO clients
+        INSERT INTO client
             (birthdate, nickname, gender_id, user_id)
         VALUES (?, ?, ?, ?)
         `,
@@ -75,13 +68,21 @@ class ClientsRepository {
 
       const clientId = clientResult.insertId;
 
-      await connection.query<Result>(
+      if(!clientId) {
+        throw new Error("Client creation failed");
+      };
+
+      const [phoneResult] = await connection.query<Result>(
         `
-      INSERT INTO phones (client_id, phone_number)
+      INSERT INTO phone (client_id, phone_number)
       VALUES (?, ?)
       `,
         [clientId, client.phoneNumber],
       );
+
+      if(!phoneResult.insertId) {
+        throw new Error("Phone creation failed");
+      };
 
       await connection.commit();
       return clientId;
@@ -94,13 +95,16 @@ class ClientsRepository {
   }
 
   // The Rs of CRUD - Read operations
-
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific client by its ID
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT * FROM client 
-      WHERE id = ?
+      SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phone.phone_number, gender.type
+      FROM client
+      INNER JOIN user ON client.user_id = user.id
+      INNER JOIN phone ON client.id = phone.client_id
+      INNER JOIN gender ON client.gender_id = gender.id
+      WHERE client.id = ?
       `,
       [id],
     );
@@ -111,7 +115,14 @@ class ClientsRepository {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "client" table
-    const [rows] = await databaseClient.query<Rows>("SELECT * FROM client");
+    const [rows] = await databaseClient.query<Rows>(
+      ` 
+      SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phone.phone_number, gender.type
+      FROM client
+      INNER JOIN user ON client.user_id = user.id
+      INNER JOIN phone ON client.id = phone.client_id
+      INNER JOIN gender ON client.gender_id = gender.id
+      `)
 
     // Return the array of items
     return rows as Client[];
@@ -121,7 +132,7 @@ class ClientsRepository {
   async destroy(id: number): Promise<boolean> {
     const [result] = await databaseClient.query<Result>(
       `
-      DELETE FROM clients
+      DELETE FROM client
       WHERE id = ?
       `,
       [id],
