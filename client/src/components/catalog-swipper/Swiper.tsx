@@ -13,7 +13,7 @@ export default function Swiper() {
   const [cards, setCards] = useState<Card[]>([]);
   const { saveCards, setSaveCards } = useSaveCards();
   useEffect(() => {
-    fetch("http://localhost:3310/api/restaurants")
+    fetch("http://localhost:3310/api/chr")
       .then((res) => res.json())
       .then((data) => setCards(data));
   }, []);

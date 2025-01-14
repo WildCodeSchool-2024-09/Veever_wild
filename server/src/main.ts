@@ -59,7 +59,7 @@ const datas = [
     minPrice: 50,
     maxPrice: 200,
     category: "Appart",
-    picture: "client/src/assets/images/AppartHotel.jpg",
+    picture: "/assets/images/AppartHotel.jpg",
   },
   {
     id: 5,
@@ -69,7 +69,7 @@ const datas = [
     minPrice: 50,
     maxPrice: 200,
     category: "Palace",
-    picture: "client/src/assets/images/HotelBedroom.jpg",
+    picture: "/assets/images/HotelBedroom.jpg",
   },
   {
     id: 6,
@@ -79,7 +79,7 @@ const datas = [
     minPrice: 50,
     maxPrice: 200,
     category: "Palace",
-    picture: "client/src/assets/images/Palace.jpg",
+    picture: "/assets/images/Palace.jpg",
   },
   {
     id: 7,
@@ -89,7 +89,7 @@ const datas = [
     minPrice: 30,
     maxPrice: 100,
     category: "Sport",
-    picture: "client/src/assets/images/rock-climbing.jpg",
+    picture: "/assets/images/rock-climbing.jpg",
   },
   {
     id: 8,
@@ -99,7 +99,7 @@ const datas = [
     minPrice: 30,
     maxPrice: 100,
     category: "Loisir",
-    picture: "client/src/assets/images/escape_game.jpg",
+    picture: "/assets/images/escape_game.jpg",
   },
   {
     id: 9,
@@ -109,7 +109,7 @@ const datas = [
     minPrice: 30,
     maxPrice: 100,
     category: "Sport",
-    picture: "client/src/assets/images/paintball.jpg",
+    picture: "/assets/images/paintball.jpg",
   },
 ];
 
@@ -124,4 +124,7 @@ app.get("/api/hostels", (req, res, next) => {
 app.get("/api/activities", (req, res, next) => {
   const result = datas.filter((data) => data.type === "activity");
   res.json(result);
+});
+app.get("/api/chr", (req, res, next) => {
+  res.json(datas);
 });

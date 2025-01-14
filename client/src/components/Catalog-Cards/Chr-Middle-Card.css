@@ -10,8 +10,8 @@
 
 .card-container {
   justify-self: center;
-  width: 60%;
+  width: 40%;
   border-radius: var(--border-ref);
   margin: var(--padding-input);
-  box-shadow: 3px 2px 7px 1px var(--dark);
+  box-shadow: 6px 2px 11px 0px #00000042;
 }
