@@ -6,8 +6,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
-import TestSwiper from "./components/TestSwiper/TestSwiper";
-import Favorites from "./pages/Favorites/Favorites";
+import Catalogue from "./components/catalog-swipper/Swiper";
+import Catalog from "./pages/Catalog/Catalog";
 import HomePage from "./pages/HomePage/HomePage";
 import Profile from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
@@ -31,12 +31,15 @@ const router = createBrowserRouter([
         element: <HomePage />,
       },
       {
+        path: "/catalog",
+        element: <Catalog />,
+      },
+      {
         path: "/search",
-        element: <TestSwiper />,
+        element: <Catalogue />,
       },
       {
         path: "/favorites",
-        element: <Favorites />,
       },
       {
         path: "/profile",

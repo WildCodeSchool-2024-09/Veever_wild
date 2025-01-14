@@ -29,7 +29,7 @@ const datas = [
     minPrice: 200,
     maxPrice: 500,
     category: "asiatique",
-    picture: "client/src/assets/images/JapaneseFood.jpg",
+    picture: "/assets/images/JapaneseFood.jpg",
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const datas = [
     minPrice: 200,
     maxPrice: 500,
     category: "italien",
-    picture: "client/src/assets/images/PizzaFood.jpg",
+    picture: "/assets/images/PizzaFood.jpg",
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ const datas = [
     minPrice: 200,
     maxPrice: 500,
     category: "italien",
-    picture: "client/src/assets/images/FastFood.jpg",
+    picture: "/assets/images/FastFood.jpg",
   },
   {
     id: 4,
