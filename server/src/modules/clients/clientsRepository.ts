@@ -1,11 +1,16 @@
-import { el } from "@faker-js/faker/.";
 import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
 
-import type { Client } from "../../types/clientsTypes/clientsTypes";
+type Client = {
+  id: number;
+  birthdate: Date;
+  nickName: string;
+  gender_Id: number;
+  user_id: number;
+};
 
-class ClientsRepository {
+class ClientRepository {
   async update(updateClient: Omit<Client, "user_id">): Promise<boolean> {
     const [rows] = await databaseClient.query<Rows>(
       `
@@ -21,7 +26,7 @@ class ClientsRepository {
 
     const [result] = await databaseClient.query<Result>(
       `
-    UPDATE client
+    UPDATE clients
     SET birthdate = ?, nickname = ?, gender_id = ?
     WHERE id = ?
     `,
@@ -38,73 +43,27 @@ class ClientsRepository {
 
   async create(client: Omit<Client, "id">): Promise<number> {
     // Execute the SQL INSERT query to add a new client to the "client" table
-    const connection = await databaseClient.getConnection();
-    try {
-      await connection.beginTransaction();
-
-      const [userResult] = await connection.query<Result>(
-        `
-        INSERT INTO user
-            (email, password, firstname, lastname)
-        VALUES (?, ?, ?, ?)
-        `,
-        [client.email, client.password, client.firstname, client.lastname],
-      );
-
-      const userId = userResult.insertId;
-
-      if (!userId) {
-        throw new Error("User creation failed");
-      }
-
-      const [clientResult] = await connection.query<Result>(
-        `
-        INSERT INTO client
+    const [result] = await databaseClient.query<Result>(
+      `
+        INSERT INTO clients
             (birthdate, nickname, gender_id, user_id)
         VALUES (?, ?, ?, ?)
         `,
-        [client.birthdate, client.nickName, client.gender_Id, userId],
-      );
+      [client.birthdate, client.nickName, client.gender_Id, client.user_id],
+    );
 
-      const clientId = clientResult.insertId;
-
-      if (!clientId) {
-        throw new Error("Client creation failed");
-      }
-
-      const [phoneResult] = await connection.query<Result>(
-        `
-      INSERT INTO phone (client_id, phone_number)
-      VALUES (?, ?)
-      `,
-        [clientId, client.phoneNumber],
-      );
-
-      if (!phoneResult.insertId) {
-        throw new Error("Phone creation failed");
-      }
-
-      await connection.commit();
-      return clientId;
-    } catch (error) {
-      await connection.rollback();
-      throw error;
-    } finally {
-      connection.release();
-    }
+    // Return the ID of the newly inserted client
+    return result.insertId;
   }
 
   // The Rs of CRUD - Read operations
+
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific client by its ID
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phone.phone_number, gender.type
-      FROM client
-      INNER JOIN user ON client.user_id = user.id
-      INNER JOIN phone ON client.id = phone.client_id
-      INNER JOIN gender ON client.gender_id = gender.id
-      WHERE client.id = ?
+      SELECT * FROM client 
+      WHERE id = ?
       `,
       [id],
     );
@@ -115,15 +74,7 @@ class ClientsRepository {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "client" table
-    const [rows] = await databaseClient.query<Rows>(
-      ` 
-      SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phone.phone_number, gender.type
-      FROM client
-      INNER JOIN user ON client.user_id = user.id
-      INNER JOIN phone ON client.id = phone.client_id
-      INNER JOIN gender ON client.gender_id = gender.id
-      `,
-    );
+    const [rows] = await databaseClient.query<Rows>("SELECT * FROM client");
 
     // Return the array of items
     return rows as Client[];
@@ -133,7 +84,7 @@ class ClientsRepository {
   async destroy(id: number): Promise<boolean> {
     const [result] = await databaseClient.query<Result>(
       `
-      DELETE FROM client
+      DELETE FROM clients
       WHERE id = ?
       `,
       [id],
@@ -142,4 +93,4 @@ class ClientsRepository {
   }
 }
 
-export default new ClientsRepository();
+export default new ClientRepository();
