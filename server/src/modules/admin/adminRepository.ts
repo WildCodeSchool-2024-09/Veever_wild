@@ -68,12 +68,7 @@ class adminRepository {
       [id],
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
-
-    const admin = rows[0] as Omit<User & Admin, "password">;
-    return admin;
+    return rows[0];
   }
 
   async readAll() {
