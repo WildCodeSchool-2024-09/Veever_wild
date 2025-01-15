@@ -1,3 +1,9 @@
+import Swiper from "../../components/catalog-swipper/Swiper";
+
 export default function Search() {
-  return <h2>Search</h2>;
+  return (
+    <>
+      <Swiper />
+    </>
+  );
 }
