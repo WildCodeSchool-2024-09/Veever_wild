@@ -1,13 +1,14 @@
 @import url("@src/variables.css");
 .card-map {
+  padding: calc(var(--spacing-ref) * 2);
   display: grid;
   justify-content: center;
-  width: 100%;
-  height: 100vh;
 }
 
 .img-swiper {
-  width: 100%;
+  margin: auto;
+  width: 50%;
+  height: 60vh;
   grid-row: 1;
   grid-column: 1;
   border-radius: 0.5rem;
@@ -15,22 +16,4 @@
   &:active {
     cursor: grabbing;
   }
-}
-
-.btnContainer {
-  position: absolute;
-  bottom: calc(var(--spacing-ref) * 5); /* Distance du bas de l'image */
-  left: calc(var(--spacing-ref) * 25);
-  display: flex;
-}
-
-.btnLike {
-  width: 10rem;
-  border-radius: 50px;
-  background-color: rgba(0, 0, 0, 0);
-  border: 0;
-}
-
-.btnLike img {
-  width: 40%;
 }

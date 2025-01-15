@@ -61,18 +61,6 @@ const Cardz = ({ id, picture, cards, setCards, setSaveCards }: CardProps) => {
     }
   };
 
-  const handleLike = () => {
-    const likeCards = cards.find((card) => card.id === id);
-    if (likeCards) {
-      setSaveCards((prev) => [...prev, likeCards]);
-    }
-    setCards(cards.filter((card) => card.id !== id));
-  };
-
-  const handleDislike = () => {
-    setCards(cards.filter((card) => card.id !== id));
-  };
-
   return (
     <>
       <motion.img
@@ -84,14 +72,6 @@ const Cardz = ({ id, picture, cards, setCards, setSaveCards }: CardProps) => {
         style={{ x, opacity, rotate }}
         onDragEnd={handleDragEnd}
       />
-      <div className="btnContainer">
-        <button onClick={handleDislike} className="btnLike" type="button">
-          <img src="/assets/images/Dislike.svg" alt="" />
-        </button>
-        <button onClick={handleLike} className="btnLike" type="button">
-          <img src="/assets/images/Like.svg" alt="" />
-        </button>
-      </div>
     </>
   );
 };
