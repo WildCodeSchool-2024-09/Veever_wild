@@ -7,5 +7,6 @@ export type Gender = {
 };
 
 export type UpdateGenderData = {
-  genderData: GenderData;
+  type: string;
+  id: number;
 };

@@ -1,4 +1,5 @@
 import type { RequestHandler } from "express";
+import type { UpdateGenderData } from "../../types/gender/genderTypes";
 import genderRepository from "./genderRepository";
 
 // The B of BREAD - Browse (Read All) operation
@@ -37,10 +38,9 @@ const read: RequestHandler = async (req, res, next) => {
 
 const edit: RequestHandler = async (req, res, next) => {
   try {
-    const updateData = {
-      genderData: {
-        type: req.body.type,
-      },
+    const updateData: UpdateGenderData = {
+      type: req.body.type,
+      id: req.body.id,
     };
 
     const updategender = await genderRepository.update(updateData);

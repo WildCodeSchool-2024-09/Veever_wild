@@ -54,13 +54,13 @@ class GenderRepository {
 
   // The U of CRUD - Update operation
   // TODO: Implement the update operation to modify an existing restaurant
-  async update({ genderData }: UpdateGenderData) {
+  async update({ type, id }: UpdateGenderData) {
     try {
       const [genderResult] = await databaseClient.query<Result>(
         `UPDATE gender
          SET type = ?
          WHERE id = ?`,
-        [genderData.type],
+        [type, id],
       );
 
       return genderResult.affectedRows;
