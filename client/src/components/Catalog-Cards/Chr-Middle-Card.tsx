@@ -1,17 +1,24 @@
+import type { CatalogueProps } from "../catalog-swipper/catalogSwipper";
+import ChrBottomCard from "./Chr-Bottom-Card";
 import "./Chr-Middle-Card.css";
-export default function ChrMiddleCard() {
+
+export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
+  if (saveCards.length === 0) {
+    return <p>Aucune carte sauvegardée.</p>;
+  }
   return (
-    <section>
-      <img
-        className="img-catalog-card"
-        src="src\assets\images\AppartHotel.jpg"
-        alt="hôtel"
-      />
-      <article className="article-chr-middle-card">
-        <h2>Nom de l'hôtel</h2>
-        <p>Prix de l'hôtel</p>
-        <p>Adresse de l'hôtel</p>
-      </article>
-    </section>
+    <>
+      {saveCards.map((card) => (
+        <div key={card.id} className="card-container">
+          <img className="img-catalog-card" src={card.picture} alt="hôtel" />
+          <article key={card.id} className="article-chr-middle-card">
+            <h2>{card.name}</h2>
+            <p>{card.maxPrice}</p>
+            <p>{card.address}</p>
+          </article>
+          <ChrBottomCard />
+        </div>
+      ))}
+    </>
   );
 }

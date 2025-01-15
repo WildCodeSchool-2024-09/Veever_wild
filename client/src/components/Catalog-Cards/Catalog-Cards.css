@@ -9,8 +9,3 @@
   flex-direction: column;
   width: 100%;
 }
-
-.chrCard {
-  border-radius: var(--border-ref);
-  box-shadow: 3px 2px 7px 1px var(--dark);
-}

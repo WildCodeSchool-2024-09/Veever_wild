@@ -6,10 +6,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
+import Catalogue from "./components/catalog-swipper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
 import HomePage from "./pages/HomePage/HomePage";
 import Profile from "./pages/Profile/Profile";
-import Search from "./pages/Search/Search";
 import Settings from "./pages/Settings/Settings";
 
 // Import additional components for new routes
@@ -36,9 +36,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <Search />,
+        element: <Catalogue />,
       },
-
+      {
+        path: "/favorites",
+      },
       {
         path: "/profile",
         element: <Profile />,
