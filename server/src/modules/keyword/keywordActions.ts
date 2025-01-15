@@ -28,7 +28,26 @@ const read: RequestHandler = async (req, res, next) => {
   }
 };
 // The E of BREAD - Edit operation
-const edit: RequestHandler = async (req, res, next) => {};
+const edit: RequestHandler = async (req, res, next) => {
+  const keywordId = Number(req.params.id);
+  try {
+    const keywordData: Keyword & Illustration = {
+      name: req.body.name,
+      link: req.body.link,
+      id: keywordId,
+    };
+
+    const updatedKeyword = await keywordRepository.update(keywordData);
+
+    if (!updatedKeyword) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 // The A of BREAD - Add operation
 const add: RequestHandler = async (req, res, next) => {
   try {

@@ -60,6 +60,7 @@ class keywordRepository {
       return keywordId;
     } catch (error) {
       await connection.rollback();
+      throw error;
     } finally {
       connection.release();
     }
@@ -109,7 +110,55 @@ class keywordRepository {
     return keyword;
   }
   // The U of CRUD - Update operations
-  async update() {}
+  async update(keywordData: Keyword & Illustration) {
+    const connection = await databaseClient.getConnection();
+    try {
+      connection.beginTransaction();
+
+      const [keywordResult] = await connection.query<Result>(
+        `
+        UPDATE keyword
+        SET name = ?
+        WHERE id = ?
+        `,
+        [keywordData.name, keywordData.id],
+      );
+
+      if (keywordResult.affectedRows === 0) {
+        throw new Error(
+          "Nous avons rencontré une erreur lors de la mise à jour du mot-clé.",
+        );
+      }
+
+      const [illustrationResult] = await connection.query<Result>(
+        `
+        UPDATE illustration
+        SET link = ?
+        WHERE id = (
+          SELECT illustration_id
+          FROM illustration_keyword
+          WHERE keyword_id = ?
+        )
+        `,
+        [keywordData.link, keywordData.id],
+      );
+
+      if (illustrationResult.affectedRows === 0) {
+        throw new Error(
+          "Nous avons rencontré une erreur lors de la mise à jour de l'illustration.",
+        );
+      }
+
+      await connection.commit();
+
+      return true;
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
+  }
   // The D of CRUD - Delete operation
   async destroy(keywordId: number) {
     try {
