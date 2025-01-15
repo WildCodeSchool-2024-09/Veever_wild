@@ -77,15 +77,7 @@ class keywordRepository {
       `,
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
-
-    const keywords = rows.map((keyword) => {
-      return keyword as Keyword & Illustration;
-    });
-
-    return keywords;
+    return rows;
   }
 
   async read(keywordId: number) {
