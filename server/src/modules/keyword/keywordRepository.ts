@@ -138,9 +138,8 @@ class keywordRepository {
   }
   // The D of CRUD - Delete operation
   async destroy(keywordId: number) {
-    try {
-      const [result] = await databaseClient.query<Result>(
-        `
+    const [result] = await databaseClient.query<Result>(
+      `
         DELETE keyword, illustration, illustration_keyword
         FROM illustration_keyword
         INNER JOIN illustration
@@ -149,15 +148,10 @@ class keywordRepository {
         ON keyword.id = illustration_keyword.keyword_id
         WHERE keyword.id = ?
         `,
-        [keywordId],
-      );
+      [keywordId],
+    );
 
-      return result.affectedRows;
-    } catch (error) {
-      throw new Error(
-        "Nous avons rencontré une erreur lors de la suppression du mot-clé.",
-      );
-    }
+    return result.affectedRows;
   }
 }
 
