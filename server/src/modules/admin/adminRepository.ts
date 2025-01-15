@@ -106,28 +106,18 @@ class adminRepository {
 
   // The D of CRUD - Delete operation
   async destroy(adminId: number): Promise<number> {
-    try {
-      const [result] = await databaseClient.query<Result>(
-        `
+    const [result] = await databaseClient.query<Result>(
+      `
         DELETE user, admin
         FROM user
         INNER JOIN admin
         ON admin.user_id = user.id
         WHERE admin.id = ?;
         `,
-        [adminId],
-      );
+      [adminId],
+    );
 
-      if (result.affectedRows === 0) {
-        throw new Error("Administrateur ou utilisateur non trouvé.");
-      }
-
-      return result.affectedRows;
-    } catch (error) {
-      throw new Error(
-        "Nous avons rencontré une erreur lors de la suppression de l'utilisateur.",
-      );
-    }
+    return result.affectedRows;
   }
 }
 
