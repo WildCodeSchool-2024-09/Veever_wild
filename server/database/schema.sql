@@ -5,7 +5,7 @@ CREATE TABLE user (
   firstname varchar(255) not null,
   lastname varchar(255) not null,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP not null,
-  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE admin (
