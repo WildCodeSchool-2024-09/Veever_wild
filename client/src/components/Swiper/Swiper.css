@@ -10,7 +10,7 @@
   height: calc(var(--spacing-ref) * 45);
   width: calc(var(--spacing-ref) * 30);
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: calc(var(--border-ref) * 2);
   grid-row: 1;
   grid-column: 1;
   cursor: grab;

@@ -21,7 +21,7 @@
 
 .catalog-boxes {
   cursor: pointer;
-  border: solid var(--dark) 2px;
+  border: solid var(--dark) calc(var(--border-ref) * 0.2);
   border-radius: calc(var(--border-ref) * 2);
   display: flex;
   align-items: center;

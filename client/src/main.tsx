@@ -6,7 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
-import Catalogue from "./components/catalog-swipper/Swiper";
+import Swiper from "./components/catalog-swipper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
 import HomePage from "./pages/HomePage/HomePage";
 import Profile from "./pages/Profile/Profile";
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <Catalogue />,
+        element: <Swiper />,
       },
       {
         path: "/favorites",

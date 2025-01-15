@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSaveCards } from "../../services/saveCardsContext/saveCardsContext";
 import type { Card } from "../../types/Catalog/CatalogTypes";
-import TestSwiper from "../TestSwiper/TestSwiper";
+import TestSwiper from "../Swiper/Swiper";
 export default function Swiper() {
   const [cards, setCards] = useState<Card[]>([]);
   const { saveCards, setSaveCards } = useSaveCards();

@@ -13,5 +13,5 @@
   width: 40%;
   border-radius: var(--border-ref);
   margin: var(--padding-input);
-  box-shadow: 6px 2px 11px 0px #00000042;
+  box-shadow: var(--box-shadow-soft);
 }

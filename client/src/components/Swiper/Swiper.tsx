@@ -1,4 +1,4 @@
-import "./TestSwiper.css";
+import "./Swiper.css";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import type { Dispatch, SetStateAction } from "react";
 import type { Card } from "../../types/Catalog/CatalogTypes";
@@ -18,7 +18,6 @@ type TestSwiperProps = {
   setSaveCards: Dispatch<SetStateAction<Card[]>>;
 };
 
-// Composant principal
 export default function TestSwiper({
   cards,
   setCards,
