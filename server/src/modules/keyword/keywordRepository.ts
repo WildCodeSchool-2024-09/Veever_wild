@@ -93,13 +93,7 @@ class keywordRepository {
       [keywordId],
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
-
-    const keyword = rows[0] as Keyword & Illustration;
-
-    return keyword;
+    return rows[0];
   }
   // The U of CRUD - Update operations
   async update(keywordData: Keyword & Illustration) {
