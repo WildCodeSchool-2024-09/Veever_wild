@@ -42,7 +42,3 @@ export type SaveCardsContextType = {
   removeCard: (cardId: number) => void;
   isCardSaved: (cardId: number) => boolean;
 };
-
-export type CatalogueProps = {
-  saveCards: Card[];
-};
