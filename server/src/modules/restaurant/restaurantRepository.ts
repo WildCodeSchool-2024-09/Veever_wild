@@ -94,9 +94,11 @@ class RestaurantRepository {
         ],
       );
 
-      return chrResult.insertId;
+      return chrResult.affectedRows;
     } catch (error) {
-      throw new Error("Échec de la mise à jour");
+      if (error instanceof Error) {
+        throw error; //
+      }
     }
   }
 
@@ -116,7 +118,9 @@ class RestaurantRepository {
 
       return chrRows.affectedRows;
     } catch (error) {
-      throw new Error("Erreur lors de la supression");
+      if (error instanceof Error) {
+        throw error;
+      }
     }
   }
 }
