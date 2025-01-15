@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSaveCards } from "../../services/saveCardsContext/saveCardsContext";
 import TestSwiper from "../TestSwiper/TestSwiper";
-
+import "./swiper.css";
 type Card = {
   id: number;
   picture: string;
@@ -18,7 +18,7 @@ export default function Swiper() {
       .then((data) => setCards(data));
   }, []);
   return (
-    <div>
+    <div className="swiper-container">
       <TestSwiper
         cards={cards}
         setCards={setCards}

@@ -69,15 +69,37 @@ const Card = ({ id, picture, cards, setCards, setSaveCards }: CardProps) => {
     }
   };
 
+  const handleLike = () => {
+    const likeCards = cards.find((card) => card.id === id);
+    if (likeCards) {
+      setSaveCards((prev) => [...prev, likeCards]);
+    }
+    setCards(cards.filter((card) => card.id !== id));
+  };
+
+  const handleDislike = () => {
+    setCards(cards.filter((card) => card.id !== id));
+  };
+
   return (
-    <motion.img
-      className="img-swiper"
-      src={picture}
-      alt="Placeholder"
-      drag="x"
-      dragConstraints={{ left: 0, right: 0 }}
-      style={{ x, opacity, rotate }}
-      onDragEnd={handleDragEnd}
-    />
+    <>
+      <motion.img
+        className="img-swiper"
+        src={picture}
+        alt="Placeholder"
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        style={{ x, opacity, rotate }}
+        onDragEnd={handleDragEnd}
+      />
+      <div className="btnContainer">
+        <button onClick={handleDislike} className="btnLike" type="button">
+          <img src="/assets/images/Dislike.svg" alt="" />
+        </button>
+        <button onClick={handleLike} className="btnLike" type="button">
+          <img src="/assets/images/Like.svg" alt="" />
+        </button>
+      </div>
+    </>
   );
 };

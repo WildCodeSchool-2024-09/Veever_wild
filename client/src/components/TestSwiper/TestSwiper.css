@@ -1,20 +1,36 @@
 @import url("@src/variables.css");
 .card-map {
   display: grid;
-  align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  margin: 0;
+  width: 100%;
+  height: 100vh;
 }
+
 .img-swiper {
-  height: calc(var(--spacing-ref) * 45);
-  width: calc(var(--spacing-ref) * 30);
-  object-fit: cover;
-  border-radius: 0.5rem;
+  width: 100%;
   grid-row: 1;
   grid-column: 1;
+  border-radius: 0.5rem;
   cursor: grab;
   &:active {
     cursor: grabbing;
   }
+}
+
+.btnContainer {
+  position: absolute;
+  bottom: calc(var(--spacing-ref) * 5); /* Distance du bas de l'image */
+  left: calc(var(--spacing-ref) * 25);
+  display: flex;
+}
+
+.btnLike {
+  width: 10rem;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+}
+
+.btnLike img {
+  width: 40%;
 }
