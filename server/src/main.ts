@@ -23,7 +23,7 @@ app
 const datas = [
   {
     id: 1,
-    type: "restaurant",
+    type: "restaurants",
     name: "Sushi Palace",
     address: "123 av de la wild",
     minPrice: 200,
@@ -33,7 +33,7 @@ const datas = [
   },
   {
     id: 2,
-    type: "restaurant",
+    type: "restaurants",
     name: "Pizza Italia",
     address: "124 av de la wild",
     minPrice: 200,
@@ -43,7 +43,7 @@ const datas = [
   },
   {
     id: 3,
-    type: "restaurant",
+    type: "restaurants",
     name: "Burger place",
     address: "125 av de la wild",
     minPrice: 200,
@@ -53,7 +53,7 @@ const datas = [
   },
   {
     id: 4,
-    type: "hostel",
+    type: "hotels",
     name: "Wild Hostel",
     address: "126 av de la wild",
     minPrice: 50,
@@ -63,7 +63,7 @@ const datas = [
   },
   {
     id: 5,
-    type: "hostel",
+    type: "hotels",
     name: "Bedroom Hostel",
     address: "127 av de la wild",
     minPrice: 50,
@@ -73,7 +73,7 @@ const datas = [
   },
   {
     id: 6,
-    type: "hostel",
+    type: "hotels",
     name: "Palace Hostel",
     address: "128 av de la wild",
     minPrice: 50,
@@ -83,7 +83,7 @@ const datas = [
   },
   {
     id: 7,
-    type: "activity",
+    type: "activities",
     name: "Rock Climbing",
     address: "129 av de la wild",
     minPrice: 30,
@@ -93,7 +93,7 @@ const datas = [
   },
   {
     id: 8,
-    type: "activity",
+    type: "activities",
     name: "Escape Game",
     address: "130 av de la wild",
     minPrice: 30,
@@ -103,7 +103,7 @@ const datas = [
   },
   {
     id: 9,
-    type: "activity",
+    type: "activities",
     name: "Paintball",
     address: "131 av de la wild",
     minPrice: 30,

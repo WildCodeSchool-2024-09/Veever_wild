@@ -1,26 +1,9 @@
 import { createContext, useContext, useState } from "react";
-
-type Props = {
-  children: React.ReactNode;
-};
-
-// Type pour une carte
-type Card = {
-  id: number;
-  picture: string;
-  name: string;
-  maxPrice: number;
-  address: string;
-};
-
-// Type du contexte
-interface SaveCardsContextType {
-  saveCards: Card[];
-  setSaveCards: React.Dispatch<React.SetStateAction<Card[]>>;
-  addCard: (card: Card) => void;
-  removeCard: (cardId: number) => void;
-  isCardSaved: (cardId: number) => boolean;
-}
+import type {
+  Card,
+  Props,
+  SaveCardsContextType,
+} from "../../types/Catalog/CatalogTypes";
 
 // Création du contexte
 const SaveCardsContext = createContext<SaveCardsContextType | undefined>(
