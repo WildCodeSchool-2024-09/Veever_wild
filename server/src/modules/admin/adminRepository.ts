@@ -86,28 +86,22 @@ class adminRepository {
 
   // The U of CRUD - Update operation
   async update(userData: User) {
-    try {
-      const [userResult] = await databaseClient.query<Result>(
-        `
+    const [userResult] = await databaseClient.query<Result>(
+      `
         UPDATE user
         SET email = ?, password = ?, firstname = ?, lastname = ?
         WHERE id = (SELECT user_id FROM admin WHERE id = ?)
         `,
-        [
-          userData.email,
-          userData.password,
-          userData.firstname,
-          userData.lastname,
-          userData.id,
-        ],
-      );
+      [
+        userData.email,
+        userData.password,
+        userData.firstname,
+        userData.lastname,
+        userData.id,
+      ],
+    );
 
-      return userResult.affectedRows;
-    } catch (error) {
-      throw new Error(
-        "Nous avons rencontré une erreur lors de la mise à jour de l'utilisateur.",
-      );
-    }
+    return { userAffectedRows: userResult.affectedRows };
   }
 
   // The D of CRUD - Delete operation

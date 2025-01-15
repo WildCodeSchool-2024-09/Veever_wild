@@ -48,7 +48,7 @@ const edit: RequestHandler = async (req, res, next) => {
 
     const updateAdmin = await adminRepository.update(userData);
 
-    if (!updateAdmin) {
+    if (updateAdmin.userAffectedRows === 0) {
       res.sendStatus(404);
     } else {
       res.status(204);
