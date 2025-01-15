@@ -57,7 +57,7 @@ class GenderRepository {
   async update({ genderData }: UpdateGenderData) {
     try {
       const [genderResult] = await databaseClient.query<Result>(
-        `UPDATE chr
+        `UPDATE gender
          SET type = ?
          WHERE id = ?`,
         [genderData.type],

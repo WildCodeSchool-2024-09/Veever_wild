@@ -1,9 +1,32 @@
 import { FormControl, FormLabel } from "@mui/material";
 
+import { useEffect, useState } from "react";
 import { StyledSelect } from "../../../services/FormCreateAcc/StyledSelect";
 import type { FormInput } from "../../../types/FormInput/FormInput";
 
+type Gender = {
+  id: number;
+  type: string;
+};
+
 export default function InputGender({ handleChange, value }: FormInput) {
+  const [genders, setGenders] = useState<Gender[]>([]);
+  useEffect(() => {
+    const fetchGenders = async () => {
+      try {
+        const response = await fetch("http://localhost:3310/api/genders");
+        if (!response.ok) {
+          throw new Error("Erreur lors de la récupération de donnée");
+        }
+        const data = await response.json();
+        setGenders(data);
+      } catch (error) {
+        console.error("Erreur lors du fetch: ", error);
+      }
+    };
+
+    fetchGenders();
+  }, []);
   return (
     <FormControl className="formGroup">
       <FormLabel htmlFor="gender">Votre genre</FormLabel>
@@ -15,9 +38,11 @@ export default function InputGender({ handleChange, value }: FormInput) {
         onChange={(e) => handleChange(e.target.value)}
       >
         <option value="">Veuillez sélectionner</option>
-        <option value="Men">Homme</option>
-        <option value="Women">Femme</option>
-        <option value="Others">Autres</option>
+        {genders.map((gender) => (
+          <option key={gender.id} value={gender.type}>
+            {gender.type}
+          </option>
+        ))}
       </StyledSelect>
     </FormControl>
   );
