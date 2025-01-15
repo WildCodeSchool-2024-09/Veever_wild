@@ -161,10 +161,6 @@ class keywordRepository {
         [keywordId],
       );
 
-      if (result.affectedRows === 0) {
-        throw new Error("Keyword ou Illustration non trouvé");
-      }
-
       return result.affectedRows;
     } catch (error) {
       throw new Error(
