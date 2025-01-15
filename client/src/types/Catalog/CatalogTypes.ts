@@ -23,11 +23,13 @@ export type CatalogRecapProps = {
   data: RecapItem[];
 };
 export type Card = {
+  count: number;
   id: number;
   picture: string;
   name: string;
   maxPrice: number;
   address: string;
+  type: "hotels" | "restaurants" | "activities";
 };
 export type Props = {
   children: React.ReactNode;

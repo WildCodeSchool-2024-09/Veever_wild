@@ -1,15 +1,7 @@
 import "./TestSwiper.css";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import type { Dispatch, SetStateAction } from "react";
-
-// Types pour les cartes et les props du composant Card
-type Card = {
-  id: number;
-  picture: string;
-  name: string;
-  maxPrice: number;
-  address: string;
-};
+import type { Card } from "../../types/Catalog/CatalogTypes";
 
 type CardProps = {
   id: number;
@@ -36,7 +28,7 @@ export default function TestSwiper({
     <>
       <div className="card-map">
         {cards.map((card) => (
-          <Card
+          <Cardz
             key={card.id}
             cards={cards}
             setCards={setCards}
@@ -50,7 +42,7 @@ export default function TestSwiper({
 }
 
 // Composant Card
-const Card = ({ id, picture, cards, setCards, setSaveCards }: CardProps) => {
+const Cardz = ({ id, picture, cards, setCards, setSaveCards }: CardProps) => {
   const x = useMotionValue(0);
   const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
   const rotate = useTransform(x, [-150, 150], [-18, 18]);
