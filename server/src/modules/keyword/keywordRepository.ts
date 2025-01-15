@@ -110,12 +110,6 @@ class keywordRepository {
         [keywordData.name, keywordData.id],
       );
 
-      if (keywordResult.affectedRows === 0) {
-        throw new Error(
-          "Nous avons rencontré une erreur lors de la mise à jour du mot-clé.",
-        );
-      }
-
       const [illustrationResult] = await connection.query<Result>(
         `
         UPDATE illustration
@@ -129,15 +123,12 @@ class keywordRepository {
         [keywordData.link, keywordData.id],
       );
 
-      if (illustrationResult.affectedRows === 0) {
-        throw new Error(
-          "Nous avons rencontré une erreur lors de la mise à jour de l'illustration.",
-        );
-      }
-
       await connection.commit();
 
-      return true;
+      return {
+        keywordAffectedRows: keywordResult.affectedRows,
+        illustrationAffectedRows: illustrationResult.affectedRows,
+      };
     } catch (error) {
       await connection.rollback();
       throw error;

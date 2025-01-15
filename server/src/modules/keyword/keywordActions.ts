@@ -43,11 +43,14 @@ const edit: RequestHandler = async (req, res, next) => {
 
     const updatedKeyword = await keywordRepository.update(keywordData);
 
-    if (!updatedKeyword) {
+    if (
+      updatedKeyword.keywordAffectedRows === 0 &&
+      updatedKeyword.illustrationAffectedRows === 0
+    ) {
       res.sendStatus(404);
-    } else {
-      res.sendStatus(204);
     }
+
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }
