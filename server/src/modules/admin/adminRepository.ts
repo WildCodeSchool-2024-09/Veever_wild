@@ -26,7 +26,6 @@ class adminRepository {
       const userId = userResult.insertId;
 
       if (!userId) {
-        await connection.rollback();
         throw new Error("Insertion échouée dans la table user");
       }
 
@@ -40,7 +39,6 @@ class adminRepository {
       const adminId = adminResult.insertId;
 
       if (!adminId) {
-        await connection.rollback();
         throw new Error("Insertion échouée dans la table admin");
       }
 
@@ -59,7 +57,7 @@ class adminRepository {
   async read(id: number) {
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT admin.id, user.id as user_id, email, firstname, lastname
+      SELECT admin.id, user.id as user_id, email, firstname, lastname, created_at, updated_at
       FROM admin
       INNER JOIN user
       ON user.id = admin.user_id
@@ -74,7 +72,7 @@ class adminRepository {
   async readAll() {
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT admin.id, user.id as user_id, email, firstname, lastname
+      SELECT admin.id, user.id as user_id, email, firstname, lastname, created_at, updated_at
       FROM admin
       INNER JOIN user
       ON user.id = admin.user_id
@@ -89,7 +87,7 @@ class adminRepository {
     const [userResult] = await databaseClient.query<Result>(
       `
         UPDATE user
-        SET email = ?, password = ?, firstname = ?, lastname = ?
+        SET email = ?, password = ?, firstname = ?, lastname = ?, updated_at = CURRENT_TIMESTAMP
         WHERE id = (SELECT user_id FROM admin WHERE id = ?)
         `,
       [
