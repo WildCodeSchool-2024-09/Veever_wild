@@ -1,0 +1,30 @@
+@import url("@src/variables.css");
+.chr-top-section {
+  text-align: center;
+  padding: var(--spacing-ref);
+  margin: var(--spacing-ref);
+  width: 100%;
+}
+.date-card {
+  padding: var(--spacing-ref);
+  text-align: left;
+  font-family: var(--textFont);
+}
+.button-throw-likes-away {
+  box-shadow: var(--box-shadow-soft);
+  border-radius: var(--border-ref);
+  display: inline-block;
+  cursor: pointer;
+  color: var(--dark);
+  font-size: calc(var(--font-size-ref) * 1.25);
+  font-weight: bold;
+  padding: calc(var(--spacing-ref) * 0.8) calc(var(--spacing-ref) * 2);
+  text-decoration: none;
+}
+.card-category {
+  padding: var(--spacing-ref);
+  font-size: calc(var(--font-size-ref) * 2);
+  border: var(--border-input);
+  margin: var(--spacing-ref);
+  border-radius: calc(var(--border-ref) * 2);
+}
