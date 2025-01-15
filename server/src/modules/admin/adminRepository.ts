@@ -86,15 +86,7 @@ class adminRepository {
       `,
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
-
-    const admins = rows.map((admin) => {
-      return admin as Omit<User & Admin, "password">;
-    });
-
-    return admins;
+    return rows;
   }
 
   // The U of CRUD - Update operation
