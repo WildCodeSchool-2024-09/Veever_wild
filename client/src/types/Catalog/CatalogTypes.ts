@@ -22,3 +22,21 @@ export type CatalogBoxesProps = {
 export type CatalogRecapProps = {
   data: RecapItem[];
 };
+export type Card = {
+  id: number;
+  picture: string;
+  name: string;
+  maxPrice: number;
+  address: string;
+};
+export type Props = {
+  children: React.ReactNode;
+};
+
+export type SaveCardsContextType = {
+  saveCards: Card[];
+  setSaveCards: React.Dispatch<React.SetStateAction<Card[]>>;
+  addCard: (card: Card) => void;
+  removeCard: (cardId: number) => void;
+  isCardSaved: (cardId: number) => boolean;
+};
