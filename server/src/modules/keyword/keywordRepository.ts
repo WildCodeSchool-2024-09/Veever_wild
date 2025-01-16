@@ -4,7 +4,6 @@ import type { Illustration, Keyword } from "../../types/keyword/keywordTypes";
 
 class keywordRepository {
   // The C of CRUD - Create operation
-  // Quand on crée un mot clé, on le rattache à une illustration
   async create(keywordData: Omit<Keyword & Illustration, "id">) {
     const connection = await databaseClient.getConnection();
 
@@ -97,21 +96,17 @@ class keywordRepository {
   }
   // The U of CRUD - Update operations
   async update(keywordData: Keyword & Illustration) {
-    const connection = await databaseClient.getConnection();
-    try {
-      connection.beginTransaction();
-
-      const [keywordResult] = await connection.query<Result>(
-        `
+    const [keywordResult] = await databaseClient.query<Result>(
+      `
         UPDATE keyword
         SET name = ?
         WHERE id = ?
         `,
-        [keywordData.name, keywordData.id],
-      );
+      [keywordData.name, keywordData.id],
+    );
 
-      const [illustrationResult] = await connection.query<Result>(
-        `
+    const [illustrationResult] = await databaseClient.query<Result>(
+      `
         UPDATE illustration
         SET link = ?
         WHERE id = (
@@ -120,21 +115,12 @@ class keywordRepository {
           WHERE keyword_id = ?
         )
         `,
-        [keywordData.link, keywordData.id],
-      );
+      [keywordData.link, keywordData.id],
+    );
 
-      await connection.commit();
-
-      return {
-        keywordAffectedRows: keywordResult.affectedRows,
-        illustrationAffectedRows: illustrationResult.affectedRows,
-      };
-    } catch (error) {
-      await connection.rollback();
-      throw error;
-    } finally {
-      connection.release();
-    }
+    return (
+      keywordResult.affectedRows > 0 && illustrationResult.affectedRows > 0
+    );
   }
   // The D of CRUD - Delete operation
   async destroy(keywordId: number) {
