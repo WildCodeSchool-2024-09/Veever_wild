@@ -1,8 +1,6 @@
 @import url("@src/variables.css");
 .img-catalog-card {
-  height: auto;
-  max-width: 100%;
-  border-radius: var(--border-ref);
+  border-radius: calc(var(--border-ref) / 2);
 }
 .article-chr-middle-card {
   text-align: center;
@@ -10,8 +8,20 @@
 
 .card-container {
   justify-self: center;
-  width: 40%;
+  width: 80%;
   border-radius: var(--border-ref);
   margin: var(--padding-input);
-  box-shadow: var(--box-shadow-soft);
+  border: 4px solid;
+}
+
+.card-container-hotel {
+  border-color: #ffea00;
+}
+
+.card-container-restaurant {
+  border-color: #f26497;
+}
+
+.card-container-activities {
+  border-color: #36a1db;
 }

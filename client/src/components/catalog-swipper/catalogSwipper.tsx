@@ -3,9 +3,5 @@ import ChrMiddleCard from "../Catalog-Cards/Chr-Middle-Card";
 
 export default function CatalogSwipper() {
   const { saveCards } = useSaveCards();
-  return (
-    <section>
-      <ChrMiddleCard saveCards={saveCards} />
-    </section>
-  );
+  return <ChrMiddleCard saveCards={saveCards} />;
 }

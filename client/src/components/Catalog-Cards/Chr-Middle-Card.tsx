@@ -6,10 +6,18 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
   if (saveCards.length === 0) {
     return <p>Aucune carte sauvegardée.</p>;
   }
+
   return (
     <>
       {saveCards.map((card) => (
-        <div key={card.id} className="card-container">
+        <div
+          key={card.id}
+          className={`card-container ${
+            card.type === "hotels"
+              ? "card-container-hotel"
+              : "card-container-restaurant"
+          } ${card.type === "activities" ? "card-container-activities" : ""}`}
+        >
           <img className="img-catalog-card" src={card.picture} alt="hôtel" />
           <article key={card.id} className="article-chr-middle-card">
             <h2>{card.name}</h2>
