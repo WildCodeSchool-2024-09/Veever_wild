@@ -40,7 +40,6 @@ export default function TestSwiper({
   );
 }
 
-// Composant Card
 const Cardz = ({ id, picture, cards, setCards, setSaveCards }: CardProps) => {
   const x = useMotionValue(0);
   const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
@@ -55,7 +54,6 @@ const Cardz = ({ id, picture, cards, setCards, setSaveCards }: CardProps) => {
       }
       setCards(cards.filter((card) => card.id !== id));
     } else if (currentX < -50) {
-      // Retirer la carte si elle est déplacée au-delà de 50px
       setCards(cards.filter((card) => card.id !== id));
     }
   };
