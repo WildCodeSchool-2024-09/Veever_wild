@@ -43,7 +43,7 @@ const edit: RequestHandler = async (req, res, next) => {
 
     const updatedKeyword = await keywordRepository.update(keywordData);
 
-    if (updatedKeyword) {
+    if (!updatedKeyword) {
       res.sendStatus(404);
     }
 
@@ -74,7 +74,7 @@ const destroy: RequestHandler = async (req, res, next) => {
 
     const affectedRows = await keywordRepository.destroy(keywordId);
 
-    if (affectedRows === 0) {
+    if (affectedRows) {
       res.sendStatus(404);
     }
 
