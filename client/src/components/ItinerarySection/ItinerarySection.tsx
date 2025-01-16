@@ -3,13 +3,13 @@ import ItineraryCard from "./ItineraryCard.tsx";
 const itineraries = [
   {
     id: 1,
-    title: "Escapade chill",
-    imageSrc: "src/assets/images/AppartHotel.jpg",
+    title: "Activité en couple",
+    imageSrc: "src/assets/images/escape_game.jpg",
   },
   {
     id: 2,
-    title: "Week-end romantique",
-    imageSrc: "src/assets/images/HotelBedroom.jpg",
+    title: "Séjour entre amis",
+    imageSrc: "src/assets/images/paintball.jpg",
   },
   {
     id: 3,
