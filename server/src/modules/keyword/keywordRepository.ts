@@ -126,18 +126,16 @@ class keywordRepository {
   async destroy(keywordId: number) {
     const [result] = await databaseClient.query<Result>(
       `
-        DELETE keyword, illustration, illustration_keyword
-        FROM illustration_keyword
-        INNER JOIN illustration
-        ON illustration.id = illustration_keyword.illustration_id
-        INNER JOIN keyword
-        ON keyword.id = illustration_keyword.keyword_id
-        WHERE keyword.id = ?
-        `,
+      DELETE keyword, illustration_keyword
+      FROM keyword
+      LEFT JOIN illustration_keyword
+      ON keyword.id = illustration_keyword.keyword_id
+      WHERE keyword.id = ?
+      `,
       [keywordId],
     );
 
-    return result.affectedRows;
+    return result.affectedRows > 0;
   }
 }
 

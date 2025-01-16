@@ -74,7 +74,7 @@ const destroy: RequestHandler = async (req, res, next) => {
 
     const affectedRows = await keywordRepository.destroy(keywordId);
 
-    if (affectedRows) {
+    if (!affectedRows) {
       res.sendStatus(404);
     }
 
