@@ -9,3 +9,7 @@ export type PasswordType = {
   handlePasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   passwordErrors: Record<string, string>;
 };
+
+export type LoginFormType = {
+  onSubmit: (email: string, password: string) => Promise<void>;
+};
