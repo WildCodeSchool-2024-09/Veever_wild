@@ -42,6 +42,12 @@ router.post("/api/clients", clientsActions.add);
 router.put("/api/clients/:id", clientsActions.update);
 router.delete("/api/clients/:id", clientsActions.destroy);
 
+import validateChr from "./middleware/chrValidation/chrValidation";
+import restaurantActions from "./modules/restaurant/restaurantActions";
+router.get("/api/restaurants", restaurantActions.browse);
+router.get("/api/restaurants/:id", restaurantActions.read);
+router.put("/api/restaurants/:id", restaurantActions.edit);
+router.post("/api/restaurants", validateChr, restaurantActions.add);
+router.delete("/api/restaurants/:id", restaurantActions.destroy);
 /* ************************************************************************* */
-
 export default router;

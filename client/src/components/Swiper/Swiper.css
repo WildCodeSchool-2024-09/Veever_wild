@@ -1,0 +1,20 @@
+@import url("@src/variables.css");
+.card-map {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+.img-swiper {
+  height: calc(var(--spacing-ref) * 45);
+  width: calc(var(--spacing-ref) * 30);
+  object-fit: cover;
+  border-radius: calc(var(--border-ref) * 2);
+  grid-row: 1;
+  grid-column: 1;
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  }
+}
