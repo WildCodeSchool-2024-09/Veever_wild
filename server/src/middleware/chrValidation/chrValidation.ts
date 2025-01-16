@@ -3,6 +3,7 @@ import type { NextFunction, Request, Response } from "express";
 const validateChr = (req: Request, res: Response, next: NextFunction): void => {
   const { name, address, minPrice, maxPrice } = req.body;
 
+
   if (typeof name !== "string" || name.trim() === "") {
     res.status(400).json({
       error: "Le champ 'name' est requis et doit être une chaîne non vide.",
