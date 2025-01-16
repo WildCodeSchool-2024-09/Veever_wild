@@ -93,15 +93,19 @@ export default function Cardz({
     });
   };
 
+  const currentIndex = cards.findIndex((card) => card.id === id);
+
   return (
     <div className="swiper-container" id={`swiper-${id}`}>
       <article
         className={`swiper-card ${
-          cards[0].type === "activities"
+          cards[currentIndex].type === "activities"
             ? "swiper-card-activities"
-            : cards[0].type === "hotels"
+            : cards[currentIndex].type === "hotels"
               ? "swiper-card-hotel"
-              : "swiper-card-restaurant"
+              : cards[currentIndex].type === "restaurants"
+                ? "swiper-card-restaurant"
+                : ""
         }`}
       >
         <motion.img
@@ -126,7 +130,7 @@ export default function Cardz({
                 <path
                   d="m64.792 582.91-4.6811 4.6811-4.6811-4.6811-3.3189 3.3189 4.6811 4.6811-4.6811 4.6811 3.3189 3.3189 4.6811-4.6811 4.6811 4.6811 3.3189-3.3189-4.6811-4.6811 4.6811-4.6811-3.3189-3.3189z"
                   fill="#ef3416"
-                  stroke="black"
+                  stroke="#242124"
                   strokeWidth="0.3"
                 />
               </g>
@@ -141,18 +145,21 @@ export default function Cardz({
           </button>
           <button className="swiper-btn" onClick={handleLike} type="button">
             <svg
-              viewBox="0 0 16 16"
               xmlns="http://www.w3.org/2000/svg"
-              width="60"
-              height="60"
+              width="85"
+              height="85"
+              id="heart"
+              viewBox="0 0 16 16"
             >
-              <title>LikeIcone</title>
+              <title>Coeur</title>
               <path
-                d="M5.06 1.92c-2.05 0-3.71 1.66-3.71 3.71 0 4.17 4.2 5.27 7.06 9.4 2.7-4.09 7.05-5.33 7.05-9.4 0-2.05-1.66-3.71-3.71-3.71-1.48 0-2.75.88-3.34 2.14-.59-1.26-1.86-2.14-3.34-2.14z"
-                fill="#f26497"
-                stroke="black"
-                strokeWidth="0.1"
-              />
+                fill="#ef3416"
+                stroke="#242124"
+                strokeWidth="0.3"
+                d="M5.301 3.002c-.889-.047-1.759.247-2.404.893-1.29 1.292-1.175 3.49.26 4.926l.515.515L8.332 14l4.659-4.664.515-.515c1.435-1.437 1.55-3.634.26-4.926-1.29-1.292-3.483-1.175-4.918.262l-.516.517-.517-.517C7.098 3.438 6.19 3.049 5.3 3.002z"
+              >
+                Coeur
+              </path>
             </svg>
           </button>
         </div>

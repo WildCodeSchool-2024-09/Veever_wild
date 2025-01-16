@@ -1,7 +1,4 @@
 @import url("@src/variables.css");
-.img-catalog-card {
-  border-radius: calc(var(--border-ref) / 2);
-}
 .article-chr-middle-card {
   text-align: center;
 }
@@ -11,17 +8,17 @@
   width: 80%;
   border-radius: var(--border-ref);
   margin: var(--padding-input);
-  border: 4px solid;
+  border: calc(var(--border-weight) * 8) solid;
 }
 
 .card-container-hotel {
-  border-color: #ffea00;
+  border-color: var(--veever-yellow);
 }
 
 .card-container-restaurant {
-  border-color: #f26497;
+  border-color: var(--veever-pink);
 }
 
 .card-container-activities {
-  border-color: #36a1db;
+  border-color: var(--veever-blue);
 }

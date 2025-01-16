@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import type { Card } from "../../types/Catalog/CatalogTypes";
-import "./TestSwiper.css";
+import "./Swiper.css";
 
 import Cardz from "./SwiperCard";
 export default function Swiper() {
