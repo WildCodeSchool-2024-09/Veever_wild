@@ -1,42 +1,78 @@
 import databaseClient from "../../../database/client";
-
 import type { Result, Rows } from "../../../database/client";
-
 import type { Client } from "../../types/clientsTypes/clientsTypes";
 
 class ClientsRepository {
   async update(updateClient: Omit<Client, "user_id">): Promise<boolean> {
-    const [rows] = await databaseClient.query<Rows>(
-      `
-      SELECT user_id FROM client
-      WHERE id = ?
-      `,
-      [updateClient.id],
-    );
+    const connection = await databaseClient.getConnection();
+    try {
+      await connection.beginTransaction();
 
-    if (rows.length === 0) {
-      return false;
+      const [rows] = await connection.query<Rows>(
+        `
+        SELECT user_id FROM client
+        WHERE id = ?
+        `,
+        [updateClient.id],
+      );
+
+      if (rows.length === 0) {
+        await connection.rollback();
+        return false;
+      }
+
+      const userId = rows[0].user_id;
+
+      const [clientResult] = await connection.query<Result>(
+        `
+        UPDATE client
+        SET birthdate = ?, nickname = ?, gender_id = ?
+        WHERE id = ?
+        `,
+        [
+          updateClient.birthdate,
+          updateClient.nickName,
+          updateClient.gender_Id,
+          updateClient.id,
+        ],
+      );
+
+      if (clientResult.affectedRows === 0) {
+        await connection.rollback();
+        return false;
+      }
+
+      const [userResult] = await connection.query<Result>(
+        `
+        UPDATE user
+        SET email = ?, password = ?, firstname = ?, lastname = ?
+        WHERE id = ?
+        `,
+        [
+          updateClient.email,
+          updateClient.password,
+          updateClient.firstname,
+          updateClient.lastname,
+          userId,
+        ],
+      );
+
+      if (userResult.affectedRows === 0) {
+        await connection.rollback();
+        return false;
+      }
+
+      await connection.commit();
+      return true;
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
     }
-
-    const [result] = await databaseClient.query<Result>(
-      `
-    UPDATE client
-    SET birthdate = ?, nickname = ?, gender_id = ?
-    WHERE id = ?
-    `,
-      [
-        updateClient.birthdate,
-        updateClient.nickName,
-        updateClient.gender_Id,
-        updateClient.id,
-      ],
-    );
-
-    return result.affectedRows > 0;
   }
 
   async create(client: Omit<Client, "id">): Promise<number> {
-    // Execute the SQL INSERT query to add a new client to the "client" table
     const connection = await databaseClient.getConnection();
     try {
       await connection.beginTransaction();
@@ -93,27 +129,23 @@ class ClientsRepository {
     }
   }
 
-  // The Rs of CRUD - Read operations
   async read(id: number) {
-    // Execute the SQL SELECT query to retrieve a specific client by its ID
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phones.phone_number, gender.type
+      SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phone.phone_number, gender.type
       FROM client
       INNER JOIN user ON client.user_id = user.id
-      INNER JOIN phones ON client.id = phone.client_id
+      INNER JOIN phone ON client.id = phone.client_id
       INNER JOIN gender ON client.gender_id = gender.id
-      WHERE id = ?
+      WHERE client.id = ?
       `,
       [id],
     );
 
-    // Return the first row of the result, which represents the client
     return rows[0] as Client;
   }
 
   async readAll() {
-    // Execute the SQL SELECT query to retrieve all items from the "client" table
     const [rows] = await databaseClient.query<Rows>(
       ` 
       SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phone.phone_number, gender.type
@@ -124,20 +156,35 @@ class ClientsRepository {
       `,
     );
 
-    // Return the array of items
     return rows as Client[];
   }
 
-  // The D of CRUD - Delete operation
   async destroy(id: number): Promise<boolean> {
-    const [result] = await databaseClient.query<Result>(
-      `
-      DELETE FROM client
-      WHERE id = ?
-      `,
-      [id],
-    );
-    return result.affectedRows > 0;
+    const connection = await databaseClient.getConnection();
+    try {
+      await connection.beginTransaction();
+
+      const [result] = await connection.query<Result>(
+        `
+        DELETE FROM user
+        WHERE id = (SELECT user_id FROM client WHERE id = ?)
+        `,
+        [id],
+      );
+
+      if (result.affectedRows === 0) {
+        await connection.rollback();
+        return false;
+      }
+
+      await connection.commit();
+      return true;
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
   }
 }
 
