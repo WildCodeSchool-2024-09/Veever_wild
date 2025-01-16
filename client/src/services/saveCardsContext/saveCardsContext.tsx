@@ -5,12 +5,10 @@ import type {
   SaveCardsContextType,
 } from "../../types/Catalog/CatalogTypes";
 
-// Création du contexte
 const SaveCardsContext = createContext<SaveCardsContextType | undefined>(
   undefined,
 );
 
-// Provider du contexte
 export function SaveCardsProvider({ children }: Props) {
   const [saveCards, setSaveCards] = useState<Card[]>([]);
 
@@ -46,7 +44,6 @@ export function SaveCardsProvider({ children }: Props) {
   );
 }
 
-// Hook personnalisé pour utiliser le contexte
 export function useSaveCards() {
   const context = useContext(SaveCardsContext);
 

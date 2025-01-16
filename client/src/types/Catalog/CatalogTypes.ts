@@ -28,6 +28,8 @@ export type Card = {
   picture: string;
   name: string;
   maxPrice: number;
+  minPrice: number;
+  category: string;
   address: string;
   type: "hotels" | "restaurants" | "activities";
 };
