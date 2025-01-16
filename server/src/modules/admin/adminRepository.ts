@@ -99,7 +99,7 @@ class adminRepository {
       ],
     );
 
-    return { userAffectedRows: userResult.affectedRows };
+    return userResult.affectedRows > 0;
   }
 
   // The D of CRUD - Delete operation
