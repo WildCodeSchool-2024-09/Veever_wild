@@ -1,5 +1,5 @@
 import "./ItinerayStyle.css";
-import { CardProps } from "../../types/Itinerary/ItineraryTypes";
+import type { CardProps } from "../../types/Itinerary/ItineraryTypes";
 
 const ItineraryCard = ({ title, imageSrc, onReserve }: CardProps) => {
   return (
