@@ -16,7 +16,6 @@ type CardProps = {
 };
 export default function Cardz({
   id,
-  type,
   picture,
   name,
   maxPrice,
@@ -163,10 +162,7 @@ export default function Cardz({
             id={`info-${id}`}
           >
             <p>Catégories: {category}</p>
-            <p>Type: {type}</p>
-            <p>
-              Nom de l'{type}: {name}
-            </p>
+            <p>{name}</p>
             <p>Adresse: {address}</p>
             <p>
               Prix entre {minPrice} et {maxPrice}€
