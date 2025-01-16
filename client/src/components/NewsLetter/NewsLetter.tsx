@@ -1,4 +1,4 @@
-import useFormValidation from "../../services/FormCreateAcc/FormValidation";
+import useFormValidation from "../../services/Form/FormValidation";
 import InputEmail from "../FormCreateAcc/inputForm/InputEmail";
 import "./NewsLetter.css";
 

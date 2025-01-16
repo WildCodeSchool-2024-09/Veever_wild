@@ -1,5 +1,5 @@
 import { FormControl, FormLabel } from "@mui/material";
-import { StyledTelInput } from "../../../services/FormCreateAcc/StyledTelInput";
+import { StyledTelInput } from "../../../services/Form/StyledTelInput";
 import type { FormInput } from "../../../types/FormInput/FormInput";
 
 export default function InputPhone({ handleChange, value }: FormInput) {

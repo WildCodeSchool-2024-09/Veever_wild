@@ -44,7 +44,7 @@ class GenderRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all restaurants from the "restaurant" table
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT type
+      `SELECT id,type
        FROM gender`,
     );
 

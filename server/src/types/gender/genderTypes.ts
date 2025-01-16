@@ -8,5 +8,5 @@ export type Gender = {
 
 export type UpdateGenderData = {
   type: string;
-  id: number;
+  id: string;
 };

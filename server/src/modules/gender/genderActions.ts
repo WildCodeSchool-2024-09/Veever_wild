@@ -40,7 +40,7 @@ const edit: RequestHandler = async (req, res, next) => {
   try {
     const updateData: UpdateGenderData = {
       type: req.body.type,
-      id: req.body.id,
+      id: req.params.id,
     };
 
     const updategender = await genderRepository.update(updateData);

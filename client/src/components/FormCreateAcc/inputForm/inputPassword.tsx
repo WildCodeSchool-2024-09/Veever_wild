@@ -1,5 +1,5 @@
 import { FormControl, FormLabel } from "@mui/material";
-import { StyledInput } from "../../../services/FormCreateAcc/inputStyle";
+import { StyledInput } from "../../../services/Form/inputStyle";
 import type { PasswordValidation } from "../../../types/FormValidation/FormValidationCheck";
 
 export default function InputPassword({

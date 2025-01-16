@@ -1,7 +1,7 @@
 import { FormControl, FormLabel } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import { StyledSelect } from "../../../services/FormCreateAcc/StyledSelect";
+import { StyledSelect } from "../../../services/Form/StyledSelect";
 import type { FormInput } from "../../../types/FormInput/FormInput";
 
 type Gender = {
@@ -39,7 +39,7 @@ export default function InputGender({ handleChange, value }: FormInput) {
       >
         <option value="">Veuillez sélectionner</option>
         {genders.map((gender) => (
-          <option key={gender.id} value={gender.type}>
+          <option key={gender.id} value={gender.id}>
             {gender.type}
           </option>
         ))}

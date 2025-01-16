@@ -1,6 +1,6 @@
 import { FormControl, FormLabel } from "@mui/material";
 import { fr } from "date-fns/locale/fr";
-import { StyledDatePicker } from "../../../services/FormCreateAcc/StyledDatePickers";
+import { StyledDatePicker } from "../../../services/Form/StyledDatePickers";
 import type { FormInput } from "../../../types/FormInput/FormInput";
 
 export default function InputDate({ handleChange, value }: FormInput) {
