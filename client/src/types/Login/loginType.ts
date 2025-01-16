@@ -12,4 +12,5 @@ export type PasswordType = {
 
 export type LoginFormType = {
   onSubmit: (email: string, password: string) => Promise<void>;
+  isLoading: boolean;
 };
