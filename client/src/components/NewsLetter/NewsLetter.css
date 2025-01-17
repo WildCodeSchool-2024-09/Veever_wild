@@ -1,25 +1,15 @@
 @import url("@src/variables.css");
 
 .newsLetter-container {
+  padding: var(--spacing-ref);
   text-align: center;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ), url(./src/assets/images/BackGroundNewsLetter.png);
+  background-image: url("./assets/images/BackGroundNewsLetter.png");
   border: 0px solid black;
   box-shadow: var(--box-shadow-soft);
   border-radius: var(--border-ref);
 }
 
-.newsLetter-container h3 {
-  padding: var(--spacing-ref);
-}
-
-.offerNewsLetter {
-  border-radius: var(--border-ref);
-  box-shadow: var(--box-shadow-soft);
-  background-color: var(--bckgColor);
-  margin: var(--spacing-ref);
+.email-container {
   padding: var(--spacing-ref);
 }
 
