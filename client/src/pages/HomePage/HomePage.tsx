@@ -1,4 +1,6 @@
+import BlogArticles from "../../components/BlogArticles/BlogArticles";
 import Discovery from "../../components/Discovery/Discovery";
+import ItinerarySection from "../../components/ItinerarySection/ItinerarySection";
 import NewsLetter from "../../components/NewsLetter/NewsLetter";
 import PreHeader from "../../components/PreHeader/PreHeader";
 export default function HomePage() {
@@ -6,6 +8,8 @@ export default function HomePage() {
     <>
       <PreHeader />
       <Discovery />
+      <ItinerarySection />
+      <BlogArticles />
       <NewsLetter />
     </>
   );

@@ -1,5 +1,4 @@
 import ItineraryCard from "./ItineraryCard.tsx";
-
 const itineraries = [
   {
     id: 1,

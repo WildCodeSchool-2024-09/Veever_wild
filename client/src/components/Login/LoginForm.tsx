@@ -12,6 +12,7 @@ export default function LoginForm() {
     handlePasswordChange,
     passwordErrors,
   } = useLoginValidation();
+
   return (
     <form className="loginForm">
       <EmailInput
