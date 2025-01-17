@@ -3,25 +3,10 @@ import type { Result, Rows } from "../../../database/client";
 import type { Client } from "../../types/clientsTypes/clientsTypes";
 
 class ClientsRepository {
-  async update(updateClient: Omit<Client, "user_id">): Promise<boolean> {
+  async update(updateClient: Client): Promise<boolean> {
     const connection = await databaseClient.getConnection();
     try {
       await connection.beginTransaction();
-
-      const [rows] = await connection.query<Rows>(
-        `
-        SELECT user_id FROM client
-        WHERE id = ?
-        `,
-        [updateClient.id],
-      );
-
-      if (rows.length === 0) {
-        await connection.rollback();
-        return false;
-      }
-
-      const userId = rows[0].user_id;
 
       const [clientResult] = await connection.query<Result>(
         `
@@ -38,28 +23,26 @@ class ClientsRepository {
       );
 
       if (clientResult.affectedRows === 0) {
-        await connection.rollback();
-        return false;
+        throw new Error("Failed to update client");
       }
 
       const [userResult] = await connection.query<Result>(
         `
         UPDATE user
         SET email = ?, password = ?, firstname = ?, lastname = ?
-        WHERE id = ?
+        WHERE id = (SELECT user_id FROM client WHERE id = ?)
         `,
         [
           updateClient.email,
           updateClient.password,
           updateClient.firstname,
           updateClient.lastname,
-          userId,
+          updateClient.id,
         ],
       );
 
       if (userResult.affectedRows === 0) {
-        await connection.rollback();
-        return false;
+        throw new Error("User update failed");
       }
 
       await connection.commit();
@@ -160,31 +143,15 @@ class ClientsRepository {
   }
 
   async destroy(id: number): Promise<boolean> {
-    const connection = await databaseClient.getConnection();
-    try {
-      await connection.beginTransaction();
-
-      const [result] = await connection.query<Result>(
-        `
+    const [result] = await databaseClient.query<Result>(
+      `
         DELETE FROM user
         WHERE id = (SELECT user_id FROM client WHERE id = ?)
         `,
-        [id],
-      );
+      [id],
+    );
 
-      if (result.affectedRows === 0) {
-        await connection.rollback();
-        return false;
-      }
-
-      await connection.commit();
-      return true;
-    } catch (error) {
-      await connection.rollback();
-      throw error;
-    } finally {
-      connection.release();
-    }
+    return result.affectedRows > 0;
   }
 }
 
