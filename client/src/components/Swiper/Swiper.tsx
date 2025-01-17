@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import type { Card } from "../../types/Catalog/CatalogTypes";
 import "./Swiper.css";
-
+import type { ChrCardProps } from "../../types/Catalog/CatalogTypes";
 import Cardz from "./SwiperCard";
+
 export default function Swiper() {
-  const [cards, setCards] = useState<Card[]>([]);
+  const [cards, setCards] = useState<ChrCardProps[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:3310/api/chr")

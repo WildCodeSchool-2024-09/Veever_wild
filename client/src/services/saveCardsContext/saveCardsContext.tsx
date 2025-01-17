@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import type {
-  Card,
+  ChrCardProps,
   Props,
   SaveCardsContextType,
 } from "../../types/Catalog/CatalogTypes";
@@ -10,9 +10,9 @@ const SaveCardsContext = createContext<SaveCardsContextType | undefined>(
 );
 
 export function SaveCardsProvider({ children }: Props) {
-  const [saveCards, setSaveCards] = useState<Card[]>([]);
+  const [saveCards, setSaveCards] = useState<ChrCardProps[]>([]);
 
-  const addCard = (card: Card) => {
+  const addCard = (card: ChrCardProps) => {
     setSaveCards((prevCards) => {
       if (!prevCards.some((c) => c.id === card.id)) {
         return [...prevCards, card];

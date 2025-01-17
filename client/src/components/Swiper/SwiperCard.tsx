@@ -1,19 +1,7 @@
-import { animate, motion, useMotionValue, useTransform } from "framer-motion";
-import { useState } from "react";
-import { useSaveCards } from "../../services/saveCardsContext/saveCardsContext";
-import type { Card } from "../../types/Catalog/CatalogTypes";
-type CardProps = {
-  id: number;
-  name: string;
-  type: string;
-  maxPrice: number;
-  minPrice: number;
-  address: string;
-  picture: string;
-  category: string;
-  cards: Card[];
-  setCards: (cards: Card[]) => void;
-};
+import { motion } from "framer-motion";
+import type { ChrCardsProps } from "../../types/Catalog/CatalogTypes";
+import useSwiper from "../Hooks/Swiper/useSwiper";
+
 export default function Cardz({
   id,
   picture,
@@ -24,79 +12,21 @@ export default function Cardz({
   category,
   cards,
   setCards,
-}: CardProps) {
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
-  const [, setIsAnimated] = useState(false);
-  const { addCard } = useSaveCards();
-
-  const x = useMotionValue(0);
-  const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
-  const rotate = useTransform(x, [-150, 150], [-18, 18]);
-
-  const handleDragEnd = () => {
-    const currentX = x.get();
-    if (currentX > 50) {
-      const swippedCards = cards.find((card) => card.id === id);
-      if (swippedCards) {
-        addCard(swippedCards);
-      }
-      setCards(cards.filter((card) => card.id !== id));
-    } else if (currentX < -50) {
-      setCards(cards.filter((card) => card.id !== id));
-    }
-  };
-
-  const scrollToInfo = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
-  const handleClickInfo = () => {
-    setIsInfoOpen((prev) => !prev);
-    setTimeout(() => {
-      scrollToInfo(`info-${id}`);
-    }, 100);
-    if (isInfoOpen) {
-      scrollToInfo(`swiper-${id}`);
-    }
-  };
-
-  const handleLike = () => {
-    setIsAnimated(true);
-
-    animate(x, 150, {
-      duration: 0.5,
-      onComplete: () => {
-        const swippedCards = cards.find((card) => card.id === id);
-        if (swippedCards) {
-          addCard(swippedCards);
-        }
-        setCards(cards.filter((card) => card.id !== id));
-        setIsAnimated(false);
-      },
-    });
-  };
-
-  const handleDislike = () => {
-    setIsAnimated(true);
-    animate(x, -150, {
-      duration: 0.5,
-      onComplete: () => {
-        setCards(cards.filter((card) => card.id !== id));
-        setIsAnimated(false);
-      },
-    });
-  };
-
+}: ChrCardsProps) {
+  const {
+    handleClickInfo,
+    handleDislike,
+    handleDragEnd,
+    handleLike,
+    isInfoOpen,
+    opacity,
+    rotate,
+    x,
+  } = useSwiper(cards, setCards, id.toString());
   const currentIndex = cards.findIndex((card) => card.id === id);
 
   return (
-    <div className="swiper-container" id={`swiper-${id}`}>
+    <div className="swiper-container" id={`swiper-${id.toString()}`}>
       <article
         className={`swiper-card ${
           cards[currentIndex].type === "activities"
@@ -115,10 +45,14 @@ export default function Cardz({
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           style={{ x, opacity, rotate }}
-          onDragEnd={handleDragEnd}
+          onDragEnd={() => handleDragEnd(id)}
         />
         <div className="button-container">
-          <button className="swiper-btn" onClick={handleDislike} type="button">
+          <button
+            className="swiper-btn"
+            onClick={() => handleDislike(id)}
+            type="button"
+          >
             <svg
               viewBox="0 0 16 16"
               xmlns="http://www.w3.org/2000/svg"
@@ -138,12 +72,16 @@ export default function Cardz({
           </button>
           <button
             className="swiper-btn"
-            onClick={handleClickInfo}
+            onClick={() => handleClickInfo()}
             type="button"
           >
             + d'infos
           </button>
-          <button className="swiper-btn" onClick={handleLike} type="button">
+          <button
+            className="swiper-btn"
+            onClick={() => handleLike(id)}
+            type="button"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="85"
@@ -166,7 +104,7 @@ export default function Cardz({
         {isInfoOpen && (
           <div
             className={`info ${isInfoOpen ? "info-open" : "info-closed"}`}
-            id={`info-${id}`}
+            id={`info-${id.toString()}`}
           >
             <p>Catégories: {category}</p>
             <p>{name}</p>
