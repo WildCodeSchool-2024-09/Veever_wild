@@ -42,5 +42,13 @@ router.get("/api/restaurants/:id", restaurantActions.read);
 router.put("/api/restaurants/:id", restaurantActions.edit);
 router.post("/api/restaurants", validateChr, restaurantActions.add);
 router.delete("/api/restaurants/:id", restaurantActions.destroy);
+
+
+import genderActions from "./modules/gender/genderActions";
+router.get("/api/genders", genderActions.browse);
+router.get("/api/genders/:id", genderActions.read);
+router.put("/api/genders/:id", genderActions.edit);
+router.post("/api/genders", genderActions.add);
+router.delete("/api/genders/:id", genderActions.destroy);
 /* ************************************************************************* */
 export default router;
