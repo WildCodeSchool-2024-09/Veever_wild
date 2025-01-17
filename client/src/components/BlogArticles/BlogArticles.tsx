@@ -5,7 +5,7 @@ export default function BlogArticles() {
     <section className="blog">
       <h3>Dernier article du blog</h3>
       <article>
-        <img src="src/assets/images/Palace.jpg" alt="hotel" />
+        <img src="/assets/images/Palace.jpg" alt="hotel" />
 
         <h4>Article du blog</h4>
         <p>
@@ -15,7 +15,7 @@ export default function BlogArticles() {
         </p>
       </article>
       <article>
-        <img src="src/assets/images/Palace.jpg" alt="hotel" />
+        <img src="/assets/images/Palace.jpg" alt="hotel" />
 
         <h4>Article du blog</h4>
         <p>

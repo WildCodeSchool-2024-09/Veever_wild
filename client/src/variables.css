@@ -24,7 +24,6 @@
   --bckgColor-input: #fff;
   --light: white;
   --dark: black;
-
   --border-ref: 8px;
   --border-XL: calc(var(--border-ref) * 2);
   --border-input: 1px solid #dae2ed;

@@ -5,8 +5,7 @@
   justify-content: flex-end;
   align-items: flex-start;
   width: 100%;
-  height: calc(var(--spacing-ref) * 18);
-  background-image: url("src/assets/images/Discovery.jpg");
+  background-image: url("/assets/images/Discover.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

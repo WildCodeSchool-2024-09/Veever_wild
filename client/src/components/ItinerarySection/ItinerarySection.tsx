@@ -3,17 +3,17 @@ const itineraries = [
   {
     id: 1,
     title: "Escapade chill",
-    imageSrc: "src/assets/images/AppartHotel.jpg",
+    imageSrc: "/assets/images/AppartHotel.jpg",
   },
   {
     id: 2,
     title: "Week-end romantique",
-    imageSrc: "src/assets/images/HotelBedroom.jpg",
+    imageSrc: "/assets/images/HotelBedroom.jpg",
   },
   {
     id: 3,
     title: "Séjour en famille",
-    imageSrc: "src/assets/images/rock-climbing.jpg",
+    imageSrc: "/assets/images/rock-climbing.jpg",
   },
 ];
 

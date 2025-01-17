@@ -10,12 +10,10 @@
 .card {
   display: flex;
   flex-direction: column;
-  width: auto;
   border-radius: var(--border-ref);
   box-shadow: var(--box-shadow-soft);
   background-color: var(--bckgColor);
-  padding-bottom: .5rem;
-  border: 0.063rem solid var(--secondColor);
+  padding-bottom: var(--spacing-ref);
 }
 
 .card_image {
@@ -36,17 +34,15 @@
   font-weight: bold;
   margin: var(spacing-S) 0;
   text-align: center;
+  padding: var(--spacing-ref);
 }
 
 .reserve-button {
-  display: flex;
-  align-items: center;
-  justify-self: center;
+  width: auto;
   background-color: var(--mainColor);
   color: var(--light);
   padding: var(--spacing-ref);
   margin: 0 auto;
-  height: 2.5rem;
   border-radius: var(--border-ref);
   border: 0rem solid;
   cursor: pointer;

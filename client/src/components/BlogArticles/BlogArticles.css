@@ -1,27 +1,23 @@
 @import url("@src/variables.css");
 
 section.blog {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: space-around;
   font-family: var(--textFont);
-  margin-bottom: 1.5rem;
+  padding: var(--spacing-ref);
 }
 
 section.blog h3 {
+  text-align: center;
   font-family: var(--titleFont);
   font-weight: bold;
-  font-size: 2rem;
-  width: 100%;
+  font-size: calc(var(--font-size-ref) * 2);
 }
 
 section.blog article {
-  border: solid 1px var(--secondColor);
+  text-align: center;
   background-color: var(--bckgColor);
-  width: 100%;
   justify-content: center;
-  border-radius: 15px;
+  border-radius: calc(var(--border-ref) * 2);
+  margin: var(--spacing-ref);
 }
 
 section.blog article img {
@@ -36,9 +32,4 @@ section.blog article h4 {
 section.blog article a {
   text-decoration: none;
   color: var(--secondColor);
-}
-
-section.blog article h4,
-p {
-  padding: 1rem;
 }
