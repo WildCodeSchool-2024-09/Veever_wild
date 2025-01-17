@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import databaseClient, { Rows } from "../../../database/client";
+import type { NextFunction, Request, Response } from "express";
+import databaseClient, { type Rows } from "../../../database/client";
 
 export const checkClientPhoneNumber = async (
   req: Request,
