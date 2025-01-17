@@ -25,3 +25,20 @@
   margin: var(--spacing-ref);
   text-align: center;
 }
+
+h2.date-card {
+  font-family: Montserrat, Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem;
+}
+
+button.button-throw-likes-away {
+  background-color: var(--mainColor);
+  padding: 1rem;
+  border-radius: 15px;
+  color: #fff;
+  align-items: center;
+  display: block;
+  margin: 0 auto 1rem;
+}

@@ -6,7 +6,7 @@ export default function PreHeader() {
         <option value="">Choisir une ville</option>
         <option value="bordeaux">❤️ Bordeaux</option>
       </select>
-      <img className="logo" src="src/assets/images/logo.svg" alt="logo" />
+      <img className="logo" src="src/assets/images/veever.png" alt="logo" />
     </section>
   );
 }

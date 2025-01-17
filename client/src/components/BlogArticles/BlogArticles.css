@@ -27,6 +27,11 @@ section.blog article img {
 
 section.blog article h4 {
   font-family: var(--titleFont);
+  padding: 1rem;
+}
+
+section.blog article p {
+  padding: 0 1.5rem 1.5rem;
 }
 
 section.blog article a {
