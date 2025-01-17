@@ -6,6 +6,10 @@
 
   --font-weight-S: 400;
 
+  --font-size-ref: 1rem;
+
+  --font-weight-S: 400;
+
   --bckgColor: lightgrey;
   --veever-yellow: #ffea00;
   --veever-pink: #f26497;
@@ -13,6 +17,11 @@
   --mainColor: tomato;
   --secondColor: black;
   --aliceBlueColor: #f0f8ff;
+  --border-color-input-focus: #3399ff;
+  --errorColor: red;
+  --color-input: #1c2025;
+  --color-label: rgba(0, 0, 0, 0.87);
+  --bckgColor-input: #fff;
   --border-color-input-focus: #3399ff;
   --errorColor: red;
   --color-input: #1c2025;
@@ -39,6 +48,10 @@
   --box-shadow-input-focus: 0 0 0 3px #80bfff;
   --box-shadow-input: 0 2px 2px #f3f6f9;
   --box-shadow-soft: 0px 0px 2px 2px #00000033;
+
+  --width-input-form: 20rem;
+  --width-label-text: 40ch;
+  --height-input-form: 2.5rem;
 
   --width-input-form: 20rem;
   --width-label-text: 40ch;
