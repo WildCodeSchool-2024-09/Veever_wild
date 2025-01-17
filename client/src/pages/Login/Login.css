@@ -1,0 +1,34 @@
+@import url("@src/variables.css");
+
+a {
+  text-decoration: none;
+  color: var(--dark);
+}
+
+.loginMain {
+  display: flex;
+  flex-direction: column;
+
+  margin: 2rem;
+
+  text-align: center;
+}
+
+.loginMain img {
+  height: 10rem;
+}
+
+.loginMain h2 {
+  margin-bottom: 1.5rem;
+}
+
+.loginMain p {
+  margin: .5rem 0;
+}
+
+@media screen and (min-width: 450px) {
+  .loginMain {
+    border-radius: var(--border-XL);
+    border: 1px solid tomato;
+  }
+}
