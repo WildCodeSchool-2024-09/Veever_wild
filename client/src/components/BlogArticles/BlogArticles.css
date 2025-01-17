@@ -13,14 +13,13 @@ section.blog h3 {
   font-family: var(--titleFont);
   font-weight: bold;
   font-size: 2rem;
-  margin: 3%;
   width: 100%;
 }
 
 section.blog article {
   border: solid 1px var(--secondColor);
   background-color: var(--bckgColor);
-  width: 45%;
+  width: 100%;
   justify-content: center;
   border-radius: 15px;
 }

@@ -12,8 +12,7 @@
   padding: var(--spacing-ref);
   justify-items: center;
   justify-self: center;
-  margin: auto;
-  width: 80%;
+  width: 100%;
 }
 
 .newsLetter-container h3 {
@@ -52,7 +51,6 @@
   color: var(--light);
   padding: var(--spacing-ref);
   margin: var(--spacing-ref);
-  height: 2.5rem;
   border-radius: var(--border-ref);
   border: 0px solid;
   cursor: pointer;

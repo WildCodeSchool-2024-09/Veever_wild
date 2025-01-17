@@ -18,6 +18,10 @@ placeholder {
   padding: var(--spacing-ref);
 }
 
+.headerFormTitle {
+  text-align: center;
+}
+
 .formGroup {
   display: flex;
   flex-direction: column;
