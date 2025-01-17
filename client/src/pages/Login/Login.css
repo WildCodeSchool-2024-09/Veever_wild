@@ -1,6 +1,6 @@
 @import url("@src/variables.css");
 
-a {
+.loginMain a {
   text-decoration: none;
   color: var(--dark);
 }
