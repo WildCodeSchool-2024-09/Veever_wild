@@ -1,0 +1,45 @@
+@import url("@src/variables.css");
+
+section.blog {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  font-family: var(--textFont);
+  margin-bottom: 1.5rem;
+}
+
+section.blog h3 {
+  font-family: var(--titleFont);
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 3%;
+  width: 100%;
+}
+
+section.blog article {
+  border: solid 1px var(--secondColor);
+  background-color: var(--bckgColor);
+  width: 45%;
+  justify-content: center;
+  border-radius: 15px;
+}
+
+section.blog article img {
+  width: 100%;
+  border-radius: 15px 15px 0 0;
+}
+
+section.blog article h4 {
+  font-family: var(--titleFont);
+}
+
+section.blog article a {
+  text-decoration: none;
+  color: var(--secondColor);
+}
+
+section.blog article h4,
+p {
+  padding: 1rem;
+}
