@@ -1,4 +1,4 @@
-import type { CatalogueProps } from "../catalog-swipper/catalogSwipper";
+import type { CatalogueProps } from "./Catalog-Cards";
 import ChrBottomCard from "./Chr-Bottom-Card";
 import "./Chr-Middle-Card.css";
 

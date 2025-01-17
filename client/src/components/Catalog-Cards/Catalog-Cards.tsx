@@ -2,9 +2,13 @@ import { system } from "@chakra-ui/react/preset";
 import "./Catalog-Cards.css";
 import { ChakraProvider } from "@chakra-ui/react";
 
-import type { CatalogueProps } from "../catalog-swipper/catalogSwipper";
+import type { Card } from "../../types/Catalog/CatalogTypes";
 import ChrMiddleCard from "./Chr-Middle-Card";
 import ChrTopCard from "./Chr-Top-Card";
+
+export type CatalogueProps = {
+  saveCards: Card[];
+};
 
 export default function CatalogCards({ saveCards }: CatalogueProps) {
   return (
