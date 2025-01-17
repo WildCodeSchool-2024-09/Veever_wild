@@ -4,6 +4,7 @@ import "./CatalogRecap.css";
 export default function CatalogRecap({ data }: CatalogRecapProps) {
   return (
     <>
+      <h1 className="catalog-title">Mon catalogue personnalisé</h1>
       <ul className="catalog-filter-section">
         {data.map((item) => (
           <li key={item.name}>

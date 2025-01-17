@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useFormData from "../../services/Form/FormData";
 import useFormValidation from "../../services/Form/FormValidation";
 import HeaderForm from "./HeaderForm";
@@ -18,6 +19,7 @@ import InputPassword from "./inputForm/inputPassword";
 import InputUsername from "./inputForm/inputUsername";
 
 export default function FormCreateAcc() {
+  const navigate = useNavigate();
   const {
     email,
     password,
@@ -40,6 +42,7 @@ export default function FormCreateAcc() {
       setShowSnackbar(true);
       return;
     }
+    navigate("/login");
   };
 
   return (

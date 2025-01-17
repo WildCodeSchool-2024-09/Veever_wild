@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import useLoginValidation from "../../services/Login/LoginValidation";
 import EmailInput from "./InputForm/EmailInput";
 import PasswordInput from "./InputForm/PasswordInput";
 import "./LoginForm.css";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const {
     email,
     emailErrors,
@@ -13,6 +15,9 @@ export default function LoginForm() {
     passwordErrors,
   } = useLoginValidation();
 
+  const handleSubmit = () => {
+    navigate("/");
+  };
   return (
     <form className="loginForm">
       <EmailInput
@@ -25,7 +30,9 @@ export default function LoginForm() {
         handlePasswordChange={handlePasswordChange}
         passwordErrors={passwordErrors}
       />
-      <button type="submit">Connexion</button>
+      <button onClick={handleSubmit} type="submit">
+        Connexion
+      </button>
     </form>
   );
 }

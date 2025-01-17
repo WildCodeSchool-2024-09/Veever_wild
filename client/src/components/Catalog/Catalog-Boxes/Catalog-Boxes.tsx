@@ -7,7 +7,6 @@ export default function CatalogBoxes({
 }: CatalogBoxesProps) {
   return (
     <section>
-      <h1 className="catalog-title">Mon catalogue personnalisé</h1>
       <form className="catalog-boxes-form" action="">
         <label className="catalog-boxes">
           <input
