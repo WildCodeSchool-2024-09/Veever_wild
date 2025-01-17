@@ -52,6 +52,7 @@ const edit: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+
 // The A of BREAD - Add operation
 const add: RequestHandler = async (req, res, next) => {
   try {

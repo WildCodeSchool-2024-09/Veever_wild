@@ -96,17 +96,21 @@ class keywordRepository {
   }
   // The U of CRUD - Update operations
   async update(keywordData: Keyword & Illustration) {
-    const [keywordResult] = await databaseClient.query<Result>(
-      `
+    const connection = await databaseClient.getConnection();
+    try {
+      await connection.beginTransaction();
+
+      const [keywordResult] = await connection.query<Result>(
+        `
         UPDATE keyword
         SET name = ?
         WHERE id = ?
         `,
-      [keywordData.name, keywordData.id],
-    );
+        [keywordData.name, keywordData.id],
+      );
 
-    const [illustrationResult] = await databaseClient.query<Result>(
-      `
+      const [illustrationResult] = await connection.query<Result>(
+        `
         UPDATE illustration
         SET link = ?
         WHERE id = (
@@ -115,13 +119,22 @@ class keywordRepository {
           WHERE keyword_id = ?
         )
         `,
-      [keywordData.link, keywordData.id],
-    );
+        [keywordData.link, keywordData.id],
+      );
 
-    return (
-      keywordResult.affectedRows > 0 && illustrationResult.affectedRows > 0
-    );
+      await connection.commit();
+
+      return (
+        keywordResult.affectedRows > 0 && illustrationResult.affectedRows > 0
+      );
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
   }
+
   // The D of CRUD - Delete operation
   async destroy(keywordId: number) {
     const [result] = await databaseClient.query<Result>(
