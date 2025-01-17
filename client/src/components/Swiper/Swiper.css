@@ -41,7 +41,7 @@
 }
 
 .swiper-btn {
-  font-size: 1.2rem;
+  font-size: calc(var(--font-size-ref) * 1.5);
   background-color: unset;
   border: none;
   cursor: pointer;
