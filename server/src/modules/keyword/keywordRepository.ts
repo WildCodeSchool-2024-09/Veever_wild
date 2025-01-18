@@ -9,7 +9,7 @@ class keywordRepository {
 
     try {
       await connection.beginTransaction();
-      const [keywordResult] = await connection.query<Result>(
+      const [keywordResult] = await connection.execute<Result>(
         `
         INSERT INTO keyword
         (name)
@@ -100,7 +100,7 @@ class keywordRepository {
     try {
       await connection.beginTransaction();
 
-      const [keywordResult] = await connection.query<Result>(
+      const [keywordResult] = await connection.execute<Result>(
         `
         UPDATE keyword
         SET name = ?
@@ -109,7 +109,7 @@ class keywordRepository {
         [keywordData.name, keywordData.id],
       );
 
-      const [illustrationResult] = await connection.query<Result>(
+      const [illustrationResult] = await connection.execute<Result>(
         `
         UPDATE illustration
         SET link = ?
@@ -143,7 +143,7 @@ class keywordRepository {
 
   // The D of CRUD - Delete operation
   async destroy(keywordId: number) {
-    const [result] = await databaseClient.query<Result>(
+    const [result] = await databaseClient.execute<Result>(
       `
       DELETE keyword, illustration_keyword
       FROM keyword
