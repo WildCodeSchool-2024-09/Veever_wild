@@ -28,8 +28,9 @@ router.put("/api/hotels/:id", hotelsActions.edit);
 router.post("/api/hotels", hotelsActions.add);
 router.delete("/api/hotels/:id", hotelsActions.destroy);
 
+import validateLogin from "./middlewares/validateLogin";
 import userActions from "./modules/user/userActions";
-router.post("/api/login", userActions.authenticateUser);
+router.post("/api/login", validateLogin, userActions.authenticateUser);
 
 /* ************************************************************************* */
 
