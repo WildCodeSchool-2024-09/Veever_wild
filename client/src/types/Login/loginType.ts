@@ -12,3 +12,9 @@ export type LoginFormType = {
   onSubmit: (email: string, password: string) => Promise<void>;
   isLoading: boolean;
 };
+
+export type DecodedTokenType = {
+  role: string;
+  exp: number;
+  iat: number;
+};

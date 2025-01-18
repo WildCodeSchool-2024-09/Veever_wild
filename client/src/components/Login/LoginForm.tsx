@@ -1,5 +1,7 @@
+import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
 import useLoginValidation from "../../services/Login/loginValidation";
+import type { DecodedTokenType } from "../../types/Login/loginType";
 import EmailInput from "./InputForm/EmailInput";
 import PasswordInput from "./InputForm/PasswordInput";
 import "./LoginForm.css";
@@ -31,7 +33,14 @@ export default function LoginForm() {
       const data = await response.json();
       localStorage.setItem("token", data.token);
 
-      window.location.href = "/";
+      const decodedToken = jwtDecode<DecodedTokenType>(data.token);
+      const userRole = decodedToken.role;
+
+      if (userRole === "admin") {
+        window.location.href = "/dashboard";
+      } else {
+        window.location.href = "/";
+      }
     } catch (error) {
       setErrorMessage(
         error instanceof Error
