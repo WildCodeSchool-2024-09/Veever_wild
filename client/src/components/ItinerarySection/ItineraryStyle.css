@@ -4,13 +4,11 @@
   display: flex;
   flex-direction: column;
   margin: 1rem;
-  border-radius: var(--border-ref);
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  width: auto;
   border-radius: var(--border-ref);
   box-shadow: var(--box-shadow-soft);
   background-color: var(--bckgColor);
@@ -41,7 +39,6 @@
 .reserve-button {
   display: flex;
   align-items: center;
-  justify-self: center;
   background-color: var(--mainColor);
   color: var(--light);
   padding: var(--spacing-ref);
