@@ -7,11 +7,7 @@ const browse: RequestHandler = async (req, res, next) => {
   try {
     const keywords = await keywordRepository.readAll();
 
-    if (!keywords) {
-      res.sendStatus(404);
-    } else {
-      res.json(keywords);
-    }
+    res.json(keywords);
   } catch (error) {
     next(error);
   }
