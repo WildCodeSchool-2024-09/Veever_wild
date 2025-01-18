@@ -26,6 +26,7 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
 
     res.status(200).json({
       message: "Connexion réussie",
+      role: user.role,
       token,
     });
   } catch (error) {
