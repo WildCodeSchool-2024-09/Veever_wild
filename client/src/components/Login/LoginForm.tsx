@@ -1,26 +1,20 @@
 import { useState } from "react";
-import useLoginValidation from "../../services/Login/LoginValidation";
+import useLoginValidation from "../../services/Login/loginValidation";
 import EmailInput from "./InputForm/EmailInput";
 import PasswordInput from "./InputForm/PasswordInput";
 import "./LoginForm.css";
 
 export default function LoginForm() {
-  const {
-    email,
-    emailErrors,
-    handleEmailChange,
-    password,
-    handlePasswordChange,
-    passwordErrors,
-  } = useLoginValidation();
+  const { email, handleEmailChange, password, handlePasswordChange } =
+    useLoginValidation();
 
   const [isLoading, setIsLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
-    setErrorMessage("");
+    setErrorMessage(null);
 
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/login`, {
@@ -52,15 +46,10 @@ export default function LoginForm() {
   return (
     <form className="loginForm" onSubmit={handleSubmit}>
       {errorMessage && <p className="error">{errorMessage}</p>}
-      <EmailInput
-        email={email}
-        handleEmailChange={handleEmailChange}
-        emailErrors={emailErrors}
-      />
+      <EmailInput email={email} handleEmailChange={handleEmailChange} />
       <PasswordInput
         password={password}
         handlePasswordChange={handlePasswordChange}
-        passwordErrors={passwordErrors}
       />
       <button type="submit" disabled={isLoading}>
         {isLoading ? "Connexion..." : "Se connecter"}

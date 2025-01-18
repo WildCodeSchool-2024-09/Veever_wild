@@ -1,52 +1,62 @@
-import { useCallback, useState } from "react";
+import Joi from "joi";
+import { useState } from "react";
 
 export default function useLoginValidation() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailErrors, setEmailErrors] = useState({});
-  const [passwordErrors, setPasswordErrors] = useState({});
+  const [email, setEmail] = useState<string>("");
+  const [emailErrors, setEmailErrors] = useState<Record<string, string>>({});
+  const [password, setPassword] = useState<string>("");
+  const [passwordErrors, setPasswordErrors] = useState<Record<string, string>>(
+    {},
+  );
 
-  const validateEmail = useCallback((email: string) => {
-    const newEmailErrors: Record<string, string> = {};
-    if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-      newEmailErrors.emailCheck = "Votre adresse e-mail est invalide";
+  const loginSchema = Joi.object({
+    email: Joi.string()
+      .pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+      .required()
+      .messages({
+        "string.pattern.base": "L'email doit être valide.",
+        "any.required": "L'email est requis.",
+      }),
+    password: Joi.string().min(12).required().messages({
+      "string.min": "Le mot de passe doit avoir au moins 12 caractères.",
+      "any.required": "Le mot de passe est requis.",
+    }),
+  });
+
+  const validate = () => {
+    const { error } = loginSchema.validate({ email, password });
+
+    if (error) {
+      const errors: Record<string, string> = {};
+
+      for (const err of error.details) {
+        if (err.context?.key === "email") {
+          errors.emailCheck = err.message;
+        } else if (err.context?.key === "password") {
+          errors.passwordCheck = err.message;
+        }
+      }
+
+      setEmailErrors(
+        errors.emailCheck ? { emailCheck: errors.emailCheck } : {},
+      );
+      setPasswordErrors(
+        errors.passwordCheck ? { passwordCheck: errors.passwordCheck } : {},
+      );
+      return false;
     }
 
-    return newEmailErrors;
-  }, []);
-
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
-    setEmailErrors(validateEmail(newEmail));
+    setEmailErrors({});
+    setPasswordErrors({});
+    return true;
   };
 
-  const validatePassword = useCallback((password: string) => {
-    const newPasswordErrors: Record<string, string> = {};
-
-    if (password.length < 12)
-      newPasswordErrors.length =
-        "Votre mot de passe doit contenir au moins 12 caractères";
-    if (!/\d/.test(password)) {
-      newPasswordErrors.number =
-        "Votre mot de passe doit contenir au moins un chiffre";
-    }
-    if (password === password.toLowerCase()) {
-      newPasswordErrors.maj =
-        "Votre mot de passe doit contenir au moins une majuscule";
-    }
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      newPasswordErrors.specialChar =
-        "Votre mot de passe doit contenir au moins un caractère spécial";
-    }
-
-    return newPasswordErrors;
-  }, []);
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = e.target.value; // Récupérer la valeur de l'input
-    setPassword(newPassword);
-    setPasswordErrors(validatePassword(newPassword)); // Valider le mot de passe
+    setPassword(e.target.value);
   };
 
   return {
@@ -56,5 +66,6 @@ export default function useLoginValidation() {
     password,
     passwordErrors,
     handlePasswordChange,
+    validate,
   };
 }
