@@ -9,13 +9,13 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
     const user = await userRepository.getUserEmailWithRole(email);
 
     if (!user) {
-      res.sendStatus(404);
+      res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
 
     if (!isPasswordMatch) {
-      res.sendStatus(401);
+      res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
 
     const token = jwt.sign(
