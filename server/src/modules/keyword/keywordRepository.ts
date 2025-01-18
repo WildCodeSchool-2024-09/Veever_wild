@@ -122,11 +122,17 @@ class keywordRepository {
         [keywordData.link, keywordData.id],
       );
 
+      const updatedKeyword = keywordResult.affectedRows > 0;
+      const updatedIllustration = illustrationResult.affectedRows > 0;
+
+      if (!updatedKeyword || !updatedIllustration) {
+        throw new Error(
+          `Modification partielle détectée: ${!updatedKeyword ? "Keyword" : "Illustration"} non mis à jour`,
+        );
+      }
       await connection.commit();
 
-      return (
-        keywordResult.affectedRows > 0 && illustrationResult.affectedRows > 0
-      );
+      return updatedKeyword && updatedIllustration;
     } catch (error) {
       await connection.rollback();
       throw error;
