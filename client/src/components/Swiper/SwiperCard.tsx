@@ -26,7 +26,7 @@ export default function Cardz({
   const currentIndex = cards.findIndex((card) => card.id === id);
 
   return (
-    <div className="swiper-container" id={`swiper-${id.toString()}`}>
+    <article className="swiper-container" id={`swiper-${id.toString()}`}>
       <article
         className={`swiper-card ${
           cards[currentIndex].type === "activities"
@@ -47,7 +47,7 @@ export default function Cardz({
           style={{ x, opacity, rotate }}
           onDragEnd={() => handleDragEnd(id)}
         />
-        <div className="button-container">
+        <article className="button-container">
           <button
             className="swiper-btn"
             onClick={() => handleDislike(id)}
@@ -100,9 +100,9 @@ export default function Cardz({
               </path>
             </svg>
           </button>
-        </div>
+        </article>
         {isInfoOpen && (
-          <div
+          <article
             className={`info ${isInfoOpen ? "info-open" : "info-closed"}`}
             id={`info-${id.toString()}`}
           >
@@ -112,9 +112,9 @@ export default function Cardz({
             <p>
               Prix entre {minPrice} et {maxPrice}€
             </p>
-          </div>
+          </article>
         )}
       </article>
-    </div>
+    </article>
   );
 }

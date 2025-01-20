@@ -10,7 +10,7 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
   return (
     <>
       {saveCards.map((card) => (
-        <div
+        <article
           key={card.id}
           className={`card-container ${
             card.type === "hotels"
@@ -25,7 +25,7 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
             <p>{card.address}</p>
           </article>
           <ChrBottomCard />
-        </div>
+        </article>
       ))}
     </>
   );
