@@ -29,7 +29,6 @@ CREATE TABLE client (
   foreign key(user_id) references user(id)
   ON DELETE CASCADE,
   foreign key(gender_id) references gender(id)
-  ON DELETE CASCADE
 );
 
 CREATE TABLE phone (
