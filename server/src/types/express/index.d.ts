@@ -1,14 +1,13 @@
 import type { JwtPayload } from "jsonwebtoken";
 
+interface CustomJwtPayload extends JwtPayload {
+  role?: string;
+}
+
 declare global {
   namespace Express {
     export interface Request {
-      user?: string | JwtPayload;
-      /* ************************************************************************* */
-      // Add your custom properties here, for example:
-      //
-      // user?: { ... }
-      /* ************************************************************************* */
+      user?: CustomJwtPayload;
     }
   }
 }

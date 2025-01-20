@@ -1,5 +1,6 @@
 import type { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
+import type { CustomJwtPayload } from "../types/express";
 
 const jwtSecret = process.env.JWT_SECRET;
 
@@ -13,15 +14,15 @@ const verifyToken: RequestHandler = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   if (!token) {
-    res.status(401).json({ message: "Accès non autorisé, token manquant." });
+    throw new Error("Accès non autorisé, token manquant.");
   }
 
   try {
-    const decoded = jwt.verify(token as string, jwtSecret as string);
+    const decoded = jwt.verify(token, jwtSecret) as CustomJwtPayload;
     req.user = decoded;
     next();
   } catch (error) {
-    res.status(401).json({ message: "Token invalide ou expiré. " });
+    next(error);
   }
 };
 
