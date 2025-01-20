@@ -18,7 +18,7 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
       res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
 
-    req.body.password = undefined;
+    req.body.password = null;
 
     const token = generateToken({
       id: user.id,
