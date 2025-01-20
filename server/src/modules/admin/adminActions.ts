@@ -51,7 +51,7 @@ const edit: RequestHandler = async (req, res, next) => {
     if (!updateAdmin) {
       res.sendStatus(404);
     } else {
-      res.status(204);
+      res.sendStatus(204);
     }
   } catch (error) {
     next(error);

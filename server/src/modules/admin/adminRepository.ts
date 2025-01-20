@@ -1,7 +1,7 @@
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
 import authServices from "../../services/authServices";
-import type { Admin, User } from "../../types/admin/adminTypes";
+import type { User } from "../../types/admin/adminTypes";
 
 class adminRepository {
   // The C of CRUD - Create operation
@@ -55,7 +55,7 @@ class adminRepository {
   async read(id: number) {
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT admin.id, user.id as user_id, email, firstname, lastname
+      SELECT admin.id, user.id as user_id, email, firstname, lastname, created_at, updated_at
       FROM admin
       INNER JOIN user
       ON user.id = admin.user_id
@@ -70,7 +70,7 @@ class adminRepository {
   async readAll() {
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT admin.id, user.id as user_id, email, firstname, lastname
+      SELECT admin.id, user.id as user_id, email, firstname, lastname, created_at, updated_at
       FROM admin
       INNER JOIN user
       ON user.id = admin.user_id
@@ -87,7 +87,7 @@ class adminRepository {
     const [userResult] = await databaseClient.execute<Result>(
       `
         UPDATE user
-        SET email = ?, password = ?, firstname = ?, lastname = ?
+        SET email = ?, password = ?, firstname = ?, lastname = ?, updated_at = CURRENT_TIMESTAMP
         WHERE id = (SELECT user_id FROM admin WHERE id = ?)
         `,
       [
