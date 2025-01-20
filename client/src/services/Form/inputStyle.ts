@@ -4,6 +4,7 @@ export const StyledInput = styled(Input)(
   `
      display: inline-block;
     .${inputClasses.input} {
+    justify-items: center;
       width: var(--width-input-form);
       height: var(--height-input-form);
       font-family: var(--textFont);

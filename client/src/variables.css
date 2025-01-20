@@ -20,7 +20,7 @@
 
 :root {
   --titleFont: "Acumin";
-  --textFont: "Poppins-Light";
+  --textFont: "Poppins-Regular";
 
   --font-size-ref: 1rem;
 
@@ -28,12 +28,11 @@
 
   --bckgColor: lightgrey;
   --mainColor: tomato;
-  --bckgColor-CTA: #f59e3f;
   --gradientColor-CTA: linear-gradient(to left, #f59e3f 13%, #f74aa1 100%);
   --secondColor: black;
   --aliceBlueColor: #f0f8ff;
   --border-color-input-focus: #3399ff;
-  --errorColor: red;
+  --errorColor: rgba(255, 0, 0, 0.753);
   --color-input: #1c2025;
   --color-label: rgba(0, 0, 0, 0.87);
   --bckgColor-input: #fff;
