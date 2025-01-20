@@ -8,7 +8,11 @@ const browse: RequestHandler = async (req, res, next) => {
   try {
     const admins = await adminRepository.readAll();
 
-    res.json(admins);
+    if (!admins) {
+      res.sendStatus(404);
+    } else {
+      res.json(admins);
+    }
   } catch (error) {
     next(error);
   }
@@ -47,7 +51,7 @@ const edit: RequestHandler = async (req, res, next) => {
     if (!updateAdmin) {
       res.sendStatus(404);
     } else {
-      res.status(204);
+      res.sendStatus(204);
     }
   } catch (error) {
     next(error);
