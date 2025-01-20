@@ -5,12 +5,11 @@ export default function SignUp() {
   const navigate = useNavigate();
 
   return (
-    // TODO: changer la redirection vers la page d'inscription quand ça sera merge
     <button
       type="button"
       className="signUpBtn"
       onClick={() => {
-        navigate("/");
+        navigate("/createAccount");
       }}
     >
       S'inscrire
