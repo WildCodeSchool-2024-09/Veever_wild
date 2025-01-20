@@ -1,6 +1,6 @@
 import { jwtDecode } from "jwt-decode";
 import { useState } from "react";
-import useLoginValidation from "../../services/Login/pouetloginValidation";
+import useLoginValidation from "../../services/Login/loginValidation";
 import type { DecodedTokenType } from "../../types/Login/loginType";
 import EmailInput from "./InputForm/EmailInput";
 import PasswordInput from "./InputForm/PasswordInput";
