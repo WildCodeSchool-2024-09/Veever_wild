@@ -44,9 +44,10 @@ class ClientsRepository {
       if (updateClient.phoneNumber) {
         const [phoneResult] = await connection.execute<Result>(
           `
-          INSERT INTO phone (client_id, phone number)
+          INSERT INTO phone (client_id, phone_number)
           VALUES (?, ?)
           ON DUPLICATE KEY UPDATE phone_number = ?
+          WHERE client_id = ?
           `,
           [updateClient.id, updateClient.phoneNumber, updateClient.phoneNumber],
         );

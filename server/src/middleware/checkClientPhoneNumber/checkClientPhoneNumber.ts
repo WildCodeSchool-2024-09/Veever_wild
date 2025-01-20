@@ -1,5 +1,4 @@
 import type { NextFunction, Request, Response } from "express";
-import databaseClient, { type Rows } from "../../../database/client";
 
 export const checkClientPhoneNumber = async (
   req: Request,
@@ -7,20 +6,21 @@ export const checkClientPhoneNumber = async (
   next: NextFunction,
 ): Promise<void> => {
   try {
-    const clientId = req.params.id;
-    const [rows] = await databaseClient.query<Rows>(
-      `
-      SELECT user_id FROM client
-      WHERE id = ?
-      `,
-      [clientId],
-    );
+    const { phoneNumber } = req.body;
 
-    if (rows.length === 0) {
-      res.status(404).json({ error: "Client not found" });
-    } else {
-      next();
+    const phoneRegex = /^\+?([0-9]{1,3})?[-. ]?([0-9]{6,12})$/;
+
+    if (!phoneNumber) {
+      res.status(400).json({ error: "Phone number is required" });
+      return;
     }
+
+    if (!phoneRegex.test(phoneNumber)) {
+      res.status(400).json({ error: "Invalid phone number" });
+      return;
+    }
+
+    next();
   } catch (error) {
     next(error);
   }

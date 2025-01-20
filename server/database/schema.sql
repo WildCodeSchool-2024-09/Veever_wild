@@ -20,7 +20,6 @@ CREATE TABLE gender (
   type varchar(255) not null
 );
 
-
 CREATE TABLE client (
   id int unsigned primary key auto_increment not null,
   user_id int unsigned not null,
@@ -40,7 +39,6 @@ CREATE TABLE phone (
   client_id int unsigned not null,
   foreign key(client_id) references client(id)
   ON DELETE CASCADE
-  
 );
 
 CREATE TABLE reservation (
