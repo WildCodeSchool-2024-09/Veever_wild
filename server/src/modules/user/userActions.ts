@@ -1,6 +1,5 @@
-import bcrypt from "bcryptjs";
 import type { RequestHandler } from "express";
-import { generateToken } from "../../services/authServices";
+import authServices from "../../services/authServices";
 import userRepository from "./userRepository";
 
 const authenticateUser: RequestHandler = async (req, res, next) => {
@@ -9,18 +8,18 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
     const user = await userRepository.getUserEmailWithRole(email);
 
     if (!user) {
-      res.status(401).json({ message: "Email ou mot de passe incorrect" });
+      res.status(401).json({ message: "Email incorrect." });
     }
 
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    const isPasswordMatch = authServices.matchPassword(password, user.password);
 
     if (!isPasswordMatch) {
-      res.status(401).json({ message: "Email ou mot de passe incorrect" });
+      res.status(401).json({ message: "Mot de passe incorrect." });
     }
 
     req.body.password = null;
 
-    const token = generateToken({
+    const token = authServices.generateToken({
       id: user.id,
       email: user.email,
       role: user.role,

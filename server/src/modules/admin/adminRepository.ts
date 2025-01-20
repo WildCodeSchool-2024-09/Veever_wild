@@ -1,6 +1,6 @@
-import bcrypt from "bcryptjs";
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
+import authServices from "../../services/authServices";
 import type { Admin, User } from "../../types/admin/adminTypes";
 
 class adminRepository {
@@ -11,9 +11,9 @@ class adminRepository {
     try {
       await connection.beginTransaction();
 
-      const hashedPassword = await bcrypt.hash(userData.password, 10);
+      const hashedPassword = authServices.hashPassword(userData.password);
 
-      const [userResult] = await connection.query<Result>(
+      const [userResult] = await connection.execute<Result>(
         `
         INSERT INTO user (email, password, firstname, lastname)
         VALUES (?, ?, ?, ?)
@@ -24,11 +24,10 @@ class adminRepository {
       const userId = userResult.insertId;
 
       if (!userId) {
-        await connection.rollback();
         throw new Error("Insertion échouée dans la table user");
       }
 
-      const [adminResult] = await connection.query<Result>(
+      const [adminResult] = await connection.execute<Result>(
         `
         INSERT INTO admin (user_id)
         VALUES (?)
@@ -38,7 +37,6 @@ class adminRepository {
       const adminId = adminResult.insertId;
 
       if (!adminId) {
-        await connection.rollback();
         throw new Error("Insertion échouée dans la table admin");
       }
 
@@ -66,12 +64,7 @@ class adminRepository {
       [id],
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
-
-    const admin = rows[0] as Omit<User & Admin, "password">;
-    return admin;
+    return rows[0];
   }
 
   async readAll() {
@@ -84,67 +77,45 @@ class adminRepository {
       `,
     );
 
-    if (rows.length === 0) {
-      return null;
-    }
-
-    const admins = rows.map((admin) => {
-      return admin as Omit<User & Admin, "password">;
-    });
-
-    return admins;
+    return rows;
   }
 
   // The U of CRUD - Update operation
   async update(userData: User) {
-    try {
-      const [userResult] = await databaseClient.query<Result>(
-        `
+    const hashedPassword = await authServices.hashPassword(userData.password);
+
+    const [userResult] = await databaseClient.execute<Result>(
+      `
         UPDATE user
         SET email = ?, password = ?, firstname = ?, lastname = ?
         WHERE id = (SELECT user_id FROM admin WHERE id = ?)
         `,
-        [
-          userData.email,
-          userData.password,
-          userData.firstname,
-          userData.lastname,
-          userData.id,
-        ],
-      );
+      [
+        userData.email,
+        hashedPassword,
+        userData.firstname,
+        userData.lastname,
+        userData.id,
+      ],
+    );
 
-      return userResult.affectedRows;
-    } catch (error) {
-      throw new Error(
-        "Nous avons rencontré une erreur lors de la mise à jour de l'utilisateur.",
-      );
-    }
+    return userResult.affectedRows > 0;
   }
 
   // The D of CRUD - Delete operation
   async destroy(adminId: number): Promise<number> {
-    try {
-      const [result] = await databaseClient.query<Result>(
-        `
+    const [result] = await databaseClient.execute<Result>(
+      `
         DELETE user, admin
         FROM user
         INNER JOIN admin
         ON admin.user_id = user.id
         WHERE admin.id = ?;
         `,
-        [adminId],
-      );
+      [adminId],
+    );
 
-      if (result.affectedRows === 0) {
-        throw new Error("Administrateur ou utilisateur non trouvé.");
-      }
-
-      return result.affectedRows;
-    } catch (error) {
-      throw new Error(
-        "Nous avons rencontré une erreur lors de la suppression de l'utilisateur.",
-      );
-    }
+    return result.affectedRows;
   }
 }
 
