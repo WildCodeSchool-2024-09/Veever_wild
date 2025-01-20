@@ -1,5 +1,4 @@
 import express from "express";
-import databaseClient, { type Result, type Rows } from "../database/client";
 
 const router = express.Router();
 
@@ -8,17 +7,18 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Define item-related routes
-import itemActions from "./modules/item/itemActions";
-router.get("/api/items", itemActions.browse);
-router.get("/api/items/:id", itemActions.read);
-router.post("/api/items", itemActions.add);
+import validateLogin from "./middlewares/validateLogin";
+import userActions from "./modules/user/userActions";
+router.post("/api/login", validateLogin, userActions.authenticateUser);
 
-// Defin admin-related routes
+import verifyToken from "./middlewares/verifyToken";
+router.use(verifyToken);
+
 import adminActions from "./modules/admin/adminActions";
 router.get("/api/admins", adminActions.browse);
 router.get("/api/admins/:id", adminActions.read);
 router.put("/api/admins/:id", adminActions.edit);
-router.post("/api/admins", adminActions.add); //test
+router.post("/api/admins", adminActions.add);
 router.delete("/api/admins/:id", adminActions.destroy);
 
 import hotelsActions from "./modules/hotels/hotelsActions";
@@ -27,10 +27,6 @@ router.get("/api/hotels/:id", hotelsActions.read);
 router.put("/api/hotels/:id", hotelsActions.edit);
 router.post("/api/hotels", hotelsActions.add);
 router.delete("/api/hotels/:id", hotelsActions.destroy);
-
-import validateLogin from "./middlewares/validateLogin";
-import userActions from "./modules/user/userActions";
-router.post("/api/login", validateLogin, userActions.authenticateUser);
 
 /* ************************************************************************* */
 
