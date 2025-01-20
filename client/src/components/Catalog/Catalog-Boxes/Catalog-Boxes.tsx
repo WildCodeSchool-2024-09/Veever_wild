@@ -1,5 +1,5 @@
+import type { CatalogBoxesProps } from "../../../types/Catalog/CatalogTypes";
 import "./Catalog-Boxes.css";
-import type { CatalogBoxesProps } from "../../types/Catalog/CatalogTypes";
 
 export default function CatalogBoxes({
   filters,

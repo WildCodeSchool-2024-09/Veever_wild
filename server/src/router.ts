@@ -35,6 +35,13 @@ router.put("/api/keywords/:id", keywordActions.edit);
 router.post("/api/keywords", keywordActions.add);
 router.delete("/api/keywords/:id", keywordActions.destroy);
 
+import activityActions from "./modules/activities/activityActions";
+router.get("/api/activities", activityActions.browse);
+router.get("/api/activities/:id", activityActions.read);
+router.put("/api/activities/:id", activityActions.edit);
+router.post("/api/activities", activityActions.add);
+router.delete("/api/activities/:id", activityActions.destroy);
+
 import validateChr from "./middleware/chrValidation/chrValidation";
 import restaurantActions from "./modules/restaurant/restaurantActions";
 router.get("/api/restaurants", restaurantActions.browse);

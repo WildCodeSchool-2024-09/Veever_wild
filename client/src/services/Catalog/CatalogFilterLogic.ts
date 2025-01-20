@@ -1,5 +1,5 @@
 import { useSaveCards } from "../../services/saveCardsContext/saveCardsContext";
-import type { RecapItem } from "../../types/Catalog/CatalogTypes";
+import type { RecapChrProps } from "../../types/Catalog/CatalogTypes";
 import useCatalogFilter from "./CatalogBoxesLogic";
 
 export default function useCatalogLogic() {
@@ -17,7 +17,7 @@ export default function useCatalogLogic() {
     activities: saveCards.filter((card) => card.type === "activities").length,
   };
 
-  const recapData: RecapItem[] = [
+  const recapData: RecapChrProps[] = [
     { name: "Offres likées", emoji: "❤️", count: counts.all, type: "all" },
     { name: "Hôtels", emoji: "🏨", count: counts.hotels, type: "hotels" },
     {
