@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import type { RequestHandler } from "express";
-import jwt from "jsonwebtoken";
+import { generateToken } from "../../services/authServices";
 import userRepository from "./userRepository";
 
 const authenticateUser: RequestHandler = async (req, res, next) => {
@@ -18,11 +18,13 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
       res.status(401).json({ message: "Email ou mot de passe incorrect" });
     }
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email, role: user.role },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "1h" },
-    );
+    req.body.password = undefined;
+
+    const token = generateToken({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+    });
 
     res.status(200).json({
       message: "Connexion réussie",
