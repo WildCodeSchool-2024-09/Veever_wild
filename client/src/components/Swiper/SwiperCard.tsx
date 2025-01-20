@@ -18,25 +18,17 @@ export default function Cardz({
     handleDislike,
     handleDragEnd,
     handleLike,
+    currentIndex,
     isInfoOpen,
     opacity,
     rotate,
     x,
   } = useSwiper(cards, setCards, id.toString());
-  const currentIndex = cards.findIndex((card) => card.id === id);
 
   return (
     <article className="swiper-container" id={`swiper-${id.toString()}`}>
       <article
-        className={`swiper-card ${
-          cards[currentIndex].type === "activities"
-            ? "swiper-card-activities"
-            : cards[currentIndex].type === "hotels"
-              ? "swiper-card-hotel"
-              : cards[currentIndex].type === "restaurants"
-                ? "swiper-card-restaurant"
-                : ""
-        }`}
+        className={`swiper-card swiper-card-${cards[currentIndex].type}`}
       >
         <motion.img
           className="img-swiper"
@@ -47,7 +39,7 @@ export default function Cardz({
           style={{ x, opacity, rotate }}
           onDragEnd={() => handleDragEnd(id)}
         />
-        <article className="button-container">
+        <aside className="button-container">
           <button
             className="swiper-btn"
             onClick={() => handleDislike(id)}
@@ -74,6 +66,7 @@ export default function Cardz({
             className="swiper-btn"
             onClick={() => handleClickInfo()}
             type="button"
+            aria-labelledby={cards[currentIndex].type}
           >
             + d'infos
           </button>
@@ -100,7 +93,7 @@ export default function Cardz({
               </path>
             </svg>
           </button>
-        </article>
+        </aside>
         {isInfoOpen && (
           <article
             className={`info ${isInfoOpen ? "info-open" : "info-closed"}`}

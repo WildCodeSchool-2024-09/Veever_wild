@@ -12,11 +12,7 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
       {saveCards.map((card) => (
         <article
           key={card.id}
-          className={`card-container ${
-            card.type === "hotels"
-              ? "card-container-hotel"
-              : "card-container-restaurant"
-          } ${card.type === "activities" ? "card-container-activities" : ""}`}
+          className={`card-container  card-container-${card.type}`}
         >
           <img className="img-catalog-card" src={card.picture} alt="hôtel" />
           <article key={card.id} className="article-chr-middle-card">

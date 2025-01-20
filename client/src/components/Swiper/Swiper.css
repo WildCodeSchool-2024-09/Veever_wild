@@ -15,10 +15,10 @@
   border: calc(var(--border-weight) * 8) solid;
 }
 
-.swiper-card-hotel {
+.swiper-card-hotels {
   border-color: var(--veever-yellow);
 }
-.swiper-card-restaurant {
+.swiper-card-restaurants {
   border-color: var(--veever-pink);
 }
 .swiper-card-activities {
