@@ -25,6 +25,10 @@ placeholder {
   gap: calc(var(--spacing-ref) * 0.4);
 }
 
+.btnAcceptForm {
+  background-color: black;
+}
+
 #demo-radio-buttons-group-label {
   text-align: center;
 }

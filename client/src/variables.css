@@ -1,6 +1,16 @@
+@font-face {
+  font-family: "Poppins-Light";
+  src: url(./assets/fonts/Poppins/Poppins-Light.ttf);
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url(./assets/fonts/AcuminProExtraCondensedSemibold/font.woff);
+}
+
 :root {
-  --titleFont: "MontSerrat";
-  --textFont: "Arial";
+  --titleFont: "Acumin";
+  --textFont: "Poppins-Light";
 
   --font-size-ref: 1rem;
 
@@ -8,6 +18,8 @@
 
   --bckgColor: lightgrey;
   --mainColor: tomato;
+  --bckgColor-CTA: #f59e3f;
+  --gradientColor-CTA: linear-gradient(to left, #f59e3f 13%, #f74aa1 100%);
   --secondColor: black;
   --aliceBlueColor: #f0f8ff;
   --border-color-input-focus: #3399ff;
