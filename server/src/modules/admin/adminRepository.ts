@@ -29,7 +29,7 @@ class adminRepository {
         throw new Error("Insertion échouée dans la table user");
       }
 
-      const [adminResult] = await connection.query<Result>(
+      const [adminResult] = await connection.execute<Result>(
         `
         INSERT INTO admin (user_id)
         VALUES (?)
