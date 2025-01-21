@@ -58,6 +58,10 @@ placeholder {
   font-family: var(--textFont);
 }
 
+.password-label {
+  margin: auto;
+}
+
 .checkBox {
   display: flex;
   justify-content: center;
@@ -66,16 +70,22 @@ placeholder {
 }
 
 .error {
-  font-size: var(--font-size-ref);
+  font-size: calc(var(--font-size-ref) * 0.8);
   width: 80%;
   color: var(--errorColor);
   text-align: center;
+  font-family: var(--textFont);
 }
 
 .errors {
   list-style: none;
   color: var(--errorColor);
   font-size: calc(var(--font-size-ref) * 0.8);
+  justify-items: center;
+}
+
+.css-97ewkx {
+  align-self: center;
 }
 
 .error::before {
@@ -84,6 +94,16 @@ placeholder {
 
 .react-datepicker__view-calendar-icon input {
   padding: var(--padding-input) !important;
+}
+
+.birthdayCalendar {
+  text-align: center;
+}
+
+.react-datepicker__month-select {
+  text-align: center;
+}
+.react-datepicker__current-month {
   text-align: center;
 }
 

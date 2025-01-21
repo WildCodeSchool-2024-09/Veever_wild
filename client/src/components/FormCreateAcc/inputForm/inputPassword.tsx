@@ -13,7 +13,7 @@ export default function InputPassword({
   return (
     <>
       <FormControl className="formGroup" required>
-        <FormLabel htmlFor="password">
+        <FormLabel className="password-label" htmlFor="password">
           Veuillez entrer un mot de passe
         </FormLabel>
         <StyledInput
