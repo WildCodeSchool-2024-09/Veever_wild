@@ -1,9 +1,10 @@
 @import url("@src/variables.css");
+
 .stay-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   min-height: 100vh;
   padding: calc(var(--spacing-ref) * 2);
 }
@@ -14,19 +15,42 @@
 .results {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: calc(var(--spacing-ref) * 1);
   width: 100%;
   max-width: calc(var(--spacing-ref) * 25);
 }
+
 .error-message {
   color: var(--errorColor);
   font-size: var(--font-size-ref);
+  text-align: left;
 }
+
+.checkbox-stay {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: var(--spacing-ref);
+  width: 100%;
+  max-width: calc(var(--spacing-ref) * 25);
+}
+
+.checkbox-stay-input {
+  margin-right: var(--spacing-ref);
+}
+
+.title-checkbox {
+  text-align: left;
+  width: 100%;
+  max-width: calc(var(--spacing-ref) * 25);
+  margin-bottom: calc(var(--spacing-ref) * 0.5);
+}
+
 .stay-label {
   font-size: calc(var(--font-size-ref) * 0.75);
   margin-bottom: calc(var(--spacing-ref) * 0.5);
-  text-align: center;
+  text-align: left;
 }
 
 .stay-select,
@@ -35,22 +59,9 @@
   font-size: calc(var(--font-size-ref) * 0.75);
   width: 100%;
   max-width: calc(var(--spacing-ref) * 18);
-  text-align: center;
+  text-align: left;
   cursor: pointer;
   background-color: var(--bckgColor);
   border: solid var(--bckgColor);
   border-radius: var(--border-ref);
-}
-
-.results {
-  background-color: var(--mainColor);
-  padding: calc(var(--spacing-ref));
-  border-radius: var(--border-ref);
-  box-shadow: var(--box-shadow-soft);
-  width: 100%;
-  max-width: calc(var(--spacing-ref) * 25);
-  text-align: center;
-}
-.result-p {
-  font-size: calc(var((--font-size-ref) * 0.5));
 }

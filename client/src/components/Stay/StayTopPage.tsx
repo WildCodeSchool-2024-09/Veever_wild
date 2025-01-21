@@ -104,39 +104,28 @@ export default function Stay() {
         </select>
       </section>
 
-      <article className="results">
-        <h2>Vous avez choisi</h2>
-        <p className="result-p">
-          Date :
-          {startDate && endDate
-            ? `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`
-            : "Non sélectionnée"}
-        </p>
-        <p className="result-p">
-          Type de groupe : {groupChoice || "Non sélectionné"}
-        </p>
-        <p className="result-p">
-          Nombre de personnes : {selectedNumber || "Non sélectionné"}
-        </p>
-      </article>
-      <label>
+      <h2 className="title-checkbox">Préstations souhaitées</h2>
+      <label className="checkbox-stay">
         <input
+          className="checkbox-stay-input"
           type="checkbox"
           checked={hotel}
           onChange={() => setHotel(!hotel)}
         />
         Hôtels
       </label>
-      <label>
+      <label className="checkbox-stay">
         <input
+          className="checkbox-stay-input"
           type="checkbox"
           checked={activity}
           onChange={() => setActivity(!activity)}
         />
         Activités
       </label>
-      <label>
+      <label className="checkbox-stay">
         <input
+          className="checkbox-stay-input"
           type="checkbox"
           checked={restaurant}
           onChange={() => setRestaurant(!restaurant)}
@@ -154,16 +143,9 @@ export default function Stay() {
           valueLabelDisplay="auto"
           min={MIN_PRICE}
           max={MAX_PRICE}
+          step={50}
           valueLabelFormat={formatPrice}
         />
-        <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
-          <Typography variant="body2" color="text.secondary">
-            Min: {formatPrice(MIN_PRICE)}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Max: {formatPrice(MAX_PRICE)}
-          </Typography>
-        </Box>
       </Box>
     </main>
   );
