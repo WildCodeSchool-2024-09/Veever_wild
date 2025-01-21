@@ -21,8 +21,8 @@ placeholder {
 
 .headerForm h1 {
   text-align: center;
-  color: whitesmoke;
-  border-radius: 12px;
+  color: var(--aliceBlueColor);
+  border-radius: var(--border-ref);
   background: var(--gradientColor-CTA);
 }
 
