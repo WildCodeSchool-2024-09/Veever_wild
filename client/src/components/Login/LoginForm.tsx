@@ -23,7 +23,7 @@ export default function LoginForm() {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ email, password }),
-        credentials: "include",
+        credentials: "include", // Important pour envoyer et recevoir les cookies
       });
 
       if (!response.ok) {
@@ -32,7 +32,6 @@ export default function LoginForm() {
       }
 
       const data = await response.json();
-      localStorage.setItem("token", data.token);
 
       const decodedToken = jwtDecode<DecodedTokenType>(data.token);
       const userRole = decodedToken.role;

@@ -11,8 +11,8 @@ import validateLogin from "./middlewares/validateLogin";
 import userActions from "./modules/user/userActions";
 router.post("/api/login", validateLogin, userActions.authenticateUser);
 
-import verifyToken from "./middlewares/verifyToken";
-router.use(verifyToken);
+// import verifyToken from "./middlewares/verifyToken";
+// router.use(verifyToken);
 
 import authorizeRole from "./middlewares/authorizeRole";
 import adminActions from "./modules/admin/adminActions";
