@@ -80,11 +80,14 @@ export default function useSwiper(
     });
   };
 
+  const currentIndex = cards.findIndex((card) => card.id === Number(id));
+
   return {
     handleClickInfo,
     handleDislike,
     handleDragEnd,
     handleLike,
+    currentIndex,
     isInfoOpen,
     opacity,
     rotate,
