@@ -11,8 +11,8 @@
 }
 
 .swiper-card {
-  border-radius: var(--border-ref);
-  border: calc(var(--border-weight) * 8) solid;
+  border-radius: calc(var(--border-ref) * 1.3);
+  border: calc(var(--border-weight) * 4) solid;
 }
 
 .swiper-card-hotels {
@@ -30,6 +30,7 @@
   width: 100%;
   height: 70vh;
   cursor: grab;
+  border-radius: calc(var(--border-ref) * 1.2);
   &:active {
     cursor: grabbing;
   }
