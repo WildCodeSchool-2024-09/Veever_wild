@@ -27,9 +27,11 @@
   --font-weight-S: 400;
 
   --bckgColor: #f8f9fa;
-  --mainColor: tomato;
+  --mainColor: #fb793f;
+  --secondColor: #4e4a4a;
+  --thirdColor: #f74aa1;
   --gradientColor-CTA: linear-gradient(to left, #f59e3f 13%, #f74aa1 100%);
-  --secondColor: black;
+  --shadow: #c8c8c8;
   --aliceBlueColor: #f0f8ff;
   --border-color-input-focus: #3399ff;
   --errorColor: rgba(255, 0, 0, 0.753);
@@ -42,6 +44,7 @@
   --border-ref: 8px;
   --border-XL: calc(var(--border-ref) * 2);
   --border-input: 1px solid #dae2ed;
+  --border-weight: 1px;
 
   --spacing-ref: 1rem;
   --spacing-S: calc(var(--spacing-ref) * 0.5);

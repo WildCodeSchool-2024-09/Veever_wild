@@ -39,7 +39,7 @@ placeholder {
 
 .checkLabel {
   text-align: center;
-  width: var(--width-label-text);
+  width: 30ch;
 }
 .createForm {
   display: flex;
