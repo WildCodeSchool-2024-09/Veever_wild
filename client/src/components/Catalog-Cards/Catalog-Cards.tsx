@@ -4,6 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import type { Card } from "../../types/Catalog/CatalogTypes";
 import ChrMiddleCard from "./Chr-Middle-Card";
 import ChrTopCard from "./Chr-Top-Card";
+
 export type CatalogueProps = {
   saveCards: Card[];
 };
