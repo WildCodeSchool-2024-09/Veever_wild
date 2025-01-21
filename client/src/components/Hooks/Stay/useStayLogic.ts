@@ -48,7 +48,19 @@ export function useStayLogic() {
 
   const formatPrice = (value: number) => `${value}€`;
 
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [hotel, setHotel] = useState(false);
+  const [activity, setActivity] = useState(false);
+  const [restaurant, setRestaurant] = useState(false);
   return {
+    isCalendarOpen,
+    setIsCalendarOpen,
+    hotel,
+    setHotel,
+    activity,
+    setActivity,
+    restaurant,
+    setRestaurant,
     errorMessage,
     startDate,
     endDate,

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useStayLogic } from "../Hooks/Stay/useStayLogic";
@@ -8,6 +7,14 @@ import { StyledSlider } from "../Hooks/Stay/SliderStyles";
 
 export default function Stay() {
   const {
+    isCalendarOpen,
+    setIsCalendarOpen,
+    hotel,
+    setHotel,
+    activity,
+    setActivity,
+    restaurant,
+    setRestaurant,
     startDate,
     endDate,
     errorMessage,
@@ -24,11 +31,6 @@ export default function Stay() {
     MIN_PRICE,
     MAX_PRICE,
   } = useStayLogic();
-
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [hotel, setHotel] = useState(false);
-  const [activity, setActivity] = useState(false);
-  const [restaurant, setRestaurant] = useState(false);
 
   return (
     <main className="stay-container">
