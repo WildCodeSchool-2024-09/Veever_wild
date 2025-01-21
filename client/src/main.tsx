@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
+import Stay from "./pages/Stay/Stay";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/createAccount",
         element: <CreateAccount />,
+      },
+      {
+        path: "/stay",
+        element: <Stay />,
       },
     ],
   },
