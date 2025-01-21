@@ -1,0 +1,28 @@
+.questionnaire-container {
+  display: grid;
+}
+
+.questionnaire-card {
+  grid-row: 1;
+  grid-column: 1;
+  border-radius: 8px;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.questionnaire-card button:nth-child(2) {
+  display: none;
+}
+
+.tag-container {
+  position: absolute;
+  width: 80%;
+}
+
+.tag-keyword {
+  background: var(--bckgColor);
+  color: var(--mainColor);
+  font-size: calc(var(--font-size-ref) * 1.2);
+  padding: var(--padding-input);
+  border-radius: 4px;
+}

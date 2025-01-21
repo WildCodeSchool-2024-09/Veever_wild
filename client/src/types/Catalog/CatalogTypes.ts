@@ -24,6 +24,7 @@ export type ChrCardProps = {
   count: number;
   id: number;
   picture: string;
+  link: string;
   name: string;
   maxPrice: number;
   minPrice: number;

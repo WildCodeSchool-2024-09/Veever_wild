@@ -47,7 +47,3 @@
   cursor: pointer;
   letter-spacing: var(--spacing-letter-ref);
 }
-
-.info p {
-  padding: var(--spacing-ref);
-}

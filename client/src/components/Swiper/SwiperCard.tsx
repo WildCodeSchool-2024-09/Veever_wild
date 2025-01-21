@@ -6,39 +6,38 @@ export default function Cardz({
   id,
   picture,
   name,
-  maxPrice,
-  minPrice,
-  address,
-  category,
   cards,
   setCards,
 }: ChrCardsProps) {
   const {
-    handleClickInfo,
     handleDislike,
     handleDragEnd,
     handleLike,
     currentIndex,
-    isInfoOpen,
     opacity,
     rotate,
     x,
-  } = useSwiper(cards, setCards, id.toString());
+  } = useSwiper(cards, setCards, id);
 
   return (
-    <article className="swiper-container" id={`swiper-${id.toString()}`}>
+    <article className="swiper-container">
       <article
         className={`swiper-card swiper-card-${cards[currentIndex].type}`}
       >
-        <motion.img
-          className="img-swiper"
-          src={picture}
-          alt={name}
+        <motion.article
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           style={{ x, opacity, rotate }}
           onDragEnd={() => handleDragEnd(id)}
-        />
+        >
+          {cards.map((card) => (
+            <div key={card.id} className="tag-container">
+              <p className="tag-keyword">{card.name}</p>
+            </div>
+          ))}
+
+          <img className="img-swiper" src={picture} alt={name} />
+        </motion.article>
         <aside className="button-container">
           <button
             className="swiper-btn"
@@ -64,7 +63,6 @@ export default function Cardz({
           </button>
           <button
             className="swiper-btn"
-            onClick={() => handleClickInfo()}
             type="button"
             aria-labelledby={cards[currentIndex].type}
           >
@@ -94,19 +92,6 @@ export default function Cardz({
             </svg>
           </button>
         </aside>
-        {isInfoOpen && (
-          <article
-            className={`info ${isInfoOpen ? "info-open" : "info-closed"}`}
-            id={`info-${id.toString()}`}
-          >
-            <p>Catégories: {category}</p>
-            <p>{name}</p>
-            <p>Adresse: {address}</p>
-            <p>
-              Prix entre {minPrice} et {maxPrice}€
-            </p>
-          </article>
-        )}
       </article>
     </article>
   );

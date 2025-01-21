@@ -1,5 +1,5 @@
 import { animate, useMotionValue, useTransform } from "framer-motion";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useSaveCards } from "../../../services/saveCardsContext/saveCardsContext";
 import type {
   ChrCardProps,
@@ -9,9 +9,8 @@ import type {
 export default function useSwiper(
   cards: ChrCardProps[],
   setCards: ChrCardsProps["setCards"],
-  id: string,
+  id: number,
 ) {
-  const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [, setIsAnimated] = useState(false);
   const { addCard } = useSaveCards();
 
@@ -31,27 +30,6 @@ export default function useSwiper(
       setCards(cards.filter((card) => card.id !== id));
     }
   };
-
-  const scrollToInfo = useCallback((id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  }, []);
-
-  const handleClickInfo = () => {
-    setIsInfoOpen((prev) => !prev);
-  };
-  useEffect(() => {
-    if (isInfoOpen) {
-      scrollToInfo(`info-${id}`);
-    } else {
-      scrollToInfo(`swiper-${id}`);
-    }
-  }, [isInfoOpen, id, scrollToInfo]);
 
   const handleLike = (id: number) => {
     setIsAnimated(true);
@@ -80,15 +58,13 @@ export default function useSwiper(
     });
   };
 
-  const currentIndex = cards.findIndex((card) => card.id === Number(id));
+  const currentIndex = cards.findIndex((card) => card.id === id);
 
   return {
-    handleClickInfo,
     handleDislike,
     handleDragEnd,
     handleLike,
     currentIndex,
-    isInfoOpen,
     opacity,
     rotate,
     x,

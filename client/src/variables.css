@@ -6,12 +6,12 @@
 
   --font-weight-S: 400;
 
-  --bckgColor: lightgrey;
-  --veever-yellow: #ffea00;
-  --veever-pink: #f26497;
-  --veever-blue: #36a1db;
-  --mainColor: tomato;
-  --secondColor: black;
+  --bckgColor: #ffd6c6;
+  --mainColor: #fb7a3f;
+  --secondColor: #4e4a4a;
+  --thirdColor: #f74aa1;
+  --gradientColor: linear-gradient(90deg, #f74aa1 0%, #fb793f 100%);
+  --shadow: #c8c8c8;
   --aliceBlueColor: #f0f8ff;
   --border-color-input-focus: #3399ff;
   --errorColor: red;
