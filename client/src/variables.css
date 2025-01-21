@@ -7,6 +7,9 @@
   --font-weight-S: 400;
 
   --bckgColor: lightgrey;
+  --veever-yellow: #ffea00;
+  --veever-pink: #f26497;
+  --veever-blue: #36a1db;
   --mainColor: tomato;
   --secondColor: black;
   --aliceBlueColor: #f0f8ff;
@@ -21,6 +24,7 @@
   --border-ref: 8px;
   --border-XL: calc(var(--border-ref) * 2);
   --border-input: 1px solid #dae2ed;
+  --border-weight: 1px;
 
   --spacing-ref: 1rem;
   --spacing-S: calc(var(--spacing-ref) * 0.5);
