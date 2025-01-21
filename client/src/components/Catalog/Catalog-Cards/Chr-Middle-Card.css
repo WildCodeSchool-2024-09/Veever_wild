@@ -11,11 +11,11 @@
   border: calc(var(--border-weight) * 8) solid;
 }
 
-.card-container-hotel {
+.card-container-hotels {
   border-color: var(--veever-yellow);
 }
 
-.card-container-restaurant {
+.card-container-restaurants {
   border-color: var(--veever-pink);
 }
 
