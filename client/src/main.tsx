@@ -6,8 +6,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
-import Swiper from "./components/catalog-swipper/Swiper";
+import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
+import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import HomePage from "./pages/HomePage/HomePage";
 import Profile from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <Settings />,
+      },
+      {
+        path: "/createAccount",
+        element: <CreateAccount />,
       },
     ],
   },
