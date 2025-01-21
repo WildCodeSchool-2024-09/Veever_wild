@@ -1,4 +1,4 @@
-import Swiper from "../../components/catalog-swipper/Swiper";
+import Swiper from "../../components/Swiper/Swiper";
 
 export default function Search() {
   return (
