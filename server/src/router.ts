@@ -46,32 +46,93 @@ router.delete(
 );
 
 import keywordActions from "./modules/keyword/keywordActions";
-router.get("/api/keywords", keywordActions.browse);
-router.get("/api/keywords/:id", keywordActions.read);
-router.put("/api/keywords/:id", keywordActions.edit);
-router.post("/api/keywords", keywordActions.add);
-router.delete("/api/keywords/:id", keywordActions.destroy);
+router.get(
+  "/api/keywords",
+  authorizeRole(["admin", "client"]),
+  keywordActions.browse,
+);
+router.get(
+  "/api/keywords/:id",
+  authorizeRole(["admin", "client"]),
+  keywordActions.read,
+);
+router.put("/api/keywords/:id", authorizeRole(["admin"]), keywordActions.edit);
+router.post("/api/keywords", authorizeRole(["admin"]), keywordActions.add);
+router.delete(
+  "/api/keywords/:id",
+  authorizeRole(["admin"]),
+  keywordActions.destroy,
+);
 
 import activityActions from "./modules/activities/activityActions";
-router.get("/api/activities", activityActions.browse);
-router.get("/api/activities/:id", activityActions.read);
-router.put("/api/activities/:id", activityActions.edit);
-router.post("/api/activities", activityActions.add);
-router.delete("/api/activities/:id", activityActions.destroy);
+router.get(
+  "/api/activities",
+  authorizeRole(["admin", "client"]),
+  activityActions.browse,
+);
+router.get(
+  "/api/activities/:id",
+  authorizeRole(["admin", "client"]),
+  activityActions.read,
+);
+router.put(
+  "/api/activities/:id",
+  authorizeRole(["admin"]),
+  activityActions.edit,
+);
+router.post("/api/activities", authorizeRole(["admin"]), activityActions.add);
+router.delete(
+  "/api/activities/:id",
+  authorizeRole(["admin"]),
+  activityActions.destroy,
+);
 
 import validateChr from "./middleware/chrValidation/chrValidation";
 import restaurantActions from "./modules/restaurant/restaurantActions";
-router.get("/api/restaurants", restaurantActions.browse);
-router.get("/api/restaurants/:id", restaurantActions.read);
-router.put("/api/restaurants/:id", restaurantActions.edit);
-router.post("/api/restaurants", validateChr, restaurantActions.add);
-router.delete("/api/restaurants/:id", restaurantActions.destroy);
+router.get(
+  "/api/restaurants",
+  authorizeRole(["admin", "client"]),
+  restaurantActions.browse,
+);
+router.get(
+  "/api/restaurants/:id",
+  authorizeRole(["admin", "client"]),
+  restaurantActions.read,
+);
+router.put(
+  "/api/restaurants/:id",
+  authorizeRole(["admin"]),
+  restaurantActions.edit,
+);
+router.post(
+  "/api/restaurants",
+  authorizeRole(["admin"]),
+  validateChr,
+  restaurantActions.add,
+);
+router.delete(
+  "/api/restaurants/:id",
+  authorizeRole(["admin"]),
+  restaurantActions.destroy,
+);
 
 import genderActions from "./modules/gender/genderActions";
-router.get("/api/genders", genderActions.browse);
-router.get("/api/genders/:id", genderActions.read);
-router.put("/api/genders/:id", genderActions.edit);
-router.post("/api/genders", genderActions.add);
-router.delete("/api/genders/:id", genderActions.destroy);
+router.get(
+  "/api/genders",
+  authorizeRole(["admin", "client"]),
+  genderActions.browse,
+);
+router.get(
+  "/api/genders/:id",
+  authorizeRole(["admin", "client"]),
+  genderActions.read,
+);
+router.put("/api/genders/:id", authorizeRole(["admin"]), genderActions.edit);
+router.post("/api/genders", authorizeRole(["admin"]), genderActions.add);
+router.delete(
+  "/api/genders/:id",
+  authorizeRole(["admin"]),
+  genderActions.destroy,
+);
 /* ************************************************************************* */
 export default router;
