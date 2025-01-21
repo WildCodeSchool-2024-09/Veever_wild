@@ -10,7 +10,7 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
     <>
       {saveCards.map((card) => (
         <div key={card.id} className="card-container">
-          <img className="img-catalog-card" src={card.picture} alt="hôtel" />
+          <img className="img-catalog-card" src={card.picture} alt="" />
           <article key={card.id} className="article-chr-middle-card">
             <h2>{card.name}</h2>
             <p>{card.maxPrice}</p>
