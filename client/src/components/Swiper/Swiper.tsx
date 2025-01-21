@@ -15,7 +15,13 @@ export default function Swiper() {
   return (
     <article className="card-map">
       {cards.map((card) => (
-        <Cardz key={card.id} {...card} cards={cards} setCards={setCards} />
+        <Cardz
+          handleKeywordSelection={() => {}}
+          key={card.id}
+          {...card}
+          cards={cards}
+          setCards={setCards}
+        />
       ))}
     </article>
   );

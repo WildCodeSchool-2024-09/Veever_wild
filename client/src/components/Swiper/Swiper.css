@@ -49,6 +49,10 @@
   letter-spacing: var(--spacing-letter-ref);
 }
 
+.swiper-btn a {
+  text-decoration: none;
+}
+
 .info p {
   padding: var(--spacing-ref);
 }

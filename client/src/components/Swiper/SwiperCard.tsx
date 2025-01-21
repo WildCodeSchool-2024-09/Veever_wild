@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import type { ChrCardsProps } from "../../types/Catalog/CatalogTypes";
 import useSwiper from "../Hooks/Swiper/useSwiper";
 
@@ -6,12 +7,9 @@ export default function Cardz({
   id,
   picture,
   name,
-  maxPrice,
-  minPrice,
-  address,
-  category,
   cards,
   setCards,
+  handleKeywordSelection,
 }: ChrCardsProps) {
   const {
     handleClickInfo,
@@ -19,14 +17,20 @@ export default function Cardz({
     handleDragEnd,
     handleLike,
     currentIndex,
-    isInfoOpen,
     opacity,
     rotate,
     x,
-  } = useSwiper(cards, setCards, id.toString());
-
+  } = useSwiper(cards, setCards, id.toString(), handleKeywordSelection);
+  const API_KEY_MAPS = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
   return (
     <article className="swiper-container" id={`swiper-${id.toString()}`}>
+      <iframe
+        width="600"
+        height="450"
+        loading="lazy"
+        title="Google Maps"
+        src={`https://www.google.com/maps/embed/v1/place?q=Paris&key=${API_KEY_MAPS}`}
+      />
       <article
         className={`swiper-card swiper-card-${cards[currentIndex].type}`}
       >
@@ -68,7 +72,7 @@ export default function Cardz({
             type="button"
             aria-labelledby={cards[currentIndex].type}
           >
-            + d'infos
+            <Link to="/prestataire">+ d'infos</Link>
           </button>
           <button
             className="swiper-btn"
@@ -94,19 +98,6 @@ export default function Cardz({
             </svg>
           </button>
         </aside>
-        {isInfoOpen && (
-          <article
-            className={`info ${isInfoOpen ? "info-open" : "info-closed"}`}
-            id={`info-${id.toString()}`}
-          >
-            <p>Catégories: {category}</p>
-            <p>{name}</p>
-            <p>Adresse: {address}</p>
-            <p>
-              Prix entre {minPrice} et {maxPrice}€
-            </p>
-          </article>
-        )}
       </article>
     </article>
   );

@@ -113,6 +113,39 @@ const datas = [
   },
 ];
 
+const illustrationData = [
+  {
+    id: 1,
+    keywords: ["Asiatique", "Japonais", "Sushi"],
+    picture: "/assets/images/JapaneseFood.jpg",
+  },
+  {
+    id: 2,
+    keywords: ["FastFood", "Burger"],
+    picture: "/assets/images/FastFood.jpg",
+  },
+  {
+    id: 3,
+    keywords: ["Appart", "Location", "Confort"],
+    picture: "/assets/images/AppartHotel.jpg",
+  },
+  {
+    id: 4,
+    keywords: ["Hotel", "Palace", "Luxe"],
+    picture: "/assets/images/Palace.jpg",
+  },
+  {
+    id: 5,
+    keywords: ["Activité plein-air", "Sport", "Nature"],
+    picture: "/assets/images/paintball.jpg",
+  },
+  {
+    id: 6,
+    keywords: ["Activité intérieur", "Enigme", "Groupe"],
+    picture: "/assets/images/escape_game.jpg",
+  },
+];
+
 app.get("/api/restaurants", (req, res, next) => {
   const result = datas.filter((data) => data.type === "restaurant");
   res.json(result);
@@ -127,4 +160,8 @@ app.get("/api/activities", (req, res, next) => {
 });
 app.get("/api/chr", (req, res, next) => {
   res.json(datas);
+});
+
+app.get("/api/illustration", (req, res, next) => {
+  res.json(illustrationData);
 });

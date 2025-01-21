@@ -31,7 +31,6 @@ export default function InputGender({ handleChange, value }: FormInput) {
     <FormControl className="formGroup">
       <FormLabel htmlFor="gender">Votre genre</FormLabel>
       <StyledSelect
-        required
         name="gender"
         id="gender"
         value={value}

@@ -10,6 +10,7 @@ export default function useSwiper(
   cards: ChrCardProps[],
   setCards: ChrCardsProps["setCards"],
   id: string,
+  handleKeywordSelection: (keywords: string[], picture: string) => void,
 ) {
   const [isInfoOpen, setIsInfoOpen] = useState(false);
   const [, setIsAnimated] = useState(false);
@@ -24,6 +25,7 @@ export default function useSwiper(
     if (currentX > 50) {
       const swippedCards = cards.find((card) => card.id === id);
       if (swippedCards) {
+        handleKeywordSelection(swippedCards.keywords, swippedCards.picture);
         addCard(swippedCards);
       }
       setCards(cards.filter((card) => card.id !== id));
@@ -79,7 +81,6 @@ export default function useSwiper(
       },
     });
   };
-
   const currentIndex = cards.findIndex((card) => card.id === Number(id));
 
   return {
