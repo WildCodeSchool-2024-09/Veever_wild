@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
+import AddKeywords from "./components/BackOffice/AddKeywords";
 import Questionnaire from "./components/Questionnaire/Questionnaire";
 import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/createAccount",
         element: <CreateAccount />,
+      },
+      {
+        path: "/admin",
+        element: <AddKeywords />,
       },
       {
         path: "/questionnaire",
