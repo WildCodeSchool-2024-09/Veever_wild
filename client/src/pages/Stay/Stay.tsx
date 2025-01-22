@@ -5,36 +5,37 @@ import StayTopPage from "../../components/Stay/StayTopPage";
 
 export default function Stay() {
   const { onChange } = useStayLogic();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [selectedDays, setSelectedDays] = useState<number>(1);
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleDateChange = (dates: [Date | null, Date | null]) => {
-    const [start, end] = dates;
-    if (start && end) {
-      const diffInDays = Math.floor(
-        (end.getTime() - start.getTime()) / (1000 * 3600 * 24),
-      );
-      if (diffInDays > 2) {
+  const handleDateChange = (date: Date) => {
+    let updatedDates = [...selectedDates];
+    if (updatedDates.some((d) => d.getTime() === date.getTime())) {
+      updatedDates = updatedDates.filter((d) => d.getTime() !== date.getTime());
+    } else {
+      if (updatedDates.length < 3) {
+        updatedDates.push(date);
+      } else {
         setErrorMessage("Vous ne pouvez sélectionner que jusqu'à 3 jours.");
         return;
       }
-      setSelectedDays(diffInDays + 1);
-    } else {
-      setSelectedDays(1);
     }
     setErrorMessage(null);
-    setSelectedDate(start);
-    onChange(dates);
+    setSelectedDates(updatedDates);
+    onChange([updatedDates[0] || null, updatedDates[1] || null]);
   };
+
   return (
     <>
       <StayTopPage
-        selectedDate={selectedDate}
+        selectedDates={selectedDates}
         onChange={handleDateChange}
         errorMessage={errorMessage}
       />
-      <StayBottomPage selectedDate={selectedDate} selectedDays={selectedDays} />
+      <StayBottomPage
+        selectedDate={selectedDates[0]}
+        selectedDays={selectedDates.length}
+      />
     </>
   );
 }

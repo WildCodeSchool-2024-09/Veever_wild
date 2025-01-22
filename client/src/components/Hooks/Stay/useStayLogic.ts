@@ -17,7 +17,6 @@ export function useStayLogic() {
     max_price,
   ]);
   const formatPrice = (value: number) => `${value}€`;
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [hotel, setHotel] = useState(false);
   const [activity, setActivity] = useState(false);
   const [restaurant, setRestaurant] = useState(false);
@@ -73,8 +72,6 @@ export function useStayLogic() {
   }
 
   return {
-    isCalendarOpen,
-    setIsCalendarOpen,
     hotel,
     setHotel,
     activity,

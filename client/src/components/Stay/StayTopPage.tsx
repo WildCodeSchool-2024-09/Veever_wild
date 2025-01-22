@@ -1,18 +1,18 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useStayLogic } from "../Hooks/Stay/useStayLogic";
+import { useStayLogic } from "../../components/Hooks/Stay/useStayLogic";
 import "./StayTopPage.css";
 import { Box } from "@mui/material";
 import Slider from "@mui/material/Slider";
 
 interface StayTopPageProps {
-  selectedDate: Date | null;
-  onChange: (dates: [Date | null, Date | null]) => void;
+  selectedDates: Date[];
+  onChange: (date: Date) => void;
   errorMessage: string | null;
 }
 
 export default function StayTopPage({
-  selectedDate,
+  selectedDates,
   onChange,
   errorMessage,
 }: StayTopPageProps) {
@@ -23,8 +23,6 @@ export default function StayTopPage({
     setActivity,
     restaurant,
     setRestaurant,
-    startDate,
-    endDate,
     groupChoice,
     setGroupChoice,
     selectedNumber,
@@ -34,41 +32,28 @@ export default function StayTopPage({
   } = useStayLogic();
 
   const marks = [
-    {
-      value: 0,
-      label: "€",
-    },
-    {
-      value: 33,
-      label: "€€",
-    },
-    {
-      value: 66,
-      label: "€€€",
-    },
-    {
-      value: 100,
-      label: "€€€€",
-    },
+    { value: 0, label: "€" },
+    { value: 33, label: "€€" },
+    { value: 66, label: "€€€" },
+    { value: 100, label: "€€€€" },
   ];
 
   function valuetext(value: number) {
     return `${value}`;
   }
+
   return (
     <main className="stay-container">
       <section className="calendar">
         <h2>Calendrier</h2>
         <>
           <DatePicker
-            selected={selectedDate}
-            onChange={onChange}
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
+            selected={selectedDates[0] || null}
+            onChange={(date: Date | null) => date && onChange(date)}
             inline
             isClearable
             minDate={new Date()}
+            highlightDates={selectedDates}
           />
           {errorMessage && <p className="error-message">{errorMessage}</p>}
         </>
@@ -147,7 +132,7 @@ export default function StayTopPage({
       <Box sx={{ width: 290 }}>
         <Slider
           aria-label="Custom marks"
-          defaultValue={0}
+          defaultValue={20}
           getAriaValueText={valuetext}
           step={33}
           valueLabelDisplay="auto"
