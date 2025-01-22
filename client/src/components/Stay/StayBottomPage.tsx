@@ -1,37 +1,99 @@
 import { useStayLogic } from "../Hooks/Stay/useStayLogic";
+import "./StayBottomPage.css";
+interface StayBottomPageProps {
+  selectedDate: Date | null;
+  selectedDays: number;
+}
+export default function StayBottomPage({
+  selectedDate,
+  selectedDays,
+}: StayBottomPageProps) {
+  const { checkBoxes, handleCheckboxChange } = useStayLogic();
 
-export default function StayBottomPage() {
-  const { hotel, setHotel, activity, setActivity, restaurant, setRestaurant } =
-    useStayLogic();
   return (
-    <main>
+    <main className="stay-container">
       <section>
-        <h2>Séléctionner vos préstations</h2>
-        <label>
-          <input
-            type="checkbox"
-            checked={hotel}
-            onChange={() => setHotel(!hotel)}
-          />
-          Hôtel
+        <h2>Sélectionner vos préstations</h2>
+      </section>
+
+      <section>
+        {selectedDays > 0 &&
+          [...Array(selectedDays)].map((_, dayIndex) => {
+            const dayKey = `day-${dayIndex + 1}`;
+            const displayDate = selectedDate ? new Date(selectedDate) : null;
+            if (displayDate) {
+              displayDate.setDate(displayDate.getDate() + dayIndex);
+            }
+            return (
+              <section key={dayKey} className="day-checkbox-group">
+                <h3>
+                  Journée du{" "}
+                  {displayDate
+                    ? displayDate.toLocaleDateString()
+                    : dayIndex + 1}
+                </h3>
+                {["Restaurant", "Activité", "Hôtel"].map((option) => {
+                  const key = `${dayIndex + 1}-${option}`;
+                  return (
+                    <label key={key} className="box-bottom-stay">
+                      <input
+                        type="checkbox"
+                        checked={checkBoxes[key] || false}
+                        onChange={() => handleCheckboxChange(key)}
+                      />
+                      {option}
+                    </label>
+                  );
+                })}
+              </section>
+            );
+          })}
+      </section>
+
+      <section>
+        <h2>Restauration</h2>
+        <label className="box-bottom-stay">
+          <input type="checkbox" />
+          Petit déjeuner
         </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={activity}
-            onChange={() => setActivity(!activity)}
-          />
-          Activité
+        <label className="box-bottom-stay">
+          <input type="checkbox" />
+          Déjeuner
         </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={restaurant}
-            onChange={() => setRestaurant(!restaurant)}
-          />
-          Restaurant
+        <label className="box-bottom-stay">
+          <input type="checkbox" />
+          Diner
         </label>
       </section>
+
+      <article className="other-informations">
+        <h3>Autres informations</h3>
+        <label>
+          <input type="checkbox" />
+          Accès PMR
+        </label>
+        <label>
+          <input type="checkbox" />
+          Kids friendly
+        </label>
+        <label>
+          <input type="checkbox" />
+          Animaux acceptés
+        </label>
+        <h3>Accessibilité</h3>
+        <label>
+          <input type="checkbox" />
+          Véhiculé
+        </label>
+        <label>
+          <input type="checkbox" />
+          Transports en commun
+        </label>
+      </article>
+
+      <button className="next-button" type="button">
+        Suivant
+      </button>
     </main>
   );
 }

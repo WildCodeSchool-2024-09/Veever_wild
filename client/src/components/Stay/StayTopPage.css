@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-bottom: calc(var(--spacing-ref) * 1);
+  margin-bottom: var(--spacing-ref);
   width: 100%;
   max-width: calc(var(--spacing-ref) * 25);
 }
@@ -47,7 +47,7 @@
 }
 
 .stay-label {
-  font-size: calc(var(--font-size-ref) * 0.75);
+  font-size: var(--font-size-ref);
   margin-bottom: calc(var(--spacing-ref) * 0.5);
   text-align: left;
 }
@@ -55,9 +55,9 @@
 .stay-select,
 .stay-button {
   padding: calc(var(--spacing-ref) * 0.75);
-  font-size: calc(var(--font-size-ref) * 0.75);
+  font-size: calc(var(--font-size-ref) * 0.9);
   width: 100%;
-  max-width: calc(var(--spacing-ref) * 18);
+  max-width: calc(var(--spacing-ref) * 25);
   text-align: left;
   cursor: pointer;
   background-color: var(--bckgColor);
