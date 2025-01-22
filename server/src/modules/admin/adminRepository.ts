@@ -11,7 +11,7 @@ class adminRepository {
     try {
       await connection.beginTransaction();
 
-      const hashedPassword = authServices.hashPassword(userData.password);
+      const hashedPassword = await authServices.hashPassword(userData.password);
 
       const [userResult] = await connection.execute<Result>(
         `
