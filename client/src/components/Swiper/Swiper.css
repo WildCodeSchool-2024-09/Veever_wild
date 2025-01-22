@@ -24,12 +24,28 @@
 }
 
 .swiper-card {
-  border-radius: calc(var(--border-ref) * 1.3);
-  border: calc(var(--border-weight) * 2) solid;
-  border-color: var(--mainColor);
+  position: relative;
+  border-radius: calc(var(--border-ref) * 4);
+  isolation: isolate;
+}
+
+.swiper-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: calc(var(--border-weight) * 2);
+  background: var(--gradientColor-CTA);
+  border-radius: calc(var(--border-ref) * 2);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .img-swiper {
+  padding: calc(var(--spacing-ref) * 1);
+  border-radius: calc(var(--border-ref) * 4);
   margin: auto;
   width: 100%;
   height: 70vh;
@@ -51,6 +67,8 @@
   border: none;
   cursor: pointer;
   letter-spacing: var(--spacing-letter-ref);
+  color: var(--mainColor);
+  font-family: var(--textFont);
 }
 
 .swiper-btn a {
