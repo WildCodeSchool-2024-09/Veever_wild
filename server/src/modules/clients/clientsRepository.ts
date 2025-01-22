@@ -3,27 +3,12 @@ import type { Result, Rows } from "../../../database/client";
 import type { Client } from "../../types/clientsTypes/clientsTypes";
 
 class ClientsRepository {
-  async update(updateClient: Omit<Client, "user_id">): Promise<boolean> {
+  async update(updateClient: Client): Promise<boolean> {
     const connection = await databaseClient.getConnection();
     try {
       await connection.beginTransaction();
 
-      const [rows] = await connection.query<Rows>(
-        `
-        SELECT user_id FROM client
-        WHERE id = ?
-        `,
-        [updateClient.id],
-      );
-
-      if (rows.length === 0) {
-        await connection.rollback();
-        return false;
-      }
-
-      const userId = rows[0].user_id;
-
-      const [clientResult] = await connection.query<Result>(
+      const [clientResult] = await connection.execute<Result>(
         `
         UPDATE client
         SET birthdate = ?, nickname = ?, gender_id = ?
@@ -38,28 +23,43 @@ class ClientsRepository {
       );
 
       if (clientResult.affectedRows === 0) {
-        await connection.rollback();
-        return false;
+        throw new Error("Failed to update client");
       }
 
-      const [userResult] = await connection.query<Result>(
+      const [userResult] = await connection.execute<Result>(
         `
         UPDATE user
         SET email = ?, password = ?, firstname = ?, lastname = ?
-        WHERE id = ?
+        WHERE id = (SELECT user_id FROM client WHERE id = ?)
         `,
         [
           updateClient.email,
           updateClient.password,
           updateClient.firstname,
           updateClient.lastname,
-          userId,
+          updateClient.id,
         ],
       );
 
+      if (updateClient.phoneNumber) {
+        const [phoneResult] = await connection.execute<Result>(
+          `
+          INSERT INTO phone (client_id, phone_number)
+          VALUES (?, ?)
+          ON DUPLICATE KEY UPDATE phone_number = ?
+          WHERE client_id = ?
+          `,
+          [
+            updateClient.id,
+            updateClient.phoneNumber,
+            updateClient.phoneNumber,
+            updateClient.id,
+          ],
+        );
+      }
+
       if (userResult.affectedRows === 0) {
-        await connection.rollback();
-        return false;
+        throw new Error("User update failed");
       }
 
       await connection.commit();
@@ -77,7 +77,7 @@ class ClientsRepository {
     try {
       await connection.beginTransaction();
 
-      const [userResult] = await connection.query<Result>(
+      const [userResult] = await connection.execute<Result>(
         `
         INSERT INTO user
             (email, password, firstname, lastname)
@@ -92,7 +92,7 @@ class ClientsRepository {
         throw new Error("User creation failed");
       }
 
-      const [clientResult] = await connection.query<Result>(
+      const [clientResult] = await connection.execute<Result>(
         `
         INSERT INTO client
             (birthdate, nickname, gender_id, user_id)
@@ -107,16 +107,18 @@ class ClientsRepository {
         throw new Error("Client creation failed");
       }
 
-      const [phoneResult] = await connection.query<Result>(
-        `
-      INSERT INTO phone (client_id, phone_number)
-      VALUES (?, ?)
-      `,
-        [clientId, client.phoneNumber],
-      );
+      if (client.phoneNumber) {
+        const [phoneResult] = await connection.execute<Result>(
+          `
+          INSERT INTO phone (client_id, phone_number)
+          VALUES (?, ?)
+          `,
+          [clientId, client.phoneNumber],
+        );
 
-      if (!phoneResult.insertId) {
-        throw new Error("Phone creation failed");
+        if (!phoneResult.insertId) {
+          throw new Error("Phone creation failed");
+        }
       }
 
       await connection.commit();
@@ -135,8 +137,8 @@ class ClientsRepository {
       SELECT client.nickname, client.birthdate, user.email, user.firstname, user.lastname, phone.phone_number, gender.type
       FROM client
       INNER JOIN user ON client.user_id = user.id
-      INNER JOIN phone ON client.id = phone.client_id
       INNER JOIN gender ON client.gender_id = gender.id
+      LEFT JOIN phone ON client.id = phone.client_id
       WHERE client.id = ?
       `,
       [id],
@@ -160,31 +162,15 @@ class ClientsRepository {
   }
 
   async destroy(id: number): Promise<boolean> {
-    const connection = await databaseClient.getConnection();
-    try {
-      await connection.beginTransaction();
-
-      const [result] = await connection.query<Result>(
-        `
+    const [result] = await databaseClient.execute<Result>(
+      `
         DELETE FROM user
         WHERE id = (SELECT user_id FROM client WHERE id = ?)
         `,
-        [id],
-      );
+      [id],
+    );
 
-      if (result.affectedRows === 0) {
-        await connection.rollback();
-        return false;
-      }
-
-      await connection.commit();
-      return true;
-    } catch (error) {
-      await connection.rollback();
-      throw error;
-    } finally {
-      connection.release();
-    }
+    return result.affectedRows > 0;
   }
 }
 

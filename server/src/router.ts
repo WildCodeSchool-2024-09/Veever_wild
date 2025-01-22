@@ -42,11 +42,12 @@ router.put("/api/activities/:id", activityActions.edit);
 router.post("/api/activities", activityActions.add);
 router.delete("/api/activities/:id", activityActions.destroy);
 
+import { checkClientExists } from "./middleware/checkClientExists/checkClientsExists";
 import clientsActions from "./modules/clients/clientsActions";
 router.get("/api/clients", clientsActions.browse);
 router.get("/api/clients/:id", clientsActions.read);
 router.post("/api/clients", clientsActions.add);
-router.put("/api/clients/:id", clientsActions.update);
+router.put("/api/clients/:id", checkClientExists, clientsActions.update);
 router.delete("/api/clients/:id", clientsActions.destroy);
 
 import validateChr from "./middleware/chrValidation/chrValidation";
@@ -56,7 +57,6 @@ router.get("/api/restaurants/:id", restaurantActions.read);
 router.put("/api/restaurants/:id", restaurantActions.edit);
 router.post("/api/restaurants", validateChr, restaurantActions.add);
 router.delete("/api/restaurants/:id", restaurantActions.destroy);
-
 
 import genderActions from "./modules/gender/genderActions";
 router.get("/api/genders", genderActions.browse);
