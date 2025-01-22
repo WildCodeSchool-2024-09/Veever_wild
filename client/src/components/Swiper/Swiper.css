@@ -1,28 +1,32 @@
 @import url("@src/variables.css");
+
+.swiper-header {
+  margin: var(--spacing-ref);
+  border-radius: calc(var(--border-ref) * 2);
+  box-shadow: var(--box-shadow-soft);
+}
+
+.logo-swiper {
+  width: 30%;
+}
 .card-map {
   display: grid;
-  padding: calc(var(--spacing-ref) * 2);
+  padding: calc(var(--spacing-ref) * 1);
   justify-content: center;
 }
 
 .swiper-container {
+  background-color: var(--bckgSecondColor);
+  border-radius: calc(var(--border-ref) * 2);
+  padding: 1rem;
   grid-row: 1;
   grid-column: 1;
 }
 
 .swiper-card {
   border-radius: calc(var(--border-ref) * 1.3);
-  border: calc(var(--border-weight) * 4) solid;
-}
-
-.swiper-card-hotels {
-  border-color: var(--veever-yellow);
-}
-.swiper-card-restaurants {
-  border-color: var(--veever-pink);
-}
-.swiper-card-activities {
-  border-color: var(--veever-blue);
+  border: calc(var(--border-weight) * 2) solid;
+  border-color: var(--mainColor);
 }
 
 .img-swiper {
