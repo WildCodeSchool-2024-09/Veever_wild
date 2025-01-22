@@ -1,3 +1,4 @@
+import { Snackbar } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import type { ChrCardsProps } from "../../types/Catalog/CatalogTypes";
@@ -12,28 +13,30 @@ export default function Cardz({
   handleKeywordSelection,
 }: ChrCardsProps) {
   const {
-    handleClickInfo,
     handleDislike,
     handleDragEnd,
     handleLike,
+    setIsSnackOpen,
+    isSnackOpen,
     currentIndex,
     opacity,
     rotate,
     x,
-  } = useSwiper(cards, setCards, id.toString(), handleKeywordSelection);
-  const API_KEY_MAPS = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+  } = useSwiper(cards, setCards, id, handleKeywordSelection);
   return (
     <article className="swiper-container" id={`swiper-${id.toString()}`}>
-      <iframe
-        width="600"
-        height="450"
-        loading="lazy"
-        title="Google Maps"
-        src={`https://www.google.com/maps/embed/v1/place?q=Paris&key=${API_KEY_MAPS}`}
-      />
       <article
         className={`swiper-card swiper-card-${cards[currentIndex].type}`}
       >
+        {isSnackOpen && (
+          <Snackbar
+            open={isSnackOpen}
+            onClose={() => setIsSnackOpen(false)}
+            message={`Votre ${cards[currentIndex].type} à était sauvegardé`}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            transitionDuration={1000}
+          />
+        )}
         <motion.img
           className="img-swiper"
           src={picture}
@@ -43,6 +46,7 @@ export default function Cardz({
           style={{ x, opacity, rotate }}
           onDragEnd={() => handleDragEnd(id)}
         />
+
         <aside className="button-container">
           <button
             className="swiper-btn"
@@ -68,7 +72,6 @@ export default function Cardz({
           </button>
           <button
             className="swiper-btn"
-            onClick={() => handleClickInfo()}
             type="button"
             aria-labelledby={cards[currentIndex].type}
           >
