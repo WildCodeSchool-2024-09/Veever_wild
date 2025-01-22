@@ -1,9 +1,6 @@
 import { useStayLogic } from "../Hooks/Stay/useStayLogic";
 import "./StayBottomPage.css";
-interface StayBottomPageProps {
-  selectedDate: Date | null;
-  selectedDays: number;
-}
+import type { StayBottomPageProps } from "../../types/Stay/StayProps";
 export default function StayBottomPage({
   selectedDate,
   selectedDays,

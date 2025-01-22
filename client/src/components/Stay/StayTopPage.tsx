@@ -4,12 +4,7 @@ import { useStayLogic } from "../../components/Hooks/Stay/useStayLogic";
 import "./StayTopPage.css";
 import { Box } from "@mui/material";
 import Slider from "@mui/material/Slider";
-
-interface StayTopPageProps {
-  selectedDates: Date[];
-  onChange: (date: Date) => void;
-  errorMessage: string | null;
-}
+import type { StayTopPageProps } from "../../types/Stay/StayProps";
 
 export default function StayTopPage({
   selectedDates,
@@ -132,7 +127,7 @@ export default function StayTopPage({
       <Box sx={{ width: 290 }}>
         <Slider
           aria-label="Custom marks"
-          defaultValue={20}
+          defaultValue={0}
           getAriaValueText={valuetext}
           step={33}
           valueLabelDisplay="auto"
