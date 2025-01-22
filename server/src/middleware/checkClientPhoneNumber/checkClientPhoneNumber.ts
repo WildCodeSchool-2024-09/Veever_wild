@@ -8,16 +8,13 @@ export const checkClientPhoneNumber = async (
   try {
     const { phoneNumber } = req.body;
 
-    const phoneRegex = /^\+?([0-9]{1,3})?[-. ]?([0-9]{6,12})$/;
+    if (phoneNumber) {
+      const phoneRegex = /^\+?([0-9]{1,3})?[-. ]?([0-9]{6,12})$/;
 
-    if (!phoneNumber) {
-      res.status(400).json({ error: "Phone number is required" });
-      return;
-    }
-
-    if (!phoneRegex.test(phoneNumber)) {
-      res.status(400).json({ error: "Invalid phone number" });
-      return;
+      if (!phoneRegex.test(phoneNumber)) {
+        res.status(400).json({ error: "Invalid phone number" });
+        return;
+      }
     }
 
     next();

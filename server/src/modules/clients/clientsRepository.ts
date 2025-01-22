@@ -49,7 +49,12 @@ class ClientsRepository {
           ON DUPLICATE KEY UPDATE phone_number = ?
           WHERE client_id = ?
           `,
-          [updateClient.id, updateClient.phoneNumber, updateClient.phoneNumber],
+          [
+            updateClient.id,
+            updateClient.phoneNumber,
+            updateClient.phoneNumber,
+            updateClient.id,
+          ],
         );
       }
 
