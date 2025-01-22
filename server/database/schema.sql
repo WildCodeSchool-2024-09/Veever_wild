@@ -17,7 +17,7 @@ CREATE TABLE admin (
 
 CREATE TABLE gender (
   id int unsigned primary key auto_increment not null,
-  type varchar(255) not null
+  type  varchar(255) not null
 );
 
 CREATE TABLE client (
@@ -31,13 +31,13 @@ CREATE TABLE client (
   foreign key(gender_id) references gender(id)
 );
 
+
 CREATE TABLE phone (
   id int unsigned auto_increment primary key not null,
   phone_number varchar(10),
   client_id int unsigned not null,
   foreign key(client_id) references client(id)
   ON DELETE CASCADE
-  
 );
 
 CREATE TABLE reservation (
