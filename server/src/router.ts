@@ -12,7 +12,11 @@ import verifyToken from "./middlewares/verifyToken";
 import userActions from "./modules/user/userActions";
 router.post("/api/login", validateLogin, userActions.authenticateUser);
 router.get("/api/checkToken", verifyToken, (req, res) => {
-  res.status(200).json({ message: "Token valide" });
+  if (!req.user) {
+    res.status(401).send("Accès interdit : utilisateur non trouvé");
+    return;
+  }
+  res.status(200).json({ role: req.user.role });
 });
 
 router.use("/api", verifyToken);
@@ -90,15 +94,31 @@ router.delete(
   activityActions.destroy,
 );
 
-import { checkClientExists } from "./middleware/checkClientExists/checkClientsExists";
+import { checkClientExists } from "./middlewares/checkClientExists/checkClientsExists";
+import verifyId from "./middlewares/verifyId";
 import clientsActions from "./modules/clients/clientsActions";
-router.get("/api/clients", clientsActions.browse);
-router.get("/api/clients/:id", clientsActions.read);
+router.get("/api/clients", authorizeRole(["admin"]), clientsActions.browse);
+router.get(
+  "/api/clients/:id",
+  authorizeRole(["admin", "client"]),
+  clientsActions.read,
+);
 router.post("/api/clients", clientsActions.add);
-router.put("/api/clients/:id", checkClientExists, clientsActions.update);
-router.delete("/api/clients/:id", clientsActions.destroy);
+router.put(
+  "/api/clients/:id",
+  checkClientExists,
+  authorizeRole(["admin", "client"]),
+  verifyId,
+  clientsActions.update,
+);
+router.delete(
+  "/api/clients/:id",
+  authorizeRole(["admin", "client"]),
+  verifyId,
+  clientsActions.destroy,
+);
 
-import validateChr from "./middleware/chrValidation/chrValidation";
+import validateChr from "./middlewares/chrValidation/chrValidation";
 import restaurantActions from "./modules/restaurant/restaurantActions";
 router.get(
   "/api/restaurants",
@@ -127,7 +147,6 @@ router.delete(
   restaurantActions.destroy,
 );
 
-import app from "./app";
 import genderActions from "./modules/gender/genderActions";
 router.get(
   "/api/genders",
