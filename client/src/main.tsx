@@ -5,6 +5,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /* ************************************************************************* */
 import App from "./App";
+import AdminRoute from "./components/ProtectedRoute/AdminRoute";
+import GuestRoute from "./components/ProtectedRoute/GuestRoute";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
@@ -28,16 +31,19 @@ const router = createBrowserRouter([
   {
     element: <App />,
     children: [
-      { path: "/login", element: <Login /> },
-      { path: "/createAccount", element: <CreateAccount /> },
-      { path: "/", element: <HomePage /> },
-      { path: "/catalog", element: <Catalog /> },
-      { path: "/search", element: <Swiper /> },
-      { path: "/profile", element: <Profile /> },
-      { path: "/settings", element: <Settings /> },
+      { path: "/login", element: <GuestRoute element={<Login />} /> },
+      {
+        path: "/createAccount",
+        element: <GuestRoute element={<CreateAccount />} />,
+      },
+      { path: "/", element: <ProtectedRoute element={<HomePage />} /> },
+      { path: "/catalog", element: <ProtectedRoute element={<Catalog />} /> },
+      { path: "/search", element: <ProtectedRoute element={<Swiper />} /> },
+      { path: "/profile", element: <ProtectedRoute element={<Profile />} /> },
+      { path: "/settings", element: <ProtectedRoute element={<Settings />} /> },
       {
         path: "/dashboard",
-        element: <Dashboard />,
+        element: <AdminRoute element={<Dashboard />} />,
       },
     ],
   },
