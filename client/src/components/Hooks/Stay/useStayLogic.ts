@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const MIN_PRICE = 0;
-const MAX_PRICE = 1000;
+const min_price = 0;
+const max_price = 1000;
 
 export function useStayLogic() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -9,11 +9,17 @@ export function useStayLogic() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [groupChoice, setGroupChoice] = useState<string>("");
   const [selectedNumber, setSelectedNumber] = useState<number | string>("");
-
+  const [checkBoxes, setCheckBoxes] = useState<{ [key: string]: boolean }>({});
+  const [selectedDays, setSelectedDays] = useState<number>(1);
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [priceRange, setPriceRange] = useState<number[]>([
-    MIN_PRICE,
-    MAX_PRICE,
+    min_price,
+    max_price,
   ]);
+  const formatPrice = (value: number) => `${value}€`;
+  const [hotel, setHotel] = useState(false);
+  const [activity, setActivity] = useState(false);
+  const [restaurant, setRestaurant] = useState(false);
 
   const threeDaysMaximum = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
@@ -29,12 +35,31 @@ export function useStayLogic() {
     return true;
   };
 
-  const onChange = (dates: [Date | null, Date | null]) => {
-    if (threeDaysMaximum(dates)) {
-      const [start, end] = dates;
-      setStartDate(start);
-      setEndDate(end);
+  const handleDaySelection = (days: number) => {
+    setSelectedDays(days);
+
+    const updatedCheckBoxes: { [key: string]: boolean } = {};
+    for (let day = 1; day <= days; day++) {
+      for (let option = 1; option <= 3; option++) {
+        const key = `${day}-${option}`;
+        updatedCheckBoxes[key] = false;
+      }
     }
+    setCheckBoxes(updatedCheckBoxes);
+  };
+
+  const handleCheckboxChange = (key: string) => {
+    setCheckBoxes((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
+
+  const onChange = (dates: [Date | null, Date | null]) => {
+    const [start, end] = dates;
+    setSelectedDate(start);
+    setStartDate(start);
+    setEndDate(end);
   };
   const handlePriceRangeChange = (_: Event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
@@ -46,14 +71,23 @@ export function useStayLogic() {
     numberOptions.push(i);
   }
 
-  const formatPrice = (value: number) => `${value}€`;
-
   return {
+    hotel,
+    setHotel,
+    activity,
+    setActivity,
+    restaurant,
+    setRestaurant,
     errorMessage,
     startDate,
     endDate,
     threeDaysMaximum,
+    checkBoxes,
+    handleCheckboxChange,
+    handleDaySelection,
+    selectedDays,
     onChange,
+    selectedDate,
     groupChoice,
     setGroupChoice,
     selectedNumber,
@@ -63,7 +97,7 @@ export function useStayLogic() {
     priceRange,
     handlePriceRangeChange,
     formatPrice,
-    MIN_PRICE,
-    MAX_PRICE,
+    min_price,
+    max_price,
   };
 }
