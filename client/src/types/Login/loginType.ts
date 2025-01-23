@@ -14,7 +14,9 @@ export type LoginFormType = {
 };
 
 export type DecodedTokenType = {
-  role: string;
+  id: number;
+  email: string;
+  role: "admin" | "client";
   exp: number;
   iat: number;
 };

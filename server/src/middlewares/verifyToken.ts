@@ -11,8 +11,8 @@ if (!jwtSecret) {
 }
 
 const verifyToken: RequestHandler = (req, res, next) => {
+  console.info("cookies reçus :", req.cookies);
   const token = req.cookies.token;
-
   if (!token) {
     throw new Error("Accès non autorisé, token manquant.");
   }

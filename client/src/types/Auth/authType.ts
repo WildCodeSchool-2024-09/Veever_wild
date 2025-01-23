@@ -1,6 +1,6 @@
 export type UserType = {
   id: number;
-  name: string;
+  email: string;
   role: "admin" | "client";
 };
 
@@ -9,4 +9,5 @@ export type AuthContextType = {
   login: (user: UserType) => void;
   logout: () => void;
   isAdmin: () => boolean;
+  checkToken: () => Promise<UserType | null>;
 };

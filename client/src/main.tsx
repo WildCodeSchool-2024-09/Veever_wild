@@ -4,11 +4,11 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /* ************************************************************************* */
-
 import App from "./App";
 import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/Login/Login";
 import Profile from "./pages/Profile/Profile";
@@ -28,36 +28,16 @@ const router = createBrowserRouter([
   {
     element: <App />,
     children: [
+      { path: "/login", element: <Login /> },
+      { path: "/createAccount", element: <CreateAccount /> },
+      { path: "/", element: <HomePage /> },
+      { path: "/catalog", element: <Catalog /> },
+      { path: "/search", element: <Swiper /> },
+      { path: "/profile", element: <Profile /> },
+      { path: "/settings", element: <Settings /> },
       {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/catalog",
-        element: <Catalog />,
-      },
-      {
-        path: "/search",
-        element: <Swiper />,
-      },
-      {
-        path: "/favorites",
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/settings",
-        element: <Settings />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/createAccount",
-        element: <CreateAccount />,
+        path: "/dashboard",
+        element: <Dashboard />,
       },
     ],
   },

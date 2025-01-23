@@ -5,10 +5,12 @@ import type { DecodedTokenType } from "../../types/Login/loginType";
 import EmailInput from "./InputForm/EmailInput";
 import PasswordInput from "./InputForm/PasswordInput";
 import "./LoginForm.css";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
   const { email, handleEmailChange, password, handlePasswordChange } =
     useLoginValidation();
+  const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -23,7 +25,7 @@ export default function LoginForm() {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ email, password }),
-        credentials: "include", // Important pour envoyer et recevoir les cookies
+        credentials: "include",
       });
 
       if (!response.ok) {
@@ -37,9 +39,9 @@ export default function LoginForm() {
       const userRole = decodedToken.role;
 
       if (userRole === "admin") {
-        window.location.href = "/dashboard";
+        navigate("/dashboard");
       } else {
-        window.location.href = "/";
+        navigate("/");
       }
     } catch (error) {
       setErrorMessage(

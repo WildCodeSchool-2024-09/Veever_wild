@@ -8,10 +8,13 @@ const router = express.Router();
 
 // Define item-related routes
 import validateLogin from "./middlewares/validateLogin";
+import verifyToken from "./middlewares/verifyToken";
 import userActions from "./modules/user/userActions";
 router.post("/api/login", validateLogin, userActions.authenticateUser);
+router.get("/api/checkToken", verifyToken, (req, res) => {
+  res.status(200).json({ message: "Token valide" });
+});
 
-import verifyToken from "./middlewares/verifyToken";
 router.use("/api", verifyToken);
 
 import authorizeRole from "./middlewares/authorizeRole";
@@ -124,6 +127,7 @@ router.delete(
   restaurantActions.destroy,
 );
 
+import app from "./app";
 import genderActions from "./modules/gender/genderActions";
 router.get(
   "/api/genders",
