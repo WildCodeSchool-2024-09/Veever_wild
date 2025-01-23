@@ -4,10 +4,10 @@ import useSwiper from "../Hooks/Swiper/useSwiper";
 
 export default function Cardz({
   id,
-  picture,
+  illustration_link,
   name,
-  maxPrice,
-  minPrice,
+  average_budget,
+  description,
   address,
   category,
   cards,
@@ -32,7 +32,7 @@ export default function Cardz({
       >
         <motion.img
           className="img-swiper"
-          src={picture}
+          src={illustration_link}
           alt={name}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
@@ -101,10 +101,9 @@ export default function Cardz({
           >
             <p>Catégories: {category}</p>
             <p>{name}</p>
+            <p>{description}</p>
             <p>Adresse: {address}</p>
-            <p>
-              Prix entre {minPrice} et {maxPrice}€
-            </p>
+            <p>{average_budget}€</p>
           </article>
         )}
       </article>
