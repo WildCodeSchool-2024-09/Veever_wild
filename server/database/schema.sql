@@ -31,18 +31,27 @@ CREATE TABLE client (
   foreign key(gender_id) references gender(id)
 );
 
+
 CREATE TABLE phone (
   id int unsigned auto_increment primary key not null,
   phone_number varchar(10),
   client_id int unsigned not null,
   foreign key(client_id) references client(id)
   ON DELETE CASCADE
-  
 );
 
 CREATE TABLE reservation (
   id int unsigned primary key auto_increment not null,
   is_reserved BOOLEAN not null default 0
+);
+
+CREATE TABLE client_reservation (
+  id int unsigned primary key auto_increment not null,
+  client_id int unsigned not null,
+  reservation_id int unsigned not null,
+  foreign key(client_id) references client(id),
+  foreign key(reservation_id) references reservation(id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE reservation_date (
@@ -57,8 +66,16 @@ CREATE TABLE chr (
   id int unsigned primary key auto_increment not null,
   name varchar(255) not null,
   address varchar(255) not null,
-  min_price int unsigned not null,
-  max_price int unsigned not null
+  description text not null,
+  average_budget int unsigned not null
+);
+
+CREATE TABLE client_chr (
+  id int unsigned primary key auto_increment not null,
+  client_id int unsigned not null,
+  chr_id int unsigned not null,
+  foreign key(client_id) references client(id),
+  foreign key(chr_id) references chr(id)
 );
 
 CREATE TABLE chr_reservation (
@@ -73,6 +90,7 @@ CREATE TABLE chr_reservation (
 CREATE TABLE restaurant (
   id int unsigned primary key auto_increment not null,
   chr_id int unsigned not null,
+  type varchar(255) not null,
   foreign key(chr_id) references chr(id)
   ON DELETE CASCADE
 );
@@ -80,6 +98,7 @@ CREATE TABLE restaurant (
 CREATE TABLE hotel (
   id int unsigned primary key auto_increment not null,
   chr_id int unsigned not null,
+  type varchar(255) not null,
   foreign key(chr_id) references chr(id)
   ON DELETE CASCADE
 );
@@ -87,6 +106,7 @@ CREATE TABLE hotel (
 CREATE TABLE activity (
   id int unsigned primary key auto_increment not null,
   chr_id int unsigned not null,
+  duration int not null,
   foreign key(chr_id) references chr(id)
   ON DELETE CASCADE
 );
