@@ -42,7 +42,7 @@ export default function Cardz({
           />
         )}
         <p>{cards[currentIndex].name}</p>
-        <article className="tag-img-container">
+        <div className="tag-img-container">
           <img className="img-swiper" src={picture} alt={name} />
           <article className="tag-container">
             <p>Type: {cards[currentIndex].category}</p>
@@ -50,7 +50,7 @@ export default function Cardz({
             <p>Prix entre {cards[currentIndex].minPrice}$</p>
             <p>et {cards[currentIndex].maxPrice}$</p>
           </article>
-        </article>
+        </div>
         <footer className="button-container">
           <button
             className="swiper-btn"
