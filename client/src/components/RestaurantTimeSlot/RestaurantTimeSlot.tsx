@@ -30,20 +30,15 @@ export default function RestaurantTimeSlot({
   };
 
   return (
-    <div className="restaurant-scheduler">
-      <div className="scheduler-header">
+    <section className="restaurant-scheduler">
+      <header className="scheduler-header">
         <h2>Horaires</h2>
-        <div className="time-icons">
-          <span className="time-icon">🌞</span>
-          <span className="time-icon">🌙</span>
-          <span className="time-icon">📅</span>
-        </div>
-      </div>
+      </header>
 
-      <div className="scheduler-content">
+      <main className="scheduler-content">
         <h3>Quand souhaitez-vous aller au Restaurant ?</h3>
 
-        <div className="meal-options">
+        <nav className="meal-options">
           <button
             className={`meal-option ${selectedOption === "dejeuner" ? "selected" : ""}`}
             onClick={() => handleOptionSelect("dejeuner")}
@@ -67,7 +62,7 @@ export default function RestaurantTimeSlot({
           >
             Déjeuner + Dîner
           </button>
-        </div>
+        </nav>
 
         {selectedOption && (
           <button
@@ -79,7 +74,7 @@ export default function RestaurantTimeSlot({
             →
           </button>
         )}
-      </div>
-    </div>
+      </main>
+    </section>
   );
 }

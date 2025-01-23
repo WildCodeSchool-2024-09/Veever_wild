@@ -4,7 +4,7 @@ import RestaurantPage from "../RestaurantBooking/RestaurantBooking";
 export default function Settings() {
   return (
     <>
-      <h2>Settings</h2>
+      {/* <h2>Settings</h2> */}
       <RestaurantPage />
     </>
   );
