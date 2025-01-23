@@ -5,6 +5,7 @@ import type { DecodedTokenType } from "../../types/Login/loginType";
 import EmailInput from "./InputForm/EmailInput";
 import PasswordInput from "./InputForm/PasswordInput";
 import "./LoginForm.css";
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
@@ -34,8 +35,18 @@ export default function LoginForm() {
       }
 
       const data = await response.json();
+      const token = data.token;
 
-      const decodedToken = jwtDecode<DecodedTokenType>(data.token);
+      if (!token) {
+        console.error("Token manquant ou invalide");
+        return;
+      }
+
+      Cookies.set("token", token, { expires: 1 });
+      console.info(Cookies.get(token));
+
+      const decodedToken = jwtDecode<DecodedTokenType>(token);
+      console.info("token décodé : ", decodedToken);
       const userRole = decodedToken.role;
 
       if (userRole === "admin") {
