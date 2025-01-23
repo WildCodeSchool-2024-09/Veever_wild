@@ -27,6 +27,10 @@ import Settings from "./pages/Settings/Settings";
 // You can add more routes as you build out your app!
 const router = createBrowserRouter([
   {
+    path: "/createAccount",
+    element: <CreateAccount />,
+  },
+  {
     element: <App />,
     children: [
       {

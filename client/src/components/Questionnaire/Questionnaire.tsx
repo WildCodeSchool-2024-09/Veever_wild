@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { ChrCardProps } from "../../types/Catalog/CatalogTypes";
 import Cardz from "../Swiper/SwiperCard";
 import "./questionnaire.css";
+import SwiperHeader from "../Swiper/Swiperheader";
 
 export default function Questionnaire() {
   const [cards, setCards] = useState<ChrCardProps[]>([]);
@@ -11,18 +12,20 @@ export default function Questionnaire() {
       .then((data) => setCards(data));
   }, []);
   return (
-    <article className="questionnaire-container">
-      <h1>Que préférez-vous ?</h1>
-      {cards.map((card) => (
-        <article key={card.id} className="questionnaire-card">
+    <>
+      <SwiperHeader />
+      <article className="card-map">
+        {cards.map((card) => (
           <Cardz
-            cards={cards}
+            handleKeywordSelection={() => {}}
+            key={card.id}
             {...card}
+            cards={cards}
             setCards={setCards}
             picture={card.link}
           />
-        </article>
-      ))}
-    </article>
+        ))}
+      </article>
+    </>
   );
 }

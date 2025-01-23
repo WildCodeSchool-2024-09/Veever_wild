@@ -30,6 +30,7 @@ export type ChrCardProps = {
   minPrice: number;
   category: string;
   address: string;
+  keywords: string[];
   type: "hotels" | "restaurants" | "activities";
 };
 
@@ -42,8 +43,10 @@ export type ChrCardsProps = {
   address: string;
   picture: string;
   category: string;
+  keywords: string[];
   cards: ChrCardProps[];
   setCards: (cards: ChrCardProps[]) => void;
+  handleKeywordSelection: (keywords: string[], picture: string) => void;
 };
 
 export type Props = {
