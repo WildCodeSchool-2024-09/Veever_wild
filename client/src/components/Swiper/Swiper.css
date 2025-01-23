@@ -73,12 +73,13 @@
 
 .tag-container-swiper p {
   align-content: center;
-  padding: var(--spacing-ref);
+  padding: calc(var(--spacing-ref) * 0.5);
   border-radius: calc(var(--border-ref) * 0.7);
   font-family: var(--textFont);
   font-size: calc(var(--font-size-ref) * 0.8);
   margin-bottom: calc(var(--spacing-ref) * 0.4);
   background: var(--thirdColor-opacity);
+  height: calc(var(--font-size-ref) * 2);
 }
 
 .tag-container-swiper p:nth-child(1) {

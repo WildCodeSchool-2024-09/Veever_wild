@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import type { ChrCardProps } from "../../types/Catalog/CatalogTypes";
 import Cardz from "../Swiper/SwiperCard";
-import "./questionnaire.css";
 import SwiperHeader from "../Swiper/Swiperheader";
 
 export default function Questionnaire() {
