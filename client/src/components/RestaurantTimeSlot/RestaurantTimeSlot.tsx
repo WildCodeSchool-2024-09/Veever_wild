@@ -4,7 +4,7 @@ import type {
   MealOption,
   TimeSlotSelection,
 } from "../../types/TimeSlot/TimeSlotTypes";
-import "./RestaurantTimeSlot..css";
+import "./RestaurantTimeSlot.css";
 
 interface RestaurantTimeSlotProps {
   onSelectionChange: (selection: TimeSlotSelection) => void;
