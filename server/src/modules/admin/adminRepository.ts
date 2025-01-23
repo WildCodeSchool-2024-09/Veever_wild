@@ -10,7 +10,7 @@ class adminRepository {
     try {
       await connection.beginTransaction();
 
-      const [userResult] = await connection.query<Result>(
+      const [userResult] = await connection.execute<Result>(
         `
         INSERT INTO user (email, password, firstname, lastname)
         VALUES (?, ?, ?, ?)
@@ -29,7 +29,7 @@ class adminRepository {
         throw new Error("Insertion échouée dans la table user");
       }
 
-      const [adminResult] = await connection.query<Result>(
+      const [adminResult] = await connection.execute<Result>(
         `
         INSERT INTO admin (user_id)
         VALUES (?)
@@ -84,7 +84,7 @@ class adminRepository {
 
   // The U of CRUD - Update operation
   async update(userData: User) {
-    const [userResult] = await databaseClient.query<Result>(
+    const [userResult] = await databaseClient.execute<Result>(
       `
         UPDATE user
         SET email = ?, password = ?, firstname = ?, lastname = ?, updated_at = CURRENT_TIMESTAMP
@@ -104,7 +104,7 @@ class adminRepository {
 
   // The D of CRUD - Delete operation
   async destroy(adminId: number): Promise<number> {
-    const [result] = await databaseClient.query<Result>(
+    const [result] = await databaseClient.execute<Result>(
       `
         DELETE user, admin
         FROM user
