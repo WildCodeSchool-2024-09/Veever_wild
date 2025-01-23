@@ -6,6 +6,7 @@
   box-sizing: border-box;
 }
 
-#root {
-  height: 140vh;
+button,
+a {
+  cursor: pointer;
 }
