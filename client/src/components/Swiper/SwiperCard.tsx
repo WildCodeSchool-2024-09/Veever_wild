@@ -44,14 +44,14 @@ export default function Cardz({
         <p>{cards[currentIndex].name}</p>
         <article className="tag-img-container">
           <img className="img-swiper" src={picture} alt={name} />
-          <aside className="tag-container">
+          <article className="tag-container">
             <p>Type: {cards[currentIndex].category}</p>
             <p>{cards[currentIndex].address}</p>
             <p>Prix entre {cards[currentIndex].minPrice}$</p>
             <p>et {cards[currentIndex].maxPrice}$</p>
-          </aside>
+          </article>
         </article>
-        <aside className="button-container">
+        <footer className="button-container">
           <button
             className="swiper-btn"
             onClick={() => handleDislike(id)}
@@ -106,7 +106,7 @@ export default function Cardz({
           >
             <Link to="/prestataire">VOIR PLUS D'INFOS +</Link>
           </button>
-        </aside>
+        </footer>
       </motion.article>
     </main>
   );
