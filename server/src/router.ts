@@ -33,6 +33,10 @@ router.delete(
   adminActions.destroy,
 );
 
+import chrActions from "./modules/chr/chrActions";
+router.get("/api/chr", authorizeRole(["admin", "client"]), chrActions.browse);
+router.get("/api/chr/:id", authorizeRole(["admin", "client"]), chrActions.read);
+
 import hotelsActions from "./modules/hotels/hotelsActions";
 router.get(
   "/api/hotels",
