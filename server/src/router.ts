@@ -42,6 +42,14 @@ router.put("/api/activities/:id", activityActions.edit);
 router.post("/api/activities", activityActions.add);
 router.delete("/api/activities/:id", activityActions.destroy);
 
+import { checkClientExists } from "./middleware/checkClientExists/checkClientsExists";
+import clientsActions from "./modules/clients/clientsActions";
+router.get("/api/clients", clientsActions.browse);
+router.get("/api/clients/:id", clientsActions.read);
+router.post("/api/clients", clientsActions.add);
+router.put("/api/clients/:id", checkClientExists, clientsActions.update);
+router.delete("/api/clients/:id", clientsActions.destroy);
+
 import validateChr from "./middleware/chrValidation/chrValidation";
 import restaurantActions from "./modules/restaurant/restaurantActions";
 router.get("/api/restaurants", restaurantActions.browse);
