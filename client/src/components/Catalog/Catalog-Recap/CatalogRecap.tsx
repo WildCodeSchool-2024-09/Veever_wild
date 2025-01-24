@@ -10,24 +10,21 @@ export default function CatalogRecap({ data }: CatalogRecapProps) {
         {data.map((item) => (
           <li key={item.name}>
             <hgroup>
-              <h1>{item.name}</h1>
+              <h2>{item.name}</h2>
               <p className="emoji">{item.emoji}</p>
               <p>{item.count}</p>
             </hgroup>
           </li>
         ))}
       </ul>
-      <h2 className="date-card">
+      <h3 className="date-card">
         Date :{" "}
         {date.toLocaleDateString("fr-FR", {
           month: "long",
           day: "numeric",
           year: "numeric",
         })}
-      </h2>
-      <button className="button-throw-likes-away" type="button">
-        Vider les likes de ce jour
-      </button>
+      </h3>
     </>
   );
 }
