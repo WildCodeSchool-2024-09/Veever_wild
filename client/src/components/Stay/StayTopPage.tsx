@@ -4,7 +4,13 @@ import { useStayLogic } from "../../components/Hooks/Stay/useStayLogic";
 import "./StayTopPage.css";
 import { Box } from "@mui/material";
 import Slider from "@mui/material/Slider";
-import type { StayTopPageProps } from "../../types/Stay/StayProps";
+
+interface StayTopPageProps {
+  selectedDates: Date[];
+  onChange: (date: Date | null) => void;
+  errorMessage: string | null;
+  setSelectedDates: (dates: Date[]) => void;
+}
 
 export default function StayTopPage({
   selectedDates,
@@ -12,12 +18,6 @@ export default function StayTopPage({
   errorMessage,
 }: StayTopPageProps) {
   const {
-    hotel,
-    setHotel,
-    activity,
-    setActivity,
-    restaurant,
-    setRestaurant,
     groupChoice,
     setGroupChoice,
     selectedNumber,
@@ -43,8 +43,12 @@ export default function StayTopPage({
         <h2>Calendrier</h2>
         <>
           <DatePicker
-            selected={selectedDates[0] || null}
-            onChange={(date: Date | null) => date && onChange(date)}
+            selected={
+              selectedDates.length > 0
+                ? selectedDates[selectedDates.length - 1]
+                : null
+            }
+            onChange={onChange}
             inline
             isClearable
             minDate={new Date()}
@@ -96,7 +100,7 @@ export default function StayTopPage({
         </select>
       </section>
 
-      <h2 className="title-checkbox">Préstations souhaitées</h2>
+      {/* <h2 className="title-checkbox">Préstations souhaitées</h2>
       <label className="checkbox-stay">
         <input
           className="checkbox-stay-input"
@@ -123,11 +127,11 @@ export default function StayTopPage({
           onChange={() => setRestaurant(!restaurant)}
         />
         Restaurants
-      </label>
+      </label> */}
       <Box sx={{ width: 290 }}>
         <Slider
           aria-label="Custom marks"
-          defaultValue={0}
+          defaultValue={20}
           getAriaValueText={valuetext}
           step={33}
           valueLabelDisplay="auto"
