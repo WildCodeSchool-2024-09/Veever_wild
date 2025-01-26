@@ -1,80 +1,174 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Paper, Typography, Button, Box } from "@mui/material";
+import Grid from "@mui/material/Grid2";
+import RestaurantIcon from "@mui/icons-material/Restaurant";
+import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 import type {
   MealOption,
   TimeSlotSelection,
+  AvailableDate,
 } from "../../types/TimeSlot/TimeSlotTypes";
 import "./RestaurantTimeSlot.css";
 
 interface RestaurantTimeSlotProps {
   onSelectionChange: (selection: TimeSlotSelection) => void;
+  availableDates?: AvailableDate[]; // Dates reçues du composant parent
 }
 
 export default function RestaurantTimeSlot({
-  onSelectionChange,
+  availableDates = [
+    // Dates par défaut pour tester le composant
+    { date: "2024-01-18", isAvailable: true },
+    { date: "2024-01-19", isAvailable: true },
+    { date: "2024-01-20", isAvailable: true },
+  ],
 }: RestaurantTimeSlotProps) {
-  const [selectedOption, setSelectedOption] = useState<MealOption | null>(null);
+  const [selectedOptionsByDate, setSelectedOptionsByDate] = useState<
+    Record<string, MealOption[]>
+  >({});
+  const [selectedDate, setSelectedDates] = useState<string[]>([]);
   const navigate = useNavigate();
 
-  const handleOptionSelect = (option: MealOption) => {
-    setSelectedOption(option);
-    onSelectionChange({ selected: option });
+  const handleOptionSelect = (date: string, option: MealOption) => {
+    setSelectedOptionsByDate((prevOptions) => {
+      const optionsForDates = prevOptions[date] || [];
+      if (optionsForDates.includes(option)) {
+        return {
+          ...prevOptions,
+          [date]: optionsForDates.filter((opt) => opt !== option),
+        };
+      } else {
+        return {
+          ...prevOptions,
+          [date]: [...optionsForDates, option],
+        };
+      }
+    });
+  };
+
+  const handleDateSelect = (date: string) => {
+    setSelectedDates((prevDates) => {
+      if (prevDates.includes(date)) {
+        return prevDates.filter((d) => d !== date);
+      } else {
+        return [...prevDates, date];
+      }
+    });
+  };
+
+  const formatDate = (date: string) => {
+    return format(new Date(date), "EEEE d MMMM", { locale: fr });
   };
 
   const handleNext = () => {
-    if (selectedOption) {
+    if (selectedDate.length > 0) {
+      const selections = selectedDate.map((date) => ({
+        date,
+        mealOptions: selectedOptionsByDate[date] || [],
+      }));
       navigate("/restaurant/time-selection", {
-        state: { mealOption: selectedOption },
+        state: { selections },
       });
     }
   };
 
   return (
-    <section className="restaurant-scheduler">
-      <header className="scheduler-header">
-        <h2>Horaires</h2>
-      </header>
+    <Box className="restaurant-scheduler">
+      <Paper elevation={3} className="scheduler-header">
+        <Typography variant="h4" component="h2">
+          Horaires
+        </Typography>
+      </Paper>
 
-      <main className="scheduler-content">
-        <h3>Quand souhaitez-vous aller au Restaurant ?</h3>
+      <Box className="scheduler-content">
+        <Typography variant="h6" component="h3" className="question-text">
+          Sélectionnez une date :
+        </Typography>
 
-        <nav className="meal-options">
-          <button
-            className={`meal-option ${selectedOption === "dejeuner" ? "selected" : ""}`}
-            onClick={() => handleOptionSelect("dejeuner")}
-            type="button"
-          >
-            Déjeuner
-          </button>
+        <Box
+          sx={{
+            display: "flex",
+            flex: "wrap",
+            gap: 0.5,
+            justifyContent: "center",
+          }}
+        >
+          {availableDates.map((availableDate) => (
+            <Box key={availableDate.date}>
+              <Paper
+                elevation={selectedDate.includes(availableDate.date) ? 6 : 1}
+                className={`date-option ${selectedDate.includes(availableDate.date) ? "selected" : ""} ${!availableDate.isAvailable ? "disabled" : ""}`}
+                onClick={() => {
+                  if (availableDate.isAvailable) {
+                    handleDateSelect(availableDate.date);
+                  }
+                }}
+              >
+                <Typography>{formatDate(availableDate.date)}</Typography>
+              </Paper>
+            </Box>
+          ))}
+        </Box>
 
-          <button
-            className={`meal-option ${selectedOption === "diner" ? "selected" : ""}`}
-            onClick={() => handleOptionSelect("diner")}
-            type="button"
-          >
-            Dîner
-          </button>
+        {selectedDate.map((date) => (
+          <Box key={date}>
+            <Typography variant="h6" component="h3" className="question-text">
+              Choisissez votre service pour le {formatDate(date)} :
+            </Typography>
+            <Grid container spacing={2} className="meal-options-container">
+              <Paper
+                elevation={
+                  selectedOptionsByDate[date]?.includes("dejeuner") ? 6 : 1
+                }
+                className={`meal-option ${selectedOptionsByDate[date]?.includes("dejeuner") ? "selected" : ""}`}
+                onClick={() => handleOptionSelect(date, "dejeuner")}
+              >
+                <RestaurantIcon className="meal-icon" />
+                <Typography>Déjeuner</Typography>
+              </Paper>
+              <Paper
+                elevation={
+                  selectedOptionsByDate[date]?.includes("diner") ? 6 : 1
+                }
+                className={`meal-option ${selectedOptionsByDate[date]?.includes("diner") ? "selected" : ""}`}
+                onClick={() => handleOptionSelect(date, "diner")}
+              >
+                <DinnerDiningIcon className="meal-icon" />
+                <Typography>Dîner</Typography>
+              </Paper>
+              <Paper
+                elevation={
+                  selectedOptionsByDate[date]?.includes("dejeuner-diner")
+                    ? 6
+                    : 1
+                }
+                className={`meal-option ${selectedOptionsByDate[date]?.includes("dejeuner-diner") ? "selected" : ""}`}
+                onClick={() => handleOptionSelect(date, "dejeuner-diner")}
+              >
+                <Box className="double-icon">
+                  <RestaurantIcon className="meal-icon" />
+                  <DinnerDiningIcon className="meal-icon" />
+                </Box>
+                <Typography>Déjeuner + Dîner</Typography>
+              </Paper>
+            </Grid>
+          </Box>
+        ))}
 
-          <button
-            className={`meal-option ${selectedOption === "dejeuner-diner" ? "selected" : ""}`}
-            onClick={() => handleOptionSelect("dejeuner-diner")}
-            type="button"
-          >
-            Déjeuner + Dîner
-          </button>
-        </nav>
-
-        {selectedOption && (
-          <button
+        {selectedDate.length > 0 && (
+          <Button
+            variant="contained"
             className="next-button"
             onClick={handleNext}
             aria-label="Continuer"
-            type="button"
           >
             →
-          </button>
+          </Button>
         )}
-      </main>
-    </section>
+      </Box>
+    </Box>
   );
 }
