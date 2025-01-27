@@ -8,7 +8,6 @@
   height: 18rem;
   padding: var(--spacing-ref);
   color: var(--light);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .discovery-section h1 {
@@ -25,10 +24,8 @@
 .discovery-section button {
   padding: var(--spacing-S) var(--spacing-ref);
   font-size: var(--spacing-ref);
-  background-color: rgb(240, 126, 147);
   color: var(--light);
   border: none;
   border-radius: var(--spacing-S);
   width: 10rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
