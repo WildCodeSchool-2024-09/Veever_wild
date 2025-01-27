@@ -13,6 +13,8 @@
   --bckgColorOrange: #ffd6c6;
   --bckgColorOrangeOpacity: #ffd6c690;
   --veever-light-orange: #f59e3f;
+  --veever-pink: #f74aa1;
+  --veever-gradient: linear-gradient(to right, #f74aa1, #fb793f);
   --veever-green: #7bb471;
   --veever-light-green: #eef5ed;
 
