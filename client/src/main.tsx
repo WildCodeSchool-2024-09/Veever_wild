@@ -56,6 +56,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "/createAccount",
+    element: <CreateAccount />,
+  },
   // Try adding a new route! For example, "/about" with an About component
 ]);
 
