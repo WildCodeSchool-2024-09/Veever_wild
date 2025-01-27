@@ -122,7 +122,7 @@ router.delete(
   clientsActions.destroy,
 );
 
-import validateChr from "./middlewares/chrValidation/chrValidation";
+import validateChr from "./middlewares/chrValidation";
 import restaurantActions from "./modules/restaurant/restaurantActions";
 router.get(
   "/api/restaurants",
