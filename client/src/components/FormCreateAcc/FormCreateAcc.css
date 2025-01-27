@@ -80,6 +80,7 @@ placeholder {
 .errors {
   list-style: none;
   color: var(--errorColor);
+  font-family: var(--textFont);
   font-size: calc(var(--font-size-ref) * 0.8);
   justify-items: center;
 }
@@ -98,6 +99,7 @@ placeholder {
 
 .birthdayCalendar {
   text-align: center;
+  font-family: var(--textFont);
 }
 
 .react-datepicker__month-select {
