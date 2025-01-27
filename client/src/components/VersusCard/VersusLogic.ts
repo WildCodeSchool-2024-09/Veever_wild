@@ -8,9 +8,7 @@ export default function UseVersusLogic() {
 
   const getBestCards = useCallback(() => {
     if (saveCards && saveCards.length > 0) {
-      const filteredCards = saveCards.filter(
-        (card) => card.type === "restaurants",
-      );
+      const filteredCards = saveCards.filter((card) => card.type === "hotels");
       setVersusCards(filteredCards);
     }
   }, [saveCards]);
@@ -19,5 +17,5 @@ export default function UseVersusLogic() {
     getBestCards();
   }, [getBestCards]);
 
-  return { versusCards };
+  return { versusCards, getBestCards };
 }
