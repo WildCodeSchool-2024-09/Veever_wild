@@ -10,6 +10,7 @@ export default function Questionnaire() {
       .then((res) => res.json())
       .then((data) => setCards(data));
   }, []);
+
   return (
     <>
       <SwiperHeader />
