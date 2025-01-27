@@ -127,4 +127,30 @@ ORDER BY (
   END
 ) DESC;
 
+-----------------------------------------------------
+
+SELECT 
+    chr.id AS entity_id,
+    chr.name AS entity_name,
+    chr.address,
+    chr.description,
+    chr.average_budget,
+    CASE 
+        WHEN EXISTS (SELECT 1 FROM activity WHERE activity.chr_id = chr.id) THEN 'Activity'
+        WHEN EXISTS (SELECT 1 FROM hotel WHERE hotel.chr_id = chr.id) THEN 'Hotel'
+        WHEN EXISTS (SELECT 1 FROM restaurant WHERE restaurant.chr_id = chr.id) THEN 'Restaurant'
+    END AS category_name,
+    COUNT(DISTINCT client_keyword.keyword_id) AS matching_keywords_count
+FROM chr
+INNER JOIN chr_keyword ON chr.id = chr_keyword.chr_id
+INNER JOIN client_keyword ON chr_keyword.keyword_id = client_keyword.keyword_id
+WHERE client_keyword.client_id = 1  -- Remplacer avec l'ID du client
+GROUP BY chr.id, chr.name, chr.address, chr.description, chr.average_budget, category_name
+ORDER BY 
+    CASE 
+        WHEN category_name = 'Hotel' THEN 1
+        WHEN category_name = 'Activity' THEN 2
+        WHEN category_name = 'Restaurant' THEN 3
+    END,
+    matching_keywords_count DESC;
 
