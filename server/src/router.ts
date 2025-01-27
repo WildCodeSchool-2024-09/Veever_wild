@@ -29,11 +29,11 @@ router.post("/api/hotels", hotelsActions.add);
 router.delete("/api/hotels/:id", hotelsActions.destroy);
 
 import KeywordsClientActions from "./modules/Keywords_Client/KeywordsClientActions";
-router.get("/api/keywordclient", KeywordsClientActions.browse);
-router.get("/api/keywordclient/:id", KeywordsClientActions.read);
-router.put("/api/keywordclient/:id", KeywordsClientActions.edit);
-router.post("/api/keywordclient", KeywordsClientActions.add);
-router.delete("/api/keywordclient/:id", KeywordsClientActions.destroy);
+router.get("/api/keywordsclients", KeywordsClientActions.browse);
+router.get("/api/keywordsclients/:id", KeywordsClientActions.read);
+router.put("/api/keywordsclients/:id", KeywordsClientActions.edit);
+router.post("/api/keywordsclients", KeywordsClientActions.add);
+router.delete("/api/keywordsclients/:id", KeywordsClientActions.destroy);
 
 import keywordActions from "./modules/keyword/keywordActions";
 router.get("/api/keywords", keywordActions.browse);
