@@ -27,9 +27,12 @@ export default function FormCreateAcc() {
     handlePasswordChange,
     handleConfirmPasswordChange,
     handleEmailCheckChange,
+    validateContact,
   } = useFormValidation();
   const { handleChange, formData } = useFormData();
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [contactErrors, setContactErrors] = useState<string | null>(null);
+
   const handleClose = () => {
     setShowSnackbar(false);
   };
@@ -38,6 +41,10 @@ export default function FormCreateAcc() {
     e.preventDefault();
     if (Object.keys(errors).length > 0 || !isSamePassword) {
       setShowSnackbar(true);
+    }
+    const contactError = validateContact(formData);
+    if (contactError) {
+      setContactErrors(contactError);
       return;
     }
   };
@@ -84,6 +91,7 @@ export default function FormCreateAcc() {
           handleChange={handleChange("checkContact")}
           value={formData.checkContact}
         />
+        {contactErrors && <p style={{ color: "red" }}>{contactErrors}</p>}
         <InputCheckCGU
           handleChange={handleChange("checkCGU")}
           value={formData.checkCGU}
@@ -95,13 +103,14 @@ export default function FormCreateAcc() {
         >
           Crée mon compte
         </StyledButton>
+
         {showSnackbar && (
           <Snackbar
             anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            open={showSnackbar}
+            open={true}
             onClose={handleClose}
             transitionDuration={700}
-            message="Vous avez oublié quelques chose.."
+            message={contactErrors}
           />
         )}
       </form>
