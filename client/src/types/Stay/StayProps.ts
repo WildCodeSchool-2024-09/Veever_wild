@@ -1,7 +1,8 @@
 export type StayTopPageProps = {
   selectedDates: Date[];
-  onChange: (date: Date) => void;
+  onChange: (date: Date | null) => void;
   errorMessage: string | null;
+  setSelectedDates: (dates: Date[]) => void;
 };
 
 export type StayBottomPageProps = {

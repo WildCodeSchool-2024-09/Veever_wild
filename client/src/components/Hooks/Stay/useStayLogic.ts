@@ -21,6 +21,46 @@ export function useStayLogic() {
   const [activity, setActivity] = useState(false);
   const [restaurant, setRestaurant] = useState(false);
 
+  const [selectedDates, setSelectedDates] = useState<Date[]>([]);
+  const [mealOptionsVisible, setMealOptionsVisible] = useState<{
+    [key: string]: boolean;
+  }>({});
+
+  const handleCheckboxChange = (dayKey: string, option: string) => {
+    setMealOptionsVisible((prev) => ({
+      ...prev,
+      [`${dayKey}-${option}`]: !prev[`${dayKey}-${option}`],
+    }));
+    setCheckBoxes((prev) => ({
+      ...prev,
+      [`${dayKey}-${option}`]: !prev[`${dayKey}-${option}`],
+    }));
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    if (!date) return;
+
+    const updatedDates = [...selectedDates];
+    const dateIndex = updatedDates.findIndex(
+      (d) => d.getTime() === date.getTime(),
+    );
+
+    if (dateIndex !== -1) {
+      updatedDates.splice(dateIndex, 1);
+    } else {
+      if (updatedDates.length < 3) {
+        updatedDates.push(date);
+      } else {
+        setErrorMessage("Vous ne pouvez sélectionner que jusqu'à 3 jours.");
+        return;
+      }
+    }
+
+    setErrorMessage(null);
+    setSelectedDates(updatedDates);
+    onChange([updatedDates[0] || null, updatedDates[1] || null]);
+  };
+
   const threeDaysMaximum = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
     if (start && end) {
@@ -48,19 +88,13 @@ export function useStayLogic() {
     setCheckBoxes(updatedCheckBoxes);
   };
 
-  const handleCheckboxChange = (key: string) => {
-    setCheckBoxes((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
-  };
-
   const onChange = (dates: [Date | null, Date | null]) => {
     const [start, end] = dates;
     setSelectedDate(start);
     setStartDate(start);
     setEndDate(end);
   };
+
   const handlePriceRangeChange = (_: Event, newValue: number | number[]) => {
     setPriceRange(newValue as number[]);
   };
@@ -99,5 +133,10 @@ export function useStayLogic() {
     formatPrice,
     min_price,
     max_price,
+    selectedDates,
+    setSelectedDates,
+    handleDateChange,
+    mealOptionsVisible,
+    setMealOptionsVisible,
   };
 }
