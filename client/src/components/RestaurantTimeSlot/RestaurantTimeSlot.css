@@ -1,3 +1,23 @@
+.page-header {
+  display: flex;
+  flex-direction: start;
+  align-items: center;
+  padding: .5rem;
+  background-color: var(--aliceBlueColor);
+}
+
+.page-header h1 {
+  flex-grow: 1;
+  text-align: center;
+  font-size: var(--font-size-ref);
+  font-weight: var(--font-weight-S);
+  color: var(--secondColor);
+}
+
+.page-header button {
+  margin-right: .5rem;
+}
+
 .restaurant-scheduler {
   max-height: max-content;
   margin: .5rem .5rem;
@@ -8,28 +28,21 @@
   box-shadow: var(--box-shadow-soft);
 }
 
-.scheduler-header {
+.scheduler-header h2 {
+  font-size: 1.5rem;
   display: flex;
   margin-bottom: 2rem;
   padding: 1.5rem;
   border-radius: var(--border-ref);
   background-color: var(--aliceBlueColor);
-  box-shadow: var(--box-shadow-soft);
 }
 
-.scheduler-header h2 {
+.header-title h2 {
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: var(--font-weight-S);
   color: #333;
-}
-
-.time-icons {
-  display: flex;
-  gap: 1rem;
-}
-
-.time-icon {
-  font-size: 1.2rem;
+  text-align: center;
+  flex-grow: 1;
 }
 
 .scheduler-content {
@@ -41,10 +54,6 @@
   font-size: 1.1rem;
   font-weight: 500;
   color: #333;
-}
-
-.meal-options-container {
-  margin-top: 2rem;
 }
 
 .meal-options {
@@ -112,32 +121,29 @@
 }
 
 .date-option:not(.disabled):hover {
-  background-color: var(--aliceBlueColor) !important;
+  background-color: var(--mainColor) !important;
   transform: translateY(-2px);
 }
 
 .question-text {
   text-align: center;
   color: var(--color-label);
-  margin-bottom: 2rem;
+}
+
+.page-header button {
+  margin-right: .5rem;
+  padding-right: .5rem;
 }
 
 .next-button {
   position: fixed;
-  padding: 1rem;
-  top: .5rem;
-  left: 90%;
-  border: none;
-  border-radius: 50%;
-  background-color: #007bff;
+  bottom: -.5rem;
+  left: 80%;
+  background-color: var(--veever-blue);
   color: white;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
   box-shadow: var(--box-shadow-soft);
 }
 
 .next-button:hover {
-  transform: scale(1.1);
-  box-shadow: var(--box-shadow-soft);
+  background-color: var(--border-color-input-focus);
 }
