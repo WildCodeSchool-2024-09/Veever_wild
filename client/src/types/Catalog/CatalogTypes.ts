@@ -45,12 +45,23 @@ export type ChrCardsProps = {
   setCards: (cards: ChrCardProps[]) => void;
 };
 
+export type Card = {
+  count: number;
+  id: number;
+  picture: string;
+  name: string;
+  maxPrice: number;
+  address: string;
+  type: "hotels" | "restaurants" | "activities";
+};
+
 export type Props = {
   children: React.ReactNode;
 };
 
 export type SaveCardsContextType = {
   saveCards: ChrCardProps[];
+  versusCards: () => Card[];
   setSaveCards: React.Dispatch<React.SetStateAction<ChrCardProps[]>>;
   addCard: (card: ChrCardProps) => void;
   removeCard: (cardId: number) => void;

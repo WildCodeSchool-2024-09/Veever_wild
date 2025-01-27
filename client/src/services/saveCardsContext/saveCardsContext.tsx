@@ -21,6 +21,10 @@ export function SaveCardsProvider({ children }: Props) {
     });
   };
 
+  const versusCards = () => {
+    return saveCards.slice(0, 2);
+  };
+
   const removeCard = (cardId: number) => {
     setSaveCards((prevCards) => prevCards.filter((card) => card.id !== cardId));
   };
@@ -30,6 +34,7 @@ export function SaveCardsProvider({ children }: Props) {
   };
 
   const value = {
+    versusCards,
     saveCards,
     setSaveCards,
     addCard,

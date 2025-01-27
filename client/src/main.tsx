@@ -11,7 +11,8 @@ import Catalog from "./pages/Catalog/Catalog";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import HomePage from "./pages/HomePage/HomePage";
 import Profile from "./pages/Profile/Profile";
-import Settings from "./pages/Settings/Settings";
+//import Settings from "./pages/Settings/Settings";
+import VersusPage from "./pages/VersusPage/VersusPage";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -48,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/settings",
-        element: <Settings />,
+        element: <VersusPage />,
       },
       {
         path: "/createAccount",

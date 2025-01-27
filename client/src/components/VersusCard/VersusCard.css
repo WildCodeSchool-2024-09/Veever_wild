@@ -1,0 +1,112 @@
+@import url("@src/variables.css");
+
+h1.versus-title {
+  width: 90%;
+  font-family: var(--titleFont);
+  font-size: 2rem;
+  color: var(--secondColor);
+  margin: 2rem 1rem 1rem 1rem;
+  padding: 1rem;
+  text-transform: uppercase;
+}
+
+h2.versus-subtitle {
+  width: 90%;
+  font-family: var(--textFont);
+  font-size: 1.3rem;
+  color: var(--mainColor);
+  margin: 1rem 1rem 1rem 2rem;
+  padding: 1rem;
+  text-transform: uppercase;
+  background-color: var(--light);
+  border-radius: 15px;
+  box-shadow: 8px 8px 8px var(--shadow);
+}
+
+main.versus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+article.versus-card {
+  font-family: var(--textFont);
+  width: 90%;
+  font-size: medium;
+  background-color: var(--light);
+  border: solid 1px var(--bckgColor);
+  border-radius: 15px;
+  box-shadow: 8px 8px 8px var(--shadow);
+  margin: 1.5rem;
+}
+
+article.versus-card aside.over-text h2 {
+  font-family: var(--titleFont);
+  margin: 0;
+  font-size: 1.3rem;
+  color: var(--mainColor);
+}
+
+article.versus-card aside.over-text p {
+  font-family: var(--textFont);
+  margin: 0;
+  font-size: 1rem;
+  color: var(--secondColor);
+}
+
+article.versus-card figure.figure-chr-middle-card p {
+  font-family: var(--textFont);
+  margin: 1.5rem 0 0 1.5rem;
+  font-size: 1rem;
+  text-align: left;
+}
+article.versus-card section {
+  width: 100%;
+  height: 30vh;
+  overflow: hidden;
+  position: relative;
+}
+
+article.versus-card aside {
+  position: absolute;
+  margin: 2rem 1rem 1rem 0;
+  padding: 1rem 1rem 1rem 2rem;
+  border-radius: 0 5px 5px 0;
+  background-color: var(--background-light-opacity);
+}
+article.versus-card img {
+  border-radius: 25px;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+article.versus-card ul {
+  display: flex;
+  padding: 0.5rem 0 1rem 0;
+}
+article.versus-card figure.figure-chr-middle-card ul li p {
+  color: var(--mainColor);
+  padding: 0.5rem;
+  margin: 0.5rem;
+  list-style: none;
+  background-color: var(--bckgColor);
+  border-radius: 5px;
+}
+
+button.versus-button {
+  font-family: var(--textFont);
+  font-size: 1rem;
+  color: var(--light);
+  background: var(--gradientColor);
+  border: none;
+  border-radius: 5px;
+  padding: 1rem 1.5rem;
+  margin: 0 0 2rem 0;
+  cursor: pointer;
+  /* align button in the center */
+  display: block;
+  margin: 0 auto 2rem;
+}
