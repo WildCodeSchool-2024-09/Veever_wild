@@ -9,7 +9,9 @@ export default function Swiper() {
   useEffect(() => {
     fetch("http://localhost:3310/api/chr")
       .then((res) => res.json())
-      .then((data) => setCards(data));
+      .then((data) => {
+        setCards(data);
+      });
   }, []);
 
   return (

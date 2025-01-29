@@ -23,34 +23,32 @@ export type CatalogRecapProps = {
 export type ChrCardProps = {
   count: number;
   id: number;
-  picture: string;
+  images: { link: string }[];
   name: string;
-  maxPrice: number;
-  minPrice: number;
-  category: string;
   address: string;
+  average_budget: number;
+  category: string;
   type: "hotels" | "restaurants" | "activities";
 };
 
 export type ChrCardsProps = {
   id: number;
+  images: { link: string }[];
   name: string;
-  type: string;
-  maxPrice: number;
-  minPrice: number;
   address: string;
-  picture: string;
+  average_budget: number;
   category: string;
   cards: ChrCardProps[];
+  type: string;
   setCards: (cards: ChrCardProps[]) => void;
 };
 
 export type Card = {
   count: number;
   id: number;
-  picture: string;
+  images: { link: string }[];
   name: string;
-  maxPrice: number;
+  average_budget: number;
   address: string;
   type: "hotels" | "restaurants" | "activities";
 };

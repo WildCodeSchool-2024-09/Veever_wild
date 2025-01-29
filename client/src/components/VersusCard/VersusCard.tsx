@@ -12,21 +12,28 @@ export default function Versus({ versusCards }: VersusCardProps) {
   return (
     <main className="versus-container">
       {versusCards.map((card) => (
-        <article key={card.id} className="versus-card">
-          <section>
-            <aside className="over-text">
-              <h2>{card.name}</h2>
-              <p>Localisation : {card.address}</p>
-            </aside>
-            <img className="versus-img" src={card.picture} alt="" />
-          </section>
-          <figure key={card.id} className="figure-chr-middle-card">
-            <p>Prix : {card.maxPrice}€</p>
-          </figure>
-          <button className="versus-button" type="button">
-            Je valide
-          </button>
-        </article>
+        <>
+          <article key={card.id} className="versus-card">
+            <section>
+              <aside className="over-text">
+                <h2>{card.name}</h2>
+                <p>Localisation : {card.address}</p>
+              </aside>
+              <img
+                className="versus-img"
+                src={`http://localhost:3310/${card.images}`}
+                alt=""
+              />
+            </section>
+            <div key={card.id} className="figure-chr-middle-card">
+              <p>Prix : {card.average_budget}€</p>
+            </div>
+            <button className="versus-button" type="button">
+              Je valide
+            </button>
+          </article>
+          <p key={card.id}>VS</p>
+        </>
       ))}
     </main>
   );

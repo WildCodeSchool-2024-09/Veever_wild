@@ -7,6 +7,7 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
     return <p>Aucune carte sauvegardée.</p>;
   }
 
+  console.info(saveCards);
   return (
     <>
       {saveCards.map((card) => (
@@ -14,10 +15,10 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
           key={card.id}
           className={`card-container  card-container-${card.type}`}
         >
-          <img className="img-catalog-card" src={card.picture} alt="" />
+          <img className="img-catalog-card" src={card.images[0].link} alt="" />
           <article key={card.id} className="article-chr-middle-card">
             <h2>{card.name}</h2>
-            <p>{card.maxPrice}</p>
+            <p>{card.average_budget}</p>
             <p>{card.address}</p>
           </article>
           <ChrBottomCard />

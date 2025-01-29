@@ -1,5 +1,13 @@
 @import url("@src/variables.css");
 
+.versus-container p:last-of-type {
+  display: none;
+}
+
+.versus-container p {
+  text-align: center;
+}
+
 h1.versus-title {
   width: 90%;
   font-family: var(--titleFont);
@@ -99,7 +107,7 @@ article.versus-card figure.figure-chr-middle-card ul li p {
 button.versus-button {
   font-family: var(--textFont);
   font-size: 1rem;
-  color: var(--light);
+  color: black;
   background: var(--gradientColor);
   border: none;
   border-radius: 5px;
