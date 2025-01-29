@@ -41,16 +41,29 @@ export default function Cardz({
             transitionDuration={1000}
           />
         )}
-        <p>{cards[currentIndex].name}</p>
-        <div className="tag-img-container">
+        {cards[currentIndex].category ? (
+          <p>{cards[currentIndex].name}</p>
+        ) : (
+          <p>Qu'es ce qui vous conviendriez le mieux ?</p>
+        )}
+
+        <figure className="tag-img-container">
           <img className="img-swiper" src={picture} alt={name} />
-          <article className="tag-container">
-            <p>Type: {cards[currentIndex].category}</p>
-            <p>{cards[currentIndex].address}</p>
-            <p>Prix entre {cards[currentIndex].minPrice}$</p>
-            <p>et {cards[currentIndex].maxPrice}$</p>
-          </article>
-        </div>
+          <figcaption className="tag-container">
+            {cards[currentIndex].category ? (
+              <div className="tag-container-swiper">
+                <p>Type: {cards[currentIndex].category}</p>
+                <p>{cards[currentIndex].address}</p>
+                <p>Prix entre {cards[currentIndex].minPrice}$</p>
+                <p>et {cards[currentIndex].maxPrice}$</p>
+              </div>
+            ) : (
+              <div className="tag-container-keyword">
+                <p className="tag-keyword">#{cards[currentIndex].name}</p>
+              </div>
+            )}
+          </figcaption>
+        </figure>
         <footer className="button-container">
           <button
             className="swiper-btn"
