@@ -21,6 +21,10 @@ router.put("/api/admins/:id", adminActions.edit);
 router.post("/api/admins", adminActions.add); //test
 router.delete("/api/admins/:id", adminActions.destroy);
 
+import chrActions from "./modules/chr/chrActions";
+router.get("/api/chr", chrActions.browse);
+router.get("/api/chr/:id", chrActions.read);
+
 import hotelsActions from "./modules/hotels/hotelsActions";
 router.get("/api/hotels", hotelsActions.browse);
 router.get("/api/hotels/:id", hotelsActions.read);
