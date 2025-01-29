@@ -6,71 +6,40 @@ import { Box, IconButton, Paper, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import type {
-  AvailableDate,
-  MealOption,
-  TimeSlotSelection,
-} from "../../types/TimeSlot/TimeSlotTypes";
+import { useRestaurantTimeSlotLogic } from "../../components/Hooks/Stay/useRestaurantTimeSlotLogic";
 import "./RestaurantTimeSlot.css";
-
-interface RestaurantTimeSlotProps {
-  onSelectionChange: (selection: TimeSlotSelection) => void;
-  availableDates?: AvailableDate[]; // Dates reçues du composant parent
-}
+import type { RestaurantTimeSlotProps } from "../../types/TimeSlot/TimeSlotTypes";
 
 export default function RestaurantTimeSlot({
-  availableDates = [
-    // Dates par défaut pour tester le composant
-    { date: "2024-01-18", isAvailable: true },
-    { date: "2024-01-19", isAvailable: true },
-    { date: "2024-01-20", isAvailable: true },
-  ],
+  availableDates,
+  onSelectionChange,
 }: RestaurantTimeSlotProps) {
-  const [selectedOptionsByDate, setSelectedOptionsByDate] = useState<
-    Record<string, MealOption[]>
-  >({});
-  const [selectedDate, setSelectedDates] = useState<string[]>([]);
   const navigate = useNavigate();
+  const {
+    selectedOptionsByDate,
+    selectedDate,
+    handleOptionSelect,
+    handleDateSelect,
+  } = useRestaurantTimeSlotLogic(availableDates ?? []);
 
-  const handleOptionSelect = (date: string, option: MealOption) => {
-    setSelectedOptionsByDate((prevOptions) => {
-      const optionsForDates = prevOptions[date] || [];
-      if (optionsForDates.includes(option)) {
-        return {
-          ...prevOptions,
-          [date]: optionsForDates.filter((opt) => opt !== option),
-        };
-      }
-      return {
-        ...prevOptions,
-        [date]: [...optionsForDates, option],
-      };
-    });
-  };
-
-  const handleDateSelect = (date: string) => {
-    setSelectedDates((prevDates) => {
-      if (prevDates.includes(date)) {
-        return prevDates.filter((d) => d !== date);
-      }
-      return [...prevDates, date];
-    });
-  };
-
-  const formatDate = (date: string) => {
-    return format(new Date(date), "EEEE d MMMM", { locale: fr });
-  };
+  const formatDate = (date: string) =>
+    format(new Date(date), "EEEE d MMMM", { locale: fr });
 
   const handleNext = () => {
     if (selectedDate.length > 0) {
       const selections = selectedDate.map((date) => ({
         date,
         mealOptions: selectedOptionsByDate[date] || [],
+        selected: true,
       }));
+      const timeSlotSelection = {
+        dates: selections,
+        selected: selectedOptionsByDate[selectedDate[0]]?.[0] || null,
+      };
+      onSelectionChange(timeSlotSelection);
       navigate("/restaurant/time-selection", {
-        state: { selections },
+        state: { selections: timeSlotSelection },
       });
     }
   };
@@ -86,12 +55,6 @@ export default function RestaurantTimeSlot({
         </Typography>
       </header>
 
-      <Paper elevation={3} className="scheduler-header">
-        <Typography variant="h4" component="h2" className="header-title">
-          Restaurant
-        </Typography>
-      </Paper>
-
       <Box className="scheduler-content">
         <Typography variant="h6" component="h3" className="question-text">
           Sélectionnez une date :
@@ -105,7 +68,7 @@ export default function RestaurantTimeSlot({
             justifyContent: "center",
           }}
         >
-          {availableDates.map((availableDate) => (
+          {availableDates?.map((availableDate) => (
             <Box key={availableDate.date}>
               <Paper
                 elevation={selectedDate.includes(availableDate.date) ? 6 : 1}

@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useStayLogic } from "../../components/Hooks/Stay/useStayLogic";
 import "./StayTopPage.css";
 import type { StayTopPageProps } from "../../types/Stay/StayProps";
+
 export default function StayTopPage({
   selectedDates,
   onChange,

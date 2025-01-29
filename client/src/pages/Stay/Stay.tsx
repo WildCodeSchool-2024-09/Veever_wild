@@ -1,4 +1,5 @@
 import { useStayLogic } from "../../components/Hooks/Stay/useStayLogic";
+import RestaurantTimeSlot from "../../components/RestaurantTimeSlot/RestaurantTimeSlot";
 import StayBottomPage from "../../components/Stay/StayBottomPage";
 import StayTopPage from "../../components/Stay/StayTopPage";
 
@@ -8,11 +9,15 @@ export default function Stay() {
     setSelectedDates,
     errorMessage,
     handleDateChange,
-    mealOptionsVisible,
-    setMealOptionsVisible,
-    handleCheckboxChange,
-    checkBoxes,
+    // mealOptionsVisible,
+    // setMealOptionsVisible,
+    // handleCheckboxChange,
+    // checkBoxes,
   } = useStayLogic();
+
+  const handleSelectionChange = () => {
+    // Logique pour gérer la sélection des repas
+  };
 
   return (
     <>
@@ -22,14 +27,21 @@ export default function Stay() {
         errorMessage={errorMessage}
         setSelectedDates={setSelectedDates}
       />
+      <RestaurantTimeSlot
+        availableDates={selectedDates.map((date) => ({
+          date: date.toISOString().split("T")[0],
+          isAvailable: true,
+        }))}
+        onSelectionChange={handleSelectionChange}
+      />
       <StayBottomPage
-        selectedDates={selectedDates}
-        selectedDate={selectedDates[0] || null}
-        selectedDays={selectedDates.length}
-        mealOptionsVisible={mealOptionsVisible}
-        setMealOptionsVisible={setMealOptionsVisible}
-        handleCheckboxChange={handleCheckboxChange}
-        checkBoxes={checkBoxes}
+      // selectedDates={selectedDates}
+      // selectedDate={selectedDates[0] || null}
+      // numberOfDays={selectedDates.length}
+      // mealOptionsVisible={mealOptionsVisible}
+      // setMealOptionsVisible={setMealOptionsVisible}
+      // handleCheckboxChange={handleCheckboxChange}
+      // checkBoxes={checkBoxes}
       />
     </>
   );
