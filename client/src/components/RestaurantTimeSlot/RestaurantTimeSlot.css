@@ -1,0 +1,149 @@
+.page-header {
+  display: flex;
+  flex-direction: start;
+  align-items: center;
+  padding: .5rem;
+  background-color: var(--aliceBlueColor);
+}
+
+.page-header h1 {
+  flex-grow: 1;
+  text-align: center;
+  font-size: var(--font-size-ref);
+  font-weight: var(--font-weight-S);
+  color: var(--secondColor);
+}
+
+.page-header button {
+  margin-right: .5rem;
+}
+
+.restaurant-scheduler {
+  max-height: max-content;
+  margin: .5rem .5rem;
+  padding: var(--spacing-ref);
+  background-color: var(--light);
+  border-radius: var(--border-ref);
+  background-color: var(--aliceBlueColor);
+  box-shadow: var(--box-shadow-soft);
+}
+
+.scheduler-header h2 {
+  font-size: 1.5rem;
+  display: flex;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: var(--border-ref);
+  background-color: var(--aliceBlueColor);
+}
+
+.header-title h2 {
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-S);
+  color: #333;
+  text-align: center;
+  flex-grow: 1;
+}
+
+.scheduler-content {
+  position: relative;
+}
+
+.scheduler-content h3 {
+  margin: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.meal-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.meal-option {
+  display: flex !important;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem !important;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: var(--light) !important;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.meal-options:hover {
+  background-color: #f8f8f8;
+  border-color: #ddd;
+}
+
+.meal-option.selected {
+  background-color: var(--veever-blue) !important;
+  color: var(--light);
+  border-color: #007bff;
+}
+
+.meal-icon {
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+.double-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1rem;
+}
+
+.date-option {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  padding: .9rem !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--light) !important;
+}
+
+.date-option.selected {
+  background-color: var(--veever-blue) !important;
+  color: var(--light);
+}
+
+.date-option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--bckgColor) !important;
+}
+
+.date-option:not(.disabled):hover {
+  background-color: var(--mainColor) !important;
+  transform: translateY(-2px);
+}
+
+.question-text {
+  text-align: center;
+  color: var(--color-label);
+}
+
+.page-header button {
+  margin-right: .5rem;
+  padding-right: .5rem;
+}
+
+.next-button {
+  position: fixed;
+  bottom: -.5rem;
+  left: 80%;
+  background-color: var(--veever-blue);
+  color: white;
+  box-shadow: var(--box-shadow-soft);
+}
+
+.next-button:hover {
+  background-color: var(--border-color-input-focus);
+}
