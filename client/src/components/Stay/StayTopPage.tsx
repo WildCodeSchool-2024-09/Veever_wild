@@ -2,8 +2,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useStayLogic } from "../../components/Hooks/Stay/useStayLogic";
 import "./StayTopPage.css";
-import { Box } from "@mui/material";
-import Slider from "@mui/material/Slider";
 import type { StayTopPageProps } from "../../types/Stay/StayProps";
 export default function StayTopPage({
   selectedDates,
@@ -18,17 +16,6 @@ export default function StayTopPage({
     groupOptions,
     numberOptions,
   } = useStayLogic();
-
-  const marks = [
-    { value: 0, label: "€" },
-    { value: 33, label: "€€" },
-    { value: 66, label: "€€€" },
-    { value: 100, label: "€€€€" },
-  ];
-
-  function valuetext(value: number) {
-    return `${value}`;
-  }
 
   return (
     <main className="stay-container">
@@ -92,16 +79,6 @@ export default function StayTopPage({
           ))}
         </select>
       </section>
-      <Box sx={{ width: 290 }}>
-        <Slider
-          aria-label="Custom marks"
-          defaultValue={20}
-          getAriaValueText={valuetext}
-          step={33}
-          valueLabelDisplay="auto"
-          marks={marks}
-        />
-      </Box>
     </main>
   );
 }
