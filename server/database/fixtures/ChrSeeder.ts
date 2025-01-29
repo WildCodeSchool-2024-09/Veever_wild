@@ -317,7 +317,7 @@ class ChrSeeder extends AbstractSeeder {
         average_budget: 39000,
       },
       {
-        name: "La Villa Du Bourg ",
+        name: "La Villa Du Bourg",
         address: "Eysines, France",
         description:
           "Offrez-vous une escapade unique aux portes de Bordeaux en séjournant à La Villa du Bourg. Nichée au cœur d’Eysines, cette maison atypique est le point de départ parfait pour explorer les trésors de la région, des vignobles du Médoc aux ruelles bordelaises. Alliant charme et confort, cette villa promet un séjour inoubliable dans un cadre authentique et chaleureux.",
