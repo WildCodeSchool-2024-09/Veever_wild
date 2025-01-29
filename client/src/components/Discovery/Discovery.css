@@ -5,39 +5,27 @@
   justify-content: flex-end;
   align-items: flex-start;
   width: 100%;
-  height: calc(var(--spacing-ref) * 18);
-  background-image: url("src/assets/images/Discovery.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: 18rem;
   padding: var(--spacing-ref);
   color: var(--light);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .discovery-section h1 {
   font-family: var(--titleFont);
-  font-size: calc(var(--font-size-ref) * 1.5);
+  font-size: calc(var(--spacing-ref) * 1.5);
   padding: calc(var(--spacing-ref) * 2);
 }
 .discovery-section p {
   font-family: var(--textFont);
-  padding: calc(var(--spacing-ref) * 0.5);
-  font-size: clamp(
-    calc(var(--font-size-ref) * 1),
-    calc(var(--font-size-ref) * 1.25 + 1vw),
-    calc(var(--font-size-ref) * 5)
-  );
+  padding: var(--spacing-S);
+  font-size: calc(var(--spacing-ref) * 1.25);
 }
 
 .discovery-section button {
-  padding: calc(var(--spacing-ref) * 0.5) var(--spacing-ref);
-  font-size: var(--font-size-ref);
-  background-color: var(--bckgColor);
+  padding: var(--spacing-S) var(--spacing-ref);
+  font-size: var(--spacing-ref);
   color: var(--light);
   border: none;
-  border-radius: var(--border-ref);
-  width: calc(var(--spacing-ref) * 10);
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: var(--spacing-S);
+  width: 10rem;
 }

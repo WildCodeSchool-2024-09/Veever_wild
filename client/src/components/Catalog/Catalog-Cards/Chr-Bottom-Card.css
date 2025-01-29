@@ -22,7 +22,6 @@
 
   border-radius: calc(var(--border-ref) * 1.25);
   display: inline-block;
-  cursor: pointer;
   color: var(--dark);
   font-size: calc(var(--font-size-ref) * 1.25);
   font-weight: bold;

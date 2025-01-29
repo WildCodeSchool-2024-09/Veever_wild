@@ -2,11 +2,6 @@
 
 .newsLetter-container {
   display: grid;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.5),
-      rgba(255, 255, 255, 0.5)
-    ), url(./src/assets/images/BackGroundNewsLetter.png);
-  border: 0px solid black;
   box-shadow: var(--box-shadow-soft);
   border-radius: var(--border-ref);
   padding: var(--spacing-ref);
@@ -27,7 +22,6 @@
 
 .offerNewsLetter {
   text-align: center;
-  border-radius: 20px;
   box-shadow: var(--box-shadow-soft);
   background-color: var(--bckgColor);
   padding: var(--spacing-ref);
@@ -37,9 +31,7 @@
 #newsLetterEmail {
   justify-items: center;
   border-radius: var(--border-ref);
-  border: 0px solid;
   box-shadow: var(--box-shadow-soft);
-  height: 2rem;
   width: 100%;
 }
 
@@ -52,6 +44,5 @@
   padding: var(--spacing-ref);
   margin: var(--spacing-ref);
   border-radius: var(--border-ref);
-  border: 0px solid;
   cursor: pointer;
 }

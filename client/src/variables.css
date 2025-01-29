@@ -9,13 +9,16 @@
   --font-size-ref: 1rem;
 
   --font-weight-S: 400;
-
-  --bckgColor: lightgrey;
+  --bckgColor: #f8f9fa;
+  --mainColor: #fb793f;
+  --secondColor: #4e4a4a;
+  --thirdColor: #f74aa1;
+  --gradientColor-CTA: linear-gradient(to left, #f59e3f 13%, #f74aa1 100%);
+  --bckgColorOrangeOpacity: #ffd6c690;
   --veever-yellow: #ffea00;
+  --shadow: #c8c8c8;
   --veever-pink: #f26497;
   --veever-blue: #36a1db;
-  --mainColor: tomato;
-  --secondColor: black;
   --aliceBlueColor: #f0f8ff;
   --errorColor: red;
   --color-label: rgba(0, 0, 0, 0.87);

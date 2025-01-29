@@ -7,19 +7,15 @@
   margin: var(--spacing-ref);
   height: calc(var(--spacing-ref) * 3);
   width: calc(var(--spacing-ref) * 10);
-  border: var(--border-input);
-  border-radius: calc(var(--border-ref) * 3);
+  border: 2px solid var(--veever-pink);
+  border-radius: calc(var(--spacing-ref) * 2);
   padding: 0 var(--spacing-ref);
   background-color: transparent;
-  color: var(--secondColor);
-  font-size: var(--font-size-ref);
-  cursor: pointer;
+  font-size: var(--spacing-ref);
   text-align: center;
   appearance: none;
 }
-option {
-  cursor: pointer;
-}
+
 .logo {
   height: calc(var(--spacing-ref) * 6);
   width: calc(var(--spacing-ref) * 6);
