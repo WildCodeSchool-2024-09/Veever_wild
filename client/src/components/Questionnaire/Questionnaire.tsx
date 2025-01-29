@@ -6,7 +6,7 @@ import SwiperHeader from "../Swiper/Swiperheader";
 export default function Questionnaire() {
   const [cards, setCards] = useState<ChrCardProps[]>([]);
   useEffect(() => {
-    fetch("http://localhost:3310/api/keywords")
+    fetch(`${import.meta.env.VITE_API_URL}/keywords`)
       .then((res) => res.json())
       .then((data) => setCards(data));
   }, []);

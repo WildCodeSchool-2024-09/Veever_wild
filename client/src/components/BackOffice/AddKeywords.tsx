@@ -7,7 +7,7 @@ export default function AddKeywords() {
   });
 
   const handleSubmit = () => {
-    fetch("http://localhost:3310/api/keywords", {
+    fetch(`${import.meta.env.VITE_API_URL}/keywords`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,20 +34,16 @@ export default function AddKeywords() {
   };
 
   return (
-    <>
-      <form action="submit" method="post">
-        <label htmlFor="keyword">
-          Ajoutez un mot-clé
-          <input type="text" name="name" id="keyword" onChange={onChange} />
-        </label>
-        <label htmlFor="url">
-          Ajoutez l'URL d'une image
-          <input type="text" name="link" id="url" onChange={onChange} />
-        </label>
-        <button onClick={handleSubmit} type="button">
-          Envoyer
-        </button>
-      </form>
-    </>
+    <form action="submit" method="post" onSubmit={handleSubmit}>
+      <label htmlFor="keyword">
+        Ajoutez un mot-clé
+        <input type="text" name="name" id="keyword" onChange={onChange} />
+      </label>
+      <label htmlFor="url">
+        Ajoutez l'URL d'une image
+        <input type="text" name="link" id="url" onChange={onChange} />
+      </label>
+      <button type="submit">Envoyer</button>
+    </form>
   );
 }

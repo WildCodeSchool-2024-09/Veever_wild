@@ -47,23 +47,23 @@ export default function Cardz({
           <p>Qu'es ce qui vous conviendriez le mieux ?</p>
         )}
 
-        <article className="tag-img-container">
+        <figure className="tag-img-container">
           <img className="img-swiper" src={picture} alt={name} />
-          <article className="tag-container">
+          <figcaption className="tag-container">
             {cards[currentIndex].category ? (
-              <article className="tag-container-swiper">
+              <div className="tag-container-swiper">
                 <p>Type: {cards[currentIndex].category}</p>
                 <p>{cards[currentIndex].address}</p>
                 <p>Prix entre {cards[currentIndex].minPrice}$</p>
                 <p>et {cards[currentIndex].maxPrice}$</p>
-              </article>
+              </div>
             ) : (
-              <article className="tag-container-keyword">
+              <div className="tag-container-keyword">
                 <p className="tag-keyword">#{cards[currentIndex].name}</p>
-              </article>
+              </div>
             )}
-          </article>
-        </article>
+          </figcaption>
+        </figure>
         <footer className="button-container">
           <button
             className="swiper-btn"
@@ -117,7 +117,7 @@ export default function Cardz({
             type="button"
             aria-labelledby={cards[currentIndex].type}
           >
-            <Link to="/prestataire">VOIR PLUS D'INFOS +</Link>
+            <Link to="/prestataire">Voir plus d'infos +</Link>
           </button>
         </footer>
       </motion.article>
