@@ -17,24 +17,6 @@
   margin: var(--spacing-ref) 0;
 }
 
-ul li {
-  list-style-type: none;
-  font-size: calc(var(--spacing-ref) * 1.25);
-  padding: calc(var(--spacing-ref) * 0.5);
-  text-align: start;
-}
-
-h1,
-h2 {
-  text-align: start;
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .add-button {
   box-shadow: var(--box-shadow-soft);
 
