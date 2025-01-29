@@ -51,9 +51,7 @@ export default function Cardz({
           >
             <LikeIcon />
           </button>
-          <button className="swiper-btn" type="button">
-            <Link to="/prestataire">+ d'infos</Link>
-          </button>
+          <Link to="/prestataire">+ d'infos</Link>
         </aside>
       </article>
     </article>
