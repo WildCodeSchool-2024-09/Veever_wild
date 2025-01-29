@@ -45,8 +45,9 @@ const edit: RequestHandler = async (req, res, next) => {
       chrData: {
         name: req.body.name,
         address: req.body.address,
-        minPrice: Number(req.body.minPrice),
-        maxPrice: Number(req.body.maxPrice),
+        description: req.body.description,
+        average_budget: Number(req.body.average_budget),
+        duration: Number(req.body.duration),
       },
     };
 
@@ -68,8 +69,9 @@ const add: RequestHandler = async (req, res, next) => {
   const newActivity = {
     name: req.body.name,
     address: req.body.address,
-    minPrice: Number(req.body.minPrice),
-    maxPrice: Number(req.body.maxPrice),
+    description: req.body.description,
+    average_budget: Number(req.body.average_budget),
+    duration: Number(req.body.duration),
   };
 
   try {

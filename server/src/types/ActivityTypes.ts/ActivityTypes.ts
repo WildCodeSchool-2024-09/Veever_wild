@@ -5,8 +5,9 @@ export type Activities = {
 export type ChrData = {
   name: string;
   address: string;
-  minPrice: number;
-  maxPrice: number;
+  description: string;
+  average_budget: number;
+  duration: number;
 };
 export type UpdateResponse = {
   activityId: number;

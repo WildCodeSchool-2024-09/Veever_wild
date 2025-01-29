@@ -1,9 +1,11 @@
 import "./Discovery.css";
-export default function () {
+export default function Discovery() {
   return (
     <section className="discovery-section">
-      <h1>Découvrez notre nouveau concept</h1>
-      <p>Une experience unique</p>
+      <hgroup>
+        <h1>Découvrez notre nouveau concept</h1>
+        <p>Une experience unique</p>
+      </hgroup>
     </section>
   );
 }
