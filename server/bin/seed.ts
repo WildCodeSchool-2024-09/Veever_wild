@@ -7,6 +7,8 @@ import path from "node:path";
 // Import database client
 import database from "../database/client";
 
+import ChrSeeder from "../database/fixtures/ChrSeeder";
+
 import type { AbstractSeeder } from "../database/fixtures/AbstractSeeder";
 
 const fixturesPath = path.join(__dirname, "../database/fixtures");
@@ -25,10 +27,18 @@ const seed = async () => {
         path.join(fixturesPath, filePath)
       );
 
-      const seeder = new SeederClass() as AbstractSeeder;
-
-      dependencyMap[SeederClass.toString()] = seeder;
+      if (SeederClass && typeof SeederClass === "function") {
+        const seeder = new SeederClass() as AbstractSeeder;
+        dependencyMap[SeederClass.toString()] = seeder;
+      } else {
+        console.error(
+          `Le fichier ${filePath} n'exporte pas une classe valide.`,
+        );
+      }
     }
+
+    const chrSeeder = new ChrSeeder();
+    dependencyMap[ChrSeeder.toString()] = chrSeeder;
 
     // Sort seeders according to their dependencies
     const sortedSeeders: AbstractSeeder[] = [];
