@@ -233,7 +233,7 @@ class ChrSeeder extends AbstractSeeder {
         average_budget: 3500,
       },
       {
-        name: "La Grande Vigne",
+        name: "La Grand'Vigne",
         address: "Chemin de Smith Haut Lafitte, 33650 Martillac",
         description:
           "Installé au cœur du domaine viticole du Château Smith Haut Lafitte, La Grande Vigne est un restaurant étoilé au guide Michelin dirigé par le chef Nicolas Masse. Ce restaurant d’exception propose une cuisine gastronomique élaborée à partir de produits locaux, et une carte qui évolue selon les saisons.",
