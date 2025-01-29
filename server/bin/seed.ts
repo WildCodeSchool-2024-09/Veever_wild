@@ -7,8 +7,6 @@ import path from "node:path";
 // Import database client
 import database from "../database/client";
 
-import ChrSeeder from "../database/fixtures/ChrSeeder";
-
 import type { AbstractSeeder } from "../database/fixtures/AbstractSeeder";
 
 const fixturesPath = path.join(__dirname, "../database/fixtures");
@@ -36,9 +34,6 @@ const seed = async () => {
         );
       }
     }
-
-    const chrSeeder = new ChrSeeder();
-    dependencyMap[ChrSeeder.toString()] = chrSeeder;
 
     // Sort seeders according to their dependencies
     const sortedSeeders: AbstractSeeder[] = [];
