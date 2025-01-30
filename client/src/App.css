@@ -9,3 +9,8 @@
 #root {
   background-color: var(--bckgColor);
 }
+select,
+button,
+a {
+  cursor: pointer;
+}

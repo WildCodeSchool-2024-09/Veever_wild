@@ -30,6 +30,7 @@ const router = createBrowserRouter([
     path: "/createAccount",
     element: <CreateAccount />,
   },
+
   {
     element: <App />,
     children: [

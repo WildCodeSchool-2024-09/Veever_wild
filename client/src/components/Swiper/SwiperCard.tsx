@@ -4,14 +4,7 @@ import { Link } from "react-router-dom";
 import type { ChrCardsProps } from "../../types/Catalog/CatalogTypes";
 import useSwiper from "../Hooks/Swiper/useSwiper";
 
-export default function Cardz({
-  id,
-  picture,
-  name,
-  cards,
-  setCards,
-  handleKeywordSelection,
-}: ChrCardsProps) {
+export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
   const {
     handleDislike,
     handleDragEnd,
@@ -22,7 +15,7 @@ export default function Cardz({
     opacity,
     rotate,
     x,
-  } = useSwiper(cards, setCards, id, handleKeywordSelection);
+  } = useSwiper(cards, setCards, id);
   return (
     <main className="swiper-container">
       <motion.article
@@ -41,27 +34,18 @@ export default function Cardz({
             transitionDuration={1000}
           />
         )}
-        {cards[currentIndex].category ? (
-          <p>{cards[currentIndex].name}</p>
-        ) : (
-          <p>Qu'es ce qui vous conviendriez le mieux ?</p>
-        )}
+        <p>{cards[currentIndex].name}</p>
 
         <figure className="tag-img-container">
-          <img className="img-swiper" src={picture} alt={name} />
+          <img
+            className="img-swiper"
+            src={`http://localhost:3310/${cards[currentIndex].images[0].link}`}
+            alt={name}
+          />
           <figcaption className="tag-container">
-            {cards[currentIndex].category ? (
-              <div className="tag-container-swiper">
-                <p>Type: {cards[currentIndex].category}</p>
-                <p>{cards[currentIndex].address}</p>
-                <p>Prix entre {cards[currentIndex].minPrice}$</p>
-                <p>et {cards[currentIndex].maxPrice}$</p>
-              </div>
-            ) : (
-              <div className="tag-container-keyword">
-                <p className="tag-keyword">#{cards[currentIndex].name}</p>
-              </div>
-            )}
+            <p>Type: {cards[currentIndex].type}</p>
+            <p>{cards[currentIndex].address}</p>
+            <p>Prix entre {cards[currentIndex].average_budget}$</p>
           </figcaption>
         </figure>
         <footer className="button-container">
@@ -117,7 +101,7 @@ export default function Cardz({
             type="button"
             aria-labelledby={cards[currentIndex].type}
           >
-            <Link to="/prestataire">Voir plus d'infos +</Link>
+            <Link to="/prestataire">VOIR PLUS D'INFOS +</Link>
           </button>
         </footer>
       </motion.article>

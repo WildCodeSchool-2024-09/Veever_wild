@@ -23,11 +23,9 @@ export type CatalogRecapProps = {
 export type ChrCardProps = {
   count: number;
   id: number;
-  picture: string;
-  link: string;
+  images: { link: string }[];
   name: string;
-  maxPrice: number;
-  minPrice: number;
+  average_budget: number;
   category: string;
   address: string;
   keywords: string[];
@@ -38,10 +36,9 @@ export type ChrCardsProps = {
   id: number;
   name: string;
   type: string;
-  maxPrice: number;
-  minPrice: number;
+  average_budget: number;
   address: string;
-  picture: string;
+  images: { link: string }[];
   category: string;
   keywords: string[];
   cards: ChrCardProps[];
@@ -63,4 +60,16 @@ export type SaveCardsContextType = {
 
 export type CatalogueProps = {
   saveCards: ChrCardProps[];
+};
+
+export type CheckboxItem = {
+  id: "all" | "hotels" | "restaurants" | "activities";
+  label: string;
+};
+
+export type CatalogCheckboxProps = {
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: () => void;
 };

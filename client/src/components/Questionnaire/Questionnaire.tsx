@@ -22,7 +22,6 @@ export default function Questionnaire() {
             {...card}
             cards={cards}
             setCards={setCards}
-            picture={card.link}
           />
         ))}
       </article>

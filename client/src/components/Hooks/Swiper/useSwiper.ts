@@ -7,7 +7,6 @@ export default function useSwiper(
   cards: ChrCardProps[],
   setCards: (cards: ChrCardProps[]) => void,
   id: number,
-  handleKeywordSelection: (keywords: string[], picture: string) => void,
 ) {
   const [, setIsAnimated] = useState(false);
   const { addCard } = useSaveCards();
@@ -26,7 +25,6 @@ export default function useSwiper(
         setTimeout(() => {
           setIsSnackOpen(true);
         }, 1000);
-        handleKeywordSelection(swippedCards.keywords, swippedCards.picture);
         addCard(swippedCards);
       }
     } else if (currentX < -50) {
