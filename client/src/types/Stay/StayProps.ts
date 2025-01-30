@@ -6,13 +6,13 @@ export type StayTopPageProps = {
 };
 
 export type StayBottomPageProps = {
-  selectedDate: Date | null;
-  selectedDays: number;
   selectedDates: Date[];
+  selectedDate: Date | null;
+  numberOfDays: number;
   mealOptionsVisible: { [key: string]: boolean };
-  setMealOptionsVisible: (mealOptionsVisible: {
-    [key: string]: boolean;
-  }) => void;
+  setMealOptionsVisible: React.Dispatch<
+    React.SetStateAction<{ [key: string]: boolean }>
+  >;
   handleCheckboxChange: (dayKey: string, option: string) => void;
   checkBoxes: { [key: string]: boolean };
 };

@@ -134,16 +134,3 @@
   margin-right: .5rem;
   padding-right: .5rem;
 }
-
-.next-button {
-  position: fixed;
-  bottom: -.5rem;
-  left: 80%;
-  background-color: var(--veever-blue);
-  color: white;
-  box-shadow: var(--box-shadow-soft);
-}
-
-.next-button:hover {
-  background-color: var(--border-color-input-focus);
-}

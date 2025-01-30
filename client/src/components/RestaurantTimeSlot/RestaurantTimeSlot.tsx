@@ -1,21 +1,17 @@
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DinnerDiningIcon from "@mui/icons-material/DinnerDining";
+import FreeBreakfastIcon from "@mui/icons-material/FreeBreakfast";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
-import { Box, IconButton, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { useNavigate } from "react-router-dom";
 import { useRestaurantTimeSlotLogic } from "../../components/Hooks/Stay/useRestaurantTimeSlotLogic";
 import "./RestaurantTimeSlot.css";
 import type { RestaurantTimeSlotProps } from "../../types/TimeSlot/TimeSlotTypes";
 
 export default function RestaurantTimeSlot({
   availableDates,
-  onSelectionChange,
 }: RestaurantTimeSlotProps) {
-  const navigate = useNavigate();
   const {
     selectedOptionsByDate,
     selectedDate,
@@ -26,35 +22,8 @@ export default function RestaurantTimeSlot({
   const formatDate = (date: string) =>
     format(new Date(date), "EEEE d MMMM", { locale: fr });
 
-  const handleNext = () => {
-    if (selectedDate.length > 0) {
-      const selections = selectedDate.map((date) => ({
-        date,
-        mealOptions: selectedOptionsByDate[date] || [],
-        selected: true,
-      }));
-      const timeSlotSelection = {
-        dates: selections,
-        selected: selectedOptionsByDate[selectedDate[0]]?.[0] || null,
-      };
-      onSelectionChange(timeSlotSelection);
-      navigate("/restaurant/time-selection", {
-        state: { selections: timeSlotSelection },
-      });
-    }
-  };
-
   return (
     <Box className="restaurant-scheduler">
-      <header className="page-header">
-        <IconButton onClick={() => navigate(-1)} aria-label="Retour">
-          <ArrowBackIcon />
-        </IconButton>
-        <Typography variant="h4" component="h1">
-          Horaires
-        </Typography>
-      </header>
-
       <Box className="scheduler-content">
         <Typography variant="h6" component="h3" className="question-text">
           Sélectionnez une date :
@@ -101,8 +70,8 @@ export default function RestaurantTimeSlot({
                   className={`meal-option ${selectedOptionsByDate[date]?.includes("dejeuner") ? "selected" : ""}`}
                   onClick={() => handleOptionSelect(date, "dejeuner")}
                 >
-                  <RestaurantIcon className="meal-icon" />
-                  <Typography>Déjeuner</Typography>
+                  <FreeBreakfastIcon className="meal-icon" />
+                  <Typography>Petit déjeuner</Typography>
                 </Paper>
                 <Paper
                   elevation={
@@ -112,7 +81,7 @@ export default function RestaurantTimeSlot({
                   onClick={() => handleOptionSelect(date, "diner")}
                 >
                   <DinnerDiningIcon className="meal-icon" />
-                  <Typography>Dîner</Typography>
+                  <Typography>Déjeuner</Typography>
                 </Paper>
                 <Paper
                   elevation={
@@ -125,23 +94,12 @@ export default function RestaurantTimeSlot({
                 >
                   <Box className="double-icon">
                     <RestaurantIcon className="meal-icon" />
-                    <DinnerDiningIcon className="meal-icon" />
                   </Box>
-                  <Typography>Déjeuner + Dîner</Typography>
+                  <Typography>Dîner</Typography>
                 </Paper>
               </Grid>
             </Box>
           ))}
-
-        {selectedDate.length > 0 && (
-          <IconButton
-            onClick={handleNext}
-            aria-label="Suivant"
-            className="next-button"
-          >
-            <ArrowForwardIcon />
-          </IconButton>
-        )}
       </Box>
     </Box>
   );

@@ -12,5 +12,5 @@ export interface TimeSlotSelection {
 
 export type RestaurantTimeSlotProps = {
   onSelectionChange: (selection: TimeSlotSelection) => void;
-  availableDates?: AvailableDate[]; // Dates reçues du composant parent
+  availableDates?: AvailableDate[];
 };

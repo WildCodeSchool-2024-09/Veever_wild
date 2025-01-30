@@ -1,6 +1,7 @@
+import type { StayBottomPageProps } from "../../types/Stay/StayProps";
 import "./StayBottomPage.css";
 
-export default function StayBottomPage() {
+export default function StayBottomPage(_: StayBottomPageProps) {
   return (
     <main className="stay-container">
       <article className="other-informations">
@@ -11,7 +12,7 @@ export default function StayBottomPage() {
         </label>
         <label>
           <input type="checkbox" />
-          Kids friendly
+          Pour toute la famille
         </label>
         <label>
           <input type="checkbox" />
