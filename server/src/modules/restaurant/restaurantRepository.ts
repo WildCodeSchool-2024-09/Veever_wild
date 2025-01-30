@@ -17,8 +17,13 @@ class RestaurantRepository {
       await connection.beginTransaction();
       const [chrResult] = await connection.query<Result>(
         ` INSERT INTO chr
-          (name, address, min_price, max_price) values (?, ?, ?, ?)`,
-        [chrData.name, chrData.address, chrData.minPrice, chrData.maxPrice],
+          (name, address, description, average_budget) values (?, ?, ?, ?)`,
+        [
+          chrData.name,
+          chrData.address,
+          chrData.description,
+          chrData.average_budget,
+        ],
       );
 
       if (!chrResult.insertId) {
@@ -29,8 +34,8 @@ class RestaurantRepository {
 
       const [restaurantResult] = await connection.query<Result>(
         `INSERT INTO restaurant
-         (chr_id) values(?)`,
-        [chrId],
+         (chr_id, type) values(?,?)`,
+        [chrId, chrData.type],
       );
 
       if (!restaurantResult.insertId) {
@@ -53,7 +58,7 @@ class RestaurantRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific restaurant by its ID
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.name AS name, chr.address, chr.min_price AS minPrice, chr.max_price AS maxPrice
+      `SELECT chr.name AS name, chr.address, chr.description, chr.average_budget, restaurant.type
        FROM restaurant 
        INNER JOIN chr
        ON restaurant.chr_id = chr.id
@@ -67,7 +72,7 @@ class RestaurantRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all restaurants from the "restaurant" table
     const [rows] = await databaseClient.query<Rows>(
-      `SELECT chr.name AS name, chr.address, chr.min_price AS minPrice , chr.max_price AS maxPrice
+      `SELECT chr.name AS name, chr.address, chr.description, chr.average_budget, restaurant.type
        FROM restaurant
        INNER JOIN chr
        ON restaurant.chr_id = chr.id`,
@@ -83,13 +88,14 @@ class RestaurantRepository {
     try {
       const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
-         SET name = ?, address = ?, min_price = ?, max_price = ?
+         SET name = ?, address = ?, description = ?, average_budget = ?, type = ?
          WHERE id = (SELECT chr_id FROM restaurant WHERE id = ?)`,
         [
           chrData.name,
           chrData.address,
-          chrData.minPrice,
-          chrData.maxPrice,
+          chrData.description,
+          chrData.average_budget,
+          chrData.type,
           restaurantId,
         ],
       );

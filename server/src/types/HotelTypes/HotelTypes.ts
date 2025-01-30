@@ -1,12 +1,14 @@
 export type Hotels = {
   id: number;
   chr_id: number;
+  type: string;
 };
 export type ChrData = {
   name: string;
   address: string;
-  minPrice: number;
-  maxPrice: number;
+  description: string;
+  average_budget: number;
+  type: string;
 };
 export type UpdateResponse = {
   hotelId: number;
