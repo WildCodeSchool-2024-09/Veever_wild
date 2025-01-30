@@ -1,7 +1,3 @@
-export type Activities = {
-  id: number;
-  chr_id: number;
-};
 export type ChrData = {
   name: string;
   address: string;
@@ -9,6 +5,12 @@ export type ChrData = {
   average_budget: number;
   duration: number;
 };
+
+export type Activities = {
+  id: number;
+  chr_id: number;
+};
+
 export type UpdateResponse = {
   activityId: number;
   chrData: ChrData;

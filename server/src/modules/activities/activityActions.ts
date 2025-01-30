@@ -46,8 +46,8 @@ const edit: RequestHandler = async (req, res, next) => {
         name: req.body.name,
         address: req.body.address,
         description: req.body.description,
-        average_budget: Number(req.body.average_budget),
-        duration: Number(req.body.duration),
+        average_budget: req.body.average_budget,
+        duration: req.body.duration,
       },
     };
 
@@ -70,8 +70,8 @@ const add: RequestHandler = async (req, res, next) => {
     name: req.body.name,
     address: req.body.address,
     description: req.body.description,
-    average_budget: Number(req.body.average_budget),
-    duration: Number(req.body.duration),
+    average_budget: req.body.average_budget,
+    duration: req.body.duration,
   };
 
   try {
