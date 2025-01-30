@@ -29,6 +29,7 @@
   border-radius: calc(var(--border-ref) * 2);
   border-color: var(--mainColor);
   padding: var(--spacing-ref);
+  height: 100%;
 }
 
 .swiper-card p {
@@ -38,7 +39,7 @@
 
 .img-swiper {
   width: 100%;
-  height: 50vh;
+  height: 70vh;
   cursor: grab;
   border-radius: calc(var(--border-ref) * 1.2);
   &:active {
@@ -51,16 +52,10 @@
   grid-row: 1;
   grid-column: 1;
 }
-.tag-img-container {
-  display: grid;
-  height: 50vh;
-}
 
 .tag-container {
   color: var(--aliceBlueColor);
   display: grid;
-  width: 100%;
-  height: 50vh;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(5, 1fr);
 }
@@ -118,8 +113,4 @@
   color: var(--aliceBlueColor);
   font-size: calc(var(--font-size-ref) * 0.8);
   font-family: var(--textFont);
-}
-
-.info p {
-  padding: var(--spacing-ref);
 }
