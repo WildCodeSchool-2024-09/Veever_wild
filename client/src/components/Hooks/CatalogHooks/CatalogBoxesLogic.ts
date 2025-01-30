@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CheckBoxProps } from "../../types/Catalog/CatalogTypes";
+import type { CheckBoxProps } from "../../../types/Catalog/CatalogTypes";
 
 export default function useCatalogBoxes() {
   const [filters, setFilters] = useState<CheckBoxProps>({

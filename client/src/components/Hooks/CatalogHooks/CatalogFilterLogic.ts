@@ -1,5 +1,5 @@
-import { useSaveCards } from "../../services/saveCardsContext/saveCardsContext";
-import type { RecapChrProps } from "../../types/Catalog/CatalogTypes";
+import { useSaveCards } from "../../../services/saveCardsContext/saveCardsContext";
+import type { RecapChrProps } from "../../../types/Catalog/CatalogTypes";
 import useCatalogFilter from "./CatalogBoxesLogic";
 
 export default function useCatalogLogic() {
