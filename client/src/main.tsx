@@ -26,6 +26,10 @@ import VersusPage from "./pages/VersusPage/VersusPage";
 // You can add more routes as you build out your app!
 const router = createBrowserRouter([
   {
+    path: "/createAccount",
+    element: <CreateAccount />,
+  },
+  {
     element: <App />,
     children: [
       {
@@ -50,10 +54,6 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <VersusPage />,
-      },
-      {
-        path: "/createAccount",
-        element: <CreateAccount />,
       },
     ],
   },

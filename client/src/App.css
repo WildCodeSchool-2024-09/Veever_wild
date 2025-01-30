@@ -7,5 +7,10 @@
 }
 
 #root {
-  height: 140vh;
+  background-color: var(--bckgColor);
+}
+select,
+button,
+a {
+  cursor: pointer;
 }

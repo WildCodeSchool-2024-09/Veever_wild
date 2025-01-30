@@ -15,12 +15,16 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
           key={card.id}
           className={`card-container  card-container-${card.type}`}
         >
-          <img className="img-catalog-card" src={card.images[0].link} alt="" />
-          <article key={card.id} className="article-chr-middle-card">
+          <img
+            className="img-catalog-card"
+            src={`http://localhost:3310/${card.images[0].link}`}
+            alt=""
+          />
+          <section className="article-chr-middle-card">
             <h2>{card.name}</h2>
             <p>{card.average_budget}</p>
             <p>{card.address}</p>
-          </article>
+          </section>
           <ChrBottomCard />
         </article>
       ))}
