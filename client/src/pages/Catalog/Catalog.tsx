@@ -9,8 +9,12 @@ export default function Catalog() {
 
   return (
     <main>
-      <CatalogRecap data={filteredRecapData} />
-      <CatalogBoxes filters={filters} onFilterChange={handleFilterChange} />
+      <CatalogRecap />
+      <CatalogBoxes
+        filters={filters}
+        onFilterChange={handleFilterChange}
+        data={filteredRecapData}
+      />
       <CatalogCards saveCards={filteredCards} />
     </main>
   );

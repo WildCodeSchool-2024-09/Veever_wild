@@ -1,18 +1,18 @@
 import type { CatalogBoxesProps } from "../../../types/Catalog/CatalogTypes";
 import "./Catalog-Boxes.css";
-import { CatalogCheckbox } from "../../../services/Catalog/CatalogCheckbox";
 import type { CheckboxItem } from "../../../types/Catalog/CatalogTypes";
-
+import { CatalogCheckbox } from "./CatalogCheckbox";
 const checkboxItems: CheckboxItem[] = [
-  { id: "all", label: "Tous" },
-  { id: "hotels", label: "Hôtels" },
-  { id: "restaurants", label: "Restaurants" },
-  { id: "activities", label: "Activités" },
+  { id: "all", label: "Tous", emoji: "❤️" },
+  { id: "hotels", label: "Hôtels", emoji: "🏨" },
+  { id: "restaurants", label: "Restaurants", emoji: "🍴" },
+  { id: "activities", label: "Activités", emoji: "🏃‍♀️" },
 ];
 
 export default function CatalogBoxes({
   filters,
   onFilterChange,
+  data = [],
 }: CatalogBoxesProps) {
   return (
     <section>
@@ -22,7 +22,8 @@ export default function CatalogBoxes({
           <CatalogCheckbox
             key={item.id}
             id={`catalog-${item.id}`}
-            label={item.label}
+            label={`${data?.find((d) => d.type === item.id)?.count || 0}`}
+            emoji={item.emoji}
             checked={filters[item.id]}
             onChange={() => onFilterChange(item.id)}
           />
