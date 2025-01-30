@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import type { Card } from "../../types/Catalog/CatalogTypes";
 import "./VersusCard.css";
+import { Link } from "react-router-dom";
 
 type VersusCardProps = {
   versusCards: Card[];
@@ -15,10 +16,17 @@ export default function Versus({ versusCards }: VersusCardProps) {
   const handleSelectVersus = (cardId: number) => {
     setSelectedCard(cardId);
   };
+
+  const handleOnClickValidation = () => {
+    setSelectedCard(selectedCard);
+  };
+
   return (
     <main className="versus-container">
+      <h1 className="versus-title">Choissisez votre {versusCards[0].type}</h1>
+      <button type="button">Rewind</button>
       {versusCards.map((card) => (
-        <>
+        <Fragment key={card.id}>
           <article
             key={card.id}
             className={`versus-card ${selectedCard === card.id ? "selected" : ""}`}
@@ -31,10 +39,11 @@ export default function Versus({ versusCards }: VersusCardProps) {
                 src={`http://localhost:3310/${card.images[0].link}`}
                 alt=""
               />
-              <figcaption className="tag-container">
+              <figcaption className="tag-versus-container">
                 <h2>{card.name}</h2>
-                <p> Prix moyen: {card.average_budget / 100}</p>
+                <p> Prix moyen: {card.average_budget / 100} euros</p>
                 <p>Type: {card.type}</p>
+                <p>Localisation: {card.address}</p>
                 {selectedCard === card.id ? (
                   <svg
                     id="Calque_1"
@@ -53,11 +62,14 @@ export default function Versus({ versusCards }: VersusCardProps) {
                 ) : null}
               </figcaption>
             </figure>
+            <Link to="/prestataire">+ d'infos</Link>
           </article>
-          <p key={card.id}>VS</p>
-        </>
+          <p className="vs">vs</p>
+        </Fragment>
       ))}
-      <button type="submit">Valider mon choix</button>
+      <button onClick={handleOnClickValidation} type="button">
+        Valider mon choix
+      </button>
     </main>
   );
 }

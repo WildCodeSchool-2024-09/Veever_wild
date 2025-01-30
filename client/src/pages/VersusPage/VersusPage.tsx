@@ -6,13 +6,5 @@ export default function VersusPage() {
   const { versusCards } = useSaveCards();
 
   const versusCardsSlice = versusCards();
-  return (
-    <>
-      <main className="versus">
-        <h1 className="versus-title">Résultats</h1>
-        <h2 className="versus-subtitle">Choissisez votre activité</h2>
-        <VersusCard versusCards={versusCardsSlice} />
-      </main>
-    </>
-  );
+  return <VersusCard versusCards={versusCardsSlice} />;
 }
