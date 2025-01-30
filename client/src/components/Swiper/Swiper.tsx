@@ -8,9 +8,14 @@ export default function Swiper() {
   const [cards, setCards] = useState<ChrCardProps[]>([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/chr`)
+    fetch(`${import.meta.env.VITE_API_URL}/chr`, {
+      method: "GET",
+      credentials: "include",
+    })
       .then((res) => res.json())
-      .then((data) => setCards(data));
+      .then((data) => {
+        setCards(data);
+      });
   }, []);
 
   return (
@@ -19,8 +24,7 @@ export default function Swiper() {
       <article className="card-map">
         {cards.map((card) => (
           <Cardz
-            handleKeywordSelection={() => {}}
-            key={card.id}
+            key={`${card.id}-${card.name}`}
             {...card}
             cards={cards}
             setCards={setCards}
