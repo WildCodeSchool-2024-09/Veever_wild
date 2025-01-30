@@ -21,7 +21,7 @@ export default function Versus({ versusCards }: VersusCardProps) {
               </aside>
               <img
                 className="versus-img"
-                src={`http://localhost:3310/${card.images}`}
+                src={`http://localhost:3310/${card.images[0].link}`}
                 alt=""
               />
             </section>
