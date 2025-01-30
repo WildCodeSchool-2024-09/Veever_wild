@@ -3,10 +3,22 @@ import "./Catalog-Boxes.css";
 import type { CheckboxItem } from "../../../types/Catalog/CatalogTypes";
 import { CatalogCheckbox } from "./CatalogCheckbox";
 const checkboxItems: CheckboxItem[] = [
-  { id: "all", label: "Tous", emoji: "❤️" },
-  { id: "hotels", label: "Hôtels", emoji: "🏨" },
-  { id: "restaurants", label: "Restaurants", emoji: "🍴" },
-  { id: "activities", label: "Activités", emoji: "🏃‍♀️" },
+  { id: "all", label: "Tous", emoji: "/src/assets/images/heart.svg" },
+  {
+    id: "hotels",
+    label: "Hôtels",
+    emoji: "/src/assets/images/hotel.svg",
+  },
+  {
+    id: "restaurants",
+    label: "Restaurants",
+    emoji: "/src/assets/images/restaurant.svg",
+  },
+  {
+    id: "activities",
+    label: "Activités",
+    emoji: "/src/assets/images/activity.svg",
+  },
 ];
 
 export default function CatalogBoxes({

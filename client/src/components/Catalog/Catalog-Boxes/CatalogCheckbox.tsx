@@ -1,5 +1,4 @@
 import type { CatalogCheckboxProps } from "../../../types/Catalog/CatalogTypes";
-
 export const CatalogCheckbox = ({
   label,
   checked,
@@ -13,7 +12,12 @@ export const CatalogCheckbox = ({
       className={`catalog-emoji-checkbox ${checked ? "checked" : ""}`}
       aria-label={label}
     >
-      {emoji} <span className="count">{label}</span>
+      {emoji.endsWith(".svg") ? (
+        <img src={emoji} alt={label} className="catalog-icon" />
+      ) : (
+        emoji
+      )}
+      <span className="label">{label}</span>
     </button>
   );
 };

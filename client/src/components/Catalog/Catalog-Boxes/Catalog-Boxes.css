@@ -18,7 +18,10 @@
   font-size: calc(var(--font-size-ref) * 2.5);
   margin-bottom: var(--border-ref);
 }
-
+.catalog-icon {
+  width: calc(var(--spacing-ref) * 3);
+  height: calc(var(--spacing-ref) * 3);
+}
 .catalog-boxes {
   cursor: pointer;
   border: solid var(--dark) calc(var(--border-ref) * 0.2);
@@ -44,20 +47,22 @@ input[type="checkbox"] {
 .catalog-emoji-checkbox {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: calc(var(--font-size-ref) * 1.5);
   cursor: pointer;
-  padding: 8px;
+  padding: calc(var(--spacing-ref) * 0.5);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: calc(var(--spacing-ref) * 0.5);
   opacity: 0.5;
   transition: opacity 0.2s;
 }
 
 .catalog-emoji-checkbox.checked {
   opacity: 1;
+  border: solid var(--secondColor) calc(var(--border-ref) * 0.1);
+  border-radius: var(--border-ref);
 }
 
 .catalog-emoji-checkbox .label {
-  font-size: 1rem;
+  font-size: var(--font-size-ref);
 }
