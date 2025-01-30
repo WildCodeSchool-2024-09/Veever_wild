@@ -11,6 +11,7 @@ import Catalog from "./pages/Catalog/Catalog";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import HomePage from "./pages/HomePage/HomePage";
 import Profile from "./pages/Profile/Profile";
+import Provider from "./pages/Provider/Provider";
 import Settings from "./pages/Settings/Settings";
 
 // Import additional components for new routes
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/settings",
         element: <Settings />,
+      },
+      {
+        path: "/provider/:id",
+        element: <Provider />,
       },
     ],
   },
