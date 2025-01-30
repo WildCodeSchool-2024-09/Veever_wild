@@ -26,7 +26,7 @@
   background-color: var(--light);
   border: solid 1px var(--bckgColor);
   border-radius: 15px;
-  box-shadow: 8px 8px 8px var(--shadow);
+  box-shadow: -2px -1px 8px 3px var(--shadow);
   padding: var(--spacing-ref);
 }
 
@@ -61,7 +61,7 @@
   background-color: var(--bckgColor-opacity);
   padding: var(--spacing-ref);
   margin-top: var(--spacing-ref);
-  font-size: calc(var(--font-size-ref) * 1.5);
+  font-size: clamp(1.3rem, 5vw, 2.5rem);
 }
 
 .tag-versus-container p {
@@ -69,7 +69,7 @@
   margin-left: 10px;
   background-color: var(--bckgColor-opacity);
   width: 30vw;
-  font-size: calc(var(--font-size-ref) * 0.8);
+  font-size: clamp(0.8rem, 2vw, 1.8rem);
 }
 
 .tag-versus-container svg {
@@ -91,6 +91,7 @@
   grid-column: span 2;
   grid-row-start: 3;
   justify-self: end;
+  margin-right: 10px;
 }
 
 .versus-card.selected {
