@@ -1,15 +1,15 @@
 import { useState } from "react";
-import type { Filters } from "../../types/Catalog/CatalogTypes";
+import type { CheckBoxProps } from "../../types/Catalog/CatalogTypes";
 
 export default function useCatalogBoxes() {
-  const [filters, setFilters] = useState<Filters>({
-    restaurants: true,
-    activities: true,
-    hotels: true,
+  const [filters, setFilters] = useState<CheckBoxProps>({
+    restaurants: false,
+    activities: false,
+    hotels: false,
     all: true,
   });
 
-  const handleFilterChange = (filterName: keyof Filters) => {
+  const handleFilterChange = (filterName: keyof CheckBoxProps) => {
     if (filterName === "all") {
       const newValue = !filters.all;
       setFilters({

@@ -1,44 +1,74 @@
-export type Filters = {
+export type CheckBoxProps = {
   all: boolean;
   hotels: boolean;
   restaurants: boolean;
   activities: boolean;
 };
 
-export type RecapItem = {
+export type RecapChrProps = {
   name: string;
   emoji: string;
   count: number;
-  type: "all" | "hotels" | "restaurants" | "activities"; // <--- Ici on pourrait mettre keyof de Filters
+  type: "all" | "hotels" | "restaurants" | "activities";
 };
 
-// Props pour CatalogBoxes
 export type CatalogBoxesProps = {
-  filters: Filters;
-  onFilterChange: (filterName: keyof Filters) => void; //<--- keyof permet de prendre UNE clé de Filters
+  filters: CheckBoxProps;
+  onFilterChange: (filterName: keyof CheckBoxProps) => void;
 };
 
-// Props pour CatalogRecap
 export type CatalogRecapProps = {
-  data: RecapItem[];
+  data: RecapChrProps[];
 };
-export type Card = {
+export type ChrCardProps = {
   count: number;
   id: number;
   picture: string;
   name: string;
   maxPrice: number;
+  minPrice: number;
+  category: string;
   address: string;
   type: "hotels" | "restaurants" | "activities";
 };
+
+export type ChrCardsProps = {
+  id: number;
+  name: string;
+  type: string;
+  maxPrice: number;
+  minPrice: number;
+  address: string;
+  picture: string;
+  category: string;
+  cards: ChrCardProps[];
+  setCards: (cards: ChrCardProps[]) => void;
+};
+
 export type Props = {
   children: React.ReactNode;
 };
 
 export type SaveCardsContextType = {
-  saveCards: Card[];
-  setSaveCards: React.Dispatch<React.SetStateAction<Card[]>>;
-  addCard: (card: Card) => void;
+  saveCards: ChrCardProps[];
+  setSaveCards: React.Dispatch<React.SetStateAction<ChrCardProps[]>>;
+  addCard: (card: ChrCardProps) => void;
   removeCard: (cardId: number) => void;
   isCardSaved: (cardId: number) => boolean;
+};
+
+export type CatalogueProps = {
+  saveCards: ChrCardProps[];
+};
+
+export type CheckboxItem = {
+  id: "all" | "hotels" | "restaurants" | "activities";
+  label: string;
+};
+
+export type CatalogCheckboxProps = {
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: () => void;
 };
