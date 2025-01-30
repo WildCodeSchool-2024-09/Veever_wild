@@ -320,16 +320,16 @@ class IllustrationSeeder extends AbstractSeeder {
         link: "assets/images/restaurant-images/lesaintjulien1_mobile.webp",
       },
       {
-        link: "assets/images/restaurant-images/lesaintjulien2_desktop.webp",
+        link: "assets/images/restaurant-images/lesaintjulien2_desktop.jpg",
       },
       {
-        link: "assets/images/restaurant-images/lesaintjulien2_mobile.webp",
+        link: "assets/images/restaurant-images/lesaintjulien2_mobile.jpg",
       },
       {
-        link: "assets/images/restaurant-images/lesaintjulien3_desktop.webp",
+        link: "assets/images/restaurant-images/lesaintjulien3_desktop.jpg",
       },
       {
-        link: "assets/images/restaurant-images/lesaintjulien3_mobile.webp",
+        link: "assets/images/restaurant-images/lesaintjulien3_mobile.jpg",
       },
       {
         link: "assets/images/restaurant-images/danslenoirbordeaux1_desktop.jpg",
@@ -443,19 +443,19 @@ class IllustrationSeeder extends AbstractSeeder {
         link: "assets/images/restaurant-images/terredemeraude1_desktop.jpeg",
       },
       {
-        link: "assets/images/restaurant-images/terredemeraude1_mobile.jpeg",
+        link: "assets/images/restaurant-images/terredemeraude1_mobile.jpg",
       },
       {
-        link: "assets/images/restaurant-images/terredemeraude2_desktop.jpeg",
+        link: "assets/images/restaurant-images/terredemeraude2_desktop.jpg",
       },
       {
-        link: "assets/images/restaurant-images/terredemeraude2_mobile.jpeg",
+        link: "assets/images/restaurant-images/terredemeraude2_mobile.jpg",
       },
       {
-        link: "assets/images/restaurant-images/terredemeraude3_desktop.jpeg",
+        link: "assets/images/restaurant-images/terredemeraude3_desktop.jpg",
       },
       {
-        link: "assets/images/restaurant-images/terredemeraude3_mobile.jpeg",
+        link: "assets/images/restaurant-images/terredemeraude3_mobile.jpg",
       },
       {
         link: "assets/images/restaurant-images/riadmarrakech1_desktop.jpg",

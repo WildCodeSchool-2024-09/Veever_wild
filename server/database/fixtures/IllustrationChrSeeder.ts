@@ -531,22 +531,22 @@ class IllustrationChrSeeder extends AbstractSeeder {
       {
         chr_name: "Le Saint Julien",
         illustration_link:
-          "assets/images/restaurant-images/lesaintjulien2_desktop.webp",
+          "assets/images/restaurant-images/lesaintjulien2_desktop.jpg",
       },
       {
         chr_name: "Le Saint Julien",
         illustration_link:
-          "assets/images/restaurant-images/lesaintjulien2_mobile.webp",
+          "assets/images/restaurant-images/lesaintjulien2_mobile.jpg",
       },
       {
         chr_name: "Le Saint Julien",
         illustration_link:
-          "assets/images/restaurant-images/lesaintjulien3_desktop.webp",
+          "assets/images/restaurant-images/lesaintjulien3_desktop.jpg",
       },
       {
         chr_name: "Le Saint Julien",
         illustration_link:
-          "assets/images/restaurant-images/lesaintjulien3_mobile.webp",
+          "assets/images/restaurant-images/lesaintjulien3_mobile.jpg",
       },
       {
         chr_name: "Dans le Noir",
@@ -736,27 +736,27 @@ class IllustrationChrSeeder extends AbstractSeeder {
       {
         chr_name: "Terre d'Émeraude",
         illustration_link:
-          "assets/images/restaurant-images/terredemeraude1_mobile.jpeg",
+          "assets/images/restaurant-images/terredemeraude1_mobile.jpg",
       },
       {
         chr_name: "Terre d'Émeraude",
         illustration_link:
-          "assets/images/restaurant-images/terredemeraude2_desktop.jpeg",
+          "assets/images/restaurant-images/terredemeraude2_desktop.jpg",
       },
       {
         chr_name: "Terre d'Émeraude",
         illustration_link:
-          "assets/images/restaurant-images/terredemeraude2_mobile.jpeg",
+          "assets/images/restaurant-images/terredemeraude2_mobile.jpg",
       },
       {
         chr_name: "Terre d'Émeraude",
         illustration_link:
-          "assets/images/restaurant-images/terredemeraude3_desktop.jpeg",
+          "assets/images/restaurant-images/terredemeraude3_desktop.jpg",
       },
       {
         chr_name: "Terre d'Émeraude",
         illustration_link:
-          "assets/images/restaurant-images/terredemeraude3_mobile.jpeg",
+          "assets/images/restaurant-images/terredemeraude3_mobile.jpg",
       },
       {
         chr_name: "Le Riad Marrakech",
