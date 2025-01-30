@@ -36,11 +36,9 @@ const validateChr = (req: Request, res: Response, next: NextFunction): void => {
   }
 
   if (parsedAverageBudget < 0) {
-    res
-      .status(400)
-      .json({
-        error: "Le champ 'average_budget doit être supérieur ou égal à 0.",
-      });
+    res.status(400).json({
+      error: "Le champ 'average_budget doit être supérieur ou égal à 0.",
+    });
     return;
   }
 
