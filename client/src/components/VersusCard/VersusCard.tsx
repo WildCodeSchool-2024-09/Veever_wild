@@ -2,6 +2,7 @@ import { Fragment, useState } from "react";
 import type { Card } from "../../types/Catalog/CatalogTypes";
 import "./VersusCard.css";
 import { Link } from "react-router-dom";
+import { StyledButton } from "../../services/Form/StyledButton";
 
 type VersusCardProps = {
   versusCards: Card[];
@@ -18,7 +19,7 @@ export default function Versus({ versusCards }: VersusCardProps) {
   };
 
   const handleOnClickValidation = () => {
-    setSelectedCard(selectedCard);
+    console.info(selectedCard);
   };
 
   return (
@@ -67,9 +68,9 @@ export default function Versus({ versusCards }: VersusCardProps) {
           <p className="vs">vs</p>
         </Fragment>
       ))}
-      <button onClick={handleOnClickValidation} type="button">
+      <StyledButton onClick={handleOnClickValidation}>
         Valider mon choix
-      </button>
+      </StyledButton>
     </main>
   );
 }

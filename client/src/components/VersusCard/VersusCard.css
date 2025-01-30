@@ -54,13 +54,14 @@
 }
 
 .tag-img-container h2 {
+  font-family: var(--titleFont);
   border-top-right-radius: var(--border-ref);
   border-bottom-right-radius: var(--border-ref);
   grid-column: span 2;
   background-color: var(--bckgColor-opacity);
   padding: var(--spacing-ref);
   margin-top: var(--spacing-ref);
-  font-size: calc(var(--font-size-ref) * 1);
+  font-size: calc(var(--font-size-ref) * 1.5);
 }
 
 .tag-versus-container p {
@@ -68,6 +69,7 @@
   margin-left: 10px;
   background-color: var(--bckgColor-opacity);
   width: 30vw;
+  font-size: calc(var(--font-size-ref) * 0.8);
 }
 
 .tag-versus-container svg {
@@ -86,8 +88,9 @@
   grid-row-start: 2;
 }
 .tag-versus-container p:nth-of-type(3) {
-  grid-column-start: 3;
-  grid-row: span 2;
+  grid-column: span 2;
+  grid-row-start: 3;
+  justify-self: end;
 }
 
 .versus-card.selected {
@@ -114,7 +117,7 @@
   font-size: calc(var(--font-size-ref) * 1.5);
   letter-spacing: var(--spacing-letter-ref);
   margin: calc(var(--spacing-ref) * 1);
-  background-color: var(--mainColor);
+  background-color: var(--variantMainColor);
   border-radius: calc(var(--border-ref) * 2);
   color: var(--bckgColor);
   font-weight: 800;
