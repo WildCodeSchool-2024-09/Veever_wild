@@ -11,7 +11,7 @@ export default function EmailInput({ email, handleEmailChange }: EmailType) {
         id="email"
         placeholder="Email"
         onChange={handleEmailChange}
-        aria-describedby="emailError"
+        aria-labelledby="emailError"
       />
     </>
   );

@@ -14,7 +14,7 @@ export default function PasswordInput({
         id="password"
         placeholder="Mot de passe"
         onChange={handlePasswordChange}
-        aria-describedby="passwordError"
+        aria-labelledby="passwordError"
       />
     </>
   );
