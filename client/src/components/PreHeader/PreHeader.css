@@ -22,10 +22,11 @@
 
 .logobox {
   width: 20%;
+  align-content: center;
 }
 
 .logo {
-  height: calc(var(--spacing-ref) * 6);
-  width: calc(var(--spacing-ref) * 6);
+  /* height: calc(var(--spacing-ref) * 6);
+  width: calc(var(--spacing-ref) * 6); */
   width: 100%;
 }

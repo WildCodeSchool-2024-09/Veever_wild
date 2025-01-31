@@ -4,17 +4,17 @@ const itineraries = [
   {
     id: 1,
     title: "Activité en couple",
-    imageSrc: "src/assets/images/escape_game.jpg",
+    imageSrc: "../assets/images/escape_game.jpg",
   },
   {
     id: 2,
     title: "Séjour entre amis",
-    imageSrc: "src/assets/images/paintball.jpg",
+    imageSrc: "../assets/images/paintball.jpg",
   },
   {
     id: 3,
     title: "Séjour en famille",
-    imageSrc: "src/assets/images/rock-climbing.jpg",
+    imageSrc: "../assets/images/rock-climbing.jpg",
   },
 ];
 
@@ -25,7 +25,7 @@ const ItinerarySection = () => {
 
   return (
     <section className="itineraries-section">
-      <h2 className="section-title">Nos Itinéraires du Moment</h2>
+      <h2 className="section-title">Itinéraires du moment</h2>
       <article className="cards-container">
         {itineraries.map((item) => (
           <ItineraryCard

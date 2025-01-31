@@ -1,5 +1,13 @@
+@font-face {
+  font-family: "AcuminProExtraCondensedSemibold";
+  src: url("../public/assets/fonts/AcuminVariableConcept.otf")
+    format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  --titleFont: "MontSerrat";
+  --titleFont: "AcuminProExtraCondensedSemibold";
   --textFont: "Arial";
 
   --font-size-ref: 1rem;
@@ -40,7 +48,7 @@
 
   --box-shadow-input-focus: 0 0 0 3px #80bfff;
   --box-shadow-input: 0 2px 2px #f3f6f9;
-  --box-shadow-soft: 0px 0px 2px 2px #00000033;
+  --box-shadow-soft: 5px 5px 15px 5px #4e4a4a16;
 
   --width-input-form: 20rem;
   --width-label-text: 40ch;

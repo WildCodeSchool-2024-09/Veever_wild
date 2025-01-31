@@ -2,8 +2,8 @@ import "./Discovery.css";
 export default function () {
   return (
     <section className="discovery-section">
-      <h1>Découvrez notre nouveau concept</h1>
-      <p>Une experience unique</p>
+      <h1>Swippez, découvrez, choissisez</h1>
+      <p>Trouvez les meilleurs expériences qui vous correspondent</p>
       <button type="button">Voir les itinéraires</button>
     </section>
   );
