@@ -7,15 +7,15 @@ import useFormData from "../../services/Form/FormData";
 import useFormValidation from "../../services/Form/FormValidation";
 import HeaderForm from "./HeaderForm";
 import InputCheckCGU from "./InputForm/InputCheckCGU";
+import InputCheckContact from "./InputForm/InputCheckContact";
 import InputDate from "./InputForm/InputDate";
 import InputEmail from "./InputForm/InputEmail";
 import InputFirstName from "./InputForm/InputFirstName";
 import InputGender from "./InputForm/InputGender";
-import InputPhone from "./InputForm/InputPhone";
-import InputUsername from "./InputForm/InputUsername";
-import InputCheckContact from "./InputForm/InputCheckContact";
 import InputLastName from "./InputForm/InputLastName";
 import InputPassword from "./InputForm/InputPassword";
+import InputPhone from "./InputForm/InputPhone";
+import InputUsername from "./InputForm/InputUsername";
 
 export default function Form() {
   const {
