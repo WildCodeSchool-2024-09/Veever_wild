@@ -29,6 +29,7 @@
   border-radius: calc(var(--border-ref) * 2);
   border-color: var(--mainColor);
   padding: var(--spacing-ref);
+  height: 85vh;
 }
 
 .swiper-card p {
@@ -86,9 +87,9 @@
 }
 .tag-container p:nth-child(3) {
   align-self: flex-end;
-  justify-self: end;
   grid-column-start: 2;
   grid-row-start: 4;
+  height: calc(var(--spacing-ref) * 3);
 }
 
 .button-container {

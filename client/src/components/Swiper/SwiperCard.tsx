@@ -44,9 +44,9 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
             alt={name}
           />
           <figcaption className="tag-container">
-            <p>Type: {cards[currentIndex].type}</p>
+            <p>{cards[currentIndex].type}</p>
             <p>{cards[currentIndex].address}</p>
-            <p>Prix entre {cards[currentIndex].average_budget}$</p>
+            <p>Prix moyen: {cards[currentIndex].average_budget}$</p>
           </figcaption>
         </figure>
         <footer className="button-container">
