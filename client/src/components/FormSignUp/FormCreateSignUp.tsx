@@ -1,5 +1,5 @@
 import Form from "./Form";
 
-export default function FormCreateAcc() {
+export default function FormCreateSignUp() {
   return <Form />;
 }

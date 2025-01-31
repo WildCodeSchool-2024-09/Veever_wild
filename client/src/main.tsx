@@ -6,9 +6,9 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
+import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
 import Catalog from "./pages/Catalog/Catalog";
 import HomePage from "./pages/HomePage/HomePage";
-
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
 
@@ -33,7 +33,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-
+  {
+    path: "/FormCreateSignUp",
+    element: <FormCreateSignUp />,
+  },
   // Try adding a new route! For example, "/about" with an About component
 ]);
 
