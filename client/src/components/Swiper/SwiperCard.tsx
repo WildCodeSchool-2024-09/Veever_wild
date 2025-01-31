@@ -16,6 +16,7 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
     rotate,
     x,
   } = useSwiper(cards, setCards, id);
+
   return (
     <main className="swiper-container">
       <motion.article
@@ -34,12 +35,12 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
             transitionDuration={1000}
           />
         )}
-        <p>{cards[currentIndex].name}</p>
+        <h1>{cards[currentIndex].name}</h1>
 
         <figure className="tag-img-container">
           <img
             className="img-swiper"
-            src={`http://localhost:3310/${cards[currentIndex].images[0].link}`}
+            src={`http://localhost:3310/${cards[currentIndex].images[1].link}`}
             alt={name}
           />
           <figcaption className="tag-container">
