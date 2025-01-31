@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/FormCreateSignUp",
+    path: "/form-create-sign-up",
     element: <FormCreateSignUp />,
   },
   // Try adding a new route! For example, "/about" with an About component
