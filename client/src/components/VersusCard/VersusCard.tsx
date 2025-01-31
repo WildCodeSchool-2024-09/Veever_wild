@@ -43,8 +43,8 @@ export default function Versus({ versusCards }: VersusCardProps) {
               <figcaption className="tag-versus-container">
                 <h2>{card.name}</h2>
                 <p> Prix moyen: {card.average_budget / 100} euros</p>
-                <p>Type: {card.type}</p>
-                <p>Localisation: {card.address}</p>
+                <p>{card.type}</p>
+                <p>{card.address}</p>
                 {selectedCard === card.id ? (
                   <svg
                     id="Calque_1"
