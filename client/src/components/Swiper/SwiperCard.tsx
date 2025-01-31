@@ -23,7 +23,7 @@ export default function Cardz({
   } = useSwiper(cards, setCards, id.toString());
 
   return (
-    <section className="swiper-container" id={`swiper-${id.toString()}`}>
+    <main className="swiper-container" id={`swiper-${id.toString()}`}>
       <article
         className={`swiper-card swiper-card-${cards[currentIndex].type}`}
       >
@@ -54,6 +54,6 @@ export default function Cardz({
           <Link to="/prestataire">+ d'infos</Link>
         </footer>
       </article>
-    </section>
+    </main>
   );
 }
