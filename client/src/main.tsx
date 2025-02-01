@@ -6,12 +6,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
-import Swiper from "./components/Swiper/Swiper";
+import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
 import Catalog from "./pages/Catalog/Catalog";
-import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import HomePage from "./pages/HomePage/HomePage";
-import Profile from "./pages/Profile/Profile";
-//import Settings from "./pages/Settings/Settings";
+
+import Swiper from "./components/Swiper/Swiper";
 import VersusPage from "./pages/VersusPage/VersusPage";
 
 // Import additional components for new routes
@@ -25,10 +24,6 @@ import VersusPage from "./pages/VersusPage/VersusPage";
 // Create router configuration with routes
 // You can add more routes as you build out your app!
 const router = createBrowserRouter([
-  {
-    path: "/createAccount",
-    element: <CreateAccount />,
-  },
   {
     element: <App />,
     children: [
@@ -45,17 +40,14 @@ const router = createBrowserRouter([
         element: <Swiper />,
       },
       {
-        path: "/favorites",
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
         path: "/settings",
         element: <VersusPage />,
       },
     ],
+  },
+  {
+    path: "/form-create-sign-up",
+    element: <FormCreateSignUp />,
   },
   // Try adding a new route! For example, "/about" with an About component
 ]);

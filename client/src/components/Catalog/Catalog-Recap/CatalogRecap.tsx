@@ -17,14 +17,14 @@ export default function CatalogRecap({ data }: CatalogRecapProps) {
           </li>
         ))}
       </ul>
-      <h3 className="date-card">
+      <p className="date-card">
         Date :{" "}
         {date.toLocaleDateString("fr-FR", {
           month: "long",
           day: "numeric",
           year: "numeric",
         })}
-      </h3>
+      </p>
     </>
   );
 }
