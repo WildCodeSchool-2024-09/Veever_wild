@@ -6,9 +6,15 @@ import { StyledButton } from "../../services/Form/StyledButton";
 
 type VersusCardProps = {
   versusCards: Card[];
+  handleValidationVersus: (cardId: number) => void;
+  handleRewind: () => void;
 };
 
-export default function Versus({ versusCards }: VersusCardProps) {
+export default function Versus({
+  versusCards,
+  handleValidationVersus,
+  handleRewind,
+}: VersusCardProps) {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   if (versusCards.length === 0) {
     return <p>Aucune carte sauvegardée.</p>;
@@ -18,14 +24,12 @@ export default function Versus({ versusCards }: VersusCardProps) {
     setSelectedCard(cardId);
   };
 
-  const handleOnClickValidation = () => {
-    console.info(selectedCard);
-  };
-
   return (
     <main className="versus-container">
       <h1 className="versus-title">Choissisez votre {versusCards[0].type}</h1>
-      <button type="button">Rewind</button>
+      <button type="button" onClick={handleRewind}>
+        Rewind
+      </button>
       {versusCards.map((card) => (
         <Fragment key={card.id}>
           <article
@@ -68,7 +72,11 @@ export default function Versus({ versusCards }: VersusCardProps) {
           <p className="vs">vs</p>
         </Fragment>
       ))}
-      <StyledButton onClick={handleOnClickValidation}>
+      <StyledButton
+        onClick={() =>
+          selectedCard !== null && handleValidationVersus(selectedCard)
+        }
+      >
         Valider mon choix
       </StyledButton>
     </main>

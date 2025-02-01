@@ -1,21 +1,61 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { useSaveCards } from "../../services/saveCardsContext/saveCardsContext";
-import type { Card } from "../../types/Catalog/CatalogTypes";
 
 export default function UseVersusLogic() {
-  const [versusCards, setVersusCards] = useState<Card[]>([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentType, setCurrentType] = useState<
+    "hotel" | "restaurant" | "activity"
+  >("hotel");
+  const [seenCards, setSeenCards] = useState<{ [key: string]: number[] }>({
+    hotel: [],
+    restaurant: [],
+    activity: [],
+  });
   const { saveCards } = useSaveCards();
 
-  const getBestCards = useCallback(() => {
-    if (saveCards && saveCards.length > 0) {
-      const filteredCards = saveCards.filter((card) => card.type === "hotels");
-      setVersusCards(filteredCards);
+  const versusCards = () => {
+    const filteredCards = saveCards
+      .filter(
+        (card) =>
+          card.type === currentType &&
+          !seenCards[currentType].includes(card.id),
+      )
+      .slice(currentIndex, currentIndex + 2);
+
+    return filteredCards;
+  };
+
+  const handleValidationVersus = (cardId: number) => {
+    setSeenCards((prevSeenCards) => ({
+      ...prevSeenCards,
+      [currentType]: [...prevSeenCards[currentType], cardId],
+    }));
+
+    if (currentType === "hotel") {
+      setCurrentType("restaurant");
+    } else if (currentType === "restaurant") {
+      setCurrentType("activity");
+    } else if (currentType === "activity") {
+      setCurrentType("hotel");
+      setCurrentIndex((prevIndex) => prevIndex + 2);
     }
-  }, [saveCards]);
+  };
 
-  useEffect(() => {
-    getBestCards();
-  }, [getBestCards]);
+  const handleRewind = () => {
+    setSeenCards((prevSeenCards) => ({
+      ...prevSeenCards,
+      [currentType]: [],
+    }));
 
-  return { versusCards, getBestCards };
+    if (currentType === "restaurant") {
+      setCurrentType("hotel");
+    } else if (currentType === "activity") {
+      setCurrentType("restaurant");
+    } else if (currentType === "hotel" && currentIndex >= 2) {
+      setCurrentType("activity");
+      setCurrentIndex((prevIndex) => prevIndex - 2);
+    }
+  };
+
+  return { versusCards, handleValidationVersus, handleRewind, currentType };
 }

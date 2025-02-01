@@ -11,7 +11,6 @@ const SaveCardsContext = createContext<SaveCardsContextType | undefined>(
 
 export function SaveCardsProvider({ children }: Props) {
   const [saveCards, setSaveCards] = useState<ChrCardProps[]>([]);
-
   const addCard = (card: ChrCardProps) => {
     setSaveCards((prevCards) => {
       if (!prevCards.some((c) => c.id === card.id)) {
@@ -19,10 +18,6 @@ export function SaveCardsProvider({ children }: Props) {
       }
       return prevCards;
     });
-  };
-
-  const versusCards = () => {
-    return saveCards.slice(0, 2);
   };
 
   const removeCard = (cardId: number) => {
@@ -34,7 +29,6 @@ export function SaveCardsProvider({ children }: Props) {
   };
 
   const value = {
-    versusCards,
     saveCards,
     setSaveCards,
     addCard,

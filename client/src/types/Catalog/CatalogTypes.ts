@@ -1,15 +1,15 @@
 export type CheckBoxProps = {
   all: boolean;
-  hotels: boolean;
-  restaurants: boolean;
-  activities: boolean;
+  hotel: boolean;
+  restaurant: boolean;
+  activity: boolean;
 };
 
 export type RecapChrProps = {
   name: string;
   emoji: string;
   count: number;
-  type: "all" | "hotels" | "restaurants" | "activities";
+  type: "all" | "hotel" | "restaurant" | "activity";
 };
 
 export type CatalogBoxesProps = {
@@ -29,7 +29,7 @@ export type ChrCardProps = {
   category: string;
   address: string;
   keywords: string[];
-  type: "hotels" | "restaurants" | "activities";
+  type: "hotel" | "restaurant" | "activity";
 };
 
 export type ChrCardsProps = {
@@ -52,7 +52,7 @@ export type Card = {
   name: string;
   average_budget: number;
   address: string;
-  type: "hotels" | "restaurants" | "activities";
+  type: "hotel" | "restaurant" | "activity";
 };
 
 export type Props = {
@@ -61,7 +61,6 @@ export type Props = {
 
 export type SaveCardsContextType = {
   saveCards: ChrCardProps[];
-  versusCards: () => Card[];
   setSaveCards: React.Dispatch<React.SetStateAction<ChrCardProps[]>>;
   addCard: (card: ChrCardProps) => void;
   removeCard: (cardId: number) => void;
@@ -73,7 +72,7 @@ export type CatalogueProps = {
 };
 
 export type CheckboxItem = {
-  id: "all" | "hotels" | "restaurants" | "activities";
+  id: "all" | "hotel" | "restaurant" | "activity";
   label: string;
 };
 
