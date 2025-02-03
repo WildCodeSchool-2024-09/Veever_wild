@@ -15,9 +15,7 @@ export default function Stay() {
     checkBoxes,
   } = useStayLogic();
 
-  const handleSelectionChange = () => {
-    // Logique pour gérer la sélection des repas
-  };
+  const handleSelectionChange = () => {};
 
   return (
     <>
