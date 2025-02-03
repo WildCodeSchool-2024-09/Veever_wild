@@ -1,9 +1,9 @@
 import { useSaveCards } from "../../../services/saveCardsContext/saveCardsContext";
 import type { RecapChrProps } from "../../../types/Catalog/CatalogTypes";
-import useCatalogFilter from "./CatalogBoxesLogic";
+import useFilters from "./useFilters";
 
 export default function useCatalogLogic() {
-  const { filters, handleFilterChange } = useCatalogFilter();
+  const { filters, handleFilterChange } = useFilters();
   const { saveCards } = useSaveCards();
 
   const filteredCards = saveCards.filter(

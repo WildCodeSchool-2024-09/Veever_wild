@@ -1,6 +1,5 @@
 import CatalogBoxes from "../../components/Catalog/Catalog-Boxes/Catalog-Boxes";
 import CatalogCards from "../../components/Catalog/Catalog-Cards/Catalog-Cards";
-import CatalogRecap from "../../components/Catalog/Catalog-Recap/CatalogRecap";
 import useCatalogLogic from "../../components/Hooks/CatalogHooks/CatalogFilterLogic";
 
 export default function Catalog() {
@@ -9,7 +8,6 @@ export default function Catalog() {
 
   return (
     <main>
-      <CatalogRecap />
       <CatalogBoxes
         filters={filters}
         onFilterChange={handleFilterChange}

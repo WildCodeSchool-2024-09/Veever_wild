@@ -26,8 +26,18 @@ export default function CatalogBoxes({
   onFilterChange,
   data = [],
 }: CatalogBoxesProps) {
+  const date = new Date();
+
   return (
     <section>
+      <p className="date-card">
+        Date :{" "}
+        {date.toLocaleDateString("fr-FR", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        })}
+      </p>
       <h1 className="catalog-title">Mon catalogue personnalisé</h1>
       <form className="catalog-boxes-form" action="">
         {checkboxItems.map((item) => (
