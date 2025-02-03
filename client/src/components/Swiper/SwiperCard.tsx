@@ -1,4 +1,3 @@
-import { Snackbar } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import type { ChrCardsProps } from "../../types/Catalog/CatalogTypes";
@@ -9,8 +8,6 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
     handleDislike,
     handleDragEnd,
     handleLike,
-    setIsSnackOpen,
-    isSnackOpen,
     currentIndex,
     opacity,
     rotate,
@@ -26,15 +23,6 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
         style={{ x, opacity, rotate }}
         onDragEnd={() => handleDragEnd(id)}
       >
-        {isSnackOpen && (
-          <Snackbar
-            open={isSnackOpen}
-            onClose={() => setIsSnackOpen(false)}
-            message={`Votre ${cards[currentIndex].type} à était sauvegardé`}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            transitionDuration={1000}
-          />
-        )}
         <h1>{cards[currentIndex].name}</h1>
 
         <figure className="tag-img-container">

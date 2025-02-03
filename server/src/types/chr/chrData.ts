@@ -2,8 +2,9 @@ export type chrData = {
   name: string;
   address: string;
   description: string;
-  average_budget: string;
-  type: string;
+  average_budget: number;
+  type?: string;
+  duration?: number;
 };
 
 export type Restaurant = {
