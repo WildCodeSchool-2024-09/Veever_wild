@@ -1,7 +1,7 @@
 import { FormControl, FormLabel } from "@mui/material";
 
 import { useEffect, useState } from "react";
-import { StyledSelect } from "../../../services/Form/StyledSelect";
+import { StyledSelect } from "../../../Styles/StyledSelect";
 import type { FormInput } from "../../../types/FormInput/FormInput";
 
 type Gender = {
@@ -14,7 +14,7 @@ export default function InputGender({ handleChange, value }: FormInput) {
   useEffect(() => {
     const fetchGenders = async () => {
       try {
-        const response = await fetch("http://localhost:3310/api/genders");
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/genders`);
         if (!response.ok) {
           throw new Error("Erreur lors de la récupération de donnée");
         }
