@@ -7,6 +7,7 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
     return <p>Aucune carte sauvegardée.</p>;
   }
 
+  console.info(saveCards);
   return (
     <>
       {saveCards.map((card) => (
