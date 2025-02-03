@@ -7,14 +7,16 @@
   justify-content: flex-start;
   padding: calc(var(--spacing-ref) * 2);
 }
-
+.title-calendar {
+  padding: var(--spacing-ref);
+}
 .calendar,
 .group-choice,
 .group-number,
 .results {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   margin-bottom: var(--spacing-ref);
   width: 100%;
   max-width: calc(var(--spacing-ref) * 25);

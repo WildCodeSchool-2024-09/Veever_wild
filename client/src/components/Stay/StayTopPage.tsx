@@ -21,7 +21,7 @@ export default function StayTopPage({
   return (
     <main className="stay-container">
       <section className="calendar">
-        <h2>Calendrier</h2>
+        <h2 className="title-calendar">Calendrier</h2>
         <>
           <DatePicker
             selected={

@@ -22,12 +22,16 @@
   border: var(--border-input);
   border-radius: var(--border-ref);
   padding: var(--spacing-ref);
-  width: auto;
+  width: 100%;
   font-size: var(--font-size-ref);
   box-shadow: var(--box-shadow-soft);
   cursor: pointer;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--light);
   margin: var(--spacing-ref) auto;
+  background: var(--gradientColor-CTA);
 }
 
 .other-informations label {
