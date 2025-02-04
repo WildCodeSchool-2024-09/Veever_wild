@@ -1,36 +1,57 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import PriceDisplay from "../../services/Provider/PriceDisplay";
 import TypeDisplay from "../../services/Provider/TypeDisplay";
 import type { Chr } from "../../types/Provider/ProviderType";
 
 export default function Provider() {
-  const [chr, setChr] = useState<Chr | null>(null);
-  const { id } = useParams<{ id: string }>();
+  const chr = useLoaderData() as Chr;
+  const [photosToDisplay, setPhotosToDisplay] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/chr/${id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.info(data[0]);
-        setChr(data[0]);
-      });
-  }, [id]);
+    const isMobile = window.innerWidth <= 768;
 
-  if (!chr) return <p>Loading...</p>;
+    try {
+      const filteredPhotos = filterPhotosByDevice(chr.images, isMobile);
+      setPhotosToDisplay(filteredPhotos);
+    } catch (error) {
+      setError("Erreur lors de la récupération des photos.");
+    } finally {
+      setLoading(false);
+    }
+  }, [chr.images]);
+
+  const filterPhotosByDevice = (
+    images: { link: string }[],
+    isMobile: boolean,
+  ): string[] => {
+    return images
+      .filter(
+        (image) =>
+          (isMobile && image.link.includes("mobile")) ||
+          (!isMobile && image.link.includes("desktop")),
+      )
+      .map((image) => image.link);
+  };
+
+  if (loading) return <p>Loading...</p>;
+
+  if (error) return <p>{error}</p>;
+
+  if (!chr) return <p>Aucun prestataire trouvé.</p>;
 
   return (
     <section>
       {chr.images.length > 0 ? (
-        chr.images.map((image, index) => {
-          return (
-            <img
-              key={`${chr.name} ${index}`}
-              src={`${import.meta.env.VITE_IMAGE_URL}/${image.link}`}
-              alt={chr.name}
-            />
-          );
-        })
+        photosToDisplay.map((image, index) => (
+          <img
+            key={`${chr.name} ${index}`}
+            src={`${import.meta.env.VITE_IMAGE_URL}/${image}`}
+            alt={chr.name}
+          />
+        ))
       ) : (
         <p>Photo indisponible</p>
       )}
