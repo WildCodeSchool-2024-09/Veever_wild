@@ -5,18 +5,16 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /* ************************************************************************* */
 import App from "./App";
+import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
 import AdminRoute from "./components/ProtectedRoute/AdminRoute";
 import GuestRoute from "./components/ProtectedRoute/GuestRoute";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
-import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/Login/Login";
-import Profile from "./pages/Profile/Profile";
 import Settings from "./pages/Settings/Settings";
-
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
 
@@ -33,13 +31,12 @@ const router = createBrowserRouter([
     children: [
       { path: "/login", element: <GuestRoute element={<Login />} /> },
       {
-        path: "/createAccount",
-        element: <GuestRoute element={<CreateAccount />} />,
+        path: "/signup",
+        element: <GuestRoute element={<FormCreateSignUp />} />,
       },
       { path: "/", element: <ProtectedRoute element={<HomePage />} /> },
       { path: "/catalog", element: <ProtectedRoute element={<Catalog />} /> },
       { path: "/search", element: <ProtectedRoute element={<Swiper />} /> },
-      { path: "/profile", element: <ProtectedRoute element={<Profile />} /> },
       { path: "/settings", element: <ProtectedRoute element={<Settings />} /> },
       {
         path: "/dashboard",
