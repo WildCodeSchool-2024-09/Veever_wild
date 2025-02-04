@@ -10,7 +10,6 @@ export default function Swiper() {
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/chr`, {
       method: "GET",
-      credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => {

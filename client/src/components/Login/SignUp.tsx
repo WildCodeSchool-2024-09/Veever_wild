@@ -10,7 +10,7 @@ export default function SignUp() {
       type="button"
       className="signUpBtn"
       onClick={() => {
-        navigate("/");
+        navigate("/form-create-sign-up");
       }}
     >
       S'inscrire

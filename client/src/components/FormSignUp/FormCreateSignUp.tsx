@@ -2,6 +2,7 @@ import "./Form.css";
 import "react-datepicker/dist/react-datepicker.css";
 import Snackbar from "@mui/material/Snackbar";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useFormData from "../../services/Form/FormData";
 import useFormValidation from "../../services/Form/FormValidation";
 import { StyledButton } from "../../services/Form/StyledButton";
@@ -33,13 +34,14 @@ export default function FormCreateSignUp() {
   const handleClose = () => {
     setShowSnackbar(false);
   };
-
+  const navigate = useNavigate();
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (Object.keys(errors).length > 0 || !isSamePassword) {
       setShowSnackbar(true);
       return;
     }
+    navigate("/login");
   };
 
   return (
