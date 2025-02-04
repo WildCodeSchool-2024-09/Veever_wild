@@ -156,6 +156,50 @@ class keywordRepository {
 
     return result.affectedRows > 0;
   }
+
+  async readAllByClient(clientId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT keyword.id, keyword.name
+      FROM client_keyword
+      INNER JOIN keyword ON keyword.id = client_keyword.keyword_id
+      WHERE client_keyword.client_id = ?`,
+      [clientId],
+    );
+
+    return rows;
+  }
+
+  async readByClient(clientId: number, keywordId: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      `SELECT keyword.id, keyword.name
+      FROM client_keyword
+      INNER JOIN keyword ON keyword.id = client_keyword.keyword_id
+      WHERE client_keyword.client_id = ? AND client_keyword.keyword_id = ?`,
+      [clientId, keywordId],
+    );
+
+    return rows[0];
+  }
+
+  async addKeywordToClient(clientId: number, keywordId: number) {
+    const [result] = await databaseClient.execute<Result>(
+      `INSERT INTO client_keyword (client_id, keyword_id)
+      VALUES (?, ?)`,
+      [clientId, keywordId],
+    );
+
+    return result.insertId;
+  }
+
+  async removeKeywordFromClient(clientId: number, keywordId: number) {
+    const [result] = await databaseClient.execute<Result>(
+      `DELETE FROM client_keyword
+      WHERE client_id = ? AND keyword_id = ?`,
+      [clientId, keywordId],
+    );
+
+    return result.affectedRows > 0;
+  }
 }
 
 export default new keywordRepository();

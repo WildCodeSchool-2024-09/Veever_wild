@@ -80,5 +80,77 @@ const destroy: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+const browseByClient: RequestHandler = async (req, res, next) => {
+  try {
+    const clientId = Number(req.params.clientId);
+    const keywords = await keywordRepository.readAllByClient(clientId);
 
-export default { browse, read, edit, add, destroy };
+    res.json(keywords);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const readByClient: RequestHandler = async (req, res, next) => {
+  try {
+    const clientId = Number(req.params.clientId);
+    const keywordId = Number(req.params.keywordId);
+    const keyword = await keywordRepository.readByClient(clientId, keywordId);
+
+    if (!keyword) {
+      res.sendStatus(404);
+    } else {
+      res.json(keyword);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+const addToClient: RequestHandler = async (req, res, next) => {
+  try {
+    const clientId = Number(req.params.clientId);
+    const keywordId = Number(req.body.keywordId);
+
+    const insertId = await keywordRepository.addKeywordToClient(
+      clientId,
+      keywordId,
+    );
+
+    res.status(201).json({ insertId });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const removeFromClient: RequestHandler = async (req, res, next) => {
+  try {
+    const clientId = Number(req.params.clientId);
+    const keywordId = Number(req.params.keywordId);
+
+    const affectedRows = await keywordRepository.removeKeywordFromClient(
+      clientId,
+      keywordId,
+    );
+
+    if (!affectedRows) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(204);
+    }
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default {
+  browse,
+  read,
+  edit,
+  add,
+  destroy,
+  browseByClient,
+  readByClient,
+  addToClient,
+  removeFromClient,
+};
