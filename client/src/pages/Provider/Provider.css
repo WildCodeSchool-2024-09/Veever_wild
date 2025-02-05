@@ -55,6 +55,11 @@
   gap: .5rem;
 }
 
+.summary img {
+  height: 1rem;
+  margin-right: .25rem;
+}
+
 .summary li {
   display: flex;
   align-items: center;
@@ -74,12 +79,12 @@
 
 .summary li:nth-child(1),
 .summary li:nth-child(4) {
-  flex: 1 1 calc(25%);
+  flex: 1 1 calc(40%);
 }
 
 .summary li:nth-child(2),
 .summary li:nth-child(3) {
-  flex: 2 1 calc(50%);
+  flex: 2 1 calc(55%);
 }
 
 .descriptionProvider p {
