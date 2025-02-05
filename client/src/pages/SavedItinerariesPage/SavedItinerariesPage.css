@@ -1,5 +1,8 @@
 .my-itineraries {
   padding: var(--spacing-ref);
+  background-color: var(--light);
+  border-radius: var(--border-ref);
+  box-shadow: var(--box-shadow-soft);
 }
 
 .my-itineraries h1 {
