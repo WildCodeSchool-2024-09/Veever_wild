@@ -5,7 +5,7 @@ class ChrRepository {
   async read(id: number) {
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT
+       SELECT
         chr.id,
         chr.name,
         chr.address,
@@ -17,8 +17,8 @@ class ChrRepository {
           WHEN MAX(restaurant.type) IS NOT NULL THEN 'restaurant'
         END AS type,
         CASE 
-          WHEN MAX(activity.duration) IS NOT NULL THEN CONCAT(MAX(activity.duration))
-          WHEN MAX(hotel.type) IS NOT NULL THEN CONCAT(MAX(hotel.type))
+          WHEN MAX(activity.duration) IS NOT NULL THEN CONCAT('Durée : ', MAX(activity.duration), ' heures')
+          WHEN MAX(hotel.type) IS NOT NULL THEN CONCAT('Type : ', MAX(hotel.type))
           WHEN MAX(restaurant.type) IS NOT NULL THEN CONCAT(MAX(restaurant.type))
         END AS additional_info,
         COALESCE(
@@ -34,7 +34,7 @@ class ChrRepository {
       LEFT JOIN hotel ON hotel.chr_id = chr.id
       LEFT JOIN restaurant ON restaurant.chr_id = chr.id
       WHERE chr.id = ?
-      GROUP BY chr.id, chr.name, chr.address, chr.description, chr.average_budget
+      GROUP BY chr.id, chr.name, chr.address, chr.description, chr.average_budget;
       `,
       [id],
     );
@@ -45,7 +45,7 @@ class ChrRepository {
   async readAll() {
     const [rows] = await databaseClient.query<Rows>(
       `
-      SELECT
+        SELECT
         chr.id,
         chr.name,
         chr.address,
@@ -57,8 +57,8 @@ class ChrRepository {
           WHEN MAX(restaurant.type) IS NOT NULL THEN 'restaurant'
         END AS type,
         CASE 
-          WHEN MAX(activity.duration) IS NOT NULL THEN CONCAT(MAX(activity.duration))
-          WHEN MAX(hotel.type) IS NOT NULL THEN CONCAT(MAX(hotel.type))
+          WHEN MAX(activity.duration) IS NOT NULL THEN CONCAT('Durée : ', MAX(activity.duration), ' heures')
+          WHEN MAX(hotel.type) IS NOT NULL THEN CONCAT('Type : ', MAX(hotel.type))
           WHEN MAX(restaurant.type) IS NOT NULL THEN CONCAT(MAX(restaurant.type))
         END AS additional_info,
         COALESCE(
@@ -73,7 +73,7 @@ class ChrRepository {
       LEFT JOIN activity ON activity.chr_id = chr.id
       LEFT JOIN hotel ON hotel.chr_id = chr.id
       LEFT JOIN restaurant ON restaurant.chr_id = chr.id
-      GROUP BY chr.id, chr.name, chr.address, chr.description, chr.average_budget
+      GROUP BY chr.id, chr.name, chr.address, chr.description, chr.average_budget;
       `,
     );
 

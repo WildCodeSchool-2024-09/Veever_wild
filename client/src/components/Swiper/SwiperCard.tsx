@@ -28,7 +28,7 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
         <figure className="tag-img-container">
           <img
             className="img-swiper"
-            src={`http://localhost:3310/${cards[0].images[1].link}`}
+            src={`http://localhost:3310/${cards[currentIndex].images[1].link}`}
             alt={name}
           />
           <figcaption className="tag-container">
