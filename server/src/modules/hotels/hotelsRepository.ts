@@ -55,6 +55,7 @@ class HotelsRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific hotel by its ID
     const [rows] = await databaseClient.query<Rows>(
+
       `SELECT chr.name, chr.address, chr.description, chr.average_budget, hotel.type
        FROM hotel 
        INNER JOIN chr
@@ -66,7 +67,6 @@ class HotelsRepository {
     // Return the first row of the result, which represents the hotel
     return rows[0] as Hotels;
   }
-
   async readAll() {
     // Execute the SQL SELECT query to retrieve all hotels from the "hotel" table
     const [rows] = await databaseClient.query<Rows>(
@@ -86,6 +86,7 @@ class HotelsRepository {
     try {
       const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
+
          SET name = ?, address = ?, descritpion = ?, average_budget = ?, type = ?
          WHERE id = (
           SELECT chr_id

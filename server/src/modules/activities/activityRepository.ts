@@ -16,12 +16,15 @@ class ActivityRepository {
       const [chrResult] = await connection.query<Result>(
         `INSERT 
         INTO chr 
-        (name, address, description, average_budget) values (?, ?, ?, ?)`,
+
+        (name, address, description, average_budget, duration) values (?, ?, ?, ?,?)`,
         [
           chrData.name,
           chrData.address,
           chrData.description,
           chrData.average_budget,
+
+          chrData.duration,
         ],
       );
       if (!chrResult || !chrResult.insertId) {
@@ -55,6 +58,7 @@ class ActivityRepository {
     // Execute the SQL SELECT query to retrieve a specific activity by its ID
     const [rows] = await databaseClient.query<Rows>(
       `SELECT chr.name, chr.address, chr.description, chr.average_budget, activity.duration
+
        FROM activity
        INNER JOIN chr
        ON activity.chr_id = chr.id

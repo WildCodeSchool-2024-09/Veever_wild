@@ -1,10 +1,9 @@
 import "./Discovery.css";
-export default function () {
+export default function Discovery() {
   return (
-    <section className="discovery-section">
+    <hgroup className="discovery-hgroup">
       <h1>Découvrez notre nouveau concept</h1>
       <p>Une experience unique</p>
-      <button type="button">Voir les itinéraires</button>
-    </section>
+    </hgroup>
   );
 }
