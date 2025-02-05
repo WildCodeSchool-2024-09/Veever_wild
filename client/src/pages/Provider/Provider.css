@@ -1,5 +1,19 @@
 @import url("@src/variables.css");
 
+.provider button,
+.summary li {
+  border: var(--border-input);
+  border-radius: var(--border-ref);
+  box-shadow: var(--box-shadow-button);
+  background-color: var(--bckgColor-input);
+}
+
+.provider button {
+  margin: 1rem 0 0 1rem;
+  height: 2.5rem;
+  width: 6rem;
+}
+
 .provider h1,
 .provider h2 {
   font-family: var(--titleFont);
@@ -9,7 +23,8 @@
 .provider h1,
 .provider h2,
 .provider p,
-.provider li {
+.provider li,
+.provider button {
   color: var(--secondColor);
 }
 
@@ -70,11 +85,6 @@
   font-size: .75rem;
 
   padding-left: .25rem;
-
-  border: var(--border-input);
-  border-radius: var(--border-ref);
-  box-shadow: var(--box-shadow-button);
-  background-color: var(--bckgColor-input);
 }
 
 .summary li:nth-child(1),
@@ -90,4 +100,24 @@
 .descriptionProvider p {
   text-align: start;
   margin: 0.5rem 1rem 3rem;
+}
+
+@media screen and (min-width: 769px) {
+  .provider h1,
+  .provider h2 {
+    text-align: center;
+  }
+
+  .summary {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin: 1rem 3rem;
+  }
+
+  .summary li {
+    flex: 1;
+  }
+  .descriptionProvider p {
+    margin: .5rem auto;
+  }
 }
