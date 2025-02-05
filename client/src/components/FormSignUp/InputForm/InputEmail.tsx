@@ -10,7 +10,6 @@ export default function InputEmail({
   return (
     <FormControl className="formGroup">
       <StyledInput
-        required
         value={email}
         onChange={handleEmailCheckChange}
         type="email"
