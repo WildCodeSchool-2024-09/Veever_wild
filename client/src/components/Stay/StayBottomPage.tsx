@@ -1,7 +1,14 @@
+import { StyledButton } from "../../Styles/StyledButton";
 import type { StayBottomPageProps } from "../../types/Stay/StayProps";
 import "./StayBottomPage.css";
+import { useNavigate } from "react-router-dom";
 
 export default function StayBottomPage(_: StayBottomPageProps) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/settings");
+  };
   return (
     <main className="stay-container">
       <article className="other-informations">
@@ -29,10 +36,7 @@ export default function StayBottomPage(_: StayBottomPageProps) {
           Transports en commun
         </label>
       </article>
-
-      <button className="next-button" type="button">
-        Suivant
-      </button>
+      <StyledButton onClick={handleClick}>Suivant</StyledButton>
     </main>
   );
 }
