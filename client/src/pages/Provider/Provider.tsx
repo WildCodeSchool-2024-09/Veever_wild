@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import type { Chr } from "../../types/Provider/ProviderType";
 import "./Provider.css";
 import DescriptionProvider from "../../components/Provider/DescriptionProvider";
@@ -7,6 +7,7 @@ import PhotosProvider from "../../components/Provider/PhotosProvider";
 import SummaryProvider from "../../components/Provider/SummaryProvider";
 
 export default function Provider() {
+  const navigate = useNavigate();
   const chr = useLoaderData() as Chr;
   const [photosToDisplay, setPhotosToDisplay] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -46,6 +47,9 @@ export default function Provider() {
 
   return (
     <section className="provider">
+      <button type="button" onClick={() => navigate(-1)}>
+        ← Retour
+      </button>
       <PhotosProvider chr={chr} photosToDisplay={photosToDisplay} />
       <h1>{chr.name}</h1>
       <SummaryProvider chr={chr} />
