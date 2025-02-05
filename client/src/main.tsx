@@ -6,7 +6,6 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 import App from "./App";
 import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
-
 import GuestRoute from "./components/ProtectedRoute/GuestRoute";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import AdminRoute from "./components/ProtectedRoute/ProtectedRoute";
