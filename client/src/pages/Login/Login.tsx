@@ -8,7 +8,7 @@ import "./Login.css";
 export default function Login() {
   return (
     <main className="loginMain">
-      <img src={logo} alt="" />
+      <img src={logo} alt="Veever logo" />
       <h2>Connexion</h2>
       <p>Connectez-vous pour accéder à Veever</p>
       <LoginForm />

@@ -5,13 +5,14 @@ CREATE TABLE user (
   firstname varchar(255) not null,
   lastname varchar(255) not null,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP not null,
-  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  updated_at TIMESTAMP
 );
 
 CREATE TABLE admin (
   id int unsigned primary key auto_increment not null,
   user_id int unsigned not null,
   foreign key(user_id) references user(id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE gender (
@@ -24,16 +25,19 @@ CREATE TABLE client (
   user_id int unsigned not null,
   birthdate date not null,
   nickname varchar(255) not null,
-  gender int unsigned not null,
-  foreign key(user_id) references user(id),
+  gender_id int unsigned not null,
+  foreign key(user_id) references user(id)
+  ON DELETE CASCADE,
   foreign key(gender_id) references gender(id)
 );
 
+
 CREATE TABLE phone (
-  id int unsigned primary key auto_increment not null,
+  id int unsigned auto_increment primary key not null,
   phone_number varchar(10),
   client_id int unsigned not null,
   foreign key(client_id) references client(id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE reservation (
@@ -41,44 +45,70 @@ CREATE TABLE reservation (
   is_reserved BOOLEAN not null default 0
 );
 
+CREATE TABLE client_reservation (
+  id int unsigned primary key auto_increment not null,
+  client_id int unsigned not null,
+  reservation_id int unsigned not null,
+  foreign key(client_id) references client(id),
+  foreign key(reservation_id) references reservation(id)
+  ON DELETE CASCADE
+);
+
 CREATE TABLE reservation_date (
   id int unsigned primary key auto_increment not null,
   is_confirmed BOOLEAN not null default 0,
   reservation_id int unsigned not null,
   foreign key(reservation_id) references reservation(id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE chr (
   id int unsigned primary key auto_increment not null,
+  name varchar(255) not null,
   address varchar(255) not null,
-  min_price int unsigned not null,
-  max_price int unsigned not null
+  description text not null,
+  average_budget int unsigned not null
+);
+
+CREATE TABLE client_chr (
+  id int unsigned primary key auto_increment not null,
+  client_id int unsigned not null,
+  chr_id int unsigned not null,
+  foreign key(client_id) references client(id),
+  foreign key(chr_id) references chr(id)
 );
 
 CREATE TABLE chr_reservation (
   id int unsigned primary key auto_increment not null,
   reservation_id int unsigned not null,
-  foreign key(reservation_id) references reservation(id),
   chr_id int unsigned not null,
+  foreign key(reservation_id) references reservation(id)
+  ON DELETE CASCADE,
   foreign key(chr_id) references chr(id)
 );
 
 CREATE TABLE restaurant (
   id int unsigned primary key auto_increment not null,
   chr_id int unsigned not null,
+  type varchar(255) not null,
   foreign key(chr_id) references chr(id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE hotel (
   id int unsigned primary key auto_increment not null,
   chr_id int unsigned not null,
+  type varchar(255) not null,
   foreign key(chr_id) references chr(id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE activity (
   id int unsigned primary key auto_increment not null,
   chr_id int unsigned not null,
+  duration int not null,
   foreign key(chr_id) references chr(id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE keyword (
@@ -92,33 +122,36 @@ CREATE TABLE chr_keyword (
   keyword_id int unsigned not null,
   foreign key(chr_id) references chr(id),
   foreign key(keyword_id) references keyword(id)
+  ON DELETE CASCADE
 );
 
 CREATE TABLE client_keyword (
   id int unsigned primary key auto_increment not null,
   client_id int unsigned not null,
   keyword_id int unsigned not null,
-  foreign key(client_id) references client(id),
+  foreign key(client_id) references client(id)
+  ON DELETE CASCADE,
   foreign key(keyword_id) references keyword(id)
+  ON DELETE CASCADE
 );
 
-CREATE TABLE form_item (
+CREATE TABLE illustration (
   id int unsigned primary key auto_increment not null,
-  name varchar(255) not null
+  link varchar(255) not null
 );
 
-CREATE TABLE question (
+CREATE TABLE illustration_keyword (
   id int unsigned primary key auto_increment not null,
-  order int not null,
-  form_item_id int unsigned not null,
-  foreign key(form_item_id) references form_item(id)
-);
-
-CREATE TABLE answer (
-  id int unsigned primary key auto_increment not null,
-  is_checked BOOLEAN not null default 0,
-  question_id int unsigned not null,
+  illustration_id int unsigned not null,
   keyword_id int unsigned not null,
-  foreign key(question_id) references question(id),
+  foreign key(illustration_id) references illustration(id),
   foreign key(keyword_id) references keyword(id)
+);
+
+CREATE TABLE illustration_chr (
+  id int unsigned primary key auto_increment not null,
+  illustration_id int unsigned not null,
+  chr_id int unsigned not null,
+  foreign key(illustration_id) references illustration(id),
+  foreign key(chr_id) references chr(id)
 );

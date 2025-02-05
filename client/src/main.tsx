@@ -4,15 +4,17 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /* ************************************************************************* */
-
 import App from "./App";
-import Favorites from "./pages/Favorites/Favorites";
+import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
+import AdminRoute from "./components/ProtectedRoute/AdminRoute";
+import GuestRoute from "./components/ProtectedRoute/GuestRoute";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Swiper from "./components/Swiper/Swiper";
+import Catalog from "./pages/Catalog/Catalog";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/Login/Login";
-import Profile from "./pages/Profile/Profile";
-import Search from "./pages/Search/Search";
 import Settings from "./pages/Settings/Settings";
-
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
 
@@ -27,29 +29,18 @@ const router = createBrowserRouter([
   {
     element: <App />,
     children: [
+      { path: "/login", element: <GuestRoute element={<Login />} /> },
       {
-        path: "/",
-        element: <HomePage />,
+        path: "/signup",
+        element: <GuestRoute element={<FormCreateSignUp />} />,
       },
+      { path: "/", element: <ProtectedRoute element={<HomePage />} /> },
+      { path: "/catalog", element: <ProtectedRoute element={<Catalog />} /> },
+      { path: "/search", element: <ProtectedRoute element={<Swiper />} /> },
+      { path: "/settings", element: <ProtectedRoute element={<Settings />} /> },
       {
-        path: "/search",
-        element: <Search />,
-      },
-      {
-        path: "/favorites",
-        element: <Favorites />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
-        path: "/settings",
-        element: <Settings />,
-      },
-      {
-        path: "/login",
-        element: <Login />,
+        path: "/dashboard",
+        element: <AdminRoute element={<Dashboard />} />,
       },
     ],
   },
