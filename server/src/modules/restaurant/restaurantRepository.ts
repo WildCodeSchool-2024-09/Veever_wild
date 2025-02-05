@@ -23,6 +23,7 @@ class RestaurantRepository {
           chrData.address,
           chrData.description,
           chrData.average_budget,
+          chrData.type,
         ],
       );
 
@@ -88,7 +89,7 @@ class RestaurantRepository {
     try {
       const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
-         SET name = ?, address = ?, description, average_price = ?, type = ?
+         SET name = ?, address = ?, description = ?, average_budget = ?, type = ?
          WHERE id = (SELECT chr_id FROM restaurant WHERE id = ?)`,
         [
           chrData.name,

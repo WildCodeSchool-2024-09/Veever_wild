@@ -25,9 +25,9 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
             <p>{card.average_budget}</p>
             <p>{card.address}</p>
           </section>
-          <ChrBottomCard />
         </article>
       ))}
+      <ChrBottomCard />
     </>
   );
 }

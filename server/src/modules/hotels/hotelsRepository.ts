@@ -66,7 +66,6 @@ class HotelsRepository {
     // Return the first row of the result, which represents the hotel
     return rows[0] as Hotels;
   }
-
   async readAll() {
     // Execute the SQL SELECT query to retrieve all hotels from the "hotel" table
     const [rows] = await databaseClient.query<Rows>(
@@ -86,6 +85,7 @@ class HotelsRepository {
     try {
       const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
+
          SET name = ?, address = ?, descritpion = ?, average_budget = ?, type = ?
          WHERE id = (
           SELECT chr_id
