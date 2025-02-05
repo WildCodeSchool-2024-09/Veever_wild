@@ -7,7 +7,6 @@ import type {
   ItineraryStatus,
   ViewMode,
 } from "../../types/SavedItinerariesTypes/SavedItinerariesTypes";
-import "./MyItineraries.css";
 
 export default function SavedItinerariesPage() {
   const [viewMode, setViewMode] = useState<ViewMode>("list");

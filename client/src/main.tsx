@@ -13,6 +13,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/Login/Login";
 import Stay from "./pages/Stay/Stay";
 
+import SavedItinerariesPage from "./pages/SavedItinerariesPage/SavedItinerariesPage";
 import VersusPage from "./pages/VersusPage/VersusPage";
 
 // Import additional components for new routes
@@ -53,12 +54,17 @@ const router = createBrowserRouter([
         path: "/settings",
         element: <VersusPage />,
       },
+      {
+        path: "/SavedItinerariesPage",
+        element: <SavedItinerariesPage />,
+      },
     ],
   },
   {
     path: "/form-create-sign-up",
     element: <FormCreateSignUp />,
   },
+
   // Try adding a new route! For example, "/about" with an About component
 ]);
 

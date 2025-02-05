@@ -1,0 +1,24 @@
+.itinerary-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-ref);
+  margin-bottom: var(--spacing-ref);
+  background-color: var(--bckgColorOrangeOpacity);
+  border-radius: var(--border-ref);
+  box-shadow: var(--box-shadow-soft);
+}
+
+.status-filters,
+.view-filters {
+  display: flex;
+  gap: var(--spacing-ref);
+}
+
+.MuiFormControlLabel-root {
+  margin: 0;
+}
+
+.MuiCheckbox-root.Mui-checked {
+  color: var(--mainColor);
+}

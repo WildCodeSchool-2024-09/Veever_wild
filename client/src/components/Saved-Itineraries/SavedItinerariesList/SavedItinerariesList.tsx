@@ -21,14 +21,14 @@ export default function ItineraryList({ itineraries }: ItineraryListProps) {
             <h2>{itinerary.title}</h2>
             <span className="status-badge">{itinerary.status}</span>
           </header>
-          <div className="dates">
+          <main className="dates">
             <time dateTime={itinerary.startDate.toISOString()}>
               Du {itinerary.startDate.toLocaleDateString()}
             </time>
             <time dateTime={itinerary.endDate.toISOString()}>
               au {itinerary.endDate.toLocaleDateString()}
             </time>
-          </div>
+          </main>
           <ul className="activities-list">
             {itinerary.activities.map((activity) => (
               <li

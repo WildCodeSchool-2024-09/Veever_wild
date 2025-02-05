@@ -4,6 +4,7 @@ import type {
   ItineraryStatus,
   ViewMode,
 } from "../../../types/SavedItinerariesTypes/SavedItinerariesTypes";
+import "./SavedItinerariesFilters.css";
 
 interface ItineraryFiltersProps {
   filters: ItineraryFilter[];
