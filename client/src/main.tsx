@@ -7,12 +7,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
+import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
 import HomePage from "./pages/HomePage/HomePage";
-
-import Swiper from "./components/Swiper/Swiper";
 import VersusPage from "./pages/VersusPage/VersusPage";
-
+import { chrLoader } from "./services/Loader/LoaderChr";
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
 
@@ -38,6 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <Swiper />,
+        loader: chrLoader,
       },
       {
         path: "/settings",

@@ -85,7 +85,6 @@ class HotelsRepository {
     try {
       const [chrResult] = await databaseClient.query<Result>(
         `UPDATE chr
-
          SET name = ?, address = ?, descritpion = ?, average_budget = ?, type = ?
          WHERE id = (
           SELECT chr_id

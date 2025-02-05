@@ -1,4 +1,3 @@
-import { Snackbar } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import type { ChrCardsProps } from "../../types/Catalog/CatalogTypes";
@@ -9,13 +8,12 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
     handleDislike,
     handleDragEnd,
     handleLike,
-    setIsSnackOpen,
-    isSnackOpen,
     currentIndex,
     opacity,
     rotate,
     x,
   } = useSwiper(cards, setCards, id);
+
   return (
     <main className="swiper-container">
       <motion.article
@@ -25,27 +23,18 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
         style={{ x, opacity, rotate }}
         onDragEnd={() => handleDragEnd(id)}
       >
-        {isSnackOpen && (
-          <Snackbar
-            open={isSnackOpen}
-            onClose={() => setIsSnackOpen(false)}
-            message={`Votre ${cards[currentIndex].type} à était sauvegardé`}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            transitionDuration={1000}
-          />
-        )}
-        <p>{cards[currentIndex].name}</p>
+        <h1>{cards[currentIndex].name}</h1>
 
         <figure className="tag-img-container">
           <img
             className="img-swiper"
-            src={`http://localhost:3310/${cards[currentIndex].images[0].link}`}
+            src={`http://localhost:3310/${cards[currentIndex].images[1].link}`}
             alt={name}
           />
           <figcaption className="tag-container">
-            <p>Type: {cards[currentIndex].type}</p>
+            <p>{cards[currentIndex].type}</p>
             <p>{cards[currentIndex].address}</p>
-            <p>Prix entre {cards[currentIndex].average_budget}$</p>
+            <p>Prix moyen: {cards[currentIndex].average_budget}$</p>
           </figcaption>
         </figure>
         <footer className="button-container">
@@ -101,7 +90,7 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
             type="button"
             aria-labelledby={cards[currentIndex].type}
           >
-            <Link to="/prestataire">VOIR PLUS D'INFOS +</Link>
+            <Link to="/prestataire">Voir + d'infos</Link>
           </button>
         </footer>
       </motion.article>

@@ -23,6 +23,7 @@ class RestaurantRepository {
           chrData.address,
           chrData.description,
           chrData.average_budget,
+
           chrData.type,
         ],
       );

@@ -10,7 +10,6 @@ export default function useSwiper(
 ) {
   const [, setIsAnimated] = useState(false);
   const { addCard } = useSaveCards();
-  const [isSnackOpen, setIsSnackOpen] = useState(false);
   const x = useMotionValue(0);
   const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
   const rotate = useTransform(x, [-150, 150], [-18, 18]);
@@ -21,10 +20,6 @@ export default function useSwiper(
       const swippedCards = cards.find((card) => card.id === id);
       if (swippedCards) {
         setCards(cards.filter((card) => card.id !== id));
-        setIsSnackOpen(false);
-        setTimeout(() => {
-          setIsSnackOpen(true);
-        }, 1000);
         addCard(swippedCards);
       }
     } else if (currentX < -50) {
@@ -61,11 +56,9 @@ export default function useSwiper(
   const currentIndex = cards.findIndex((card) => card.id === Number(id));
 
   return {
-    setIsSnackOpen,
     handleDislike,
     handleDragEnd,
     handleLike,
-    isSnackOpen,
     currentIndex,
     opacity,
     rotate,

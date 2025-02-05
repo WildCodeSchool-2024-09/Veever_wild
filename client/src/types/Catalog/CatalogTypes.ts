@@ -62,7 +62,6 @@ export type Props = {
 
 export type SaveCardsContextType = {
   saveCards: ChrCardProps[];
-  setSaveCards: React.Dispatch<React.SetStateAction<ChrCardProps[]>>;
   addCard: (card: ChrCardProps) => void;
   removeCard: (cardId: number) => void;
   isCardSaved: (cardId: number) => boolean;
