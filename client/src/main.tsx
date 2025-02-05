@@ -6,12 +6,14 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 /* ************************************************************************* */
 
 import App from "./App";
+import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
 import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
-import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import HomePage from "./pages/HomePage/HomePage";
-import Profile from "./pages/Profile/Profile";
-import Settings from "./pages/Settings/Settings";
+import Login from "./pages/Login/Login";
+import Stay from "./pages/Stay/Stay";
+
+import VersusPage from "./pages/VersusPage/VersusPage";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -36,25 +38,26 @@ const router = createBrowserRouter([
         element: <Catalog />,
       },
       {
+        path: "/stay",
+        element: <Stay />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
         path: "/search",
         element: <Swiper />,
       },
       {
-        path: "/favorites",
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
-      },
-      {
         path: "/settings",
-        element: <Settings />,
-      },
-      {
-        path: "/createAccount",
-        element: <CreateAccount />,
+        element: <VersusPage />,
       },
     ],
+  },
+  {
+    path: "/form-create-sign-up",
+    element: <FormCreateSignUp />,
   },
   // Try adding a new route! For example, "/about" with an About component
 ]);

@@ -4,6 +4,7 @@
   display: grid;
   background-color: var(--bckgColorOrangeOpacity);
   border: 0px solid black;
+  box-shadow: var(--box-shadow-soft);
   border-radius: var(--border-ref);
   padding: 2rem;
   justify-items: left;
@@ -16,6 +17,10 @@
   color: var(--mainColor);
   text-align: left;
   padding: 1rem 0;
+  padding: var(--spacing-ref);
+  justify-items: center;
+  justify-self: center;
+  width: 100%;
 }
 
 .newsLetter-container h3 {
@@ -72,6 +77,7 @@ span.material-symbols-outlined {
   color: var(--secondColor);
   text-align: left;
   border-radius: 8px;
+  text-align: center;
   box-shadow: var(--box-shadow-soft);
   background-color: var(--bckgColor);
   padding: var(--spacing-ref);
@@ -81,9 +87,7 @@ span.material-symbols-outlined {
 #newsLetterEmail {
   justify-items: center;
   border-radius: var(--border-ref);
-  border: 0px solid;
   box-shadow: var(--box-shadow-soft);
-  height: 2rem;
   width: 100%;
 }
 
@@ -96,7 +100,8 @@ span.material-symbols-outlined {
   padding: 1rem;
   background-image: var(--veever-gradient);
   color: var(--light);
+  padding: var(--spacing-ref);
+  margin: var(--spacing-ref);
   border-radius: var(--border-ref);
-  border: 0px solid;
   cursor: pointer;
 }

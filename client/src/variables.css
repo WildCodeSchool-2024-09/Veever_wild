@@ -27,8 +27,9 @@
   --veever-light-green: #eef5ed;
 
   --errorColor: red;
-  --color-input: #1c2025;
   --color-label: rgba(0, 0, 0, 0.87);
+  --border-color-input-focus: #3399ff;
+  --color-input: #1c2025;
   --bckgColor-input: #fff;
   --light: white;
   --dark: black;
@@ -41,6 +42,8 @@
   --spacing-ref: 1rem;
   --spacing-S: calc(var(--spacing-ref) * 0.5);
 
+  --font-size-XS: calc(var(--spacing-ref) * 0.8);
+
   --spacing-letter-ref: 1px;
 
   --padding-input: 8px 12px;
@@ -49,6 +52,10 @@
   --box-shadow-input-focus: 0 0 0 3px #80bfff;
   --box-shadow-input: 0 2px 2px #f3f6f9;
   --box-shadow-soft: 5px 5px 15px 5px #4e4a4a16;
+
+  --width-input-form: 20rem;
+  --width-label-text: 40ch;
+  --height-input-form: 2.5rem;
 
   --width-input-form: 20rem;
   --width-label-text: 40ch;

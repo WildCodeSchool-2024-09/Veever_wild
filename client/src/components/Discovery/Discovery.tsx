@@ -1,5 +1,5 @@
 import "./Discovery.css";
-export default function () {
+export default function Discovery() {
   return (
     <section className="discovery-section">
       <h1>Swippez, découvrez, choissisez</h1>

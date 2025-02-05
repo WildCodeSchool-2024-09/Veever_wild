@@ -1,9 +1,8 @@
-import ItineraryCard from "./ItineraryCard/ItineraryCard";
-
+import ItineraryCard from "./ItineraryCard.tsx";
 const itineraries = [
   {
     id: 1,
-    title: "Activité en couple",
+    title: "Séjour en couple",
     imageSrc: "../assets/images/escape_game.jpg",
   },
   {

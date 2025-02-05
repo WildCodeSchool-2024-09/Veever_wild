@@ -1,13 +1,16 @@
 export type chrData = {
   name: string;
   address: string;
-  minPrice: number;
-  maxPrice: number;
+  description: string;
+  average_budget: number;
+  type?: string;
+  duration?: number;
 };
 
 export type Restaurant = {
   id: number;
   chr_id: number;
+  type: string;
 };
 
 export type UpdateChrData = {
