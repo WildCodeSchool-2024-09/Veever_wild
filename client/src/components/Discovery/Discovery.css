@@ -18,18 +18,18 @@
   margin: 1rem;
 }
 
-.discovery-hgroup h1 {
+.discovery-section h1 {
   font-family: var(--titleFont);
   font-size: calc(var(--spacing-ref) * 2);
 }
-.discovery-hgroup p {
+.discovery-section p {
   font-family: var(--textFont);
-  font-size: calc(var(--spacing-ref) * 1.25);
+  font-size: calc(var(--spacing-ref));
   margin: 1rem 0;
   text-align: left;
 }
 
-.discovery-hgroup button {
+.discovery-section button {
   padding: var(--spacing-S) var(--spacing-ref);
   font-size: var(--spacing-ref);
   background-image: var(--veever-gradient);

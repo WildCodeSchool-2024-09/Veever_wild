@@ -17,7 +17,6 @@
   color: var(--mainColor);
   text-align: left;
   padding: 1rem 0;
-  padding: var(--spacing-ref);
   justify-items: center;
   justify-self: center;
   width: 100%;
@@ -25,7 +24,7 @@
 
 .newsLetter-container h3 {
   font-family: var(--textFont);
-  font-weight: 100;
+  font-weight: 400;
   color: var(--secondColor);
   text-align: left;
   padding: 1rem 0;
@@ -33,9 +32,14 @@
 
 .newsLetter-box {
   background-color: var(--light);
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 8px;
   margin: 0.5rem 0;
+}
+
+.newsLetter-box .base-Input-root {
+  width: 100%;
+  margin: auto auto auto 0;
 }
 
 .newsLetter-box p {
@@ -47,6 +51,12 @@
 
 .css-1iw3t7y-MuiFormControl-root {
   margin: 1rem 0 0 0;
+}
+.newsLetter-box .css-nwsdb5-MuiFormLabel-root {
+  font-family: var(--textFont);
+  color: var(--secondColor);
+  font-size: 1rem;
+  text-align: left;
 }
 
 .formGroup {
@@ -72,12 +82,11 @@ span.material-symbols-outlined {
 .offerNewsLetter {
   width: 100%;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   font-family: var(--textFont);
   color: var(--secondColor);
   text-align: left;
   border-radius: 8px;
-  text-align: center;
   box-shadow: var(--box-shadow-soft);
   background-color: var(--bckgColor);
   padding: var(--spacing-ref);
@@ -93,15 +102,12 @@ span.material-symbols-outlined {
 
 .newsLetter-btn {
   width: 100%;
-  justify-self: left;
-  text-align: center;
-  align-items: center;
   font-weight: bold;
+  border: 0px;
   padding: 1rem;
+  margin: 1rem 0;
   background-image: var(--veever-gradient);
   color: var(--light);
-  padding: var(--spacing-ref);
-  margin: var(--spacing-ref);
   border-radius: var(--border-ref);
   cursor: pointer;
 }
