@@ -3,6 +3,9 @@ import { useLoaderData } from "react-router-dom";
 import PriceDisplay from "../../services/Provider/PriceDisplay";
 import TypeDisplay from "../../services/Provider/TypeDisplay";
 import type { Chr } from "../../types/Provider/ProviderType";
+import "./Provider.css";
+import DescriptionProvider from "../../components/Provider/DescriptionProvider";
+import PhotosProvider from "../../components/Provider/PhotosProvider";
 
 export default function Provider() {
   const chr = useLoaderData() as Chr;
@@ -44,17 +47,7 @@ export default function Provider() {
 
   return (
     <section>
-      {chr.images.length > 0 ? (
-        photosToDisplay.map((image, index) => (
-          <img
-            key={`${chr.name} ${index}`}
-            src={`${import.meta.env.VITE_IMAGE_URL}/${image}`}
-            alt={chr.name}
-          />
-        ))
-      ) : (
-        <p>Photo indisponible</p>
-      )}
+      <PhotosProvider chr={chr} photosToDisplay={photosToDisplay} />
       <h1>{chr.name}</h1>
       <ul>
         <li>
@@ -71,12 +64,9 @@ export default function Provider() {
         <li>
           <PriceDisplay price={+chr.average_budget} />
         </li>
+        <li>{chr.address}</li>
       </ul>
-
-      <article>
-        <h2>À propos</h2>
-        <p>{chr.description}</p>
-      </article>
+      <DescriptionProvider chr={chr} />
     </section>
   );
 }
