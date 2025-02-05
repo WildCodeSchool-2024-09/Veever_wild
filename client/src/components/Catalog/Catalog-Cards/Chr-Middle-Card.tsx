@@ -20,9 +20,9 @@ export default function ChrMiddleCard({ saveCards }: CatalogueProps) {
             <p>{card.maxPrice}</p>
             <p>{card.address}</p>
           </section>
-          <ChrBottomCard />
         </article>
       ))}
+      <ChrBottomCard />
     </>
   );
 }
