@@ -24,12 +24,11 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
       email: user.email,
       role: user.role,
     });
-
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       maxAge: 3600000,
-      sameSite: "lax",
+      sameSite: "none",
     });
 
     res.status(200).json({

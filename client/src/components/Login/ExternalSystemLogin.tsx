@@ -1,6 +1,4 @@
-import { GoogleOAuthProvider } from "@react-oauth/google";
 import "./ExternalSystemLogin.css";
-import GoogleLoginButton from "./GoogleLoginBtn";
 
 export default function ExternalSystemLogin() {
   const handleLogin = () => {
@@ -8,11 +6,11 @@ export default function ExternalSystemLogin() {
   };
   return (
     <ul className="socialLogin">
-      <li>
+      {/* <li>
         <GoogleOAuthProvider clientId="402783265252-p7u70jckq4008iibe9m7siasq1eg3o52.apps.googleusercontent.com">
           <GoogleLoginButton />
         </GoogleOAuthProvider>
-      </li>
+      </li> */}
       <li>
         <button type="button" onClick={handleLogin}>
           <svg

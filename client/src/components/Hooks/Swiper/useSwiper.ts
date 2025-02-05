@@ -9,7 +9,7 @@ import type {
 export default function useSwiper(
   cards: ChrCardProps[],
   setCards: ChrCardsProps["setCards"],
-  id: string,
+  id: number,
 ) {
   const [, setIsAnimated] = useState(false);
   const { addCard } = useSaveCards();

@@ -72,15 +72,15 @@ import router from "./router";
 
 // Mount the API router under the "/api" endpoint
 app.use(router);
-app.use(
-  session({
-    secret: "ton_secret",
-    resave: false,
-    saveUninitialized: false,
-  }),
-);
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(
+//   session({
+//     secret: "ton_secret",
+//     resave: false,
+//     saveUninitialized: false,
+//   }),
+// );
+// app.use(passport.initialize());
+// app.use(passport.session());
 /* ************************************************************************* */
 
 // Production-ready setup: What is it for?

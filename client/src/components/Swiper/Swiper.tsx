@@ -12,14 +12,20 @@ export default function Swiper() {
       credentials: "include",
     })
       .then((res) => res.json())
-      .then((data) => setCards(data));
+      .then((data) => {
+        setCards(data);
+      });
   }, []);
 
   return (
     <article className="card-map">
-      {cards.map((card) => (
-        <Cardz key={card.id} {...card} cards={cards} setCards={setCards} />
-      ))}
+      {cards.length > 0 ? (
+        cards.map((card) => (
+          <Cardz key={card.id} {...card} cards={cards} setCards={setCards} />
+        ))
+      ) : (
+        <p>Aucune carte disponible.</p>
+      )}
     </article>
   );
 }

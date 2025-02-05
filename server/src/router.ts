@@ -171,55 +171,55 @@ router.delete(
   genderActions.destroy,
 );
 
-import passport from "passport";
-import "./Auth/Facebook";
+// import passport from "passport";
+// import "./Auth/Facebook";
 
-router.get(
-  "/auth/facebook",
-  passport.authenticate("facebook", { scope: ["email"] }),
-);
+// router.get(
+//   "/auth/facebook",
+//   passport.authenticate("facebook", { scope: ["email"] }),
+// );
 
-router.get(
-  "/auth/facebook/callback",
-  passport.authenticate("facebook", { failureRedirect: "/login" }),
-  (req, res) => {
-    if (!req.user) {
-      return res.status(401).redirect("/login");
-    }
-    const token = jwt.sign(
-      { id: req.user.id, role: req.user.role },
-      process.env.JWT_SECRET as string,
-      { expiresIn: "1h" },
-    );
-    res.cookie("token", token, { httpOnly: true, secure: true });
-    res.redirect("http://localhost:3000/");
-  },
-);
-import "./Auth/Google";
-router.get(
-  "/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"],
-  }),
-);
+// router.get(
+//   "/auth/facebook/callback",
+//   passport.authenticate("facebook", { failureRedirect: "/login" }),
+//   (req, res) => {
+//     if (!req.user) {
+//       return res.status(401).redirect("/login");
+//     }
+//     const token = jwt.sign(
+//       { id: req.user.id, role: req.user.role },
+//       process.env.JWT_SECRET as string,
+//       { expiresIn: "1h" },
+//     );
+//     res.cookie("token", token, { httpOnly: true, secure: true });
+//     res.redirect("http://localhost:3000/");
+//   },
+// );
+// import "./Auth/Google";
+// router.get(
+//   "/auth/google",
+//   passport.authenticate("google", {
+//     scope: ["profile", "email"],
+//   }),
+// );
 
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: "/login",
-  }),
-  (req, res) => {
-    res.redirect("http://localhost:3000/");
-  },
-);
+// router.get(
+//   "/auth/google/callback",
+//   passport.authenticate("google", {
+//     failureRedirect: "/login",
+//   }),
+//   (req, res) => {
+//     res.redirect("http://localhost:3000/");
+//   },
+// );
 
-router.get("/auth/user", verifyToken, (req, res) => {
-  if (req.user) {
-    res.json(req.user);
-  } else {
-    res.status(401).json({ message: "Non authentifié" });
-  }
-});
+// router.get("/auth/user", verifyToken, (req, res) => {
+//   if (req.user) {
+//     res.json(req.user);
+//   } else {
+//     res.status(401).json({ message: "Non authentifié" });
+//   }
+// });
 
 /* ************************************************************************* */
 export default router;
