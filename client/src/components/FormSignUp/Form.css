@@ -1,0 +1,166 @@
+@import url("@src/variables.css");
+
+placeholder {
+  letter-spacing: var(--spacing-letter-ref);
+}
+
+.MuiFormLabel-colorPrimary {
+  color: var(--color-label) !important;
+}
+
+.logoForm {
+  width: 70%;
+}
+
+.headerForm {
+  text-align: center;
+  font-family: var(--titleFont);
+  font-size: calc(var(--font-size-ref) * 1.3);
+  padding: var(--spacing-ref);
+}
+
+.headerForm h1 {
+  text-align: center;
+  color: var(--aliceBlueColor);
+  border-radius: var(--border-ref);
+  background: var(--gradientColor-CTA);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(var(--spacing-ref) * 0.4);
+}
+
+#demo-radio-buttons-group-label {
+  text-align: center;
+}
+
+.checkLabel {
+  text-align: center;
+  width: 30ch;
+}
+.createForm {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: var(--spacing-ref);
+}
+
+.createForm input {
+  margin-bottom: calc(var(--spacing-ref) * 0.4);
+}
+
+.createForm label {
+  letter-spacing: var(--spacing-letter-ref);
+  font-family: var(--textFont);
+}
+
+.password-label {
+  margin: auto;
+}
+
+.checkBox {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-ref);
+  padding: var(--spacing-ref);
+}
+
+.error {
+  font-size: calc(var(--font-size-ref) * 0.8);
+  width: 80%;
+  color: var(--errorColor);
+  text-align: center;
+  font-family: var(--textFont);
+}
+
+.errors {
+  list-style: none;
+  color: var(--errorColor);
+  font-family: var(--textFont);
+  font-size: calc(var(--font-size-ref) * 0.8);
+  justify-items: center;
+}
+
+.css-97ewkx {
+  align-self: center;
+}
+
+.error::before {
+  content: "❌";
+}
+
+.react-datepicker__view-calendar-icon input {
+  padding: var(--padding-input) !important;
+}
+
+.birthdayCalendar {
+  text-align: center;
+  font-family: var(--textFont);
+}
+
+.react-datepicker__month-select {
+  text-align: center;
+}
+.react-datepicker__current-month {
+  text-align: center;
+}
+
+.MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedStart {
+  padding: var(--padding-input) !important;
+}
+
+.react-datepicker__input-container input {
+  border-radius: var(--border-ref);
+  width: var(--width-input-form);
+  border: var(--border-input);
+  font-size: calc(var(--font-size-ref) * 0.875);
+  font-weight: var(--font-weight-S);
+  letter-spacing: var(--spacing-letter-ref);
+  line-height: 1.5;
+  padding: var(--padding-input);
+  box-shadow: var(--box-shadow-input);
+}
+
+.react-datepicker__input-container input:focus {
+  border-color: var(--border-color-input-focus);
+  box-shadow: var(--box-shadow-input-focus);
+}
+
+.react-datepicker__input-container input:hover {
+  border-color: var(--border-color-input-focus);
+}
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+  border-radius: var(--border-ref);
+  padding: calc(var(--spacing-ref) * 0.2);
+  margin: calc(var(--spacing-ref) * 0.3);
+}
+
+@media screen and (min-width: 900px) {
+  .createForm {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-self: center;
+  }
+  .checkContact {
+    grid-column: span 2;
+  }
+  .btnAcceptForm {
+    grid-column: span 2;
+  }
+
+  .checkCGU {
+    grid-column: span 2;
+  }
+  .MuiInputBase-input.MuiOutlinedInput-input.MuiInputBase-inputAdornedStart {
+    grid-column: span 2;
+  }
+  .phone {
+    grid-column: span 2;
+  }
+}

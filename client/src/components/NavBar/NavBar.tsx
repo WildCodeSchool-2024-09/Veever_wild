@@ -52,9 +52,7 @@ export default function NavBar() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/profile" className={getNavLinkClass}>
-              <ProfileIcon />
-            </NavLink>
+            <ProfileIcon />
           </li>
           <li>
             <NavLink to="/settings" className={getNavLinkClass}>
