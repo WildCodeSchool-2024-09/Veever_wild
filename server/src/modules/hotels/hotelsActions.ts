@@ -87,7 +87,6 @@ const add: RequestHandler = async (req, res, next) => {
     description: req.body.description,
     average_budget: req.body.average_budget,
     type: req.body.type,
-
   };
   try {
     const insertId = await hotelRepository.create(newHotel);

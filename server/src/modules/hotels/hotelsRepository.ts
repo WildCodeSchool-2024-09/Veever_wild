@@ -55,7 +55,6 @@ class HotelsRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific hotel by its ID
     const [rows] = await databaseClient.query<Rows>(
-
       `SELECT chr.name, chr.address, chr.description, chr.average_budget, hotel.type
        FROM hotel 
        INNER JOIN chr

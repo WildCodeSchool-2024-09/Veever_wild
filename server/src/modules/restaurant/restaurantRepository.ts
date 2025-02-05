@@ -24,7 +24,6 @@ class RestaurantRepository {
           chrData.description,
           chrData.average_budget,
           chrData.type,
-
         ],
       );
 
@@ -60,7 +59,6 @@ class RestaurantRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific restaurant by its ID
     const [rows] = await databaseClient.query<Rows>(
-
       `SELECT chr.name AS name, chr.address, chr.description, chr.average_budget, restaurant.type
        FROM restaurant 
        INNER JOIN chr
