@@ -1,5 +1,5 @@
 import { FormControl, FormLabel } from "@mui/material";
-import { StyledInput } from "../../../services/Form/inputStyle";
+import { StyledInput } from "../../../Styles/StyledInput";
 import type { EmailValidation } from "../../../types/FormValidation/FormValidationCheck";
 
 export default function InputEmail({
@@ -11,7 +11,6 @@ export default function InputEmail({
     <FormControl className="formGroup">
       <FormLabel htmlFor="email">Votre adresse e-mail</FormLabel>
       <StyledInput
-        required
         value={email}
         onChange={handleEmailCheckChange}
         type="email"
