@@ -27,25 +27,38 @@ export default function FormCreateSignUp() {
     handlePasswordChange,
     handleConfirmPasswordChange,
     handleEmailCheckChange,
-    validateContact,
   } = useFormValidation();
   const { handleChange, formData } = useFormData();
   const [showSnackbar, setShowSnackbar] = useState(false);
-  const [contactErrors, setContactErrors] = useState<string | null>(null);
 
   const handleClose = () => {
     setShowSnackbar(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (Object.keys(errors).length > 0 || !isSamePassword) {
       setShowSnackbar(true);
-    }
-    const contactError = validateContact(formData);
-    if (contactError) {
-      setContactErrors(contactError);
       return;
+    }
+    try {
+      const response = await fetch("http://localhost:3310/api/clients", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...formData, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        console.info("Compte créé avec succès:", data);
+      } else {
+        console.error("Erreur lors de la création du compte:", data.message);
+      }
+    } catch (error) {
+      console.error("Erreur réseau:", error);
     }
   };
 
@@ -54,8 +67,8 @@ export default function FormCreateSignUp() {
       <HeaderForm />
       <form onSubmit={handleSubmit} className="createForm">
         <InputUsername
-          handleChange={handleChange("username")}
-          value={formData.username}
+          handleChange={handleChange("nickname")}
+          value={formData.nickname}
         />
         <InputLastName
           handleChange={handleChange("lastname")}
@@ -79,19 +92,22 @@ export default function FormCreateSignUp() {
           handleConfirmPasswordChange={handleConfirmPasswordChange}
         />
         <InputGender
-          handleChange={handleChange("gender")}
-          value={formData.gender}
+          handleChange={handleChange("gender_id")}
+          value={formData.gender_id}
         />
-        <InputDate handleChange={handleChange("date")} value={formData.date} />
+        <InputDate
+          handleChange={handleChange("birthdate")}
+          value={formData.birthdate}
+        />
         <InputPhone
-          handleChange={handleChange("phone")}
-          value={formData.phone}
+          handleChange={handleChange("phoneNumber")}
+          value={formData.phoneNumber}
         />
         <InputCheckContact
           handleChange={handleChange("checkContact")}
           value={formData.checkContact}
         />
-        {contactErrors && <p style={{ color: "red" }}>{contactErrors}</p>}
+
         <InputCheckCGU
           handleChange={handleChange("checkCGU")}
           value={formData.checkCGU}
@@ -110,7 +126,6 @@ export default function FormCreateSignUp() {
             open={true}
             onClose={handleClose}
             transitionDuration={700}
-            message={contactErrors}
           />
         )}
       </form>
