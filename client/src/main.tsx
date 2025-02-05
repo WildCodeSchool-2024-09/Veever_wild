@@ -10,7 +10,7 @@ import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
 import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
 import HomePage from "./pages/HomePage/HomePage";
-import Settings from "./pages/Settings/Settings";
+import VersusPage from "./pages/VersusPage/VersusPage";
 import { chrLoader } from "./services/Loader/LoaderChr";
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -41,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/settings",
-        element: <Settings />,
+        element: <VersusPage />,
       },
     ],
   },

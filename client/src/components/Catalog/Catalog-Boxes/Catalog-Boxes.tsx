@@ -5,17 +5,17 @@ import { CatalogCheckbox } from "./CatalogCheckbox";
 const checkboxItems: CheckboxItem[] = [
   { id: "all", label: "Tous", emoji: "/src/assets/images/heart.svg" },
   {
-    id: "hotels",
+    id: "hotel",
     label: "Hôtels",
     emoji: "/src/assets/images/hotel.svg",
   },
   {
-    id: "restaurants",
+    id: "restaurant",
     label: "Restaurants",
     emoji: "/src/assets/images/restaurant.svg",
   },
   {
-    id: "activities",
+    id: "activity",
     label: "Activités",
     emoji: "/src/assets/images/activity.svg",
   },
