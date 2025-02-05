@@ -1,8 +1,31 @@
+@import url("@src/variables.css");
+
+.provider h1,
+.provider h2 {
+  font-family: var(--titleFont);
+  margin: 0 1rem;
+}
+
+.provider h1,
+.provider h2,
+.provider p,
+.provider li {
+  color: var(--secondColor);
+}
+
+.provider p,
+.provider li {
+  font-family: var(--textFont);
+  font-size: var(--font-size-ref);
+  max-width: 65ch;
+}
+
 .imageGroup {
+  margin: 1rem;
+
   display: grid;
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(3, 1fr);
-  width: 100%;
   gap: 0;
 }
 
@@ -24,6 +47,42 @@
   grid-area: 2 / 3 / 3 / 4;
 }
 
+.summary {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0.5rem 1rem;
+
+  gap: .5rem;
+}
+
+.summary li {
+  display: flex;
+  align-items: center;
+
+  height: 2.5rem;
+
+  list-style-type: none;
+  font-size: .75rem;
+
+  padding-left: .25rem;
+
+  border: var(--border-input);
+  border-radius: var(--border-ref);
+  box-shadow: var(--box-shadow-button);
+  background-color: var(--bckgColor-input);
+}
+
+.summary li:nth-child(1),
+.summary li:nth-child(4) {
+  flex: 1 1 calc(25%);
+}
+
+.summary li:nth-child(2),
+.summary li:nth-child(3) {
+  flex: 2 1 calc(50%);
+}
+
 .descriptionProvider p {
   text-align: start;
+  margin: 0.5rem 1rem 3rem;
 }

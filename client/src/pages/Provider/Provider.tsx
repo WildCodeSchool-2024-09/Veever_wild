@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import PriceDisplay from "../../services/Provider/PriceDisplay";
-import TypeDisplay from "../../services/Provider/TypeDisplay";
 import type { Chr } from "../../types/Provider/ProviderType";
 import "./Provider.css";
 import DescriptionProvider from "../../components/Provider/DescriptionProvider";
 import PhotosProvider from "../../components/Provider/PhotosProvider";
+import SummaryProvider from "../../components/Provider/SummaryProvider";
 
 export default function Provider() {
   const chr = useLoaderData() as Chr;
@@ -46,26 +45,10 @@ export default function Provider() {
   if (!chr) return <p>Aucun prestataire trouvé.</p>;
 
   return (
-    <section>
+    <section className="provider">
       <PhotosProvider chr={chr} photosToDisplay={photosToDisplay} />
       <h1>{chr.name}</h1>
-      <ul>
-        <li>
-          <TypeDisplay type={chr.type} />
-        </li>
-        {chr.type === "activity" ? (
-          <li>
-            {+chr.additional_info / 60}
-            {+chr.additional_info / 60 > 1 ? " heures" : " heure"}
-          </li>
-        ) : (
-          <li>{chr.additional_info}</li>
-        )}
-        <li>
-          <PriceDisplay price={+chr.average_budget} />
-        </li>
-        <li>{chr.address}</li>
-      </ul>
+      <SummaryProvider chr={chr} />
       <DescriptionProvider chr={chr} />
     </section>
   );
