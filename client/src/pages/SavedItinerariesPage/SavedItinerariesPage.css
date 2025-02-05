@@ -1,0 +1,10 @@
+.my-itineraries {
+  padding: var(--spacing-ref);
+}
+
+.my-itineraries h1 {
+  font-family: var(--titleFont);
+  color: var(--secondColor);
+  text-align: center;
+  margin-bottom: var(--spacing-ref);
+}

@@ -12,9 +12,9 @@ export default function useCatalogLogic() {
 
   const counts = {
     all: saveCards.length,
-    hotels: saveCards.filter((card) => card.type === "hotels").length,
-    restaurants: saveCards.filter((card) => card.type === "restaurants").length,
-    activities: saveCards.filter((card) => card.type === "activities").length,
+    hotels: saveCards.filter((card) => card.type === "hotel").length,
+    restaurants: saveCards.filter((card) => card.type === "restaurant").length,
+    activities: saveCards.filter((card) => card.type === "activity").length,
   };
 
   const recapData: RecapChrProps[] = [
@@ -28,19 +28,19 @@ export default function useCatalogLogic() {
       name: "Hôtels",
       emoji: "/src/assets/images/hotel.svg",
       count: counts.hotels,
-      type: "hotels",
+      type: "hotel",
     },
     {
       name: "Restaurants",
       emoji: "/src/assets/images/restaurant.svg",
       count: counts.restaurants,
-      type: "restaurants",
+      type: "restaurant",
     },
     {
       name: "Activités",
       emoji: "/src/assets/images/activity.svg",
       count: counts.activities,
-      type: "activities",
+      type: "activity",
     },
   ];
 
