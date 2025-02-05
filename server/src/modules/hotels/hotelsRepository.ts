@@ -66,7 +66,6 @@ class HotelsRepository {
     // Return the first row of the result, which represents the hotel
     return rows[0] as Hotels;
   }
-
   async readAll() {
     // Execute the SQL SELECT query to retrieve all hotels from the "hotel" table
     const [rows] = await databaseClient.query<Rows>(

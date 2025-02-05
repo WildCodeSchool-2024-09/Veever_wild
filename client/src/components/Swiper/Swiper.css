@@ -120,7 +120,3 @@
   font-size: calc(var(--font-size-ref) * 0.8);
   font-family: var(--textFont);
 }
-
-.info p {
-  padding: var(--spacing-ref);
-}
