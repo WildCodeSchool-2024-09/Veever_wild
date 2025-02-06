@@ -13,7 +13,7 @@ export default function Swiper() {
     <>
       <SwiperHeader />
       <article className="card-map">
-        {Loadcards.map((card) => (
+        {cards.map((card) => (
           <Cardz
             key={`${card.id}-${card.name}`}
             {...card}

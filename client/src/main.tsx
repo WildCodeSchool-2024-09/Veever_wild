@@ -14,7 +14,6 @@ import Login from "./pages/Login/Login";
 import Stay from "./pages/Stay/Stay";
 
 import VersusPage from "./pages/VersusPage/VersusPage";
-
 import { chrLoader } from "./services/Loader/LoaderChr";
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
