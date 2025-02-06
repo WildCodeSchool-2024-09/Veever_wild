@@ -4,11 +4,14 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /* ************************************************************************* */
-
 import App from "./App";
 import FormCreateSignUp from "./components/FormSignUp/FormCreateSignUp";
+import GuestRoute from "./components/ProtectedRoute/GuestRoute";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import AdminRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
+import Dashboard from "./pages/Dashboard/Dashboard";
 import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/Login/Login";
 import Stay from "./pages/Stay/Stay";
@@ -28,34 +31,29 @@ const router = createBrowserRouter([
   {
     element: <App />,
     children: [
+      { path: "/login", element: <GuestRoute element={<Login />} /> },
       {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/catalog",
-        element: <Catalog />,
+        path: "/signup",
+        element: <GuestRoute element={<FormCreateSignUp />} />,
       },
       {
         path: "/stay",
-        element: <Stay />,
+        element: <ProtectedRoute element={<Stay />} />,
       },
-      {
-        path: "/login",
-        element: <Login />,
-      },
+      { path: "/", element: <ProtectedRoute element={<HomePage />} /> },
+      { path: "/catalog", element: <ProtectedRoute element={<Catalog />} /> },
       {
         path: "/search",
-        element: <Swiper />,
         loader: chrLoader,
+        element: <ProtectedRoute element={<Swiper />} />,
       },
       {
         path: "/settings",
-        element: <VersusPage />,
+        element: <ProtectedRoute element={<VersusPage />} />,
       },
       {
-        path: "/form-create-sign-up",
-        element: <FormCreateSignUp />,
+        path: "/dashboard",
+        element: <AdminRoute element={<Dashboard />} />,
       },
     ],
   },

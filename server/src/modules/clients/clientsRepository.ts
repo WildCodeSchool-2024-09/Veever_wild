@@ -1,10 +1,14 @@
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
+import authServices from "../../services/authServices";
 import type { Client } from "../../types/clientsTypes/clientsTypes";
 
 class ClientsRepository {
   async update(updateClient: Client): Promise<boolean> {
     const connection = await databaseClient.getConnection();
+    const hashedPassword = await authServices.hashPassword(
+      updateClient.password,
+    );
     try {
       await connection.beginTransaction();
 
@@ -34,7 +38,7 @@ class ClientsRepository {
         `,
         [
           updateClient.email,
-          updateClient.password,
+          hashedPassword,
           updateClient.firstname,
           updateClient.lastname,
           updateClient.id,
@@ -76,14 +80,14 @@ class ClientsRepository {
     const connection = await databaseClient.getConnection();
     try {
       await connection.beginTransaction();
-
+      const hashedPassword = await authServices.hashPassword(client.password);
       const [userResult] = await connection.execute<Result>(
         `
         INSERT INTO user
             (email, password, firstname, lastname)
         VALUES (?, ?, ?, ?)
         `,
-        [client.email, client.password, client.firstname, client.lastname],
+        [client.email, hashedPassword, client.firstname, client.lastname],
       );
 
       const userId = userResult.insertId;
