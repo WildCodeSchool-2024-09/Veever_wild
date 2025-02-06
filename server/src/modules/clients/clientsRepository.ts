@@ -16,8 +16,8 @@ class ClientsRepository {
         `,
         [
           updateClient.birthdate,
-          updateClient.nickName,
-          updateClient.gender_Id,
+          updateClient.nickname,
+          updateClient.gender_id,
           updateClient.id,
         ],
       );
@@ -98,7 +98,7 @@ class ClientsRepository {
             (birthdate, nickname, gender_id, user_id)
         VALUES (?, ?, ?, ?)
         `,
-        [client.birthdate, client.nickName, client.gender_Id, userId],
+        [client.birthdate, client.nickname, client.gender_id, userId],
       );
 
       const clientId = clientResult.insertId;
