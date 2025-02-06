@@ -30,7 +30,6 @@ export function SaveCardsProvider({ children }: Props) {
 
   const value = {
     saveCards,
-    setSaveCards,
     addCard,
     removeCard,
     isCardSaved,

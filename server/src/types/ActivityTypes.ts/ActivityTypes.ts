@@ -11,7 +11,6 @@ export type ChrData = {
   average_budget: string;
   duration?: number;
 };
-
 export type UpdateResponse = {
   activityId: number;
   chrData: ChrData;
