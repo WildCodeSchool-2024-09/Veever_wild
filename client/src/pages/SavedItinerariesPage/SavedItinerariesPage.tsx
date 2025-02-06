@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ItineraryCalendar from "../../components/Saved-Itineraries/SavedItinerariesCalendar/SavedItinerariesCalendar";
 import ItineraryFilters from "../../components/Saved-Itineraries/SavedItinerariesFilters/SavedItinerariesFilters";
 import ItineraryList from "../../components/Saved-Itineraries/SavedItinerariesList/SavedItinerariesList";
@@ -11,15 +11,8 @@ import type {
 export default function SavedItinerariesPage() {
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [selectedFilters, setSelectedFilters] = useState<ItineraryStatus[]>([]);
-  const [itineraries, setItineraries] = useState<Itinerary[]>([]);
-  // [itineraries] À remplacer par un appel API
-
-  useEffect(() => {
-    fetch("/api/itineraries")
-      .then((response) => response.json())
-      .then((data) => setItineraries(data))
-      .catch((error) => console.error("Error fetching itineraries:", error));
-  }, []);
+  const [itineraries] = useState<Itinerary[]>([]);
+  // [itineraries, setItineraries] À remplacer par un appel API
 
   const handleFilterChange = (status: ItineraryStatus) => {
     setSelectedFilters((prev) =>

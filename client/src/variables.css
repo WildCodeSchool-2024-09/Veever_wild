@@ -30,19 +30,12 @@
 
   --font-weight-S: 400;
   --bckgColor: #f8f9fa;
-  --bckgColor-opacity: #f8f9facb;
-  --bckgSecondColor: #ffd6c6ab;
-  --bckgSecondColor-opacity: #ffd6c61c;
-  --mainColor: #fb7a3f;
-  --variantMainColor: #f59d3fe8;
+  --mainColor: #fb793f;
   --secondColor: #4e4a4a;
   --thirdColor: #f74aa1;
-  --thirdColor-opacity: #f74aa1c5;
-  --gradientColor: linear-gradient(
-    90deg,
-    rgba(247, 74, 161, 1) 13%,
-    rgba(245, 158, 63, 1) 100%
-  );
+  --gradientColor-CTA: linear-gradient(to left, #f59e3f 13%, #f74aa1 100%);
+  --bckgColorOrangeOpacity: #ffd6c690;
+  --veever-yellow: #ffea00;
   --shadow: #c8c8c8;
   --veever-pink: #f26497;
   --veever-blue: #36a1db;
@@ -63,6 +56,8 @@
   --spacing-ref: 1rem;
   --spacing-S: calc(var(--spacing-ref) * 0.5);
 
+  --font-size-XS: calc(var(--spacing-ref) * 0.8);
+
   --spacing-letter-ref: 1px;
 
   --padding-input: 8px 12px;
@@ -70,7 +65,11 @@
 
   --box-shadow-input-focus: 0 0 0 3px #80bfff;
   --box-shadow-input: 0 2px 2px #f3f6f9;
-  --box-shadow-soft: 0px 2px 7px 1px #00000033;
+  --box-shadow-soft: 0px 0px 2px 2px #00000033;
+
+  --width-input-form: 20rem;
+  --width-label-text: 40ch;
+  --height-input-form: 2.5rem;
 
   --width-input-form: 20rem;
   --width-label-text: 40ch;
