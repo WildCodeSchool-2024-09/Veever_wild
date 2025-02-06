@@ -14,7 +14,7 @@ import Catalog from "./pages/Catalog/Catalog";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/Login/Login";
-import Settings from "./pages/Settings/Settings";
+import Stay from "./pages/Stay/Stay";
 import VersusPage from "./pages/VersusPage/VersusPage";
 import { chrLoader } from "./services/Loader/LoaderChr";
 // Import additional components for new routes
@@ -34,7 +34,11 @@ const router = createBrowserRouter([
       { path: "/login", element: <GuestRoute element={<Login />} /> },
       {
         path: "/signup",
-        element: <FormCreateSignUp />,
+        element: <GuestRoute element={<FormCreateSignUp />} />,
+      },
+      {
+        path: "/stay",
+        element: <ProtectedRoute element={<Stay />} />,
       },
       { path: "/", element: <ProtectedRoute element={<HomePage />} /> },
       { path: "/catalog", element: <ProtectedRoute element={<Catalog />} /> },
@@ -43,19 +47,13 @@ const router = createBrowserRouter([
         loader: chrLoader,
         element: <ProtectedRoute element={<Swiper />} />,
       },
-      { path: "/settings", element: <ProtectedRoute element={<Settings />} /> },
+      {
+        path: "/settings",
+        element: <ProtectedRoute element={<VersusPage />} />,
+      },
       {
         path: "/dashboard",
         element: <AdminRoute element={<Dashboard />} />,
-      },
-      {
-        path: "/search",
-        element: <Swiper />,
-        loader: chrLoader,
-      },
-      {
-        path: "/settings",
-        element: <VersusPage />,
       },
     ],
   },

@@ -18,7 +18,7 @@ class adminRepository {
         INSERT INTO user (email, password, firstname, lastname)
         VALUES (?, ?, ?, ?)
         `,
-        [userData.email, hashedPassword, userData.firstname, userData.lastname],
+        [userData.email, userData.firstname, userData.lastname],
       );
 
       const userId = userResult.insertId;

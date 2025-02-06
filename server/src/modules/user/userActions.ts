@@ -11,7 +11,10 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
       res.status(401).json({ message: "Email incorrect." });
     }
 
-    const isPasswordMatch = authServices.matchPassword(password, user.password);
+    const isPasswordMatch = await authServices.matchPassword(
+      password,
+      user.password,
+    );
 
     if (!isPasswordMatch) {
       res.status(401).json({ message: "Mot de passe incorrect." });

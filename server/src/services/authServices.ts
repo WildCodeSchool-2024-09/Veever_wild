@@ -24,6 +24,7 @@ const hashPassword = async (password: string) => {
 const matchPassword = async (password: string, hashedPassword: string) => {
   try {
     const isMatch = await bcrypt.compare(password, hashedPassword);
+
     return isMatch;
   } catch (error) {
     throw new Error("Erreur lors de la comparaison des mots de passe.");
