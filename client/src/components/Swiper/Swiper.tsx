@@ -7,7 +7,7 @@ import SwiperHeader from "./Swiperheader";
 
 export default function Swiper() {
   const Loadcards = useLoaderData() as ChrCardProps[];
-  const [_, setCards] = useState<ChrCardProps[]>(Loadcards);
+  const [cards, setCards] = useState<ChrCardProps[]>(Loadcards);
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function Swiper() {
           <Cardz
             key={`${card.id}-${card.name}`}
             {...card}
-            cards={Loadcards}
+            cards={cards}
             setCards={setCards}
           />
         ))}
