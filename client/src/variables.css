@@ -42,10 +42,11 @@
   );
   --shadow: #c8c8c8;
   --aliceBlueColor: #f0f8ff;
+  --errorColor: red;
+  --color-label: rgba(0, 0, 0, 0.87);
   --border-color-input-focus: #3399ff;
   --errorColor: rgba(255, 0, 0, 0.753);
   --color-input: #1c2025;
-  --color-label: rgba(0, 0, 0, 0.87);
   --bckgColor-input: #fff;
   --light: white;
   --dark: black;
@@ -57,6 +58,8 @@
 
   --spacing-ref: 1rem;
   --spacing-S: calc(var(--spacing-ref) * 0.5);
+
+  --font-size-XS: calc(var(--spacing-ref) * 0.8);
 
   --spacing-letter-ref: 1px;
 
