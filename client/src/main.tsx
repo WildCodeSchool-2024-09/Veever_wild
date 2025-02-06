@@ -15,6 +15,7 @@ import Provider from "./pages/Provider/Provider";
 import Stay from "./pages/Stay/Stay";
 import VersusPage from "./pages/VersusPage/VersusPage";
 import { chrLoader } from "./services/Loader/LoaderChr";
+import { providerLoader } from "./services/Loader/ProviderLoader";
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
 
@@ -40,21 +41,7 @@ const router = createBrowserRouter([
       {
         path: "/provider/:id",
         element: <Provider />,
-        loader: async ({ params }) => {
-          const { id } = params;
-          try {
-            const response = await fetch(
-              `${import.meta.env.VITE_API_URL}/chr/${id}`,
-            );
-            if (!response.ok) {
-              throw new Error("Erreur de récupération des données");
-            }
-            const data = await response.json();
-            return data[0];
-          } catch (error) {
-            throw new Error("Erreur de chargement des données");
-          }
-        },
+        loader: providerLoader,
       },
       {
         path: "/stay",
