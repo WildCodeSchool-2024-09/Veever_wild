@@ -2,6 +2,7 @@ import "./Form.css";
 import "react-datepicker/dist/react-datepicker.css";
 import Snackbar from "@mui/material/Snackbar";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../../Styles/StyledButton";
 import useFormData from "../../services/Form/FormData";
 import useFormValidation from "../../services/Form/FormValidation";
@@ -30,7 +31,7 @@ export default function FormCreateSignUp() {
   } = useFormValidation();
   const { handleChange, formData } = useFormData();
   const [showSnackbar, setShowSnackbar] = useState(false);
-
+  const navigate = useNavigate();
   const handleClose = () => {
     setShowSnackbar(false);
   };
@@ -60,6 +61,7 @@ export default function FormCreateSignUp() {
     } catch (error) {
       console.error("Erreur réseau:", error);
     }
+    navigate("/login");
   };
 
   return (

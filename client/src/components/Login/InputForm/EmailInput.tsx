@@ -1,10 +1,6 @@
 import type { EmailType } from "../../../types/Login/loginType";
 
-export default function EmailInput({
-  email,
-  handleEmailChange,
-  emailErrors,
-}: EmailType) {
+export default function EmailInput({ email, handleEmailChange }: EmailType) {
   return (
     <>
       <label htmlFor="email">Email :</label>
@@ -15,13 +11,8 @@ export default function EmailInput({
         id="email"
         placeholder="Email"
         onChange={handleEmailChange}
-        aria-describedby="emailError"
+        aria-labelledby="emailError"
       />
-      {emailErrors?.emailCheck && (
-        <p id="emailError" className="error">
-          {emailErrors.emailCheck}
-        </p>
-      )}
     </>
   );
 }
