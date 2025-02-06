@@ -34,7 +34,7 @@
   text-align: center;
 }
 
-.tag-img-container {
+.tag-img-versusContainer {
   display: grid;
 }
 
@@ -53,7 +53,7 @@
   gap: calc(var(--spacing-ref) * 0.5);
 }
 
-.tag-img-container h2 {
+.tag-img-versusContainer h2 {
   font-family: var(--titleFont);
   border-top-right-radius: var(--border-ref);
   border-bottom-right-radius: var(--border-ref);

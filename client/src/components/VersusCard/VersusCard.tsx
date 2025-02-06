@@ -38,7 +38,7 @@ export default function Versus({
             onKeyDown={() => handleSelectVersus(card.id)}
             onClick={() => handleSelectVersus(card.id)}
           >
-            <figure className="tag-img-container">
+            <figure className="tag-img-versusContainer">
               <img
                 className="versus-img"
                 src={`http://localhost:3310/${card.images[0].link}`}
