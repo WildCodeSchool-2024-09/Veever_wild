@@ -12,7 +12,7 @@ export default function SavedItinerariesPage() {
   const [viewMode, setViewMode] = useState<ViewMode>("list");
   const [selectedFilters, setSelectedFilters] = useState<ItineraryStatus[]>([]);
   const [itineraries] = useState<Itinerary[]>([]);
-  // [itineraries, setItineraries] À remplacer par un appel API
+  //À remplacer par un appel API
 
   const handleFilterChange = (status: ItineraryStatus) => {
     setSelectedFilters((prev) =>

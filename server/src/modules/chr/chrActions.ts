@@ -5,10 +5,6 @@ const browse: RequestHandler = async (req, res, next) => {
   try {
     const chr = await chrRepository.readAll();
 
-    if (!chr) {
-      res.sendStatus(404);
-    }
-
     res.json(chr);
   } catch (error) {
     next(error);
