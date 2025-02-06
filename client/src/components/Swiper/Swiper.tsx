@@ -7,8 +7,10 @@ import SwiperHeader from "./Swiperheader";
 
 export default function Swiper() {
   const Loadcards = useLoaderData() as ChrCardProps[];
-  const [cards, setCards] = useState<ChrCardProps[]>(Loadcards);
-
+  const shuffleArray = (array: ChrCardProps[]) => {
+    return [...array].sort(() => Math.random() - 0.5);
+  };
+  const [cards, setCards] = useState<ChrCardProps[]>(shuffleArray(Loadcards));
   return (
     <>
       <SwiperHeader />
