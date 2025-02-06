@@ -7,17 +7,17 @@ import SwiperHeader from "./Swiperheader";
 
 export default function Swiper() {
   const Loadcards = useLoaderData() as ChrCardProps[];
-  const [_, setCards] = useState<ChrCardProps[]>(Loadcards);
+  const [cards, setCards] = useState<ChrCardProps[]>(Loadcards);
 
   return (
     <>
       <SwiperHeader />
       <article className="card-map">
-        {Loadcards.map((card) => (
+        {cards.map((card) => (
           <Cardz
             key={`${card.id}-${card.name}`}
             {...card}
-            cards={Loadcards}
+            cards={cards}
             setCards={setCards}
           />
         ))}
