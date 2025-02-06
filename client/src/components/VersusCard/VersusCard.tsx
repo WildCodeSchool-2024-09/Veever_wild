@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 import type { Card } from "../../types/Catalog/CatalogTypes";
 import "./VersusCard.css";
 import { Link } from "react-router-dom";
-import { StyledButton } from "../../services/Form/StyledButton";
+import { StyledButton } from "../../Styles/StyledButton";
 
 type VersusCardProps = {
   versusCards: Card[];

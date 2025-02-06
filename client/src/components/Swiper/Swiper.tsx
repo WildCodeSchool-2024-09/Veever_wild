@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import "./Swiper.css";
+//import { useLoaderData } from "react-router-dom";
 import type { ChrCardProps } from "../../types/Catalog/CatalogTypes";
 import Cardz from "./SwiperCard";
 import SwiperHeader from "./Swiperheader";
 
 export default function Swiper() {
+  //const Loadcards = useLoaderData() as ChrCardProps[];
   const [cards, setCards] = useState<ChrCardProps[]>([]);
 
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/chr`, {
       method: "GET",
+      credentials: "include",
     })
       .then((res) => res.json())
       .then((data) => {

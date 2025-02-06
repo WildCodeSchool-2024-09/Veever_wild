@@ -11,10 +11,10 @@ import Swiper from "./components/Swiper/Swiper";
 import Catalog from "./pages/Catalog/Catalog";
 import HomePage from "./pages/HomePage/HomePage";
 import Login from "./pages/Login/Login";
-import Stay from "./pages/Stay/Stay";
-
 import SavedItinerariesPage from "./pages/SavedItinerariesPage/SavedItinerariesPage";
+import Stay from "./pages/Stay/Stay";
 import VersusPage from "./pages/VersusPage/VersusPage";
+import { chrLoader } from "./services/Loader/LoaderChr";
 
 // Import additional components for new routes
 // Try creating these components in the "pages" folder
@@ -47,8 +47,17 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "/settings",
+        element: <VersusPage />,
+      },
+      {
+        path: "/SavedItinerariesPage",
+        element: <SavedItinerariesPage />,
+      },
+      {
         path: "/search",
         element: <Swiper />,
+        loader: chrLoader,
       },
       {
         path: "/settings",
@@ -64,7 +73,6 @@ const router = createBrowserRouter([
     path: "/form-create-sign-up",
     element: <FormCreateSignUp />,
   },
-
   // Try adding a new route! For example, "/about" with an About component
 ]);
 
