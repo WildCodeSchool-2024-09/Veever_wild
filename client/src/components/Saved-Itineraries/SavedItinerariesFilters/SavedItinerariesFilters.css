@@ -1,24 +1,41 @@
 .itinerary-filters {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: var(--spacing-ref);
   margin-bottom: var(--spacing-ref);
-  background-color: var(--bckgColorOrangeOpacity);
+  background-color: var(--light);
   border-radius: var(--border-ref);
   box-shadow: var(--box-shadow-soft);
 }
 
-.status-filters,
-.view-filters {
-  display: flex;
-  gap: var(--spacing-ref);
+.filter-chip {
+  font-family: var(--textFont);
 }
 
-.MuiFormControlLabel-root {
-  margin: 0;
+.filter-chip.created {
+  color: var(--veever-yellow);
+  border-color: var(--veever-yellow);
 }
 
-.MuiCheckbox-root.Mui-checked {
+.filter-chip.reserved {
+  color: var(--veever-blue);
+  border-color: var(--veever-blue);
+}
+
+.filter-chip.completed {
   color: var(--mainColor);
+  border-color: var(--mainColor);
+}
+
+.view-button {
+  background: var(--gradientColor);
+  color: var(--light);
+  border-radius: calc(var(--border-ref) * 2);
+  text-transform: none;
+}
+
+.view-button:hover {
+  opacity: 0.9;
+}
+
+.view-button.Mui-selected {
+  background: var(--mainColor);
 }

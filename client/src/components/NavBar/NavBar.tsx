@@ -52,7 +52,9 @@ export default function NavBar() {
             </NavLink>
           </li>
           <li>
-            <ProfileIcon />
+            <NavLink to="/SavedItinerariesPage" className={getNavLinkClass}>
+              <ProfileIcon />
+            </NavLink>
           </li>
           <li>
             <NavLink to="/settings" className={getNavLinkClass}>

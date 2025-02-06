@@ -1,10 +1,3 @@
-.itinerary-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: var(--spacing-ref);
-  padding: var(--spacing-ref);
-}
-
 .no-itineraries {
   text-align: center;
   color: var(--secondColor);
