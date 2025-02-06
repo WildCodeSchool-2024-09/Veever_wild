@@ -27,16 +27,26 @@
   --font-weight-S: 400;
 
   --bckgColor: #f8f9fa;
-  --mainColor: #fb793f;
+  --bckgColor-opacity: #f8f9facb;
+  --bckgSecondColor: #ffd6c6ab;
+  --bckgSecondColor-opacity: #ffd6c61c;
+  --mainColor: #fb7a3f;
+  --variantMainColor: #f59d3fe8;
   --secondColor: #4e4a4a;
   --thirdColor: #f74aa1;
-  --gradientColor-CTA: linear-gradient(to left, #f59e3f 13%, #f74aa1 100%);
+  --thirdColor-opacity: #f74aa1c5;
+  --gradientColor: linear-gradient(
+    90deg,
+    rgba(247, 74, 161, 1) 13%,
+    rgba(245, 158, 63, 1) 100%
+  );
   --shadow: #c8c8c8;
   --aliceBlueColor: #f0f8ff;
+  --errorColor: red;
+  --color-label: rgba(0, 0, 0, 0.87);
   --border-color-input-focus: #3399ff;
   --errorColor: rgba(255, 0, 0, 0.753);
   --color-input: #1c2025;
-  --color-label: rgba(0, 0, 0, 0.87);
   --bckgColor-input: #fff;
   --light: white;
   --dark: black;
@@ -48,6 +58,8 @@
 
   --spacing-ref: 1rem;
   --spacing-S: calc(var(--spacing-ref) * 0.5);
+
+  --font-size-XS: calc(var(--spacing-ref) * 0.8);
 
   --spacing-letter-ref: 1px;
 
