@@ -10,3 +10,8 @@ export type Chr = {
   type: string;
   additional_info: string | number;
 };
+
+export type PhotoModalType = {
+  imageSrc: string;
+  onClose: () => void;
+};
