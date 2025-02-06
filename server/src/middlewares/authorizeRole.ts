@@ -4,8 +4,8 @@ const authorizeRole = (allowedRoles: string[]): RequestHandler => {
   return (req, res, next) => {
     try {
       const userRole = req.user?.role;
-
       if (!userRole) {
+        console.info(userRole);
         throw new Error("Accès interdit: rôle non défini.");
       }
 

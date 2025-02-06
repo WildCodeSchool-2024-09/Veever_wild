@@ -40,5 +40,18 @@ const authenticateUser: RequestHandler = async (req, res, next) => {
     next(error);
   }
 };
+const logoutUser: RequestHandler = async (req, res, next) => {
+  try {
+    res.clearCookie("token", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
 
-export default { authenticateUser };
+    res.status(200).json({ message: "Déconnexion réussie" });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export default { authenticateUser, logoutUser };
