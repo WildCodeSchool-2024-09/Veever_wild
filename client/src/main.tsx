@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       { path: "/login", element: <GuestRoute element={<Login />} /> },
       {
         path: "/signup",
-        element: <GuestRoute element={<FormCreateSignUp />} />,
+        element: <FormCreateSignUp />,
       },
       { path: "/", element: <ProtectedRoute element={<HomePage />} /> },
       { path: "/catalog", element: <ProtectedRoute element={<Catalog />} /> },
