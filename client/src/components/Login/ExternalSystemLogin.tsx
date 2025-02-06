@@ -1,18 +1,10 @@
 import "./ExternalSystemLogin.css";
 
 export default function ExternalSystemLogin() {
-  const handleLogin = () => {
-    window.location.href = "http://localhost:3310/auth/facebook";
-  };
   return (
     <ul className="socialLogin">
-      {/* <li>
-        <GoogleOAuthProvider clientId="402783265252-p7u70jckq4008iibe9m7siasq1eg3o52.apps.googleusercontent.com">
-          <GoogleLoginButton />
-        </GoogleOAuthProvider>
-      </li> */}
       <li>
-        <button type="button" onClick={handleLogin}>
+        <button type="button">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
