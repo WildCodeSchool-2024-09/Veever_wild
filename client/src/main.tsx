@@ -47,10 +47,6 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "/search",
-        element: <Swiper />,
-      },
-      {
         path: "/settings",
         element: <VersusPage />,
       },
