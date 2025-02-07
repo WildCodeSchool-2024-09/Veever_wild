@@ -42,8 +42,8 @@ router.put(
 );
 router.post(
   "/api/admins",
-  // verifyToken,
-  // authorizeRole(["admin"]),
+  verifyToken,
+  authorizeRole(["admin"]),
   adminActions.add,
 );
 router.delete(

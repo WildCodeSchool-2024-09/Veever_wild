@@ -35,6 +35,7 @@ export default function PhotoModal({ imageSrc, onClose }: PhotoModalType) {
       onClick={(e) => {
         const target = e.target as HTMLElement;
         if (target === modalRef.current) {
+          document.body.style.overflow = "";
           onClose();
         }
       }}

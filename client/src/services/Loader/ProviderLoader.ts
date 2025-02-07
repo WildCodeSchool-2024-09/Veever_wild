@@ -8,11 +8,12 @@ export const providerLoader = async ({ params }: { params: Params }) => {
       credentials: "include",
     });
     if (!response.ok) {
-      throw new Error("Erreur de récupération des données");
+      return null;
     }
     const data = await response.json();
-    return data[0];
+
+    return data;
   } catch (error) {
-    throw new Error("Erreur de chargement des données");
+    console.error(error);
   }
 };
