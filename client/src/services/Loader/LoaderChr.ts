@@ -3,6 +3,6 @@ export const chrLoader = async () => {
     method: "GET",
     credentials: "include",
   });
-  if (!res.ok) throw new Error("Failed to fetch chr data");
+  if (!res.ok) throw new Error(`Failed to fetch chr data: ${res.status}`);
   return res.json();
 };

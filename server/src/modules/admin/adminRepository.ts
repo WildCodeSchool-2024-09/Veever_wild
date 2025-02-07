@@ -1,7 +1,7 @@
-import bcrypt from "bcryptjs";
 import databaseClient from "../../../database/client";
 import type { Result, Rows } from "../../../database/client";
-import type { Admin, User } from "../../types/admin/adminTypes";
+import authServices from "../../services/authServices";
+import type { User } from "../../types/admin/adminTypes";
 
 class adminRepository {
   // The C of CRUD - Create operation
@@ -10,6 +10,8 @@ class adminRepository {
 
     try {
       await connection.beginTransaction();
+
+      const hashedPassword = await authServices.hashPassword(userData.password);
 
       const [userResult] = await connection.execute<Result>(
         `
@@ -80,6 +82,8 @@ class adminRepository {
 
   // The U of CRUD - Update operation
   async update(userData: User) {
+    const hashedPassword = await authServices.hashPassword(userData.password);
+
     const [userResult] = await databaseClient.execute<Result>(
       `
         UPDATE user
@@ -88,7 +92,7 @@ class adminRepository {
         `,
       [
         userData.email,
-        userData.password,
+        hashedPassword,
         userData.firstname,
         userData.lastname,
         userData.id,
