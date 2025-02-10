@@ -25,6 +25,10 @@
   box-shadow: var(--box-shadow-button);
 }
 
+.loginForm #email {
+  border: none;
+}
+
 .errors {
   list-style-type: none;
 }
