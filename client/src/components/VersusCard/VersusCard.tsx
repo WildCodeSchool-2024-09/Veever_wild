@@ -27,8 +27,8 @@ export default function Versus({
   return (
     <main className="versus-container">
       <h1 className="versus-title">Choissisez votre {versusCards[0].type}</h1>
-      <button type="button" onClick={handleRewind}>
-        Rewind
+      <button className="rewind" type="button" onClick={handleRewind}>
+        Recharger le VS
       </button>
       {versusCards.map((card) => (
         <Fragment key={card.id}>
@@ -46,8 +46,15 @@ export default function Versus({
               />
               <figcaption className="tag-versus-container">
                 <h2>{card.name}</h2>
-                <p> Prix moyen: {card.average_budget / 100} euros</p>
-                <p>{card.type}</p>
+                <p>
+                  <strong>Prix moyen :</strong>
+                  <br />
+                  {card.average_budget / 100} €
+                </p>
+                <p>
+                  <strong>Type : </strong>
+                  {card.type}
+                </p>
                 <p>{card.address}</p>
                 {selectedCard === card.id ? (
                   <svg
@@ -56,7 +63,7 @@ export default function Versus({
                     version="1.1"
                     viewBox="0 0 24 24"
                     width="50"
-                    fill="#f69d41"
+                    fill="#5c8655"
                   >
                     <title>check selection</title>
                     <path
@@ -67,7 +74,9 @@ export default function Versus({
                 ) : null}
               </figcaption>
             </figure>
-            <Link to={`/provider/${card.id}`}>+ d'infos</Link>
+            <Link className="infos" to={`/provider/${card.id}`}>
+              + d'infos
+            </Link>
           </article>
           <p className="vs">vs</p>
         </Fragment>
