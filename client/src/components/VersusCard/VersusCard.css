@@ -129,6 +129,8 @@ button.rewind {
 .versus-card img {
   width: 100%;
   border-radius: calc(var(--border-ref) * 2);
+  height: 28vh;
+  object-fit: cover;
 }
 
 #calque_1 {

@@ -6,7 +6,7 @@
   border-radius: 15px;
   padding: 1rem;
   margin: 1rem;
-  box-shadow: 5px 5px 10px var(--bckgcolor);
+  box-shadow: var(--box-shadow-softer);
 }
 .city-select {
   margin: var(--spacing-ref);
@@ -43,4 +43,5 @@ button.logout {
   font-size: var(--spacing-ref);
   cursor: pointer;
   transition: 0.3s;
+  box-shadow: var(--box-shadow-softer);
 }

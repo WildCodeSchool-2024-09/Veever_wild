@@ -35,13 +35,13 @@ export default function Cardz({ id, name, cards, setCards }: ChrCardsProps) {
           />
           <figcaption className="tag-container">
             <p>
-              Type:
+              <strong>Type :</strong>
               <br />
               <TypeDisplay type={cards[currentIndex].type} />
             </p>
             <p>{cards[currentIndex].address}</p>
             <p>
-              Prix moyen:
+              <strong>Prix moyen :</strong>
               <br />
               <PriceDisplay price={cards[currentIndex].average_budget} />
             </p>

@@ -1,4 +1,7 @@
 @import url("@src/variables.css");
+main.catalog {
+  background-color: var(--bckgColor);
+}
 .catalog-boxes-form {
   margin: 0 auto;
   display: grid;

@@ -3,6 +3,8 @@ import type { Card } from "../../types/Catalog/CatalogTypes";
 import "./VersusCard.css";
 import { Link } from "react-router-dom";
 import { StyledButton } from "../../Styles/StyledButton";
+import PriceDisplay from "../../services/Provider/PriceDisplay";
+import TypeDisplay from "../../services/Provider/TypeDisplay";
 
 type VersusCardProps = {
   versusCards: Card[];
@@ -13,7 +15,7 @@ type VersusCardProps = {
 export default function Versus({
   versusCards,
   handleValidationVersus,
-  handleRewind,
+  // handleRewind,
 }: VersusCardProps) {
   const [selectedCard, setSelectedCard] = useState<number | null>(null);
   if (versusCards.length === 0) {
@@ -27,9 +29,9 @@ export default function Versus({
   return (
     <main className="versus-container">
       <h1 className="versus-title">Choissisez votre {versusCards[0].type}</h1>
-      <button className="rewind" type="button" onClick={handleRewind}>
+      {/* <button className="rewind" type="button" onClick={handleRewind}>
         Recharger le VS
-      </button>
+      </button> */}
       {versusCards.map((card) => (
         <Fragment key={card.id}>
           <article
@@ -49,11 +51,11 @@ export default function Versus({
                 <p>
                   <strong>Prix moyen :</strong>
                   <br />
-                  {card.average_budget / 100} €
+                  <PriceDisplay price={card.average_budget} />
                 </p>
                 <p>
                   <strong>Type : </strong>
-                  {card.type}
+                  <TypeDisplay type={card.type} />
                 </p>
                 <p>{card.address}</p>
                 {selectedCard === card.id ? (
