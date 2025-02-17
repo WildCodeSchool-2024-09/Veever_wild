@@ -3,12 +3,27 @@
   text-align: center;
 }
 
-.card-container {
+article.card-container {
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem;
   justify-self: center;
-  width: 80%;
-  border-radius: var(--border-ref);
+  border-radius: 15px;
   margin: var(--padding-input);
-  border: calc(var(--border-weight) * 8) solid;
+  border: 1px var(--mainColor) solid;
+}
+
+article.card-container img {
+  border-radius: 8px;
+}
+
+article.card-container section.article-chr-middle-card {
+  padding: 1rem;
+  text-align: left;
+}
+
+article.card-container section.article-chr-middle-card h2 {
+  font-weight: bold;
 }
 
 .card-container-hotels {
