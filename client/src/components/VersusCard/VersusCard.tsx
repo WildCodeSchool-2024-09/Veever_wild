@@ -28,7 +28,9 @@ export default function Versus({
 
   return (
     <main className="versus-container">
-      <h1 className="versus-title">Choissisez votre {versusCards[0].type}</h1>
+      <h1 className="versus-title">
+        Choissisez votre <TypeDisplay type={versusCards[0].type} />
+      </h1>
       {/* <button className="rewind" type="button" onClick={handleRewind}>
         Recharger le VS
       </button> */}
@@ -54,8 +56,14 @@ export default function Versus({
                   <PriceDisplay price={card.average_budget} />
                 </p>
                 <p>
-                  <strong>Type : </strong>
-                  <TypeDisplay type={card.type} />
+                  {card.type === "activity" ? (
+                    <>
+                      {+card.additional_info / 60}
+                      {+card.additional_info / 60 > 1 ? " heures" : " heure"}
+                    </>
+                  ) : (
+                    <>{card.additional_info}</>
+                  )}
                 </p>
                 <p>{card.address}</p>
                 {selectedCard === card.id ? (
