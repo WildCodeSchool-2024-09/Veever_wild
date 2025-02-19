@@ -56,8 +56,14 @@ export default function Versus({
                   <PriceDisplay price={card.average_budget} />
                 </p>
                 <p>
-                  <strong>Type : </strong>
-                  <TypeDisplay type={card.type} />
+                  {card.type === "activity" ? (
+                    <>
+                      {+card.additional_info / 60}
+                      {+card.additional_info / 60 > 1 ? " heures" : " heure"}
+                    </>
+                  ) : (
+                    <>{card.additional_info}</>
+                  )}
                 </p>
                 <p>{card.address}</p>
                 {selectedCard === card.id ? (
