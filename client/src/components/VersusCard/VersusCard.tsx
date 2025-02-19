@@ -28,7 +28,9 @@ export default function Versus({
 
   return (
     <main className="versus-container">
-      <h1 className="versus-title">Choissisez votre {versusCards[0].type}</h1>
+      <h1 className="versus-title">
+        Choissisez votre <TypeDisplay type={versusCards[0].type} />
+      </h1>
       {/* <button className="rewind" type="button" onClick={handleRewind}>
         Recharger le VS
       </button> */}
